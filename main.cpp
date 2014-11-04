@@ -10,6 +10,10 @@
 #include "GRRLIB.h"
 #include "music.h"
 
+#ifndef __WII__
+#include <SDL/SDL.h>
+#endif
+
 void ScanPADSandReset(u32 retrace_count) 
 {
 	PAD_ScanPads();
@@ -29,8 +33,8 @@ extern u16 *GRRLIB_buffer;
 
 int main(int argc, char **argv)
 {
-	GRRLIB_buffer = GRRLIB_MakeBuffer(640, 480);
 	VIDEO_Init();
+	GRRLIB_buffer = GRRLIB_MakeBuffer(640, 480);
 	GRRLIB_InitVideo();
 	GRRLIB_Start();
 	PAD_Init();

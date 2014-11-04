@@ -77,11 +77,10 @@ int getButtonState()
 
 void PAD_ScanPads()
 {
+	BUTTON_DOWN_STATE = 0;
 	BUTTON_LASTSTATE = BUTTON_STATE;
 	BUTTON_STATE = getButtonState();
-	int lastDownState = BUTTON_DOWN_STATE;
-	BUTTON_DOWN_STATE = ((BUTTON_STATE) & ~BUTTON_DOWN_STATE);
-	BUTTON_DOWN_STATE ^= lastDownState;
+	BUTTON_DOWN_STATE = ((BUTTON_STATE ^ BUTTON_LASTSTATE));
 }
 
 int PAD_ButtonsDown(int padButton)

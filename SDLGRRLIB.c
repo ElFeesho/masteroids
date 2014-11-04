@@ -21,7 +21,6 @@ info : http://wiibrew.org/index.php?title=Homebrew_apps/GRRLIB
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include <malloc.h>
 
 #include <SDL/SDL.h>
 
@@ -43,6 +42,7 @@ u16 GRRLIB_magenta=0xf01e;
 u16 *GRRLIB_MakeBuffer(int w, int h)
 {
     SDL_SetVideoMode(w, h, 0, SDL_SWSURFACE);
+    return NULL;
 }
 
 
@@ -129,7 +129,7 @@ void GRRLIB_DrawImg(int xpos, int ypos, int width, int high, const u16 data[], f
                         bx = ((unsigned int) x) >> 16;
                         by = ((unsigned int) y) >> 16;
                         /* on vérifie que l'on ne sort pas des bords*/
-                        if (bx>=0 && bx< width && by>=0 && by< high){
+                        if (bx< width && by< high){
 								if(data[by*width+bx]!=GRRLIB_magenta)
                                 GRRLIB_PutPixel(i+xpos-mxdest+mx,j+ypos-mydest+my,data[by*width+bx]);
                         }
@@ -196,7 +196,7 @@ void GRRLIB_DrawTile(int xpos, int ypos, int width, int high, const u16 data[], 
                         bx = ((unsigned int) x) >> 16;
                         by = ((unsigned int) y) >> 16;
                         /* on vérifie que l'on ne sort pas des bords*/
-                        if (bx>=0 && bx< width && by>=0 && by< high){
+                        if (bx< width && by< high){
 								if(data[by*width+bx]!=GRRLIB_magenta)
                                 GRRLIB_PutPixel(i+xpos-mxdest+mx,j+ypos-mydest+my,data[by*width+bx+(width*high*frame)]);
                         }

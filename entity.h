@@ -7,7 +7,7 @@ class Entity
 {
 public:
 	Entity();
-	~Entity();
+	virtual ~Entity();
 
 	/* Overridings */
 	virtual bool update() = 0;
