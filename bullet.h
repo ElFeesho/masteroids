@@ -2,17 +2,18 @@
 #define __BULLET_H__
 
 #include "entity.h"
+#include "gfx.h"
 
 class Bullet : public Entity
 {
 public:
 	Bullet();
-	Bullet(double x, double y, double rot, unsigned short color, Entity *player);
+	Bullet(double x, double y, double rot, const RGB &color, Entity *player);
 	~Bullet();
-	bool update();
+	bool update(GfxWrapper *gfx);
 private:
 	double angle;
-	unsigned short col;
+	RGB col;
 	Entity *owner;
 	unsigned long ttl;
 };

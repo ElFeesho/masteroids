@@ -2,13 +2,14 @@
 #define __OPTIONS_H__
 
 #include "entity.h"
+#include "gfx.h"
 
 class Options : public Entity
 {
 public:
 	Options();
 	~Options();
-	bool update();
+	bool update(GfxWrapper *gfx);
 	static int lives;
 	static int difficulty;
 	static bool team_kill;
@@ -19,6 +20,8 @@ private:
 	int menu_sel;
 	unsigned long next_change;
 	char ldir;
+	RGB colour;
+	RGB colourHighlight;
 	Entity *child;
 };
 

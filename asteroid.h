@@ -2,6 +2,7 @@
 #define __ASTEROID_H__
 
 #include "collobj.h"
+#include "gfx.h"
 
 class Asteroid : public Collobj
 {
@@ -10,7 +11,7 @@ public:
 	Asteroid(double scale);
 	~Asteroid();
 
-	bool update();
+	bool update(GfxWrapper *gfx);
 	void on_hit();
 	static int count;
 private:
@@ -20,6 +21,7 @@ private:
 	double rot;
 	double rot_speed;
 	double trav_ang;
+	RGB colour;
 };
 
 #endif

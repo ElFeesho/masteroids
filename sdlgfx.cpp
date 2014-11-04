@@ -13,9 +13,17 @@ RGB::~RGB()
 
 }
 
+RGB RGB::white = RGB(1.0f, 1.0f, 1.0f);
+RGB RGB::yellow = RGB(1.0f, 0.8f, 0.0f);
+RGB RGB::blue = RGB(0.0f, 0.0f, 1.0f);
+
 unsigned int RGB::as24bit() const
 {
-	return (((unsigned int)(255.0f * r)) + ((unsigned int)(255.0f * g))<<8 + ((unsigned int)(255.0f * b))<<16) + 0xff000000;
+	int red = 255.0f * r;
+	int green = 255.0f * g;
+	int blue = 255.0f * b;
+	int packed = 0xff000000 | (red << 16) | (green << 8) | (blue) ;
+	return packed;
 }
 
 unsigned short RGB::as16bit() const
@@ -46,7 +54,24 @@ void GfxWrapper::drawText(int x, int y, const char *text, const RGB &colour) con
 
 void GfxWrapper::drawRect(int x, int y, int w, int h, const RGB &colour) const
 {
-	rectangleColor(SDL_GetVideoSurface(), x, y, x+w, y+h, colour.as24bit());
+	rectangleColor(SDL_GetVideoSurface(), x, y, x+w, h, colour.as24bit());
+}
+
+void GfxWrapper::drawImg(int xpos, int ypos, int width, int height, const unsigned short *data) const
+{
+	int x, y;
+	int ni = 0;
+	for(y=ypos;y<ypos+height;y++)
+	{
+        for(x=xpos;x<xpos+width;x++)
+        {
+			if(data[ni]!=0xf00f)
+			{
+            	pixelColor(SDL_GetVideoSurface(), x, y, data[ni]);
+            }
+            ni++;
+        }
+	}	
 }
 
 void GfxWrapper::render()

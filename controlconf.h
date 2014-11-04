@@ -2,6 +2,7 @@
 #define __CONTROL_CONF_H__
 
 #include "entity.h"
+#include "gfx.h"
 
 /* 
 	Really complex controller configurator
@@ -61,7 +62,7 @@ class ControlConf : public Entity
 public:
 	ControlConf();
 	~ControlConf();
-	bool update();
+	bool update(GfxWrapper *gfx);
 	static bool button_down(int player, unsigned int button);
 	static bool button_held(int player, unsigned int button);
 private:

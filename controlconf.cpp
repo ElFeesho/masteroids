@@ -24,14 +24,14 @@ ControlConf::~ControlConf()
 
 }
 
-bool ControlConf::update()
+bool ControlConf::update(GfxWrapper *gfx)
 {
 	
-	GRRLIB_DrawRectangle(120,70,316, 403, 0x001f,0);
-	GRRLIB_DrawImg(321-controls_width/2,81,controls_width, controls_height, controls_img, 0.0, 1.0);
-	GRRLIB_Print(135, 80+font5_char_high*8, font5_char_width, font5_char_high, (char*)"Choose a player using Wiimote or GCN Pad 1",font5, 0xffff, 0x0000);
-	GRRLIB_Print(135, 80+font5_char_high*10, font5_char_width, font5_char_high, (char*)"And then push a button on a controller to",font5, 0xffff, 0x0000);
-	GRRLIB_Print(135, 80+font5_char_high*12, font5_char_width, font5_char_high, (char*)"map it to that player.",font5, 0xffff, 0x0000);
+	gfx->drawRect(120,70,316, 403, RGB::blue);
+	gfx->drawImg(321-controls_width/2,81,controls_width, controls_height, controls_img);
+	gfx->drawText(135, 80+font5_char_high*8, (char*)"Choose a player using Wiimote or GCN Pad 1", RGB::white);
+	gfx->drawText(135, 80+font5_char_high*10, (char*)"And then push a button on a controller to",RGB::white);
+	gfx->drawText(135, 80+font5_char_high*12, (char*)"map it to that player.",RGB::white);
 
 	for(int i = 0;i<Options::players;i++)
 	{
@@ -90,16 +90,16 @@ bool ControlConf::update()
 		}
 		sprintf(mesg_buf, "Player %d: %s",i+1,control_name);
 		if(menu_sel == i)
-			GRRLIB_Print(145, 80+font5_char_high*(15+(i*2)), font5_char_width, font5_char_high, mesg_buf,font5, 0xffa0, 0x0000);
+			gfx->drawText(145, 80+font5_char_high*(15+(i*2)), mesg_buf,RGB::yellow);
 		else
-			GRRLIB_Print(145, 80+font5_char_high*(15+(i*2)), font5_char_width, font5_char_high, mesg_buf,font5, 0xffff, 0x0000);			
+			gfx->drawText(145, 80+font5_char_high*(15+(i*2)), mesg_buf,RGB::white);			
 	}
-	GRRLIB_Print((320-(18*font5_char_width)/2), 80+font5_char_high*25, font5_char_width, font5_char_high, (char*)"Push Start To Exit",font5, 0xffff, 0x0000);			
+	gfx->drawText((320-(18*font5_char_width)/2), 80+font5_char_high*25, (char*)"Push Start To Exit",RGB::white);			
 	if(binding!=-1)
 	{
 		char bind_buf[32] = { 0 };
 		sprintf(bind_buf,"Binding Player %d",binding+1);
-		GRRLIB_Print(145, 80+font5_char_high*23, font5_char_width, font5_char_high, bind_buf,font5, 0xffff, 0x0000);			
+		gfx->drawText(145, 80+font5_char_high*23, bind_buf,RGB::white);			
 	}
 
 	if(button_down(0,BUTTON_START))

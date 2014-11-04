@@ -8,7 +8,7 @@
 
 #include "controlconf.h"
 
-InGame::InGame(int player) : player_num(player) , menu_sel(0)
+InGame::InGame(int player) : player_num(player) , menu_sel(0), colour(RGB(1.0f, 1.0f, 1.0f)), colourHighlight(1.0f, 8.0f, 0.0f)
 {
 
 }
@@ -18,7 +18,7 @@ InGame::~InGame()
 
 }
 
-bool InGame::update()
+bool InGame::update(GfxWrapper *gfx)
 {
 	if(ControlConf::button_down(player_num,BUTTON_LEFT))
 		menu_sel = 0;
@@ -37,18 +37,26 @@ bool InGame::update()
 		}
 	}
 	
-	GRRLIB_DrawRectangle((320-150),240-50,90, 300, 0,1);
-	GRRLIB_DrawRectangle((320-150),240-50,90, 300, 0x001f,0);
+	gfx->drawRect((320-150), 240-50, 90, 300, colour);
+	gfx->drawRect((320-150), 240-50, 90, 300, colourHighlight);
 
-	GRRLIB_Print(320-80, 240-40, font5_char_width, font5_char_high, (char*)"Quit Current Game?",font5, 0xffff, 0x0000);
+	gfx->drawText(320-80, 240-40, (char*)"Quit Current Game?", colour);
 	if(menu_sel==0)
-		GRRLIB_Print(320-140, 240-5, font5_char_width, font5_char_high, (char*)"Continue",font5, 0xffa0, 0x0000);
+	{
+		gfx->drawText(320-140, 240-5, (char*)"Continue", colourHighlight);
+	}
 	else
-		GRRLIB_Print(320-140, 240-5, font5_char_width, font5_char_high, (char*)"Continue",font5, 0xffff, 0x0000);
+	{	
+		gfx->drawText(320-140, 240-5, (char*)"Continue", colour);
+	}
 	if(menu_sel==1)
-		GRRLIB_Print(420, 240-5, font5_char_width, font5_char_high, (char*)"Exit",font5, 0xffa0, 0x0000);
+	{
+		gfx->drawText(420, 240-5, (char*)"Exit", colourHighlight);
+	}
 	else
-		GRRLIB_Print(420, 240-5, font5_char_width, font5_char_high, (char*)"Exit",font5, 0xffff, 0x0000);
-	
+	{
+		gfx->drawText(420, 240-5, (char*)"Exit", colour);
+	}
+
 	return true;
 }

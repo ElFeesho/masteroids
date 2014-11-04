@@ -10,6 +10,10 @@ public:
 	unsigned int as24bit() const;
 	unsigned short as16bit() const;
 
+	static RGB white;
+	static RGB blue;
+	static RGB yellow;
+
 private:
 	float r;
 	float g;
@@ -25,6 +29,7 @@ public:
 	void fillScreen(const RGB &colour) const;
 	void drawText(int x, int y, const char *text, const RGB &colour) const;
 	void drawRect(int x, int y, int w, int h, const RGB &colour) const;
+	void drawImg(int x, int y, int w, int h, const unsigned short *imgData) const;
 
 	void render();
 };

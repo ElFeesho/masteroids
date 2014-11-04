@@ -37,7 +37,7 @@ void Engine::update()
 {
 	if(pause_ent!=NULL)
 	{
-		if(!pause_ent->update())
+		if(!pause_ent->update(gfx))
 		{
 			delete pause_ent;
 			pause_ent = NULL;
@@ -70,7 +70,7 @@ void Engine::update()
 
 		for(vector<Entity *>::iterator it = ent_list->begin(); it!=ent_list->end();)
 		{
-			if(!(*it)->update())
+			if(!(*it)->update(gfx))
 			{
 				/* Entity returned false, that means it want's cleaning up */
 				delete (*it);
@@ -81,7 +81,7 @@ void Engine::update()
 		}
 		for(vector<Collobj *>::iterator it = collent_list->begin(); it!=collent_list->end();)
 		{
-			if(!(*it)->update())
+			if(!(*it)->update(gfx))
 			{
 				/* Entity returned false, that means it want's cleaning up */
 				delete (*it);

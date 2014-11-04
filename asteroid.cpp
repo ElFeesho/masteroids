@@ -10,7 +10,7 @@
 
 #include "debris.h"
 
-Asteroid::Asteroid() : speed(0.0f), alive(true), rot((double)(rand()%360)), rot_speed(rand()%10-5), trav_ang(rand()%360)
+Asteroid::Asteroid() : speed(0.0f), alive(true), rot((double)(rand()%360)), rot_speed(rand()%10-5), trav_ang(rand()%360), colour(RGB(1.0f, 1.0f, 1.0f))
 {
 	while(speed==0)
 	{
@@ -47,7 +47,7 @@ Asteroid::Asteroid() : speed(0.0f), alive(true), rot((double)(rand()%360)), rot_
 	Asteroid::count++;
 }
 
-Asteroid::Asteroid(double scale) : speed(0), alive(true), rot((double)(rand()%360)), rot_speed(rand()%10-5), trav_ang(rand()%360)
+Asteroid::Asteroid(double scale) : speed(0), alive(true), rot((double)(rand()%360)), rot_speed(rand()%10-5), trav_ang(rand()%360), colour(RGB(1.0f, 1.0f, 1.0f))
 {
 	while(speed==0)
 	{
@@ -88,7 +88,7 @@ Asteroid::~Asteroid()
 {
 }
 
-bool Asteroid::update()
+bool Asteroid::update(GfxWrapper *gfx)
 {
 	rot+=rot_speed;
 	X(X()+cos(trav_ang/180*M_PI)*speed);
@@ -113,13 +113,13 @@ bool Asteroid::update()
 		{	
 			double rot1 = (rot + i*72.0)/180.0*M_PI;
 			double rot2 = (rot + (i+1) * 72.0)/180.0*M_PI;
-			GRRLIB_Line(X()+cos(rot1)*peaks[i],Y()+sin(rot1)*peaks[i],X()+cos(rot2)*peaks[i+1],Y()+sin(rot2)*peaks[i+1],0xffff);
+			gfx->drawLine(X()+cos(rot1)*peaks[i],Y()+sin(rot1)*peaks[i],X()+cos(rot2)*peaks[i+1],Y()+sin(rot2)*peaks[i+1],colour);
 		}
 		else
 		{
 			double rot1 = (rot + i*72)/180.0*M_PI;
 			double rot2 = rot/180.0*M_PI;
-			GRRLIB_Line(X()+cos(rot1)*peaks[i],Y()+sin(rot1)*peaks[i],X()+cos(rot2)*peaks[0],Y()+sin(rot2)*peaks[0],0xffff);
+			gfx->drawLine(X()+cos(rot1)*peaks[i],Y()+sin(rot1)*peaks[i],X()+cos(rot2)*peaks[0],Y()+sin(rot2)*peaks[0],colour);
 		}
 	}
 	return alive;
@@ -137,7 +137,7 @@ void Asteroid::on_hit()
 			get_engine()->add_entity(ast);
 		}
 	}
-	get_engine()->add_entity(new Debris(4,X(),Y(),rot,speed,speed,0xffff,1500));
+	get_engine()->add_entity(new Debris(4,X(),Y(),rot,speed,speed,colour,1500));
 	Asteroid::count--;
 	alive = false;	
 }

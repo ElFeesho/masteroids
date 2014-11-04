@@ -2,6 +2,7 @@
 #define __SHIP_H__
 
 #include "collobj.h"
+#include "gfx.h"
 
 class Ship : public Collobj
 {
@@ -11,10 +12,10 @@ public:
 	~Ship();
 	void inc_bfired();
 	void dec_bfired();
-	bool update();
+	bool update(GfxWrapper *gfx);
 	void add_score(int am);
 	void on_hit();
-	void draw_lives();
+	void draw_lives(GfxWrapper *gfx);
 	int get_lives();
 	int get_score();
 	static Ship *players[4];
@@ -29,7 +30,7 @@ private:
 	int llevel;
 	int lives;
 	unsigned long kill_time;
-	unsigned short colour;
+	RGB colour;
 };
 
 #endif

@@ -19,7 +19,7 @@
 
 using std::sprintf;
 
-Options::Options() : menu_sel(0), next_change(ticks_to_millisecs(gettime())+500), ldir(1), child(NULL)
+Options::Options() : menu_sel(0), next_change(ticks_to_millisecs(gettime())+500), ldir(1), child(NULL), colour(RGB(1.0f, 1.0f, 1.0f)), colourHighlight(RGB(1.0f, 0.8f, 0.0f))
 {
 
 }
@@ -29,11 +29,11 @@ Options::~Options()
 
 }
 
-bool Options::update()
+bool Options::update(GfxWrapper *gfx)
 {
 	if(child!=NULL)
 	{
-		if(!child->update())
+		if(!child->update(gfx))
 		{
 			delete child;
 			child = NULL;
@@ -179,41 +179,41 @@ bool Options::update()
 	sprintf(muse, "Enable Music: %-3s",(Options::music)?("Yes"):("No"));
 
 	if(menu_sel == 0)
-		GRRLIB_Print((640-strlen(lives)*font5_char_width)/2, 80+font5_char_high*8, font5_char_width, font5_char_high, lives,font5, 0xffa0, 0x0000);
+		gfx->drawText((640-strlen(lives)*font5_char_width)/2, 80+font5_char_high*8, lives,colourHighlight);
 	else
-		GRRLIB_Print((640-strlen(lives)*font5_char_width)/2, 80+font5_char_high*8, font5_char_width, font5_char_high, lives,font5, 0xffff, 0x0000);
+		gfx->drawText((640-strlen(lives)*font5_char_width)/2, 80+font5_char_high*8, lives,colour);
 	
 	if(menu_sel == 1)
-		GRRLIB_Print((640-strlen(diff)*font5_char_width)/2, 80+font5_char_high*11, font5_char_width, font5_char_high, diff,font5, 0xffa0, 0x0000);
+		gfx->drawText((640-strlen(diff)*font5_char_width)/2, 80+font5_char_high*11, diff,colourHighlight);
 	else
-		GRRLIB_Print((640-strlen(diff)*font5_char_width)/2, 80+font5_char_high*11, font5_char_width, font5_char_high, diff,font5, 0xffff, 0x0000);
+		gfx->drawText((640-strlen(diff)*font5_char_width)/2, 80+font5_char_high*11, diff,colour);
 		
 	if(menu_sel == 2)
-		GRRLIB_Print((640-strlen(tk)*font5_char_width)/2, 80+font5_char_high*14, font5_char_width, font5_char_high, tk,font5, 0xffa0, 0x0000);
+		gfx->drawText((640-strlen(tk)*font5_char_width)/2, 80+font5_char_high*14, tk,colourHighlight);
 	else
-		GRRLIB_Print((640-strlen(tk)*font5_char_width)/2, 80+font5_char_high*14, font5_char_width, font5_char_high, tk,font5, 0xffff, 0x0000);
+		gfx->drawText((640-strlen(tk)*font5_char_width)/2, 80+font5_char_high*14, tk,colour);
 		
 	if(menu_sel == 3)
-		GRRLIB_Print((640-strlen(players_txt)*font5_char_width)/2, 80+font5_char_high*17, font5_char_width, font5_char_high, players_txt,font5, 0xffa0, 0x0000);
+		gfx->drawText((640-strlen(players_txt)*font5_char_width)/2, 80+font5_char_high*17, players_txt,colourHighlight);
 	else
-		GRRLIB_Print((640-strlen(players_txt)*font5_char_width)/2, 80+font5_char_high*17, font5_char_width, font5_char_high, players_txt,font5, 0xffff, 0x0000);
+		gfx->drawText((640-strlen(players_txt)*font5_char_width)/2, 80+font5_char_high*17, players_txt,colour);
 
 	if(menu_sel == 4)	
-		GRRLIB_Print((640-strlen(max_bulls)*font5_char_width)/2, 80+font5_char_high*20, font5_char_width, font5_char_high, max_bulls,font5, 0xffa0, 0x0000);
+		gfx->drawText((640-strlen(max_bulls)*font5_char_width)/2, 80+font5_char_high*20, max_bulls,colourHighlight);
 	else
-		GRRLIB_Print((640-strlen(max_bulls)*font5_char_width)/2, 80+font5_char_high*20, font5_char_width, font5_char_high, max_bulls,font5, 0xffff, 0x0000);
+		gfx->drawText((640-strlen(max_bulls)*font5_char_width)/2, 80+font5_char_high*20, max_bulls,colour);
 
 	if(menu_sel == 5)	
-		GRRLIB_Print((640-strlen(muse)*font5_char_width)/2, 80+font5_char_high*23, font5_char_width, font5_char_high, muse,font5, 0xffa0, 0x0000);
+		gfx->drawText((640-strlen(muse)*font5_char_width)/2, 80+font5_char_high*23, muse,colourHighlight);
 	else
-		GRRLIB_Print((640-strlen(muse)*font5_char_width)/2, 80+font5_char_high*23, font5_char_width, font5_char_high, muse,font5, 0xffff, 0x0000);
+		gfx->drawText((640-strlen(muse)*font5_char_width)/2, 80+font5_char_high*23, muse,colour);
 
 	if(menu_sel == 6)	
-		GRRLIB_Print((640-strlen("Configure Controls")*font5_char_width)/2, 80+font5_char_high*26, font5_char_width, font5_char_high, (char*)"Configure Controls",font5, 0xffa0, 0x0000);
+		gfx->drawText((640-strlen("Configure Controls")*font5_char_width)/2, 80+font5_char_high*26, (char*)"Configure Controls",colourHighlight);
 	else
-		GRRLIB_Print((640-strlen("Configure Controls")*font5_char_width)/2, 80+font5_char_high*26, font5_char_width, font5_char_high, (char*)"Configure Controls",font5, 0xffff, 0x0000);
+		gfx->drawText((640-strlen("Configure Controls")*font5_char_width)/2, 80+font5_char_high*26, (char*)"Configure Controls",colour);
 
-	GRRLIB_Print((640-13*font5_char_width)/2, 80+font5_char_high*29, font5_char_width, font5_char_high, (char*)"Start to Exit",font5, 0xffff, 0x0000);
+	gfx->drawText((640-13*font5_char_width)/2, 80+font5_char_high*29, (char*)"Start to Exit",colour);
 	
 	if(ControlConf::button_down(0,BUTTON_SHOOT))
 	{

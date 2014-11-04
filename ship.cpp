@@ -20,12 +20,12 @@
 
 #include "controlconf.h"
 
-Ship::Ship()
+Ship::Ship() : colour(RGB(0.0f, 0.0f, 0.0f))
 {
 
 }
 
-Ship::Ship(int padnum) : player_num(padnum), rot(90+(padnum%2)*180), xspeed(0), yspeed(0), bullets_fired(0), score(0), llevel(1), lives(Options::lives), kill_time(0)
+Ship::Ship(int padnum) : player_num(padnum), rot(90+(padnum%2)*180), xspeed(0), yspeed(0), bullets_fired(0), score(0), llevel(1), lives(Options::lives), kill_time(0), colour(RGB(0.0f, 0.0f,0.0f))
 {
 	scores[player_num] = 0;
 	set_radius(7.5);
@@ -33,28 +33,28 @@ Ship::Ship(int padnum) : player_num(padnum), rot(90+(padnum%2)*180), xspeed(0), 
 	if(player_num == 0)
 	{
 		Ship::players[0] = this;
-		colour = 0x07d0;
+		colour = RGB(0.0f, 1.0f, 0.0f);
 		X(640/4);
 		Y(480/4);
 	}
 	if(player_num == 1)
 	{
 		Ship::players[1] = this;
-		colour = 0xff30;
+		colour = RGB(1.0f, 1.0f, 0.0f);
 		X(640/4*3);
 		Y(480/4*3);
 	}
 	if(player_num == 2)
 	{
 		Ship::players[2] = this;
-		colour = GRRLIB_Conv888_565(0x0000ffff);
+		colour = RGB(0.0f, 0.0f, 1.0f);
 		X(640/4*3);
 		Y(480/4);
 	}
 	if(player_num == 3)
 	{
 		Ship::players[3] = this;
-		colour = GRRLIB_Conv888_565(0xff8800ff);
+		colour = RGB(0.0f, 0.5f, 1.0f);
 		X(640/4);
 		Y(480/4*3);
 	}
@@ -75,9 +75,9 @@ void Ship::dec_bfired()
 	bullets_fired--;
 }
 
-bool Ship::update()
+bool Ship::update(GfxWrapper *gfx)
 {
-	draw_lives();
+	draw_lives(gfx);
 
 	if(ControlConf::button_down(player_num,BUTTON_START))
 	{
@@ -195,10 +195,10 @@ bool Ship::update()
 	double bl_x = X()+cos((rot/180*M_PI)+4.18)*6;
 	double bl_y = Y()+sin((rot/180*M_PI)+4.18)*6;
 
-	GRRLIB_Line(tp_x, tp_y, br_x, br_y, colour);
-	GRRLIB_Line(tp_x, tp_y, bl_x, bl_y, colour);
-	GRRLIB_Line(br_x, br_y, X(), Y(), colour);
-	GRRLIB_Line(bl_x, bl_y, X(), Y(), colour);
+	gfx->drawLine(tp_x, tp_y, br_x, br_y, colour);
+	gfx->drawLine(tp_x, tp_y, bl_x, bl_y, colour);
+	gfx->drawLine(br_x, br_y, X(), Y(), colour);
+	gfx->drawLine(bl_x, bl_y, X(), Y(), colour);
 
 	/* Collision Detection and barbaric treatment of CPU :( */
 	for(vector<Collobj *>::iterator iter = get_engine()->get_collents()->begin(); iter!=get_engine()->get_collents()->end(); iter++)
@@ -231,7 +231,7 @@ bool Ship::update()
 	return true;
 }
 
-void Ship::draw_lives()
+void Ship::draw_lives(GfxWrapper *gfx)
 {
 	char score_buf[32] = { 0 };
 	char lives_buf[10] = { 0 };
@@ -239,39 +239,39 @@ void Ship::draw_lives()
 	sprintf(lives_buf, "x %d", lives);
 	if(player_num == 0)
 	{
-		GRRLIB_Print(35, 35, font5_char_width, font5_char_high, score_buf,font5, colour, 0x0000);
-		GRRLIB_Print(65,48,font5_char_width, font5_char_high, lives_buf, font5, colour, 0x0000);
-		GRRLIB_Line(15+40, 50, 15+35, 60, colour);
-		GRRLIB_Line(15+40, 50, 15+45, 60, colour);
-		GRRLIB_Line(15+35, 60, 15+40, 55, colour);
-		GRRLIB_Line(15+45, 60, 15+40, 55, colour);
+		gfx->drawText(35, 35, score_buf,colour);
+		gfx->drawText(65,48,lives_buf, colour);
+		gfx->drawLine(15+40, 50, 15+35, 60, colour);
+		gfx->drawLine(15+40, 50, 15+45, 60, colour);
+		gfx->drawLine(15+35, 60, 15+40, 55, colour);
+		gfx->drawLine(15+45, 60, 15+40, 55, colour);
 	}
 	if(player_num == 1)
 	{
-		GRRLIB_Print(490, 435, font5_char_width, font5_char_high, (char*)score_buf,font5, colour, 0x0000);
-		GRRLIB_Print(520,448,font5_char_width, font5_char_high, lives_buf, font5, colour, 0x0000);
-		GRRLIB_Line(15+495, 450, 15+490, 460, colour);
-		GRRLIB_Line(15+495, 450, 15+500, 460, colour);
-		GRRLIB_Line(15+490, 460, 15+495, 455, colour);
-		GRRLIB_Line(15+500, 460, 15+495, 455, colour);
+		gfx->drawText(490, 435, (char*)score_buf,colour);
+		gfx->drawText(520,448,lives_buf, colour);
+		gfx->drawLine(15+495, 450, 15+490, 460, colour);
+		gfx->drawLine(15+495, 450, 15+500, 460, colour);
+		gfx->drawLine(15+490, 460, 15+495, 455, colour);
+		gfx->drawLine(15+500, 460, 15+495, 455, colour);
 	}
 	if(player_num == 2)
 	{
-		GRRLIB_Print(490, 35, font5_char_width, font5_char_high, (char*)score_buf,font5, colour, 0x0000);
-		GRRLIB_Print(520,48,font5_char_width, font5_char_high, lives_buf, font5, colour, 0x0000);
-		GRRLIB_Line(15+495, 50, 15+490, 60, colour);
-		GRRLIB_Line(15+495, 50, 15+500, 60, colour);
-		GRRLIB_Line(15+490, 60, 15+495, 55, colour);
-		GRRLIB_Line(15+500, 60, 15+495, 55, colour);
+		gfx->drawText(490, 35, (char*)score_buf,colour);
+		gfx->drawText(520,48,lives_buf, colour);
+		gfx->drawLine(15+495, 50, 15+490, 60, colour);
+		gfx->drawLine(15+495, 50, 15+500, 60, colour);
+		gfx->drawLine(15+490, 60, 15+495, 55, colour);
+		gfx->drawLine(15+500, 60, 15+495, 55, colour);
 	}
 	if(player_num == 3)
 	{
-		GRRLIB_Print(35, 435, font5_char_width, font5_char_high, (char*)score_buf,font5, colour, 0x0000);
-		GRRLIB_Print(65,448,font5_char_width, font5_char_high, lives_buf, font5, colour, 0x0000);
-		GRRLIB_Line(15+40, 450, 15+35, 460, colour);
-		GRRLIB_Line(15+40, 450, 15+45, 460, colour);
-		GRRLIB_Line(15+35, 460, 15+40, 455, colour);
-		GRRLIB_Line(15+45, 460, 15+40, 455, colour);
+		gfx->drawText(35, 435, (char*)score_buf,colour);
+		gfx->drawText(65,448,lives_buf, colour);
+		gfx->drawLine(15+40, 450, 15+35, 460, colour);
+		gfx->drawLine(15+40, 450, 15+45, 460, colour);
+		gfx->drawLine(15+35, 460, 15+40, 455, colour);
+		gfx->drawLine(15+45, 460, 15+40, 455, colour);
 	}
 }
 

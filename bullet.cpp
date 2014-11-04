@@ -15,12 +15,12 @@
 
 using std::vector;
 
-Bullet::Bullet()
+Bullet::Bullet() : col(RGB(1.0f, 1.0f, 1.0f))
 {
 
 }
 
-Bullet::Bullet(double x, double y, double rot, unsigned short color, Entity *player) : angle(rot), col(color), owner(player), ttl(ticks_to_millisecs(gettime())+1500)
+Bullet::Bullet(double x, double y, double rot, const RGB &color, Entity *player) : angle(rot), col(color), owner(player), ttl(ticks_to_millisecs(gettime())+1500)
 {
 	X(x);
 	Y(y);
@@ -31,7 +31,7 @@ Bullet::~Bullet()
 
 }
 
-bool Bullet::update()
+bool Bullet::update(GfxWrapper *gfx)
 {
 	/* Collision Detection and barbaric treatment of CPU :( */
 	for(vector<Collobj *>::iterator iter = get_engine()->get_collents()->begin(); iter!=get_engine()->get_collents()->end(); iter++)
@@ -61,7 +61,7 @@ bool Bullet::update()
 			}
 	 	}
 	}
-	GRRLIB_DrawRectangle(X()-1,Y()-1,2,2,col,1);
+	gfx->drawRect(X()-1,Y()-1,2,2,col);
 	
 	X(X()+cos(angle/180*M_PI)*3.5);
 	Y(Y()+sin(angle/180*M_PI)*3.5);
