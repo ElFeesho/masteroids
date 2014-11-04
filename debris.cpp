@@ -5,11 +5,9 @@
 
 #include <math.h>
 
-#include "GRRLIB.h"
-
 #include "debris.h"
 
-Debris::Debris(int amount, double xpos, double ypos, double angle, double xspeed, double yspeed, unsigned short colour, long time_to_live) : count(amount), col(colour), ttl(time_to_live)
+Debris::Debris(int amount, double xpos, double ypos, double angle, double xspeed, double yspeed, const RGB &colour, long time_to_live) : count(amount), colour(colour), ttl(time_to_live)
 {
 	if(count > 16) // If there are more than 16 pieces of shrapnel, bail
 	{
@@ -36,7 +34,7 @@ Debris::~Debris()
 
 }
 
-bool Debris::update()
+bool Debris::update(GfxWrapper *gfx)
 {
 	long ctime = ticks_to_millisecs(gettime());
 	if(ctime>ttl)
@@ -62,7 +60,7 @@ bool Debris::update()
 
 		// Cheeky chappy: gonna use angles[] again but for the rotation of the 
 		// debris, since xsp and ysp is constant now, they don't depend on it
-		GRRLIB_Line(x[i]+cos(angles[i]/180.0*M_PI)*sizes[i],y[i]+sin(angles[i]/180.0*M_PI)*sizes[i],x[i]+cos((angles[i]-180)/180.0*M_PI)*sizes[i],y[i]+sin((angles[i]-180)/180.0*M_PI)*sizes[i],col);
+		gfx->drawLine(x[i]+cos(angles[i]/180.0*M_PI)*sizes[i],y[i]+sin(angles[i]/180.0*M_PI)*sizes[i],x[i]+cos((angles[i]-180)/180.0*M_PI)*sizes[i],y[i]+sin((angles[i]-180)/180.0*M_PI)*sizes[i],colour);
 		if(i%2)
 			angles[i]+=rot_speed[i];
 		else

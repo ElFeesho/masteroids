@@ -3,13 +3,15 @@
 
 #include "entity.h"
 
+#include "gfx.h"
+
 class UFOBullet : public Entity
 {
 public:
 	UFOBullet();
 	UFOBullet(double x, double y, double rot, Entity *ufo);
 	~UFOBullet();
-	bool update();
+	bool update(GfxWrapper *gfx);
 private:
 	double angle;
 	Entity *owner;

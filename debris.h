@@ -2,13 +2,14 @@
 #define __DEBRIS_H__
 
 #include "entity.h"
+#include "gfx.h"
 
 class Debris : public Entity
 {
 public:
-	Debris(int amount, double xpos, double ypos, double angle, double xspeed, double yspeed, unsigned short colour, long time_to_live);
+	Debris(int amount, double xpos, double ypos, double angle, double xspeed, double yspeed, const RGB &colour, long time_to_live);
 	~Debris();
-	bool update();
+	bool update(GfxWrapper *gfx);
 private:
 	
 	int count;
@@ -17,11 +18,10 @@ private:
 	double angles[16];
 	double xsp[16];
 	double ysp[16];
-	unsigned short col;
 	long ttl;
 	double rot_speed[16];
 	int sizes[16];
-	
+	RGB colour;
 };
 
 #endif

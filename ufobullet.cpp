@@ -31,7 +31,7 @@ UFOBullet::~UFOBullet()
 
 }
 
-bool UFOBullet::update()
+bool UFOBullet::update(GfxWrapper *gfx)
 {
 	/* Collision Detection and barbaric treatment of CPU :( */
 	for(vector<Collobj *>::iterator iter = get_engine()->get_collents()->begin(); iter!=get_engine()->get_collents()->end(); iter++)

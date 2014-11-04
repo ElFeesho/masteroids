@@ -9,6 +9,7 @@
 #include "options.h"
 #include "GRRLIB.h"
 #include "music.h"
+#include "gfx.h"
 
 #ifndef __WII__
 #include <SDL/SDL.h>
@@ -33,22 +34,37 @@ extern u16 *GRRLIB_buffer;
 
 int main(int argc, char **argv)
 {
-	VIDEO_Init();
-	GRRLIB_buffer = GRRLIB_MakeBuffer(640, 480);
-	GRRLIB_InitVideo();
-	GRRLIB_Start();
+	GfxWrapper *gfxWrapper = new GfxWrapper();
+	gfxWrapper->init(640, 480);
+	//VIDEO_Init();
+	//GRRLIB_buffer = GRRLIB_MakeBuffer(640, 480);
+	//GRRLIB_InitVideo();
+	//GRRLIB_Start();
 	PAD_Init();
 	WPAD_Init();
 	WPAD_Disconnect(WPAD_CHAN_ALL);
 	WPAD_SetIdleTimeout(120);
 
-	Engine engine;
+	Engine engine(gfxWrapper, RGB(0.0f, 0.0f, 0.0f));
 	for(;;)
 	{
 		VIDEO_WaitVSync();
 		ScanPADSandReset(0);
 		engine.update();
-		GRRLIB_Render();
+		gfxWrapper->render();
+		//GRRLIB_Render();
+
+#ifndef __WII__
+		 SDL_Event ev = { 0 };
+
+	    while(SDL_PollEvent(&ev))
+	    {
+		    if(ev.type == SDL_QUIT)
+		    {
+		        exit(0);
+		    }
+		}
+#endif
 	}
 
 	return 0;

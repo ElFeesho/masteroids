@@ -4,16 +4,16 @@
 #include <vector>
 #include "entity.h"
 #include "collobj.h"
+#include "gfx.h"
 
 using std::vector;
 /*
 	The engine: takes a list of entities and processes them.
 */
-
 class Engine
 {
 public:
-	Engine();
+	Engine(GfxWrapper *gfx, const RGB &clearColour );
 	~Engine();
 
 	/* Calls all the entities update functions */
@@ -39,6 +39,8 @@ public:
 	void set_pause_ent(Entity *ent);
 
 private:
+	RGB clearColour;
+	GfxWrapper *gfx;
 	vector<Entity*> *ent_list;
 	vector<Collobj *> *collent_list;
 	vector<Entity*> *ent_list_tmp;

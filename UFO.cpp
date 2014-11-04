@@ -9,7 +9,7 @@
 
 #include "ufobullet.h"
 
-UFO::UFO() : next_think(ticks_to_millisecs(gettime())+1500), next_fire(ticks_to_millisecs(gettime())+450), alive(true)
+UFO::UFO() : next_think(ticks_to_millisecs(gettime())+1500), next_fire(ticks_to_millisecs(gettime())+450), alive(true), shipColour(RGB(1.0f, 0.0f, 1.0f))
 {
 	if(rand()%2)
 	{
@@ -32,7 +32,7 @@ UFO::~UFO()
 	
 }
 
-bool UFO::update()
+bool UFO::update(GfxWrapper *gfx)
 {
 	if(!alive)
 		return false;
@@ -68,16 +68,16 @@ bool UFO::update()
 		Y(-10);
 
 	/* COMPLEX DRAWING ROUTEIN!!! j/k */
-	GRRLIB_Line(X()-get_radius()/4,Y()-get_radius(), X()+get_radius()/4, Y()-get_radius(),0xf81f);
-	GRRLIB_Line(X()-get_radius()/2,Y()+get_radius(), X()+get_radius()/2, Y()+get_radius(),0xf81f);
-	GRRLIB_Line(X()-get_radius()/2,Y()+get_radius(), X()-get_radius(), Y()+get_radius()/2,0xf81f);
-	GRRLIB_Line(X()+get_radius()/2,Y()+get_radius(), X()+get_radius(), Y()+get_radius()/2,0xf81f);
-	GRRLIB_Line(X()-get_radius()/2,Y()-get_radius(), X()-get_radius(), Y()-get_radius()/2,0xf81f);
-	GRRLIB_Line(X()+get_radius()/2,Y()-get_radius(), X()+get_radius(), Y()-get_radius()/2,0xf81f);
-	GRRLIB_Line(X()+get_radius(),Y()-get_radius()/2, X()+get_radius(), Y()+get_radius()/2,0xf81f);
-	GRRLIB_Line(X()-get_radius(),Y()-get_radius()/2, X()-get_radius(), Y()+get_radius()/2,0xf81f);
-	GRRLIB_Line(X()-get_radius(),Y()+get_radius()/2, X()+get_radius(), Y()+get_radius()/2,0xf81f);
-	GRRLIB_Line(X()-get_radius(),Y()-get_radius()/2, X()+get_radius(), Y()-get_radius()/2,0xf81f);
+	gfx->drawLine(X()-get_radius()/4,Y()-get_radius(), X()+get_radius()/4, Y()-get_radius(),shipColour);
+	gfx->drawLine(X()-get_radius()/2,Y()+get_radius(), X()+get_radius()/2, Y()+get_radius(),shipColour);
+	gfx->drawLine(X()-get_radius()/2,Y()+get_radius(), X()-get_radius(), Y()+get_radius()/2,shipColour);
+	gfx->drawLine(X()+get_radius()/2,Y()+get_radius(), X()+get_radius(), Y()+get_radius()/2,shipColour);
+	gfx->drawLine(X()-get_radius()/2,Y()-get_radius(), X()-get_radius(), Y()-get_radius()/2,shipColour);
+	gfx->drawLine(X()+get_radius()/2,Y()-get_radius(), X()+get_radius(), Y()-get_radius()/2,shipColour);
+	gfx->drawLine(X()+get_radius(),Y()-get_radius()/2, X()+get_radius(), Y()+get_radius()/2,shipColour);
+	gfx->drawLine(X()-get_radius(),Y()-get_radius()/2, X()-get_radius(), Y()+get_radius()/2,shipColour);
+	gfx->drawLine(X()-get_radius(),Y()+get_radius()/2, X()+get_radius(), Y()+get_radius()/2,shipColour);
+	gfx->drawLine(X()-get_radius(),Y()-get_radius()/2, X()+get_radius(), Y()-get_radius()/2,shipColour);
 
 
 	return true;
@@ -86,14 +86,27 @@ bool UFO::update()
 void UFO::on_hit()
 {
 	if(xspeed<0)
+	{
 		if(yspeed<0)
-			get_engine()->add_entity(new Debris(10, X(), Y(), -45, xspeed*2, yspeed*2, 0xf81f, 2500));
+		{
+			get_engine()->add_entity(new Debris(10, X(), Y(), -45, xspeed*2, yspeed*2, shipColour, 2500));
+		}
 		else
-			get_engine()->add_entity(new Debris(10, X(), Y(), 225, xspeed*2, yspeed*2, 0xf81f, 2500));
+		{	
+			get_engine()->add_entity(new Debris(10, X(), Y(), 225, xspeed*2, yspeed*2, shipColour, 2500));
+		}
+	}
 	else
+	{
 		if(yspeed<0)
-			get_engine()->add_entity(new Debris(10, X(), Y(), 45, xspeed*2, yspeed*2, 0xf81f, 2500));
+		{
+			get_engine()->add_entity(new Debris(10, X(), Y(), 45, xspeed*2, yspeed*2, shipColour, 2500));
+		}
 		else
-			get_engine()->add_entity(new Debris(10, X(), Y(), 135, xspeed*2, yspeed*2, 0xf81f, 2500));
+		{
+			get_engine()->add_entity(new Debris(10, X(), Y(), 135, xspeed*2, yspeed*2, shipColour, 2500));
+		}
+	}
+
 	alive = false;
 }

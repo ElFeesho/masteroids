@@ -1,6 +1,8 @@
 #ifndef __ENTITY_H__
 #define __ENTITY_H__
 
+class GfxWrapper;
+
 class Engine;
 
 class Entity
@@ -10,7 +12,7 @@ public:
 	virtual ~Entity();
 
 	/* Overridings */
-	virtual bool update() = 0;
+	virtual bool update(GfxWrapper *gfx) = 0;
 
 	double X();
 	double X(double nx);
