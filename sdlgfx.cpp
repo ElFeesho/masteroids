@@ -54,7 +54,7 @@ void GfxWrapper::init(int w, int h)
 
 void GfxWrapper::drawLine(int x, int y, int x2, int y2, const RGB &colour) const
 {
-	lineColor(SDL_GetVideoSurface(), x, y, x2, y2, colour.as24bit());
+	aalineColor(SDL_GetVideoSurface(), x, y, x2, y2, colour.as24bit());
 }
 
 void GfxWrapper::fillScreen(const RGB &colour) const
