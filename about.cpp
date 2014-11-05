@@ -21,7 +21,7 @@ About::~About()
 
 bool About::update(GfxWrapper *gfx)
 {
-	gfx->drawRect(120,70,300, 403, borderColour);
+	gfx->drawRect(120, 70, 403, 300, RGB::blue);
 	gfx->drawImg(321-about_width/2,81,about_width, about_height, about_img);
 
 	gfx->drawText(145, 100+font5_char_high*6, (char*)"MAsteroids for Wii, written by Feesh.",textColour);

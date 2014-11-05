@@ -13,7 +13,8 @@ public:
 	static RGB white;
 	static RGB blue;
 	static RGB yellow;
-
+	static RGB black;
+	
 private:
 	float r;
 	float g;

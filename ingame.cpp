@@ -21,9 +21,15 @@ InGame::~InGame()
 bool InGame::update(GfxWrapper *gfx)
 {
 	if(ControlConf::button_down(player_num,BUTTON_LEFT))
+	{
 		menu_sel = 0;
+	}
+
 	if(ControlConf::button_down(player_num,BUTTON_RIGHT))
+	{	
 		menu_sel = 1;
+	}
+	
 	if(ControlConf::button_down(player_num,BUTTON_SHOOT))
 	{
 		if(menu_sel == 0) // Continue playing, just return false and get gobbled by the engine
@@ -37,8 +43,7 @@ bool InGame::update(GfxWrapper *gfx)
 		}
 	}
 	
-	gfx->drawRect((320-150), 240-50, 90, 300, colour);
-	gfx->drawRect((320-150), 240-50, 90, 300, colourHighlight);
+	gfx->drawRect((320-150), 240-50, 300, 90, RGB::blue);
 
 	gfx->drawText(320-80, 240-40, (char*)"Quit Current Game?", colour);
 	if(menu_sel==0)

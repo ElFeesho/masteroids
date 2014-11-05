@@ -45,7 +45,7 @@ int main(int argc, char **argv)
 	WPAD_Disconnect(WPAD_CHAN_ALL);
 	WPAD_SetIdleTimeout(120);
 
-	Engine engine(gfxWrapper, RGB(0.0f, 0.0f, 0.0f));
+	Engine engine(gfxWrapper, RGB::black);
 	for(;;)
 	{
 		VIDEO_WaitVSync();

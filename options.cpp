@@ -162,9 +162,10 @@ bool Options::update(GfxWrapper *gfx)
 		}
 	}
 	
-	GRRLIB_DrawRectangle(120,80,340, 403, 0x001f,0);
-	GRRLIB_DrawImg(321-options_width/2,81,options_width, options_height, options_img, 0.0, 1.0);
-
+	//GRRLIB_DrawRectangle(120,80,340, 403, 0x001f,0);
+	//GRRLIB_DrawImg(321-options_width/2,81,options_width, options_height, options_img, 0.0, 1.0);
+	gfx->drawRect(120, 80, 403, 340, RGB::blue);
+	gfx->drawImg(321-options_width/2,81,options_width, options_height, options_img);
 	char lives[32] = { 0 };
 	char diff[64] = { 0 };
 	char tk[32] = { 0 };

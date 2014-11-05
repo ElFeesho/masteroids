@@ -18,7 +18,7 @@
 
 #include "controlconf.h"
 
-Menu::Menu() : menu_sel(0), next_change(ticks_to_millisecs(gettime())+500), ldir(1), child(NULL), borderColour(RGB(0.0f, 0.0f, 1.0f)), textColour(RGB(1.0f, 1.0f, 1.0f)), highlightColour(RGB(1.0f, 0.8f, 0.0f))
+Menu::Menu() : menu_sel(0), next_change(ticks_to_millisecs(gettime())+500), ldir(1), child(NULL)
 {
 
 }
@@ -100,43 +100,49 @@ bool Menu::update(GfxWrapper *gfx)
 	}
 	
 	
-	gfx->drawRect(320-asteroid_banner_width/2,79,310, asteroid_banner_width+1, borderColour);
+	gfx->drawRect(320-asteroid_banner_width/2,79,asteroid_banner_width+1, 310, RGB::blue);
 	gfx->drawImg(321-asteroid_banner_width/2,80, asteroid_banner_width, asteroid_banner_height, asteroid_banner_data);
 	gfx->drawImg(320, 200,controllers_width, controllers_height, controllers_data);
+	int menuItemHeight = (font5_char_high+15);
+
+	int menuSeparationHeight = 80 + asteroid_banner_height;
+	int menuOffsetX = 320-asteroid_banner_width/2+20;
+
 	if(menu_sel==0)
 	{
-		gfx->drawText(320-asteroid_banner_width/2+20, 80+asteroid_banner_height+font5_char_high+15, (char*)"Start Game", highlightColour);
+		gfx->drawText(menuOffsetX, menuSeparationHeight+menuItemHeight, "Start Game", RGB::yellow);
 	}
 	else
 	{
-		gfx->drawText(320-asteroid_banner_width/2+20, 80+asteroid_banner_height+font5_char_high+15, (char*)"Start Game",textColour);
+		gfx->drawText(menuOffsetX, menuSeparationHeight+menuItemHeight, "Start Game",RGB::white);
 	}
 	
 	if(menu_sel==1)
 	{
-		gfx->drawText(320-asteroid_banner_width/2+20, 80+asteroid_banner_height+(font5_char_high+15)*2, (char*)"Options",highlightColour);
+		gfx->drawText(menuOffsetX, menuSeparationHeight+menuItemHeight*2, "Options",RGB::yellow);
 	}
 	else
 	{
-		gfx->drawText(320-asteroid_banner_width/2+20, 80+asteroid_banner_height+(font5_char_high+15)*2, (char*)"Options",textColour);
+		gfx->drawText(menuOffsetX, menuSeparationHeight+menuItemHeight*2, "Options",RGB::white);
 	}
 	
 	if(menu_sel==2)
 	{
-		gfx->drawText(320-asteroid_banner_width/2+20, 80+asteroid_banner_height+(font5_char_high+15)*3, (char*)"About",highlightColour);
+		gfx->drawText(menuOffsetX, menuSeparationHeight+menuItemHeight*3, "About",RGB::yellow);
 	}
 	else
 	{
-		gfx->drawText(320-asteroid_banner_width/2+20, 80+asteroid_banner_height+(font5_char_high+15)*3, (char*)"About",textColour);
+		gfx->drawText(menuOffsetX, menuSeparationHeight+menuItemHeight*3, "About",RGB::white);
 	}
-	if(menu_sel==3)
+
+	if(menu_sel == 3)
 	{
-		gfx->drawText(320-asteroid_banner_width/2+20, 80+asteroid_banner_height+(font5_char_high+15)*4, (char*)"Exit To HBC",highlightColour);
+		gfx->drawText(menuOffsetX, menuSeparationHeight+menuItemHeight*4, "Exit To HBC",RGB::yellow);
 	}
 	else
 	{
-		gfx->drawText(320-asteroid_banner_width/2+20, 80+asteroid_banner_height+(font5_char_high+15)*4, (char*)"Exit To HBC",textColour);
+		gfx->drawText(menuOffsetX, menuSeparationHeight+menuItemHeight*4, "Exit To HBC",RGB::white);
 	}
-	gfx->drawText(320-asteroid_banner_width/2+20, 80+asteroid_banner_height+(font5_char_high+10)*10, (char*)"Coded by Feesh! - gummybassist@gmail.com",textColour);
+	gfx->drawText(menuOffsetX, 80+asteroid_banner_height+(font5_char_high+10)*10, "Coded by Feesh! - gummybassist@gmail.com",RGB::white);
 	return true;	
 }

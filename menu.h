@@ -16,9 +16,6 @@ private:
 	char ldir;
 	bool active;
 	Entity *child;
-	RGB borderColour;
-	RGB textColour;
-	RGB highlightColour;
 };
 
 #endif
