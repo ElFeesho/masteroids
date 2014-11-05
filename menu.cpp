@@ -17,15 +17,16 @@
 #include "font5.h"
 
 #include "controlconf.h"
+#include "gamepadinputmanager.h"
 
-Menu::Menu() : menu_sel(0), next_change(ticks_to_millisecs(gettime())+500), ldir(1), child(NULL)
+Menu::Menu() : menu_sel(0), next_change(0), ldir(-1), child(NULL)
 {
-
+	GamepadInputManager::sharedInstance()->playerOne()->addListener(this);
 }
 
 Menu::~Menu()
 {
-
+	GamepadInputManager::sharedInstance()->playerOne()->removeListener(this);
 }
 
 bool Menu::update(GfxWrapper *gfx)
@@ -42,60 +43,30 @@ bool Menu::update(GfxWrapper *gfx)
 	
 	unsigned long cticks = ticks_to_millisecs(gettime());
 
-	if(ControlConf::button_held(0,BUTTON_UP) && cticks>next_change)
+	if(cticks>next_change && next_change != 0)
 	{
-		if(ldir == 0)
-			next_change = cticks+200;
-		else
-			next_change = cticks+500;
-		ldir = 0;
-		if(menu_sel>0)
-			menu_sel--;
-		else
-			menu_sel = 3;
-	}
-
-	if(ControlConf::button_held(0,BUTTON_DOWN) && cticks>next_change)
-	{
+		next_change = cticks+200;
 		if(ldir == 1)
-			next_change = cticks+200;
-		else
-			next_change = cticks+500;
-		ldir = 1;
-		if(menu_sel<3)
-			menu_sel++;
-		else
-			menu_sel = 0;
-	}
-
-	if(!ControlConf::button_held(0,BUTTON_UP) && ldir == 0)
-	{
-		next_change = 0;
-	}
-
-	if(!ControlConf::button_held(0,BUTTON_DOWN) && ldir == 1)
-	{
-		next_change = 0;
-	}
-
-	if(ControlConf::button_down(0,BUTTON_SHOOT))
-	{
-		switch(menu_sel)
 		{
-			case 0:
-				get_engine()->set_mode(1); // Start a single player game
-				break;
-			case 1:
-				child = new Options();
-				return true;
-				break;
-			case 2:
-				child = new About();
-				return true;
-				break;
-			case 3:
-				exit(0);
-				break;
+			if(menu_sel<3)
+			{
+				menu_sel++;
+			}
+			else
+			{
+				menu_sel = 0;
+			}
+		}
+		else if(ldir == 0)
+		{
+			if(menu_sel>0)
+			{
+				menu_sel--;
+			}
+			else
+			{
+				menu_sel = 3;
+			}	
 		}
 	}
 	
@@ -145,4 +116,76 @@ bool Menu::update(GfxWrapper *gfx)
 	}
 	gfx->drawText(menuOffsetX, 80+asteroid_banner_height+(font5_char_high+10)*10, "Coded by Feesh! - gummybassist@gmail.com",RGB::white);
 	return true;	
+}
+
+void Menu::incrementMenu()
+{
+	if(menu_sel<3)
+	{
+		menu_sel++;
+	}
+	else
+	{
+		menu_sel = 0;
+	}
+}
+
+void Menu::decrementMenu()
+{
+	if(menu_sel>0)
+	{
+		menu_sel--;
+	}
+	else
+	{
+		menu_sel = 3;
+	}
+}
+
+void Menu::handleMenuSelection()
+{
+	switch(menu_sel)
+	{
+		case 0:
+			get_engine()->set_mode(1); // Start a single player game
+			break;
+		case 1:
+			child = new Options();
+			break;
+		case 2:
+			child = new About();
+			break;
+		case 3:
+			exit(0);
+			break;
+	}
+}
+
+void Menu::buttonDown(GamepadButton button)
+{
+	if(button == GamepadButton::BUTTON_UP)
+	{
+		ldir = 0;
+		decrementMenu();	
+		next_change = ticks_to_millisecs(gettime()) + 500;
+	}
+	if(button == GamepadButton::BUTTON_DOWN)
+	{
+		ldir = 1;
+		incrementMenu();
+	
+		next_change = ticks_to_millisecs(gettime()) + 500;
+	}
+
+	if(button == GamepadButton::BUTTON_FIRE)
+	{
+		handleMenuSelection();
+	}
+
+}
+
+void Menu::buttonUp(GamepadButton button)
+{
+	next_change = 0;
+	ldir = -1;
 }

@@ -60,7 +60,6 @@ void GfxWrapper::drawLine(int x, int y, int x2, int y2, const RGB &colour) const
 void GfxWrapper::fillScreen(const RGB &colour) const
 {
 	SDL_FillRect(SDL_GetVideoSurface(), NULL, colour.as24bit());
-	//SDL_FillRect(SDL_GetVideoSurface(), NULL, 0x0);
 }
 
 void GfxWrapper::drawText(int x, int y, const char *text, const RGB &colour) const
@@ -76,13 +75,9 @@ void GfxWrapper::drawText(int x, int y, const char *text, const RGB &colour) con
 		{
 			for(px=x;px<x+font5_char_width;px++)
 			{
-				if(font5[ni]==0xffff)
-				{
-				}
-				else
+				if(font5[ni]!=0xffff)
 				{
 					pixelColor(SDL_GetVideoSurface(), px+i*font5_char_width, py, colour.as24bit());
-					
 				}
 
 				ni++;

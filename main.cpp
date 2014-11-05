@@ -11,6 +11,8 @@
 #include "music.h"
 #include "gfx.h"
 
+#include "gamepadinputmanager.h"
+
 #ifndef __WII__
 #include <SDL/SDL.h>
 #endif
@@ -45,6 +47,7 @@ int main(int argc, char **argv)
 	WPAD_Disconnect(WPAD_CHAN_ALL);
 	WPAD_SetIdleTimeout(120);
 
+
 	Engine engine(gfxWrapper, RGB::black);
 	for(;;)
 	{
@@ -52,6 +55,7 @@ int main(int argc, char **argv)
 		ScanPADSandReset(0);
 		engine.update();
 		gfxWrapper->render();
+		GamepadInputManager::sharedInstance()->poll();
 		//GRRLIB_Render();
 
 #ifndef __WII__
