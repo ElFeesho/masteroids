@@ -2,7 +2,7 @@
 
 #include <SDL/SDL.h>
 
-#define PAD_BUTTON_DOWN (1 << 0) 
+#define PAD_BUTTON_DOWN (1 << 0)
 #define PAD_BUTTON_UP (1 << 1)
 #define PAD_BUTTON_LEFT (1 << 2)
 #define PAD_BUTTON_RIGHT (1 << 3)
@@ -66,64 +66,52 @@ void KeyboardSource::poll()
 
 		if(buttonsDown & PAD_BUTTON_UP)
 		{
-			printf("UP\n");
-			listener->buttonDown(GamepadButton::BUTTON_UP);
+			listener->buttonDown(BUTTON_UP);
 		}
 		if(buttonsDown & PAD_BUTTON_DOWN)
 		{
-			printf("DOWN\n");
-			listener->buttonDown(GamepadButton::BUTTON_DOWN);
+			listener->buttonDown(BUTTON_DOWN);
 		}
 		if(buttonsDown & PAD_BUTTON_LEFT)
 		{
-			printf("LEFT\n");
-			listener->buttonDown(GamepadButton::BUTTON_LEFT);
+			listener->buttonDown(BUTTON_LEFT);
 		}
 		if(buttonsDown & PAD_BUTTON_RIGHT)
 		{
-			printf("RIGHT\n");
-			listener->buttonDown(GamepadButton::BUTTON_RIGHT);
+			listener->buttonDown(BUTTON_RIGHT);
 		}
 		if(buttonsDown & PAD_BUTTON_FIRE)
 		{
-			printf("FIRE\n");
-			listener->buttonDown(GamepadButton::BUTTON_FIRE);
+			listener->buttonDown(BUTTON_FIRE);
 		}
 		if(buttonsDown & PAD_BUTTON_START)
 		{
-			printf("START\n");
-			listener->buttonDown(GamepadButton::BUTTON_START);
+			listener->buttonDown(BUTTON_START);
 		}
 
 		if(buttonsUp & PAD_BUTTON_UP)
 		{
-			printf("up\n");
-			listener->buttonUp(GamepadButton::BUTTON_UP);
+			listener->buttonUp(BUTTON_UP);
 		}
 		if(buttonsUp & PAD_BUTTON_DOWN)
 		{
-			printf("down\n");
-			listener->buttonUp(GamepadButton::BUTTON_DOWN);
+			listener->buttonUp(BUTTON_DOWN);
 		}
 		if(buttonsUp & PAD_BUTTON_LEFT)
 		{
-			printf("left\n");
-			listener->buttonUp(GamepadButton::BUTTON_LEFT);
+			listener->buttonUp(BUTTON_LEFT);
 		}
 		if(buttonsUp & PAD_BUTTON_RIGHT)
 		{
-			printf("right\n");
-			listener->buttonUp(GamepadButton::BUTTON_RIGHT);
+			listener->buttonUp(BUTTON_RIGHT);
 		}
 		if(buttonsUp & PAD_BUTTON_FIRE)
 		{
-			printf("fire\n");
-			listener->buttonUp(GamepadButton::BUTTON_FIRE);
+			listener->buttonUp(BUTTON_FIRE);
 		}
 		if(buttonsUp & PAD_BUTTON_START)
 		{
-			printf("start\n");
-			listener->buttonUp(GamepadButton::BUTTON_START);
+			listener->buttonUp(BUTTON_START);
 		}
 	}
 }

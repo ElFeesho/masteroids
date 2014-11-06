@@ -5,7 +5,7 @@
 
 using std::vector;
 
-enum class GamepadButton
+enum GamepadButton
 {
 	BUTTON_UP,
 	BUTTON_DOWN,
@@ -31,7 +31,7 @@ public:
 	virtual char *name() = 0;
 };
 
-class GamepadListener 
+class GamepadListener
 {
 public:
 	GamepadListener() {};
@@ -77,7 +77,7 @@ public:
 		}
 	}
 
-	void buttonUp(GamepadButton button) 
+	void buttonUp(GamepadButton button)
 	{
 		for(int i = 0; i < listeners.size(); i++)
 		{
