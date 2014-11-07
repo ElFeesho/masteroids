@@ -24,20 +24,17 @@ bool About::update(GfxWrapper *gfx)
 	gfx->drawRect(120, 70, 403, 300, RGB::blue);
 	gfx->drawImg(321-about_width/2,81,about_width, about_height, about_img);
 
-	gfx->drawText(145, 100+font5_char_high*6, (char*)"MAsteroids for Wii, written by Feesh.",textColour);
-	gfx->drawText(145, 100+font5_char_high*8, (char*)"Thanks go out to:",textColour);
-	gfx->drawText(180, 100+font5_char_high*10, (char*)"Arn` for the cool banner and icon.",textColour);
-	gfx->drawText(180, 100+font5_char_high*12, (char*)"#wiidev IRC channel on Efnet",textColour);
-	gfx->drawText(180, 100+font5_char_high*14, (char*)"Homebrew Channel",textColour);
-	gfx->drawText(180, 100+font5_char_high*16, (char*)"LibOGC and GRRLIB.",textColour);
-	gfx->drawText(180, 100+font5_char_high*18, (char*)"Zaxx and his magical Linux-fu.",textColour);
-	gfx->drawText(180, 100+font5_char_high*20, (char*)"Dare for sucking at Mario Kart",textColour);
-	gfx->drawText((640-22*font5_char_width)/2, 100+font5_char_high*22, (char*)"Push Start to go back",textColour);
+	int aboutTextYOffset = 100+font5_char_high;
 
-	if(ControlConf::button_down(0,BUTTON_START))
-	{
-		return false;
-	}
+	gfx->drawText(145, aboutTextYOffset*6, "MAsteroids for Wii, written by Feesh.",textColour);
+	gfx->drawText(145, aboutTextYOffset*8, "Thanks go out to:",textColour);
+	gfx->drawText(180, aboutTextYOffset*10, "Arn` for the cool banner and icon.",textColour);
+	gfx->drawText(180, aboutTextYOffset*12, "#wiidev IRC channel on Efnet",textColour);
+	gfx->drawText(180, aboutTextYOffset*14, "Homebrew Channel",textColour);
+	gfx->drawText(180, aboutTextYOffset*16, "LibOGC and GRRLIB.",textColour);
+	gfx->drawText(180, aboutTextYOffset*18, "Zaxx and his magical Linux-fu.",textColour);
+	gfx->drawText(180, aboutTextYOffset*20, "Dare for sucking at Mario Kart",textColour);
+	gfx->drawText((640-22*font5_char_width)/2, aboutTextYOffset*22, "Push Start to go back",textColour);
 
-	return true;
+	return !(ControlConf::button_down(0,BUTTON_START));
 }

@@ -2,6 +2,7 @@
 #define __GAMEPAD_H__
 
 #include <vector>
+#include <string>
 
 using std::vector;
 
@@ -28,7 +29,7 @@ public:
 	virtual ~GamepadSource() {}
 	virtual void setListener(GamepadSourceListener *listener) = 0;
 	virtual void poll() = 0;
-	virtual char *name() = 0;
+	virtual const std::string name() const = 0;
 };
 
 class GamepadListener
@@ -85,7 +86,7 @@ public:
 		}
 	}
 
-	char *name()
+	const std::string name() const
 	{
 		return source->name();
 	}

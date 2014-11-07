@@ -4,6 +4,10 @@
 #include <SDL/SDL_gfxPrimitives.h>
 #include "font5.h"
 
+#include <string>
+
+using std::string;
+
 static unsigned int convert16bit_to_24bit(unsigned short colorin)
 {
     unsigned char r = (((colorin)&0x01F) <<3);
@@ -62,13 +66,13 @@ void GfxWrapper::fillScreen(const RGB &colour) const
 	SDL_FillRect(SDL_GetVideoSurface(), NULL, colour.as24bit());
 }
 
-void GfxWrapper::drawText(int x, int y, const char *text, const RGB &colour) const
+void GfxWrapper::drawText(int x, int y, const string &text, const RGB &colour) const
 {
 	int px,py;
 	int ni;
 	int i;
 
-	for(i=0; i < strlen(text); i++)
+	for(i=0; i < text.length(); i++)
 	{
 		ni = (font5_char_width*font5_char_high*(text[i]-1));
 		for (py=y;py<y+font5_char_high;py++)

@@ -1,6 +1,8 @@
 #ifndef __GFX_H__
 #define __GFX_H__
 
+#include <string>
+
 class RGB
 {
 public:
@@ -14,7 +16,7 @@ public:
 	static RGB blue;
 	static RGB yellow;
 	static RGB black;
-	
+
 private:
 	float r;
 	float g;
@@ -28,7 +30,7 @@ public:
 
 	void drawLine(int x, int y, int x2, int y2, const RGB &colour) const;
 	void fillScreen(const RGB &colour) const;
-	void drawText(int x, int y, const char *text, const RGB &colour) const;
+	void drawText(int x, int y, const std::string &text, const RGB &colour) const;
 	void drawRect(int x, int y, int w, int h, const RGB &colour) const;
 	void drawImg(int x, int y, int w, int h, const unsigned short *imgData) const;
 

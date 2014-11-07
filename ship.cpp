@@ -83,10 +83,10 @@ bool Ship::update(GfxWrapper *gfx)
 	{
 		get_engine()->set_pause_ent(new InGame(player_num));
 	}
-	
+
 	if(lives<=0) // Game over man - Engine checks to see whether game over screen should be shown
 		return true;
-	
+
 	if(kill_time!=0) /* Whilst 'dead' kill time will be time of death */
 	{
 		if(ticks_to_millisecs(gettime())>kill_time+2500) /* Player is dead for 2.5 seconds */
@@ -112,7 +112,7 @@ bool Ship::update(GfxWrapper *gfx)
 				px = 640/4;
 				py = 480/4*3;
 			}
-		
+
 			xspeed = 0;
 			yspeed = 0;
 			rot = 90+(player_num%2)*180;
@@ -160,7 +160,7 @@ bool Ship::update(GfxWrapper *gfx)
 		get_engine()->add_entity(new Bullet(X()+cos(rot/180*M_PI)*10.0,Y()+sin(rot/180*M_PI)*10.0,rot,colour,this));
 		inc_bfired();
 	}
-	
+
 	if(ControlConf::button_held(player_num,BUTTON_UP))
 	{
 		xspeed = xspeed + cos(rot/180*M_PI)*0.1;
@@ -248,7 +248,7 @@ void Ship::draw_lives(GfxWrapper *gfx)
 	}
 	if(player_num == 1)
 	{
-		gfx->drawText(490, 435, (char*)score_buf,colour);
+		gfx->drawText(490, 435, score_buf,colour);
 		gfx->drawText(520,448,lives_buf, colour);
 		gfx->drawLine(15+495, 450, 15+490, 460, colour);
 		gfx->drawLine(15+495, 450, 15+500, 460, colour);
@@ -257,7 +257,7 @@ void Ship::draw_lives(GfxWrapper *gfx)
 	}
 	if(player_num == 2)
 	{
-		gfx->drawText(490, 35, (char*)score_buf,colour);
+		gfx->drawText(490, 35, score_buf,colour);
 		gfx->drawText(520,48,lives_buf, colour);
 		gfx->drawLine(15+495, 50, 15+490, 60, colour);
 		gfx->drawLine(15+495, 50, 15+500, 60, colour);
@@ -266,7 +266,7 @@ void Ship::draw_lives(GfxWrapper *gfx)
 	}
 	if(player_num == 3)
 	{
-		gfx->drawText(35, 435, (char*)score_buf,colour);
+		gfx->drawText(35, 435, score_buf,colour);
 		gfx->drawText(65,448,lives_buf, colour);
 		gfx->drawLine(15+40, 450, 15+35, 460, colour);
 		gfx->drawLine(15+40, 450, 15+45, 460, colour);
@@ -302,7 +302,7 @@ void Ship::on_hit()
 	kill_time = ticks_to_millisecs(gettime());
 	get_engine()->add_entity(new Debris(3, X(), Y(), rot, xspeed, yspeed, colour, 2500));
 	/* Make sure the ship doesn't get hit into by other entities whilst it's disappeared */
-	X(-500.0); 
+	X(-500.0);
 	Y(-500.0);
 }
 

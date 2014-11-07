@@ -26,10 +26,10 @@ bool InGame::update(GfxWrapper *gfx)
 	}
 
 	if(ControlConf::button_down(player_num,BUTTON_RIGHT))
-	{	
+	{
 		menu_sel = 1;
 	}
-	
+
 	if(ControlConf::button_down(player_num,BUTTON_SHOOT))
 	{
 		if(menu_sel == 0) // Continue playing, just return false and get gobbled by the engine
@@ -42,25 +42,25 @@ bool InGame::update(GfxWrapper *gfx)
 			return false;
 		}
 	}
-	
+
 	gfx->drawRect((320-150), 240-50, 300, 90, RGB::blue);
 
-	gfx->drawText(320-80, 240-40, (char*)"Quit Current Game?", colour);
+	gfx->drawText(320-80, 240-40, "Quit Current Game?", colour);
 	if(menu_sel==0)
 	{
-		gfx->drawText(320-140, 240-5, (char*)"Continue", colourHighlight);
+		gfx->drawText(320-140, 240-5, "Continue", colourHighlight);
 	}
 	else
-	{	
-		gfx->drawText(320-140, 240-5, (char*)"Continue", colour);
+	{
+		gfx->drawText(320-140, 240-5, "Continue", colour);
 	}
 	if(menu_sel==1)
 	{
-		gfx->drawText(420, 240-5, (char*)"Exit", colourHighlight);
+		gfx->drawText(420, 240-5, "Exit", colourHighlight);
 	}
 	else
 	{
-		gfx->drawText(420, 240-5, (char*)"Exit", colour);
+		gfx->drawText(420, 240-5, "Exit", colour);
 	}
 
 	return true;

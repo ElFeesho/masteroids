@@ -17,9 +17,9 @@ public:
 
 	void poll();
 
-	char *name()
+	const std::string name() const
 	{
-		return "Keyboard";
+		return std::string("Keyboard");
 	}
 
 private:

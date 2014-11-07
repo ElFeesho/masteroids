@@ -40,7 +40,7 @@ bool Options::update(GfxWrapper *gfx)
 		}
 		return true;
 	}
-	
+
 	unsigned long cticks = ticks_to_millisecs(gettime());
 
 	/* Prevent the nunchuk from flying through menu options */
@@ -65,7 +65,7 @@ bool Options::update(GfxWrapper *gfx)
 		if(menu_sel<6)
 			menu_sel++;
 	}
-	
+
 	/* Allow the user to push the buttons over and over quickly :D */
 	if(!ControlConf::button_held(0,BUTTON_UP) && ldir == 0)
 	{
@@ -91,7 +91,7 @@ bool Options::update(GfxWrapper *gfx)
 	{
 		return false;
 	}
-	
+
 	if(ControlConf::button_held(0,BUTTON_LEFT) && cticks>next_change)
 	{
 		if(ldir==2)
@@ -125,7 +125,7 @@ bool Options::update(GfxWrapper *gfx)
 				break;
 		}
 	}
-	
+
 	if(ControlConf::button_held(0,BUTTON_RIGHT) && cticks>next_change)
 	{
 		if(ldir==3)
@@ -161,7 +161,7 @@ bool Options::update(GfxWrapper *gfx)
 				break;
 		}
 	}
-	
+
 	//GRRLIB_DrawRectangle(120,80,340, 403, 0x001f,0);
 	//GRRLIB_DrawImg(321-options_width/2,81,options_width, options_height, options_img, 0.0, 1.0);
 	gfx->drawRect(120, 80, 403, 340, RGB::blue);
@@ -183,39 +183,39 @@ bool Options::update(GfxWrapper *gfx)
 		gfx->drawText((640-strlen(lives)*font5_char_width)/2, 80+font5_char_high*8, lives,colourHighlight);
 	else
 		gfx->drawText((640-strlen(lives)*font5_char_width)/2, 80+font5_char_high*8, lives,colour);
-	
+
 	if(menu_sel == 1)
 		gfx->drawText((640-strlen(diff)*font5_char_width)/2, 80+font5_char_high*11, diff,colourHighlight);
 	else
 		gfx->drawText((640-strlen(diff)*font5_char_width)/2, 80+font5_char_high*11, diff,colour);
-		
+
 	if(menu_sel == 2)
 		gfx->drawText((640-strlen(tk)*font5_char_width)/2, 80+font5_char_high*14, tk,colourHighlight);
 	else
 		gfx->drawText((640-strlen(tk)*font5_char_width)/2, 80+font5_char_high*14, tk,colour);
-		
+
 	if(menu_sel == 3)
 		gfx->drawText((640-strlen(players_txt)*font5_char_width)/2, 80+font5_char_high*17, players_txt,colourHighlight);
 	else
 		gfx->drawText((640-strlen(players_txt)*font5_char_width)/2, 80+font5_char_high*17, players_txt,colour);
 
-	if(menu_sel == 4)	
+	if(menu_sel == 4)
 		gfx->drawText((640-strlen(max_bulls)*font5_char_width)/2, 80+font5_char_high*20, max_bulls,colourHighlight);
 	else
 		gfx->drawText((640-strlen(max_bulls)*font5_char_width)/2, 80+font5_char_high*20, max_bulls,colour);
 
-	if(menu_sel == 5)	
+	if(menu_sel == 5)
 		gfx->drawText((640-strlen(muse)*font5_char_width)/2, 80+font5_char_high*23, muse,colourHighlight);
 	else
 		gfx->drawText((640-strlen(muse)*font5_char_width)/2, 80+font5_char_high*23, muse,colour);
 
-	if(menu_sel == 6)	
-		gfx->drawText((640-strlen("Configure Controls")*font5_char_width)/2, 80+font5_char_high*26, (char*)"Configure Controls",colourHighlight);
+	if(menu_sel == 6)
+		gfx->drawText((640-strlen("Configure Controls")*font5_char_width)/2, 80+font5_char_high*26, "Configure Controls",colourHighlight);
 	else
-		gfx->drawText((640-strlen("Configure Controls")*font5_char_width)/2, 80+font5_char_high*26, (char*)"Configure Controls",colour);
+		gfx->drawText((640-strlen("Configure Controls")*font5_char_width)/2, 80+font5_char_high*26, "Configure Controls",colour);
 
-	gfx->drawText((640-13*font5_char_width)/2, 80+font5_char_high*29, (char*)"Start to Exit",colour);
-	
+	gfx->drawText((640-13*font5_char_width)/2, 80+font5_char_high*29, "Start to Exit",colour);
+
 	if(ControlConf::button_down(0,BUTTON_SHOOT))
 	{
 		if(menu_sel == 6)
@@ -224,7 +224,7 @@ bool Options::update(GfxWrapper *gfx)
 			return true;
 		}
 	}
-		
+
 	return true;
 }
 

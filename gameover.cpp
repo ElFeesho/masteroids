@@ -61,7 +61,7 @@ bool GameOver::update(GfxWrapper *gfx)
 			}
 		}
 	}
-	gfx->drawText((640-(23*font5_char_width))/2, 380, (char*)"Push 2 Or A To Continue", colour);
+	gfx->drawText((640-(23*font5_char_width))/2, 380, "Push 2 Or A To Continue", colour);
 
 	return true;
 }
