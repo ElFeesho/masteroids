@@ -12,19 +12,19 @@
 #include "game_over_img.h"
 #include "font5.h"
 
+#include "gamepadinputmanager.h"
 #include "engine.h"
-
-#include "controlconf.h"
 
 using std::sprintf;
 
 GameOver::GameOver() : colour(RGB(1.0f, 1.0f, 1.0f)), colourHighlight(RGB(1.0f, 0.8f, 0.0f))
 {
+	GamepadInputManager::sharedInstance()->playerOne()->addListener(this);
 }
 
 GameOver::~GameOver()
 {
-
+	GamepadInputManager::sharedInstance()->playerOne()->removeListener(this);
 }
 
 bool GameOver::update(GfxWrapper *gfx)
@@ -41,7 +41,7 @@ bool GameOver::update(GfxWrapper *gfx)
 		gfx->drawImg((640-game_over_width)/2,(350-game_over_height)/2, game_over_width, game_over_height, game_over_img);
 		char score[64] = { 0 };
 		int highest = -1;
-		
+
 		for(int i = 0;i<Options::players;i++)
 		{
 			if(Ship::scores[i]>highest)
@@ -63,11 +63,18 @@ bool GameOver::update(GfxWrapper *gfx)
 	}
 	gfx->drawText((640-(23*font5_char_width))/2, 380, (char*)"Push 2 Or A To Continue", colour);
 
-	for(int i = 0;i<Options::players;i++)
-		if(ControlConf::button_down(i,BUTTON_SHOOT))
-		{
-			get_engine()->set_mode(0);
-			return false;
-		}
 	return true;
+}
+
+void GameOver::buttonDown(GamepadButton button)
+{
+
+}
+
+void GameOver::buttonUp(GamepadButton button)
+{
+	if(button == BUTTON_FIRE)
+	{
+		get_engine()->set_mode(0);
+	}
 }

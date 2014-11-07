@@ -43,7 +43,7 @@ unsigned int RGB::as24bit() const
 unsigned short RGB::as16bit() const
 {
 
-	return ((unsigned int)(16 * r)) + ((unsigned int)(32.f * g))<<5 + ((unsigned int)(16.f * b))<<11;	
+	return ((unsigned int)(16 * r)) + (((unsigned int)(32.f * g)) << 5) + (((unsigned int)(16.f * b)) << 11);
 }
 
 void GfxWrapper::init(int w, int h)
@@ -69,9 +69,9 @@ void GfxWrapper::drawText(int x, int y, const char *text, const RGB &colour) con
 	int i;
 
 	for(i=0; i < strlen(text); i++)
-	{	
+	{
 		ni = (font5_char_width*font5_char_high*(text[i]-1));
-		for (py=y;py<y+font5_char_high;py++) 
+		for (py=y;py<y+font5_char_high;py++)
 		{
 			for(px=x;px<x+font5_char_width;px++)
 			{
@@ -81,7 +81,7 @@ void GfxWrapper::drawText(int x, int y, const char *text, const RGB &colour) con
 				}
 
 				ni++;
-			}	
+			}
 		}
 	}
 }
@@ -105,7 +105,7 @@ void GfxWrapper::drawImg(int xpos, int ypos, int width, int height, const unsign
             }
             ni++;
         }
-	}	
+	}
 }
 
 void GfxWrapper::render()
