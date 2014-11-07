@@ -5,6 +5,7 @@
 #include "entity.h"
 #include "collobj.h"
 #include "gfx.h"
+#include "screenmanager.h"
 
 using std::vector;
 /*
@@ -13,11 +14,11 @@ using std::vector;
 class Engine
 {
 public:
-	Engine(GfxWrapper *gfx, const RGB &clearColour );
+	Engine(ScreenManager *screenManager);
 	~Engine();
 
 	/* Calls all the entities update functions */
-	void update();
+	void update(GfxWrapper *gfx);
 
 	/* Add an entity to the ent_list */
 	void add_entity(Entity *new_ent);
@@ -39,8 +40,7 @@ public:
 	void set_pause_ent(Entity *ent);
 
 private:
-	RGB clearColour;
-	GfxWrapper *gfx;
+	ScreenManager *screenManager;
 	vector<Entity*> *ent_list;
 	vector<Collobj *> *collent_list;
 	vector<Entity*> *ent_list_tmp;

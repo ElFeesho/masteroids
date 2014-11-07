@@ -18,14 +18,12 @@
 using std::vector;
 
 /* Engine Class Implementation */
-
-Engine::Engine(GfxWrapper *wrapper, const RGB &clearColour) :  gfx(wrapper), clearColour(clearColour), pause_ent(NULL), c_level(1), mode(0),lmode(0), last_ufo(0)
+Engine::Engine(ScreenManager *screenManager) : screenManager(screenManager), pause_ent(NULL), c_level(1), mode(0),lmode(0), last_ufo(0)
 {
 	ent_list = new vector<Entity *>;
 	collent_list = new vector<Collobj *>;
 	ent_list_tmp = new vector<Entity *>;
 	collent_list_tmp = new vector<Collobj *>;
-	start_menu();
 }
 
 Engine::~Engine()
@@ -33,8 +31,9 @@ Engine::~Engine()
 	clean_up();
 }
 
-void Engine::update()
+void Engine::update(GfxWrapper *gfx)
 {
+	screenManager->update(gfx);
 	if(pause_ent!=NULL)
 	{
 		if(!pause_ent->update(gfx))
@@ -45,7 +44,6 @@ void Engine::update()
 	}
 	else
 	{
-		gfx->fillScreen(clearColour);
 		/* 
 			To prevent messing up the entity list during an engine update cycle, a temporary list is created
 			so that any entities that need to be added to the update queue are added after the first list of

@@ -12,6 +12,7 @@
 #include "gfx.h"
 
 #include "gamepadinputmanager.h"
+#include "screenmanager.h"
 
 #ifndef __WII__
 #include <SDL/SDL.h>
@@ -19,6 +20,7 @@
 
 void ScanPADSandReset(u32 retrace_count) 
 {
+	GamepadInputManager::sharedInstance()->poll();
 	PAD_ScanPads();
 	WPAD_ScanPads();
 	//WPAD_ReadPending(WPAD_CHAN_ALL, NULL);
@@ -38,28 +40,23 @@ int main(int argc, char **argv)
 {
 	GfxWrapper *gfxWrapper = new GfxWrapper();
 	gfxWrapper->init(640, 480);
-	//VIDEO_Init();
-	//GRRLIB_buffer = GRRLIB_MakeBuffer(640, 480);
-	//GRRLIB_InitVideo();
-	//GRRLIB_Start();
+
 	PAD_Init();
 	WPAD_Init();
 	WPAD_Disconnect(WPAD_CHAN_ALL);
 	WPAD_SetIdleTimeout(120);
-
-
-	Engine engine(gfxWrapper, RGB::black);
+	ScreenManager *screenManager = new ScreenManager();
+	Engine engine = Engine(screenManager);
 	for(;;)
 	{
+		gfxWrapper->fillScreen(RGB::black);
 		VIDEO_WaitVSync();
 		ScanPADSandReset(0);
-		engine.update();
+		engine.update(gfxWrapper);
 		gfxWrapper->render();
-		GamepadInputManager::sharedInstance()->poll();
-		//GRRLIB_Render();
 
 #ifndef __WII__
-		 SDL_Event ev = { 0 };
+		SDL_Event ev = { 0 };
 
 	    while(SDL_PollEvent(&ev))
 	    {

@@ -12,8 +12,6 @@
 #include "asteroid_banner.h"
 #include "controllers.h"
 
-#include "GRRLIB.h"
-
 #include "font5.h"
 
 #include "gamepadinputmanager.h"
@@ -28,18 +26,13 @@ Menu::~Menu()
 	GamepadInputManager::sharedInstance()->playerOne()->removeListener(this);
 }
 
+void Menu::setListener(MenuListener *listener)
+{
+	this->listener = listener;
+}
+
 bool Menu::update(GfxWrapper *gfx)
 {
-	if(child)
-	{
-		if(!child->update(gfx))
-		{
-			delete child;
-			child = NULL;
-		}
-		return true;
-	}
-
 	unsigned long cticks = ticks_to_millisecs(gettime());
 
 	if(cticks>next_change && next_change != 0)
@@ -146,13 +139,15 @@ void Menu::handleMenuSelection()
 	switch(menu_sel)
 	{
 		case 0:
-			get_engine()->set_mode(1); // Start a single player game
+			listener->menuStartGameSelected();
 			break;
 		case 1:
-			child = new Options();
+
+			listener->menuOptionsSelected();
 			break;
 		case 2:
-			child = new About();
+
+			listener->menuAboutSelected();
 			break;
 		case 3:
 			exit(0);
