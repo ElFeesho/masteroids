@@ -3,15 +3,27 @@
 
 #include "entity.h"
 #include "gfx.h"
+#include "gamepad.h"
 
-class InGame : public Entity
+class InGameListener
 {
 public:
-	InGame(int player);
+	virtual ~InGameListener(){}
+	virtual void ingameContinueSelected() = 0;
+	virtual void ingameQuitSelected() = 0;
+};
+
+class InGame : public Entity, public GamepadListener
+{
+public:
+	InGame(Gamepad *gamepad, InGameListener *listener);
 	~InGame();
 	bool update(GfxWrapper *gfx);
+	void buttonDown(GamepadButton button);
+	void buttonUp(GamepadButton button);
 private:
-	int player_num;
+	Gamepad *gamepad;
+	InGameListener *listener;
 	int menu_sel;
 	RGB colour;
 	RGB colourHighlight;

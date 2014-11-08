@@ -6,6 +6,16 @@
 
 MenuScreen::MenuScreen()
 {
+	
+}
+
+MenuScreen::~MenuScreen()
+{
+
+}
+
+void MenuScreen::screenShown()
+{
 	menu = new Menu();
 	menu->setListener(this);
 
@@ -15,15 +25,17 @@ MenuScreen::MenuScreen()
 	}
 }
 
-MenuScreen::~MenuScreen()
+void MenuScreen::screenHidden()
 {
-
+	entityList.clear();
+	
+	delete menu;
+	menu = NULL;
 }
-
 
 void MenuScreen::menuStartGameSelected()
 {
-	printf("WOOP\n");
+	listener->screenClosed(this, 1);
 }
 
 void MenuScreen::menuOptionsSelected()

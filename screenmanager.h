@@ -18,7 +18,7 @@ private:
 	Screen *activeScreen;
 	Screen *menuScreen;
 	Screen *gameScreen;
-	Screen *gameoverScreen;
+	Screen *gameOverScreen;
 };
 
 #endif

@@ -19,7 +19,9 @@ public:
 	void menuStartGameSelected();
 	void menuOptionsSelected();
 	void menuAboutSelected();
-
+	
+  void screenShown();
+  void screenHidden();
 private:
 	Menu *menu;
 	EntityList entityList;

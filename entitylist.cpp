@@ -20,8 +20,21 @@ void EntityList::add(Entity *entity)
 
 void EntityList::updateAll(GfxWrapper *gfx)
 {
-	for(int i = 0; i < entities.size(); i++)
+	for(int i = entities.size()-1; i >= 0; i--)
 	{
-		entities.at(i)->update(gfx);
+		if(!entities.at(i)->update(gfx))
+		{
+			delete entities.at(i);
+			entities.erase(entities.begin()+i);
+		}
+	}
+}
+
+void EntityList::clear()
+{
+	for(int i = entities.size()-1; i >= 0; i--)
+	{
+		delete entities.at(i);
+		entities.erase(entities.begin()+i);
 	}
 }

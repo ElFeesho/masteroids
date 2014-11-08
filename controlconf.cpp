@@ -227,7 +227,7 @@ bool ControlConf::button_down(int player, u32 button)
 {
 	expansion_t exp;
 
-	switch(player_controls[player])
+ 	switch(player_controls[player])
 	{
 		case PLAYER_GCNPAD_1:
 			if(button==BUTTON_SHOOT)

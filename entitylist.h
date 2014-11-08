@@ -16,6 +16,7 @@ public:
 
 	void add(Entity *entity);
 	void updateAll(GfxWrapper *gfx);
+	void clear();
 private:
 	vector<Entity*> entities;
 };
