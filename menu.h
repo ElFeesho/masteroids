@@ -19,7 +19,8 @@ class Menu : public Entity, public GamepadListener
 public:
 	Menu();
 	~Menu();
-	bool update(GfxWrapper *gfx);
+	bool update();
+	void render(GfxWrapper *gfx);
 
 	void setListener(MenuListener *listener);
 

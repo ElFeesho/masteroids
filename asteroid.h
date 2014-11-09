@@ -11,7 +11,8 @@ public:
 	Asteroid(double scale);
 	~Asteroid();
 
-	bool update(GfxWrapper *gfx);
+	bool update();
+	void render(GfxWrapper *gfx);
 	void on_hit();
 	static int count;
 private:

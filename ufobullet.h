@@ -11,7 +11,8 @@ public:
 	UFOBullet();
 	UFOBullet(double x, double y, double rot, Entity *ufo);
 	~UFOBullet();
-	bool update(GfxWrapper *gfx);
+	bool update();
+	void render(GfxWrapper *gfx);
 private:
 	double angle;
 	Entity *owner;

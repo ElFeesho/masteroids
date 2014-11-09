@@ -25,7 +25,8 @@ public:
 	~Ship();
 	void inc_bfired();
 	void dec_bfired();
-	bool update(GfxWrapper *gfx);
+	bool update();
+	void render(GfxWrapper *gfx);
 	void add_score(int am);
 	void on_hit();
 	void draw_lives(GfxWrapper *gfx);

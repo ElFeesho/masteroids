@@ -10,7 +10,8 @@ public:
 	Bullet();
 	Bullet(double x, double y, double rot, const RGB &color, Entity *player);
 	~Bullet();
-	bool update(GfxWrapper *gfx);
+	bool update();
+	void render(GfxWrapper *gfx);
 private:
 	double angle;
 	RGB col;

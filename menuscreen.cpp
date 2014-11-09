@@ -50,8 +50,10 @@ void MenuScreen::menuAboutSelected()
 
 void MenuScreen::update(GfxWrapper *gfx)
 {
-	entityList.updateAll(gfx);
-	menu->update(gfx);
+	entityList.updateAll();
+	menu->update();
+	entityList.renderAll(gfx);
+	menu->render(gfx);
 }
 
 void MenuScreen::setListener(ScreenListener *listener)

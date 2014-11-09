@@ -24,84 +24,8 @@ ControlConf::~ControlConf()
 
 }
 
-bool ControlConf::update(GfxWrapper *gfx)
+bool ControlConf::update()
 {
-
-	gfx->drawRect(120,70,316, 403, RGB::blue);
-	gfx->drawImg(321-controls_width/2,81,controls_width, controls_height, controls_img);
-	gfx->drawText(135, 80+font5_char_high*8, "Choose a player using Wiimote or GCN Pad 1", RGB::white);
-	gfx->drawText(135, 80+font5_char_high*10, "And then push a button on a controller to",RGB::white);
-	gfx->drawText(135, 80+font5_char_high*12, "map it to that player.",RGB::white);
-
-	for(int i = 0;i<Options::players;i++)
-	{
-		char mesg_buf[64] = { 0 };
-		char control_name[32] = { 0 };
-		switch(player_controls[i])
-		{
-			case PLAYER_WIIMOTE_1:
-				sprintf(control_name,"Wiimote 1");
-				break;
-			case PLAYER_WIIMOTE_2:
-				sprintf(control_name,"Wiimote 2");
-				break;
-			case PLAYER_WIIMOTE_3:
-				sprintf(control_name,"Wiimote 3");
-				break;
-			case PLAYER_WIIMOTE_4:
-				sprintf(control_name,"Wiimote 4");
-				break;
-			case PLAYER_NUNCHUK_1:
-				sprintf(control_name,"Nunchuk 1");
-				break;
-			case PLAYER_NUNCHUK_2:
-				sprintf(control_name,"Nunchuk 2");
-				break;
-			case PLAYER_NUNCHUK_3:
-				sprintf(control_name,"Nunchuk 3");
-				break;
-			case PLAYER_NUNCHUK_4:
-				sprintf(control_name,"Nunchuk 4");
-				break;
-			case PLAYER_CLASSIC_1:
-				sprintf(control_name,"Classic Controller 1");
-				break;
-			case PLAYER_CLASSIC_2:
-				sprintf(control_name,"Classic Controller 2");
-				break;
-			case PLAYER_CLASSIC_3:
-				sprintf(control_name,"Classic Controller 3");
-				break;
-			case PLAYER_CLASSIC_4:
-				sprintf(control_name,"Classic Controller 4");
-				break;
-			case PLAYER_GCNPAD_1:
-				sprintf(control_name,"Gamecube Pad 1");
-				break;
-			case PLAYER_GCNPAD_2:
-				sprintf(control_name,"Gamecube Pad 2");
-				break;
-			case PLAYER_GCNPAD_3:
-				sprintf(control_name,"Gamecube Pad 3");
-				break;
-			case PLAYER_GCNPAD_4:
-				sprintf(control_name,"Gamecube Pad 4");
-				break;
-		}
-		sprintf(mesg_buf, "Player %d: %s",i+1,control_name);
-		if(menu_sel == i)
-			gfx->drawText(145, 80+font5_char_high*(15+(i*2)), mesg_buf,RGB::yellow);
-		else
-			gfx->drawText(145, 80+font5_char_high*(15+(i*2)), mesg_buf,RGB::white);
-	}
-	gfx->drawText((320-(18*font5_char_width)/2), 80+font5_char_high*25, "Push Start To Exit",RGB::white);
-	if(binding!=-1)
-	{
-		char bind_buf[32] = { 0 };
-		sprintf(bind_buf,"Binding Player %d",binding+1);
-		gfx->drawText(145, 80+font5_char_high*23, bind_buf,RGB::white);
-	}
-
 	if(button_down(0,BUTTON_START))
 		return false;
 
@@ -934,4 +858,82 @@ bool ControlConf::button_held(int player, u32 button)
 	}
 	return false;
 }
+void ControlConf::render(GfxWrapper* gfx)
+{
+	for(int i = 0;i<Options::players;i++)
+	{
+		char mesg_buf[64] = { 0 };
+		char control_name[32] = { 0 };
+		switch(player_controls[i])
+		{
+			case PLAYER_WIIMOTE_1:
+				sprintf(control_name,"Wiimote 1");
+				break;
+			case PLAYER_WIIMOTE_2:
+				sprintf(control_name,"Wiimote 2");
+				break;
+			case PLAYER_WIIMOTE_3:
+				sprintf(control_name,"Wiimote 3");
+				break;
+			case PLAYER_WIIMOTE_4:
+				sprintf(control_name,"Wiimote 4");
+				break;
+			case PLAYER_NUNCHUK_1:
+				sprintf(control_name,"Nunchuk 1");
+				break;
+			case PLAYER_NUNCHUK_2:
+				sprintf(control_name,"Nunchuk 2");
+				break;
+			case PLAYER_NUNCHUK_3:
+				sprintf(control_name,"Nunchuk 3");
+				break;
+			case PLAYER_NUNCHUK_4:
+				sprintf(control_name,"Nunchuk 4");
+				break;
+			case PLAYER_CLASSIC_1:
+				sprintf(control_name,"Classic Controller 1");
+				break;
+			case PLAYER_CLASSIC_2:
+				sprintf(control_name,"Classic Controller 2");
+				break;
+			case PLAYER_CLASSIC_3:
+				sprintf(control_name,"Classic Controller 3");
+				break;
+			case PLAYER_CLASSIC_4:
+				sprintf(control_name,"Classic Controller 4");
+				break;
+			case PLAYER_GCNPAD_1:
+				sprintf(control_name,"Gamecube Pad 1");
+				break;
+			case PLAYER_GCNPAD_2:
+				sprintf(control_name,"Gamecube Pad 2");
+				break;
+			case PLAYER_GCNPAD_3:
+				sprintf(control_name,"Gamecube Pad 3");
+				break;
+			case PLAYER_GCNPAD_4:
+				sprintf(control_name,"Gamecube Pad 4");
+				break;
+		}
+		gfx->drawRect(120,70,316, 403, RGB::blue);
+		gfx->drawImg(321-controls_width/2,81,controls_width, controls_height, controls_img);
+		gfx->drawText(135, 80+font5_char_high*8, "Choose a player using Wiimote or GCN Pad 1", RGB::white);
+		gfx->drawText(135, 80+font5_char_high*10, "And then push a button on a controller to",RGB::white);
+		gfx->drawText(135, 80+font5_char_high*12, "map it to that player.",RGB::white);
+
+		sprintf(mesg_buf, "Player %d: %s",i+1,control_name);
+		if(menu_sel == i)
+			gfx->drawText(145, 80+font5_char_high*(15+(i*2)), mesg_buf,RGB::yellow);
+		else
+			gfx->drawText(145, 80+font5_char_high*(15+(i*2)), mesg_buf,RGB::white);
+	}
+	gfx->drawText((320-(18*font5_char_width)/2), 80+font5_char_high*25, "Push Start To Exit",RGB::white);
+	if(binding!=-1)
+	{
+		char bind_buf[32] = { 0 };
+		sprintf(bind_buf,"Binding Player %d",binding+1);
+		gfx->drawText(145, 80+font5_char_high*23, bind_buf,RGB::white);
+	}
+}
+
 int ControlConf::player_controls[4] = { PLAYER_GCNPAD_1, PLAYER_WIIMOTE_2, PLAYER_WIIMOTE_3, PLAYER_WIIMOTE_4 };

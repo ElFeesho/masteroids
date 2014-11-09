@@ -62,7 +62,8 @@ class ControlConf : public Entity
 public:
 	ControlConf();
 	~ControlConf();
-	bool update(GfxWrapper *gfx);
+	bool update();
+	void render(GfxWrapper *gfx);;
 	static bool button_down(int player, unsigned int button);
 	static bool button_held(int player, unsigned int button);
 private:

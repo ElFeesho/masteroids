@@ -1,4 +1,4 @@
-#include "gamescreen.h"
+ #include "gamescreen.h"
 #include "asteroid.h"
 #include "ship.h"
 #include "gamepadinputmanager.h"
@@ -27,10 +27,12 @@ void GameScreen::screenHidden()
 void GameScreen::screenShown()
 {
   playerOne = new Ship(GamepadInputManager::sharedInstance()->playerOne(), this);
+  
   for(int i = 0; i < 15; i++)
   {
 	 entities.add(new Asteroid());
-  } 
+  }
+  
   entities.add(playerOne);
 }
 
@@ -38,11 +40,14 @@ void GameScreen::update(GfxWrapper* gfx)
 {
 	if(!isPaused)
 	{
-		entities.updateAll(gfx);
+		entities.updateAll();
+		entities.renderAll(gfx);
 	}
 	else
 	{
-		pauseEnt->update(gfx);
+		entities.renderAll(gfx);
+		pauseEnt->update();
+		pauseEnt->render(gfx);
 	}
 }
 

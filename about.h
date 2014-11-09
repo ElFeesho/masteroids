@@ -3,16 +3,20 @@
 
 #include "entity.h"
 #include "gfx.h"
+#include "gamepad.h"
 
-class About : public Entity
+class About : public Entity, public GamepadListener
 {
 public:
 	About();
 	~About();
-	bool update(GfxWrapper *gfx);
+	bool update();
+	void render(GfxWrapper *gfx);
+	
+	void buttonUp(GamepadButton button);
+	void buttonDown(GamepadButton button);
 private:
-	RGB borderColour;
-	RGB textColour;
+	bool alive;
 };
 
 #endif

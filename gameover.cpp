@@ -27,7 +27,24 @@ GameOver::~GameOver()
 	GamepadInputManager::sharedInstance()->playerOne()->removeListener(this);
 }
 
-bool GameOver::update(GfxWrapper *gfx)
+bool GameOver::update()
+{
+	return true;
+}
+
+void GameOver::buttonDown(GamepadButton button)
+{
+
+}
+
+void GameOver::buttonUp(GamepadButton button)
+{
+	if(button == BUTTON_FIRE)
+	{
+		get_engine()->set_mode(0);
+	}
+}
+void GameOver::render(GfxWrapper* gfx)
 {
 	if(Options::players == 1) /* 1 player */
 	{
@@ -62,19 +79,4 @@ bool GameOver::update(GfxWrapper *gfx)
 		}
 	}
 	gfx->drawText((640-(23*font5_char_width))/2, 380, "Push 2 Or A To Continue", colour);
-
-	return true;
-}
-
-void GameOver::buttonDown(GamepadButton button)
-{
-
-}
-
-void GameOver::buttonUp(GamepadButton button)
-{
-	if(button == BUTTON_FIRE)
-	{
-		get_engine()->set_mode(0);
-	}
 }

@@ -31,7 +31,7 @@ UFOBullet::~UFOBullet()
 
 }
 
-bool UFOBullet::update(GfxWrapper *gfx)
+bool UFOBullet::update()
 {
 	/* Collision Detection and barbaric treatment of CPU :( */
 	for(vector<Collobj *>::iterator iter = get_engine()->get_collents()->begin(); iter!=get_engine()->get_collents()->end(); iter++)
@@ -54,7 +54,7 @@ bool UFOBullet::update(GfxWrapper *gfx)
 			}
 	 	}
 	}
-	gfx->drawRect(X()-1,Y()-1,2,2,RGB::white);
+	
 
 	X(X()+cos(angle/180*M_PI)*3.5);
 	Y(Y()+sin(angle/180*M_PI)*3.5);
@@ -79,4 +79,9 @@ bool UFOBullet::update(GfxWrapper *gfx)
 
 
 	return ticks_to_millisecs(gettime()) < ttl;
+}
+
+void UFOBullet::render(GfxWrapper* gfx)
+{
+	gfx->drawRect(X()-1,Y()-1,2,2,RGB::purple);
 }

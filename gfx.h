@@ -16,6 +16,7 @@ public:
 	static RGB blue;
 	static RGB yellow;
 	static RGB black;
+	static RGB purple;
 
 private:
 	float r;

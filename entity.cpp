@@ -31,13 +31,3 @@ double Entity::Y(double ny)
 	y = ny;
 	return y;
 }
-
-Engine *Entity::get_engine()
-{
-	return eng_handle;
-}
-
-void Entity::set_engine(Engine *handle)
-{
-	eng_handle = handle;
-}

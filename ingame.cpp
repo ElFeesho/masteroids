@@ -15,7 +15,38 @@ InGame::~InGame()
 	gamepad->removeListener(this);
 }
 
-bool InGame::update(GfxWrapper *gfx)
+bool InGame::update()
+{
+	return true;
+}
+
+void InGame::buttonDown(GamepadButton button)
+{
+	if(button == BUTTON_LEFT)
+	{
+		menu_sel = 0;
+	}
+	else if(button == BUTTON_RIGHT)
+	{
+		menu_sel = 1;
+	}
+}
+
+void InGame::buttonUp(GamepadButton button)
+{
+	if(button == BUTTON_FIRE)
+	{
+		if(menu_sel == 0)
+		{
+			listener->ingameContinueSelected();
+		}
+		else
+		{
+			listener->ingameQuitSelected();
+		}
+	}
+}
+void InGame::render(GfxWrapper* gfx)
 {
 	gfx->drawRect((320-150), 240-50, 300, 90, RGB::blue);
 
@@ -37,33 +68,4 @@ bool InGame::update(GfxWrapper *gfx)
 	{
 		gfx->drawText(420, 240-5, "Exit", colour);
 	}
-
-	return true;
-}
-
-void InGame::buttonDown(GamepadButton button)
-{
-	if(button == BUTTON_LEFT)
-	{
-		menu_sel = 0;
-	}
-	else if(button == BUTTON_RIGHT)
-	{
-		menu_sel = 1;
-	}
-	else if(button == BUTTON_FIRE)
-	{
-		if(menu_sel == 0)
-		{
-			listener->ingameContinueSelected();
-		}
-		else
-		{
-			listener->ingameQuitSelected();
-		}
-	}
-}
-
-void InGame::buttonUp(GamepadButton button)
-{
 }

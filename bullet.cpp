@@ -31,7 +31,7 @@ Bullet::~Bullet()
 
 }
 
-bool Bullet::update(GfxWrapper *gfx)
+bool Bullet::update()
 {
 	/* Collision Detection and barbaric treatment of CPU :( */
 	for(vector<Collobj *>::iterator iter = get_engine()->get_collents()->begin(); iter!=get_engine()->get_collents()->end(); iter++)
@@ -61,7 +61,6 @@ bool Bullet::update(GfxWrapper *gfx)
 			}
 	 	}
 	}
-	gfx->drawRect(X()-1,Y()-1,2,2,col);
 	
 	X(X()+cos(angle/180*M_PI)*3.5);
 	Y(Y()+sin(angle/180*M_PI)*3.5);
@@ -80,4 +79,8 @@ bool Bullet::update(GfxWrapper *gfx)
 		return false;
 	}
 	return true;
+}
+void Bullet::render(GfxWrapper* gfx)
+{
+	gfx->drawRect(X()-1,Y()-1,2,2,col);
 }

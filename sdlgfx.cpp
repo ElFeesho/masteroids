@@ -30,6 +30,7 @@ RGB RGB::white = RGB(1.0f, 1.0f, 1.0f);
 RGB RGB::yellow = RGB(1.0f, 0.8f, 0.0f);
 RGB RGB::blue = RGB(0.0f, 0.0f, 1.0f);
 RGB RGB::black = RGB(0.0f, 0.0f, 0.0f);
+RGB RGB::purple = RGB(1.0f, 0.0f, 1.0f);
 
 unsigned int RGB::as24bit() const
 {

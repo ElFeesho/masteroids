@@ -10,7 +10,8 @@ class GameOver : public Entity, public GamepadListener
 public:
 	GameOver();
 	~GameOver();
-	bool update(GfxWrapper *gfx);
+	bool update();
+	void render(GfxWrapper *gfx);
 
 	void buttonDown(GamepadButton button);
 	void buttonUp(GamepadButton button);

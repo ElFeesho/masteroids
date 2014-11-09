@@ -31,7 +31,7 @@ void Menu::setListener(MenuListener *listener)
 	this->listener = listener;
 }
 
-bool Menu::update(GfxWrapper *gfx)
+bool Menu::update()
 {
 	unsigned long cticks = ticks_to_millisecs(gettime());
 
@@ -62,7 +62,11 @@ bool Menu::update(GfxWrapper *gfx)
 		}
 	}
 
+	return true;
+}
 
+void Menu::render(GfxWrapper *gfx)
+{
 	gfx->drawRect(320-asteroid_banner_width/2,79,asteroid_banner_width+1, 310, RGB::blue);
 	gfx->drawImg(321-asteroid_banner_width/2,80, asteroid_banner_width, asteroid_banner_height, asteroid_banner_data);
 	gfx->drawImg(320, 200,controllers_width, controllers_height, controllers_data);
@@ -107,7 +111,6 @@ bool Menu::update(GfxWrapper *gfx)
 		gfx->drawText(menuOffsetX, menuSeparationHeight+menuItemHeight*4, "Exit To HBC",RGB::white);
 	}
 	gfx->drawText(menuOffsetX, 80+asteroid_banner_height+(font5_char_high+10)*10, "Coded by Feesh! - gummybassist@gmail.com",RGB::white);
-	return true;
 }
 
 void Menu::incrementMenu()

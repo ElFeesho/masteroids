@@ -9,7 +9,8 @@ class Options : public Entity
 public:
 	Options();
 	~Options();
-	bool update(GfxWrapper *gfx);
+	bool update();
+	void render(GfxWrapper *gfx);
 	static int lives;
 	static int difficulty;
 	static bool team_kill;

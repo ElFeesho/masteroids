@@ -15,7 +15,8 @@ public:
 	~EntityList();
 
 	void add(Entity *entity);
-	void updateAll(GfxWrapper *gfx);
+	void updateAll();
+	void renderAll(GfxWrapper *gfx);
 	void clear();
 private:
 	vector<Entity*> entities;

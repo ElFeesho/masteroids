@@ -18,7 +18,8 @@ class InGame : public Entity, public GamepadListener
 public:
 	InGame(Gamepad *gamepad, InGameListener *listener);
 	~InGame();
-	bool update(GfxWrapper *gfx);
+	bool update();
+	void render(GfxWrapper *gfx);
 	void buttonDown(GamepadButton button);
 	void buttonUp(GamepadButton button);
 private:

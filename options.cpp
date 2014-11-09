@@ -29,11 +29,11 @@ Options::~Options()
 
 }
 
-bool Options::update(GfxWrapper *gfx)
+bool Options::update()
 {
 	if(child!=NULL)
 	{
-		if(!child->update(gfx))
+		if(!child->update())
 		{
 			delete child;
 			child = NULL;
@@ -162,8 +162,20 @@ bool Options::update(GfxWrapper *gfx)
 		}
 	}
 
-	//GRRLIB_DrawRectangle(120,80,340, 403, 0x001f,0);
-	//GRRLIB_DrawImg(321-options_width/2,81,options_width, options_height, options_img, 0.0, 1.0);
+	if(ControlConf::button_down(0,BUTTON_SHOOT))
+	{
+		if(menu_sel == 6)
+		{
+			child = new ControlConf();
+			return true;
+		}
+	}
+
+	return true;
+}
+
+void Options::render(GfxWrapper* gfx) 
+{
 	gfx->drawRect(120, 80, 403, 340, RGB::blue);
 	gfx->drawImg(321-options_width/2,81,options_width, options_height, options_img);
 	char lives[32] = { 0 };
@@ -215,17 +227,6 @@ bool Options::update(GfxWrapper *gfx)
 		gfx->drawText((640-strlen("Configure Controls")*font5_char_width)/2, 80+font5_char_high*26, "Configure Controls",colour);
 
 	gfx->drawText((640-13*font5_char_width)/2, 80+font5_char_high*29, "Start to Exit",colour);
-
-	if(ControlConf::button_down(0,BUTTON_SHOOT))
-	{
-		if(menu_sel == 6)
-		{
-			child = new ControlConf();
-			return true;
-		}
-	}
-
-	return true;
 }
 
 int Options::lives = 3;

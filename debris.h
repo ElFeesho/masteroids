@@ -9,7 +9,8 @@ class Debris : public Entity
 public:
 	Debris(int amount, double xpos, double ypos, double angle, double xspeed, double yspeed, const RGB &colour, long time_to_live);
 	~Debris();
-	bool update(GfxWrapper *gfx);
+	bool update();
+	void render(GfxWrapper *gfx);
 private:
 	
 	int count;

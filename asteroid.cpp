@@ -12,7 +12,7 @@
 
 Asteroid::Asteroid() : speed(0.0f), alive(true), rot((double)(rand()%360)), rot_speed(rand()%10-5), trav_ang(rand()%360), colour(RGB(1.0f, 1.0f, 1.0f))
 {
-	while(speed==0)
+	while(speed == 0)
 	{
 		speed = rand()%(Options::difficulty+2);
 		if(rand()%2)
@@ -88,7 +88,7 @@ Asteroid::~Asteroid()
 {
 }
 
-bool Asteroid::update(GfxWrapper *gfx)
+bool Asteroid::update()
 {
 	rot+=rot_speed;
 	X(X()+cos(trav_ang/180*M_PI)*speed);
@@ -107,6 +107,11 @@ bool Asteroid::update(GfxWrapper *gfx)
 		Y(480.0f+radius);
 
 
+	return alive;
+}
+
+void Asteroid::render(GfxWrapper* gfx)
+{
 	for(int i = 0;i<6;i++)
 	{
 		if(i!=5)
@@ -122,8 +127,8 @@ bool Asteroid::update(GfxWrapper *gfx)
 			gfx->drawLine(X()+cos(rot1)*peaks[i],Y()+sin(rot1)*peaks[i],X()+cos(rot2)*peaks[0],Y()+sin(rot2)*peaks[0],colour);
 		}
 	}
-	return alive;
 }
+
 
 void Asteroid::on_hit()
 {

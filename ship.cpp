@@ -77,9 +77,9 @@ void Ship::dec_bfired()
 	bullets_fired--;
 }
 
-bool Ship::update(GfxWrapper *gfx)
+bool Ship::update()
 {
-	draw_lives(gfx);
+	//draw_lives(gfx);
 
 	if(lives<=0) // Game over man - Engine checks to see whether game over screen should be shown
 		return true;
@@ -143,18 +143,6 @@ bool Ship::update(GfxWrapper *gfx)
 	{
 		Y(480.0+10.0);
 	}
-
-	double tp_x = X()+cos(rot/180*M_PI)*10.0;
-	double tp_y = Y()+sin(rot/180*M_PI)*10.0;
-	double br_x = X()+cos((rot/180*M_PI)+2.09)*6;
-	double bl_x = X()+cos((rot/180*M_PI)+4.18)*6;
-	double br_y = Y()+sin((rot/180*M_PI)+2.09)*6;
-	double bl_y = Y()+sin((rot/180*M_PI)+4.18)*6;
-
-	gfx->drawLine(tp_x, tp_y, br_x, br_y, colour);
-	gfx->drawLine(tp_x, tp_y, bl_x, bl_y, colour);
-	gfx->drawLine(br_x, br_y, X(), Y(), colour);
-	gfx->drawLine(bl_x, bl_y, X(), Y(), colour);
 
 	/* Collision Detection and barbaric treatment of CPU :( 
 	for(vector<Collobj *>::iterator iter = get_engine()->get_collents()->begin(); iter!=get_engine()->get_collents()->end(); iter++)
@@ -302,6 +290,20 @@ void Ship::on_hit()
 Gamepad* Ship::getGamepad()
 {
 	return gamepad;
+}
+void Ship::render(GfxWrapper* gfx) 
+{
+	double tp_x = X()+cos(rot/180*M_PI)*10.0;
+	double tp_y = Y()+sin(rot/180*M_PI)*10.0;
+	double br_x = X()+cos((rot/180*M_PI)+2.09)*6;
+	double bl_x = X()+cos((rot/180*M_PI)+4.18)*6;
+	double br_y = Y()+sin((rot/180*M_PI)+2.09)*6;
+	double bl_y = Y()+sin((rot/180*M_PI)+4.18)*6;
+
+	gfx->drawLine(tp_x, tp_y, br_x, br_y, colour);
+	gfx->drawLine(tp_x, tp_y, bl_x, bl_y, colour);
+	gfx->drawLine(br_x, br_y, X(), Y(), colour);
+	gfx->drawLine(bl_x, bl_y, X(), Y(), colour);
 }
 
 Ship *Ship::players[4] = { NULL };
