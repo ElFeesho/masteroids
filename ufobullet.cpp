@@ -22,8 +22,8 @@ UFOBullet::UFOBullet()
 
 UFOBullet::UFOBullet(double x, double y, double rot, Entity *ufo) : angle(rot), owner(ufo), ttl(ticks_to_millisecs(gettime())+1500)
 {
-	X(x);
-	Y(y);
+	position().X(x);
+	position().Y(y);
 }
 
 UFOBullet::~UFOBullet()
@@ -33,7 +33,7 @@ UFOBullet::~UFOBullet()
 
 bool UFOBullet::update()
 {
-	/* Collision Detection and barbaric treatment of CPU :( */
+	/* Collision Detection and barbaric treatment of CPU :( 
 	for(vector<Collobj *>::iterator iter = get_engine()->get_collents()->begin(); iter!=get_engine()->get_collents()->end(); iter++)
 	{
 		if((*iter) == owner)
@@ -54,34 +54,32 @@ bool UFOBullet::update()
 			}
 	 	}
 	}
-	
+	*/
 
-	X(X()+cos(angle/180*M_PI)*3.5);
-	Y(Y()+sin(angle/180*M_PI)*3.5);
+	position().translate(cos(angle/180*M_PI)*3.5, sin(angle/180*M_PI)*3.5);
 
-	if(X()>640.0f)
+	if(position().X()>640.0f)
 	{
-		X(0.0f);
+		position().X(0.0f);
 	}
 
-	if(X()<0.0f)
+	if(position().X()<0.0f)
 	{
-		X(640.0f);
+		position().X(640.0f);
 	}
-	if(Y()>480.0f)
+	if(position().Y()>480.0f)
 	{
-			Y(0.0f);
+		position().Y(0.0f);
 	}
-	if(Y()<0.0f)
+	if(position().Y()<0.0f)
 	{
-		Y(480.0f);
+		position().Y(480.0f);
 	}
-
 
 	return ticks_to_millisecs(gettime()) < ttl;
 }
 
 void UFOBullet::render(GfxWrapper* gfx)
 {
-	gfx->drawRect(X()-1,Y()-1,2,2,RGB::purple);
+	gfx->drawRect(position().X()-1, position().Y()-1, 2, 2, RGB::purple);
 }

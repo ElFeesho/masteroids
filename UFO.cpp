@@ -13,15 +13,15 @@ UFO::UFO() : next_think(ticks_to_millisecs(gettime())+1500), next_fire(ticks_to_
 {
 	if(rand()%2)
 	{
-		X(-10);
+		position().X(-10);
 		xspeed = 1.5;
 	}
 	else
 	{
-		X(650);
+		position().X(650);
 		xspeed = -1.5;
 	}
-	Y((rand()%400)+40);
+	position().Y((rand()%400)+40);
 	yspeed = 0;
 	
 	set_radius(10);
@@ -50,34 +50,33 @@ bool UFO::update(GfxWrapper *gfx)
 	if(cticks>next_fire)
 	{
 		next_fire+=1000;
-		get_engine()->add_entity(new UFOBullet(X(), Y(), ((rand()%5)*90)-45, this));
+		//get_engine()->add_entity(new UFOBullet(X(), Y(), ((rand()%5)*90)-45, this));
 	}
 
-	X(X()+xspeed);
-	Y(Y()+yspeed);
+	position().translate(xspeed, yspeed);
 
-	if(xspeed>0 && X()>650)
+	if(xspeed>0 && position().X()>650)
 		return false;
-	if(xspeed<0 && X()<-10)
+	if(xspeed<0 && position().X()<-10)
 		return false;
 
-	if(Y()<-10)
-		Y(490);
+	if(position().Y()<-10)
+		position().Y(490);
 
-	if(Y()>490)
-		Y(-10);
+	if(position().Y()>490)
+		position().Y(-10);
 
 	/* COMPLEX DRAWING ROUTEIN!!! j/k */
-	gfx->drawLine(X()-get_radius()/4,Y()-get_radius(), X()+get_radius()/4, Y()-get_radius(),shipColour);
-	gfx->drawLine(X()-get_radius()/2,Y()+get_radius(), X()+get_radius()/2, Y()+get_radius(),shipColour);
-	gfx->drawLine(X()-get_radius()/2,Y()+get_radius(), X()-get_radius(), Y()+get_radius()/2,shipColour);
-	gfx->drawLine(X()+get_radius()/2,Y()+get_radius(), X()+get_radius(), Y()+get_radius()/2,shipColour);
-	gfx->drawLine(X()-get_radius()/2,Y()-get_radius(), X()-get_radius(), Y()-get_radius()/2,shipColour);
-	gfx->drawLine(X()+get_radius()/2,Y()-get_radius(), X()+get_radius(), Y()-get_radius()/2,shipColour);
-	gfx->drawLine(X()+get_radius(),Y()-get_radius()/2, X()+get_radius(), Y()+get_radius()/2,shipColour);
-	gfx->drawLine(X()-get_radius(),Y()-get_radius()/2, X()-get_radius(), Y()+get_radius()/2,shipColour);
-	gfx->drawLine(X()-get_radius(),Y()+get_radius()/2, X()+get_radius(), Y()+get_radius()/2,shipColour);
-	gfx->drawLine(X()-get_radius(),Y()-get_radius()/2, X()+get_radius(), Y()-get_radius()/2,shipColour);
+	gfx->drawLine(position().X()-get_radius()/4,position().Y()-get_radius(), position().X()+get_radius()/4, position().Y()-get_radius(),shipColour);
+	gfx->drawLine(position().X()-get_radius()/2,position().Y()+get_radius(), position().X()+get_radius()/2, position().Y()+get_radius(),shipColour);
+	gfx->drawLine(position().X()-get_radius()/2,position().Y()+get_radius(), position().X()-get_radius(), position().Y()+get_radius()/2,shipColour);
+	gfx->drawLine(position().X()+get_radius()/2,position().Y()+get_radius(), position().X()+get_radius(), position().Y()+get_radius()/2,shipColour);
+	gfx->drawLine(position().X()-get_radius()/2,position().Y()-get_radius(), position().X()-get_radius(), position().Y()-get_radius()/2,shipColour);
+	gfx->drawLine(position().X()+get_radius()/2,position().Y()-get_radius(), position().X()+get_radius(), position().Y()-get_radius()/2,shipColour);
+	gfx->drawLine(position().X()+get_radius(),position().Y()-get_radius()/2, position().X()+get_radius(), position().Y()+get_radius()/2,shipColour);
+	gfx->drawLine(position().X()-get_radius(),position().Y()-get_radius()/2, position().X()-get_radius(), position().Y()+get_radius()/2,shipColour);
+	gfx->drawLine(position().X()-get_radius(),position().Y()+get_radius()/2, position().X()+get_radius(), position().Y()+get_radius()/2,shipColour);
+	gfx->drawLine(position().X()-get_radius(),position().Y()-get_radius()/2, position().X()+get_radius(), position().Y()-get_radius()/2,shipColour);
 
 
 	return true;
@@ -89,22 +88,22 @@ void UFO::on_hit()
 	{
 		if(yspeed<0)
 		{
-			get_engine()->add_entity(new Debris(10, X(), Y(), -45, xspeed*2, yspeed*2, shipColour, 2500));
+			//get_engine()->add_entity(new Debris(10, X(), Y(), -45, xspeed*2, yspeed*2, shipColour, 2500));
 		}
 		else
 		{	
-			get_engine()->add_entity(new Debris(10, X(), Y(), 225, xspeed*2, yspeed*2, shipColour, 2500));
+			//get_engine()->add_entity(new Debris(10, X(), Y(), 225, xspeed*2, yspeed*2, shipColour, 2500));
 		}
 	}
 	else
 	{
 		if(yspeed<0)
 		{
-			get_engine()->add_entity(new Debris(10, X(), Y(), 45, xspeed*2, yspeed*2, shipColour, 2500));
+			//get_engine()->add_entity(new Debris(10, X(), Y(), 45, xspeed*2, yspeed*2, shipColour, 2500));
 		}
 		else
 		{
-			get_engine()->add_entity(new Debris(10, X(), Y(), 135, xspeed*2, yspeed*2, shipColour, 2500));
+			//get_engine()->add_entity(new Debris(10, X(), Y(), 135, xspeed*2, yspeed*2, shipColour, 2500));
 		}
 	}
 

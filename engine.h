@@ -20,36 +20,9 @@ public:
 	/* Calls all the entities update functions */
 	void update(GfxWrapper *gfx);
 
-	/* Add an entity to the ent_list */
-	void add_entity(Entity *new_ent);
-	void add_entity(Collobj *new_ent);
-	
-	/* Remove all the entities from ent_list */
-	void clean_up();
-
-	vector<Entity *> *get_ents();
-	vector<Collobj *> *get_collents();
-	void set_mode(int nmode);
-
-	void start_menu();
-	void start_game();
-	void start_gameover();
-	
-	void new_wave();
-	
-	void set_pause_ent(Entity *ent);
 
 private:
 	ScreenManager *screenManager;
-	vector<Entity*> *ent_list;
-	vector<Collobj *> *collent_list;
-	vector<Entity*> *ent_list_tmp;
-	vector<Collobj *> *collent_list_tmp;
-	Entity *pause_ent;
-	int c_level;
-	unsigned int mode;
-	unsigned int lmode;
-	unsigned long last_ufo;
 };
 
 #endif

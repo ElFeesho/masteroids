@@ -23,8 +23,8 @@ Ship::Ship(Gamepad *gamepad, ShipListener *listener) : gamepad(gamepad), listene
   gamepad->addListener(this);
 	set_radius(7.5);
   colour = RGB(0.0f, 1.0f, 0.0f);
-	X(640/4);
-	Y(480/4);
+	position().X(640/4);
+	position().Y(480/4);
 }
 
 Ship::Ship(int padnum) : player_num(padnum), rot(90+(padnum%2)*180), xspeed(0), yspeed(0), rotationSpeed(0), propulsion(0), bullets_fired(0), score(0), llevel(1), lives(Options::lives), kill_time(0), colour(RGB(0.0f, 0.0f,0.0f))
@@ -36,29 +36,29 @@ Ship::Ship(int padnum) : player_num(padnum), rot(90+(padnum%2)*180), xspeed(0), 
 	{
 		Ship::players[0] = this;
 		colour = RGB(0.0f, 1.0f, 0.0f);
-		X(640/4);
-		Y(480/4);
+		position().X(640/4);
+		position().Y(480/4);
 	}
 	if(player_num == 1)
 	{
 		Ship::players[1] = this;
 		colour = RGB(1.0f, 1.0f, 0.0f);
-		X(640/4*3);
-		Y(480/4*3);
+		position().X(640/4*3);
+		position().Y(480/4*3);
 	}
 	if(player_num == 2)
 	{
 		Ship::players[2] = this;
 		colour = RGB(0.0f, 0.0f, 1.0f);
-		X(640/4*3);
-		Y(480/4);
+		position().X(640/4*3);
+		position().Y(480/4);
 	}
 	if(player_num == 3)
 	{
 		Ship::players[3] = this;
 		colour = RGB(0.0f, 0.5f, 1.0f);
-		X(640/4);
-		Y(480/4*3);
+		position().X(640/4);
+		position().Y(480/4*3);
 	}
 }
 
@@ -123,25 +123,24 @@ bool Ship::update()
 	xspeed += cos(rot/180*M_PI)*propulsion;
 	yspeed += sin(rot/180*M_PI)*propulsion;
 	
-	X(X()+xspeed);
-	Y(Y()+yspeed);
+	position().translate(xspeed, yspeed);
 
-	if(X()>640.0+10.0)
+	if(position().X()>640.0+10.0)
 	{
-		X(-10.0);
+		position().X(-10.0);
 	}
-	if(X()<0.0-10.0)
+	if(position().X()<0.0-10.0)
 	{
-		X(640.0+10.0);
+		position().X(640.0+10.0);
 	}
 
-	if(Y()>480.0+10.0)
+	if(position().Y()>480.0+10.0)
 	{
-		Y(-10.0);
+		position().Y(-10.0);
 	}
-	if(Y()<0.0-10.0)
+	if(position().Y()<0.0-10.0)
 	{
-		Y(480.0+10.0);
+		position().Y(480.0+10.0);
 	}
 
 	/* Collision Detection and barbaric treatment of CPU :( 
@@ -281,10 +280,10 @@ void Ship::buttonUp(GamepadButton button)
 void Ship::on_hit()
 {
 	kill_time = ticks_to_millisecs(gettime());
-	get_engine()->add_entity(new Debris(3, X(), Y(), rot, xspeed, yspeed, colour, 2500));
+	//get_engine()->add_entity(new Debris(3, X(), Y(), rot, xspeed, yspeed, colour, 2500));
 	/* Make sure the ship doesn't get hit into by other entities whilst it's disappeared */
-	X(-500.0);
-	Y(-500.0);
+	position().X(-500.0);
+	position().Y(-500.0);
 }
 
 Gamepad* Ship::getGamepad()
@@ -293,17 +292,17 @@ Gamepad* Ship::getGamepad()
 }
 void Ship::render(GfxWrapper* gfx) 
 {
-	double tp_x = X()+cos(rot/180*M_PI)*10.0;
-	double tp_y = Y()+sin(rot/180*M_PI)*10.0;
-	double br_x = X()+cos((rot/180*M_PI)+2.09)*6;
-	double bl_x = X()+cos((rot/180*M_PI)+4.18)*6;
-	double br_y = Y()+sin((rot/180*M_PI)+2.09)*6;
-	double bl_y = Y()+sin((rot/180*M_PI)+4.18)*6;
+	double tp_x = position().X()+cos(rot/180*M_PI)*10.0;
+	double tp_y = position().Y()+sin(rot/180*M_PI)*10.0;
+	double br_x = position().X()+cos((rot/180*M_PI)+2.09)*6;
+	double bl_x = position().X()+cos((rot/180*M_PI)+4.18)*6;
+	double br_y = position().Y()+sin((rot/180*M_PI)+2.09)*6;
+	double bl_y = position().Y()+sin((rot/180*M_PI)+4.18)*6;
 
 	gfx->drawLine(tp_x, tp_y, br_x, br_y, colour);
 	gfx->drawLine(tp_x, tp_y, bl_x, bl_y, colour);
-	gfx->drawLine(br_x, br_y, X(), Y(), colour);
-	gfx->drawLine(bl_x, bl_y, X(), Y(), colour);
+	gfx->drawLine(br_x, br_y, position().X(), position().Y(), colour);
+	gfx->drawLine(bl_x, bl_y, position().X(), position().Y(), colour);
 }
 
 Ship *Ship::players[4] = { NULL };

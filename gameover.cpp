@@ -41,7 +41,6 @@ void GameOver::buttonUp(GamepadButton button)
 {
 	if(button == BUTTON_FIRE)
 	{
-		get_engine()->set_mode(0);
 	}
 }
 void GameOver::render(GfxWrapper* gfx)

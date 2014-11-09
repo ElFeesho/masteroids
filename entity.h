@@ -1,6 +1,8 @@
 #ifndef __ENTITY_H__
 #define __ENTITY_H__
 
+#include "position.h"
+
 class GfxWrapper;
 
 class Engine;
@@ -13,13 +15,10 @@ public:
 
 	virtual bool update() = 0;
 	virtual void render(GfxWrapper *gfx) = 0;
-
-	double X();
-	double X(double nx);
-	double Y();
-	double Y(double ny);
+	
+	Position &position();
 private:
-	double x, y;
+	Position pos;
 };
 
 #endif
