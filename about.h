@@ -5,18 +5,29 @@
 #include "gfx.h"
 #include "gamepad.h"
 
-class About : public GamepadListener
+class AboutListener
 {
 public:
-	About();
+	virtual ~AboutListener() {}
+	virtual void aboutClosed() = 0;
+};
+
+class About : public Entity, public GamepadListener
+{
+public:
+	About(AboutListener *listener);
 	~About();
-	bool update();
+	bool update() { return true; }
 	void render(GfxWrapper *gfx);
 	
 	void buttonUp(GamepadButton button);
 	void buttonDown(GamepadButton button);
+	
+	Position& position() { return Position::NONE; }
+	Shape& shape() { return Shape::NONE; }
+
 private:
-	bool alive;
+	AboutListener *listener;
 };
 
 #endif

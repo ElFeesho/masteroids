@@ -2,7 +2,6 @@
 #include "bullet.h"
 #include "ship.h"
 #include "options.h"
-#include "collobj.h"
 #include "engine.h"
 #include <ogcsys.h>
 #include <gccore.h>
@@ -25,6 +24,7 @@ Bullet::Bullet(double x, double y, double rot, const RGB &color, Entity *player)
 	position().X(x);
 	position().Y(y);
 	position().Rotation(rot);
+	shape().Radius(5.0f);
 }
 
 Bullet::~Bullet()
@@ -40,13 +40,25 @@ bool Bullet::update()
 	position().translate(cos(position().Rotation()/180*M_PI)*3.5, sin(position().Rotation()/180*M_PI)*3.5);
 	
 	if(position().X()>640.0f)
+	{
 		position().X(0.0f);
+	}
+	
 	if(position().X()<0.0f)
+	{
 		position().X(640.0f);
+	}
+	
 	if(position().Y()>480.0f)
+	{
 		position().Y(0.0f);
+	}
+	
 	if(position().Y()<0.0f)
+	{
 		position().Y(480.0f);
+	}
+	
 	if(ticks_to_millisecs(gettime())>ttl)
 	{
 		((Ship*)owner)->dec_bfired();
@@ -56,7 +68,11 @@ bool Bullet::update()
 }
 void Bullet::render(GfxWrapper* gfx)
 {
-	gfx->drawRect(position().X()-1, position().Y()-1,2,2,col);
+	gfx->drawRect(position().X()-shape().Radius(), 
+					  position().Y()-shape().Radius(),
+					  shape().Radius()*2, 
+					  shape().Radius()*2, 
+					  col);
 }
 
 Position &Bullet::position()

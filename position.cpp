@@ -68,3 +68,5 @@ void Position::translate(double x, double y)
 	this->y += y;
 }
 
+Position Position::NONE = Position();
+

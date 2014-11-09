@@ -2,8 +2,7 @@
 #define __SHIP_H__
 
 #include "gamepad.h"
-
-#include "collobj.h"
+#include "entity.h"
 #include "gfx.h"
 
 class Ship;
@@ -17,7 +16,7 @@ public:
 	virtual void shipFired(Ship *ship) = 0;
 };
 
-class Ship : public Collobj, public GamepadListener
+class Ship : public Entity, public GamepadListener
 {
 public:
 	Ship(Gamepad *gamepad, ShipListener *listener);
@@ -42,8 +41,10 @@ public:
 	static int scores[4];
 	
 	Position &position() { return pos; }
+	Shape &shape() { return bodyShape; }
 private:
   Gamepad *gamepad;
+  Shape bodyShape;
   ShipListener *listener;
 	int player_num;
 	double rot; /* Ship Rot */

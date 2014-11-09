@@ -21,7 +21,7 @@
 Ship::Ship(Gamepad *gamepad, ShipListener *listener) : gamepad(gamepad), listener(listener), player_num(1), colour(RGB(0.0f, 0.0f, 0.0f)), rot(90*180), xspeed(0), yspeed(0), rotationSpeed(0), propulsion(0), bullets_fired(0), score(0), llevel(1), lives(Options::lives), kill_time(0)
 {
   gamepad->addListener(this);
-	set_radius(7.5);
+	shape().Radius(7.5);
   colour = RGB(0.0f, 1.0f, 0.0f);
 	position().X(640/4);
 	position().Y(480/4);
@@ -30,7 +30,7 @@ Ship::Ship(Gamepad *gamepad, ShipListener *listener) : gamepad(gamepad), listene
 Ship::Ship(int padnum) : player_num(padnum), rot(90+(padnum%2)*180), xspeed(0), yspeed(0), rotationSpeed(0), propulsion(0), bullets_fired(0), score(0), llevel(1), lives(Options::lives), kill_time(0), colour(RGB(0.0f, 0.0f,0.0f))
 {
 	scores[player_num] = 0;
-	set_radius(7.5);
+	shape().Radius(7.5);
 	/* Hardcoded X and Y positions for players */
 	if(player_num == 0)
 	{

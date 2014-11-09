@@ -2,6 +2,7 @@
 #define __ENTITY_H__
 
 #include "position.h"
+#include "shape.h"
 
 class GfxWrapper;
 
@@ -16,6 +17,7 @@ public:
 	virtual void render(GfxWrapper *gfx) = 0;
 	
 	virtual Position &position() = 0;
+	virtual Shape &shape() = 0;
 };
 
 #endif

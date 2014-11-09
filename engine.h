@@ -3,7 +3,6 @@
 
 #include <vector>
 #include "entity.h"
-#include "collobj.h"
 #include "gfx.h"
 #include "screenmanager.h"
 

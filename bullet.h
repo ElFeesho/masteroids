@@ -13,8 +13,10 @@ public:
 	bool update();
 	void render(GfxWrapper *gfx);
 	Position& position();
+	Shape &shape() { return bulletShape; }
 private:
 	Position pos;
+	Shape bulletShape;
 	RGB col;
 	Entity *owner;
 	unsigned long ttl;

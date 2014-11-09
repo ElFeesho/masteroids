@@ -21,6 +21,8 @@ public:
 	void rotate(double angle);
 	
 	void translate(double x, double y);
+	
+	static Position NONE;
 private:
     double rotation;
     double y;

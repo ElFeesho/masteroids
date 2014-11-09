@@ -5,7 +5,6 @@
 #include "ship.h"
 #include "asteroid.h"
 #include "options.h"
-#include "collobj.h"
 #include "menu.h"
 #include "gameover.h"
 #include <gccore.h>

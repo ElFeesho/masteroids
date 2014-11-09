@@ -1,10 +1,10 @@
 #ifndef __UFO_H__
 #define __UFO_H__
 
-#include "collobj.h"
+#include "entity.h"
 #include "gfx.h"
 
-class UFO : public Collobj
+class UFO : public Entity
 {
 public:
 	UFO();
@@ -12,7 +12,9 @@ public:
 	bool update(GfxWrapper *gfx);
 	void on_hit();
 	Position &position() { return pos; }
+	Shape &shape() { return ufoShape; }
 private:
+	Shape ufoShape;
 	double xspeed;
 	double yspeed;
 	unsigned long next_think;

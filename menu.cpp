@@ -16,7 +16,7 @@
 
 #include "gamepadinputmanager.h"
 
-Menu::Menu() : menu_sel(0), next_change(0), ldir(-1), child(NULL)
+Menu::Menu(MenuListener *listener) : listener(listener), menu_sel(0), next_change(0), ldir(-1), child(NULL)
 {
 	GamepadInputManager::sharedInstance()->playerOne()->addListener(this);
 }
@@ -24,11 +24,6 @@ Menu::Menu() : menu_sel(0), next_change(0), ldir(-1), child(NULL)
 Menu::~Menu()
 {
 	GamepadInputManager::sharedInstance()->playerOne()->removeListener(this);
-}
-
-void Menu::setListener(MenuListener *listener)
-{
-	this->listener = listener;
 }
 
 bool Menu::update()
@@ -174,15 +169,16 @@ void Menu::buttonDown(GamepadButton button)
 		next_change = ticks_to_millisecs(gettime()) + 500;
 	}
 
-	if(button == BUTTON_FIRE)
-	{
-		handleMenuSelection();
-	}
-
 }
 
 void Menu::buttonUp(GamepadButton button)
 {
 	next_change = 0;
 	ldir = -1;
+	
+	if(button == BUTTON_FIRE || button == BUTTON_START)
+	{
+		handleMenuSelection();
+	}
+
 }

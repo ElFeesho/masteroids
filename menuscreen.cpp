@@ -16,21 +16,30 @@ MenuScreen::~MenuScreen()
 
 void MenuScreen::screenShown()
 {
-	menu = new Menu();
-	menu->setListener(this);
-
 	for(int i = 0; i < 32; i++)
 	{
 		entityList.add(new Asteroid());
 	}
+	
+	activeMenu = new Menu(this);;
 }
 
 void MenuScreen::screenHidden()
 {
 	entityList.clear();
-	
-	delete menu;
-	menu = NULL;
+	delete activeMenu;
+}
+
+void MenuScreen::aboutClosed()
+{
+	delete activeMenu;
+	activeMenu = new Menu(this);
+}
+
+void MenuScreen::controlConfClosed()
+{
+	delete activeMenu;
+	activeMenu = new Options(this);
 }
 
 void MenuScreen::menuStartGameSelected()
@@ -40,20 +49,35 @@ void MenuScreen::menuStartGameSelected()
 
 void MenuScreen::menuOptionsSelected()
 {
-
+	delete activeMenu;
+	activeMenu = new Options(this);
 }
 
 void MenuScreen::menuAboutSelected()
 {
-
+	delete activeMenu;
+	activeMenu = new About(this);
 }
+
+void MenuScreen::optionsControllerConfigSelected()
+{
+	delete activeMenu;
+	activeMenu = new ControlConf(this);
+}
+
+void MenuScreen::optionsMenuClosed()
+{
+	delete activeMenu;
+	activeMenu = new Menu(this);
+}
+
 
 void MenuScreen::update(GfxWrapper *gfx)
 {
 	entityList.updateAll();
-	menu->update();
+	activeMenu->update();
 	entityList.renderAll(gfx);
-	menu->render(gfx);
+	activeMenu->render(gfx);
 }
 
 void MenuScreen::setListener(ScreenListener *listener)

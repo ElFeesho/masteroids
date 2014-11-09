@@ -4,9 +4,12 @@
 #include "entity.h"
 #include "screen.h"
 #include "menu.h"
+#include "options.h"
+#include "about.h"
 #include "entitylist.h"
+#include "controlconf.h"
 
-class MenuScreen : public Screen, public MenuListener
+class MenuScreen : public Screen, public AboutListener, public ControlConfListener, public MenuListener, public OptionsListener
 {
 public:
 	MenuScreen();
@@ -15,15 +18,22 @@ public:
 	void update(GfxWrapper *gfx);
 	void setListener(ScreenListener *listener);
 
-
+	void aboutClosed();
+	
+	void controlConfClosed();
+	
 	void menuStartGameSelected();
 	void menuOptionsSelected();
 	void menuAboutSelected();
 	
-  void screenShown();
-  void screenHidden();
+	void optionsControllerConfigSelected();
+	void optionsMenuClosed();
+	
+	void screenShown();
+	void screenHidden();
 private:
-	Menu *menu;
+	Entity *activeMenu;
+	
 	EntityList entityList;
 	ScreenListener *listener;
 };

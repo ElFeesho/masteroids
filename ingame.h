@@ -23,6 +23,7 @@ public:
 	void buttonDown(GamepadButton button);
 	void buttonUp(GamepadButton button);
 	Position &position() { return pos; }
+	Shape &shape() { return Shape::NONE; }
 private:
 	Gamepad *gamepad;
 	InGameListener *listener;

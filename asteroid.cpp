@@ -13,6 +13,7 @@
 Asteroid::Asteroid() : speed(0.0f), alive(true), rot_speed(rand()%10-5), trav_ang(rand()%360), colour(RGB(1.0f, 1.0f, 1.0f))
 {
 	position().Rotation(rand()%360);
+	shape().Radius(25.0f);
 	
 	while(speed == 0)
 	{
@@ -22,7 +23,6 @@ Asteroid::Asteroid() : speed(0.0f), alive(true), rot_speed(rand()%10-5), trav_an
 			speed*=-1;
 		}
 	}
-	set_radius(25.0f);
 	int pos = rand()%4;
 	switch(pos)
 	{
@@ -54,13 +54,13 @@ Asteroid::Asteroid() : speed(0.0f), alive(true), rot_speed(rand()%10-5), trav_an
 Asteroid::Asteroid(double scale) : speed(0), alive(true), rot_speed(rand()%10-5), trav_ang(rand()%360), colour(RGB(1.0f, 1.0f, 1.0f))
 {
 	position().Rotation(rand()%360);
+	shape().Radius(scale);
 	while(speed==0)
 	{
 		speed = rand()%(Options::difficulty+2);
 		if(rand()%2)
 			speed*=-1;
 	}
-	set_radius(scale);
 	int pos = rand()%4;
 	switch(pos)
 	{
@@ -97,7 +97,7 @@ bool Asteroid::update()
 {
 	position().rotate(rot_speed);
 	position().translate(cos(trav_ang/180*M_PI)*speed, sin(trav_ang/180*M_PI)*speed);
-	double radius = get_radius();
+	double radius = shape().Radius();
 	if(position().X()>640.0f+radius)
 		position().X(0.0f-radius);
 
@@ -136,13 +136,16 @@ void Asteroid::render(GfxWrapper* gfx)
 
 void Asteroid::on_hit()
 {
-	if(get_radius()>10.0f)
+	int radius = shape().Radius();
+	int diameter = radius*2;
+	
+	if(radius > 10.0f)
 	{
 		for(int i = 0; i<2; i++)
 		{
-			Asteroid *ast = new Asteroid(get_radius()/2.0f);
-			ast->position().X(position().X()+rand()%((int)get_radius()*2)-get_radius());
-			ast->position().Y(position().Y()+rand()%((int)get_radius()*2)-get_radius());
+			Asteroid *ast = new Asteroid(radius / 2.0f);
+			ast->position().X(position().X()+rand()%(diameter)-radius);
+			ast->position().Y(position().Y()+rand()%(diameter)-radius);
 			//get_engine()->add_entity(ast);
 			// TODO listener emit event
 		}

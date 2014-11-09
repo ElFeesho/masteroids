@@ -24,7 +24,7 @@ UFO::UFO() : next_think(ticks_to_millisecs(gettime())+1500), next_fire(ticks_to_
 	position().Y((rand()%400)+40);
 	yspeed = 0;
 	
-	set_radius(10);
+	shape().Radius(10);
 }
 
 UFO::~UFO()
@@ -67,16 +67,16 @@ bool UFO::update(GfxWrapper *gfx)
 		position().Y(-10);
 
 	/* COMPLEX DRAWING ROUTEIN!!! j/k */
-	gfx->drawLine(position().X()-get_radius()/4,position().Y()-get_radius(), position().X()+get_radius()/4, position().Y()-get_radius(),shipColour);
-	gfx->drawLine(position().X()-get_radius()/2,position().Y()+get_radius(), position().X()+get_radius()/2, position().Y()+get_radius(),shipColour);
-	gfx->drawLine(position().X()-get_radius()/2,position().Y()+get_radius(), position().X()-get_radius(), position().Y()+get_radius()/2,shipColour);
-	gfx->drawLine(position().X()+get_radius()/2,position().Y()+get_radius(), position().X()+get_radius(), position().Y()+get_radius()/2,shipColour);
-	gfx->drawLine(position().X()-get_radius()/2,position().Y()-get_radius(), position().X()-get_radius(), position().Y()-get_radius()/2,shipColour);
-	gfx->drawLine(position().X()+get_radius()/2,position().Y()-get_radius(), position().X()+get_radius(), position().Y()-get_radius()/2,shipColour);
-	gfx->drawLine(position().X()+get_radius(),position().Y()-get_radius()/2, position().X()+get_radius(), position().Y()+get_radius()/2,shipColour);
-	gfx->drawLine(position().X()-get_radius(),position().Y()-get_radius()/2, position().X()-get_radius(), position().Y()+get_radius()/2,shipColour);
-	gfx->drawLine(position().X()-get_radius(),position().Y()+get_radius()/2, position().X()+get_radius(), position().Y()+get_radius()/2,shipColour);
-	gfx->drawLine(position().X()-get_radius(),position().Y()-get_radius()/2, position().X()+get_radius(), position().Y()-get_radius()/2,shipColour);
+	gfx->drawLine(position().X()-shape().Radius()/4,position().Y()-shape().Radius(), position().X()+shape().Radius()/4, position().Y()-shape().Radius(),shipColour);
+	gfx->drawLine(position().X()-shape().Radius()/2,position().Y()+shape().Radius(), position().X()+shape().Radius()/2, position().Y()+shape().Radius(),shipColour);
+	gfx->drawLine(position().X()-shape().Radius()/2,position().Y()+shape().Radius(), position().X()-shape().Radius(), position().Y()+shape().Radius()/2,shipColour);
+	gfx->drawLine(position().X()+shape().Radius()/2,position().Y()+shape().Radius(), position().X()+shape().Radius(), position().Y()+shape().Radius()/2,shipColour);
+	gfx->drawLine(position().X()-shape().Radius()/2,position().Y()-shape().Radius(), position().X()-shape().Radius(), position().Y()-shape().Radius()/2,shipColour);
+	gfx->drawLine(position().X()+shape().Radius()/2,position().Y()-shape().Radius(), position().X()+shape().Radius(), position().Y()-shape().Radius()/2,shipColour);
+	gfx->drawLine(position().X()+shape().Radius(),position().Y()-shape().Radius()/2, position().X()+shape().Radius(), position().Y()+shape().Radius()/2,shipColour);
+	gfx->drawLine(position().X()-shape().Radius(),position().Y()-shape().Radius()/2, position().X()-shape().Radius(), position().Y()+shape().Radius()/2,shipColour);
+	gfx->drawLine(position().X()-shape().Radius(),position().Y()+shape().Radius()/2, position().X()+shape().Radius(), position().Y()+shape().Radius()/2,shipColour);
+	gfx->drawLine(position().X()-shape().Radius(),position().Y()-shape().Radius()/2, position().X()+shape().Radius(), position().Y()-shape().Radius()/2,shipColour);
 
 
 	return true;

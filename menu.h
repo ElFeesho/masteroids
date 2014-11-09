@@ -17,12 +17,10 @@ public:
 class Menu : public Entity, public GamepadListener
 {
 public:
-	Menu();
+	Menu(MenuListener *listener);
 	~Menu();
 	bool update();
 	void render(GfxWrapper *gfx);
-
-	void setListener(MenuListener *listener);
 
 	void incrementMenu();
 	void decrementMenu();
@@ -31,7 +29,8 @@ public:
 	void buttonDown(GamepadButton button);
 	void buttonUp(GamepadButton button);
 	
-	Position &position() { return pos; }
+	Position &position() { return Position::NONE; }
+	Shape &shape() { return Shape::NONE; }
 private:
 	MenuListener *listener;
 	unsigned int menu_sel;
