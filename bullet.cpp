@@ -20,10 +20,11 @@ Bullet::Bullet() : col(RGB(1.0f, 1.0f, 1.0f))
 
 }
 
-Bullet::Bullet(double x, double y, double rot, const RGB &color, Entity *player) : angle(rot), col(color), owner(player), ttl(ticks_to_millisecs(gettime())+1500)
+Bullet::Bullet(double x, double y, double rot, const RGB &color, Entity *player) : col(color), owner(player), ttl(ticks_to_millisecs(gettime())+1500)
 {
 	position().X(x);
 	position().Y(y);
+	position().Rotation(rot);
 }
 
 Bullet::~Bullet()
@@ -36,7 +37,7 @@ bool Bullet::update()
 	/* Collision Detection and barbaric treatment of CPU :( */
 	// TODO COLLISION DETECTION
 	
-	position().translate(cos(angle/180*M_PI)*3.5, sin(angle/180*M_PI)*3.5);
+	position().translate(cos(position().Rotation()/180*M_PI)*3.5, sin(position().Rotation()/180*M_PI)*3.5);
 	
 	if(position().X()>640.0f)
 		position().X(0.0f);
@@ -56,4 +57,9 @@ bool Bullet::update()
 void Bullet::render(GfxWrapper* gfx)
 {
 	gfx->drawRect(position().X()-1, position().Y()-1,2,2,col);
+}
+
+Position &Bullet::position()
+{
+	return pos;
 }
