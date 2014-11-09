@@ -5,7 +5,7 @@
 #include "gfx.h"
 #include "gamepad.h"
 
-class About : public Entity, public GamepadListener
+class About : public GamepadListener
 {
 public:
 	About();

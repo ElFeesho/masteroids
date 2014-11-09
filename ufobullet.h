@@ -13,7 +13,9 @@ public:
 	~UFOBullet();
 	bool update();
 	void render(GfxWrapper *gfx);
+	Position &position() { return pos; }
 private:
+	Position pos;
 	double angle;
 	Entity *owner;
 	unsigned long ttl;

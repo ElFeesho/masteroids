@@ -11,6 +11,7 @@ public:
 	~UFO();
 	bool update(GfxWrapper *gfx);
 	void on_hit();
+	Position &position() { return pos; }
 private:
 	double xspeed;
 	double yspeed;
@@ -18,6 +19,7 @@ private:
 	unsigned long next_fire;
 	bool alive;
 	RGB shipColour;
+	Position pos;
 };
 
 #endif

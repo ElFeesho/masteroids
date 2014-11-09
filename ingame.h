@@ -22,12 +22,14 @@ public:
 	void render(GfxWrapper *gfx);
 	void buttonDown(GamepadButton button);
 	void buttonUp(GamepadButton button);
+	Position &position() { return pos; }
 private:
 	Gamepad *gamepad;
 	InGameListener *listener;
 	int menu_sel;
 	RGB colour;
 	RGB colourHighlight;
+	Position pos;
 };
 
 #endif

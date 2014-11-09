@@ -12,8 +12,9 @@ public:
 	~Bullet();
 	bool update();
 	void render(GfxWrapper *gfx);
+	Position& position();
 private:
-	double angle;
+	Position pos;
 	RGB col;
 	Entity *owner;
 	unsigned long ttl;

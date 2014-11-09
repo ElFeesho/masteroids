@@ -40,6 +40,8 @@ public:
 	
 	static Ship *players[4];
 	static int scores[4];
+	
+	Position &position() { return pos; }
 private:
   Gamepad *gamepad;
   ShipListener *listener;
@@ -54,6 +56,7 @@ private:
 	unsigned long kill_time;
 	RGB colour;
 	double propulsion;
+	Position pos;
 };
 
 #endif

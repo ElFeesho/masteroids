@@ -16,7 +16,7 @@
 #include "bullet.h"
 #include "options.h"
 #include "ingame.h"
-#include "debris.h"
+#include "debrisfragment.h"
 
 Ship::Ship(Gamepad *gamepad, ShipListener *listener) : gamepad(gamepad), listener(listener), player_num(1), colour(RGB(0.0f, 0.0f, 0.0f)), rot(90*180), xspeed(0), yspeed(0), rotationSpeed(0), propulsion(0), bullets_fired(0), score(0), llevel(1), lives(Options::lives), kill_time(0)
 {

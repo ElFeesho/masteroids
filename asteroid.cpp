@@ -8,15 +8,19 @@
 #include "engine.h"
 #include "GRRLIB.h"
 
-#include "debris.h"
+#include "debrisfragment.h"
 
-Asteroid::Asteroid() : speed(0.0f), alive(true), rot((double)(rand()%360)), rot_speed(rand()%10-5), trav_ang(rand()%360), colour(RGB(1.0f, 1.0f, 1.0f))
+Asteroid::Asteroid() : speed(0.0f), alive(true), rot_speed(rand()%10-5), trav_ang(rand()%360), colour(RGB(1.0f, 1.0f, 1.0f))
 {
+	position().Rotation(rand()%360);
+	
 	while(speed == 0)
 	{
 		speed = rand()%(Options::difficulty+2);
 		if(rand()%2)
+		{
 			speed*=-1;
+		}
 	}
 	set_radius(25.0f);
 	int pos = rand()%4;
@@ -47,8 +51,9 @@ Asteroid::Asteroid() : speed(0.0f), alive(true), rot((double)(rand()%360)), rot_
 	Asteroid::count++;
 }
 
-Asteroid::Asteroid(double scale) : speed(0), alive(true), rot((double)(rand()%360)), rot_speed(rand()%10-5), trav_ang(rand()%360), colour(RGB(1.0f, 1.0f, 1.0f))
+Asteroid::Asteroid(double scale) : speed(0), alive(true), rot_speed(rand()%10-5), trav_ang(rand()%360), colour(RGB(1.0f, 1.0f, 1.0f))
 {
+	position().Rotation(rand()%360);
 	while(speed==0)
 	{
 		speed = rand()%(Options::difficulty+2);
@@ -90,7 +95,7 @@ Asteroid::~Asteroid()
 
 bool Asteroid::update()
 {
-	rot+=rot_speed;
+	position().rotate(rot_speed);
 	position().translate(cos(trav_ang/180*M_PI)*speed, sin(trav_ang/180*M_PI)*speed);
 	double radius = get_radius();
 	if(position().X()>640.0f+radius)
@@ -105,7 +110,6 @@ bool Asteroid::update()
 	if(position().Y()<0.0f-radius)
 		position().Y(480.0f+radius);
 
-
 	return alive;
 }
 
@@ -115,14 +119,15 @@ void Asteroid::render(GfxWrapper* gfx)
 	{
 		if(i!=5)
 		{	
-			double rot1 = (rot + i*72.0)/180.0*M_PI;
-			double rot2 = (rot + (i+1) * 72.0)/180.0*M_PI;
+			double rot1 = (position().Rotation() + i*72.0)/180.0*M_PI;
+			double rot2 = (position().Rotation() + (i+1) * 72.0)/180.0*M_PI;
+			
 			gfx->drawLine(position().X()+cos(rot1)*peaks[i], position().Y()+sin(rot1)*peaks[i], position().X()+cos(rot2)*peaks[i+1], position().Y()+sin(rot2)*peaks[i+1],colour);
 		}
 		else
 		{
-			double rot1 = (rot + i*72)/180.0*M_PI;
-			double rot2 = rot/180.0*M_PI;
+			double rot1 = (position().Rotation() + i*72)/180.0*M_PI;
+			double rot2 = position().Rotation()/180.0*M_PI;
 			gfx->drawLine(position().X()+cos(rot1)*peaks[i], position().Y()+sin(rot1)*peaks[i], position().X()+cos(rot2)*peaks[0], position().Y()+sin(rot2)*peaks[0],colour);
 		}
 	}

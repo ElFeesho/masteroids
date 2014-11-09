@@ -30,6 +30,8 @@ public:
 
 	void buttonDown(GamepadButton button);
 	void buttonUp(GamepadButton button);
+	
+	Position &position() { return pos; }
 private:
 	MenuListener *listener;
 	unsigned int menu_sel;
@@ -37,6 +39,7 @@ private:
 	char ldir;
 	bool active;
 	Entity *child;
+	Position pos;
 };
 
 #endif

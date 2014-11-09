@@ -15,11 +15,12 @@ public:
 	void render(GfxWrapper *gfx);
 	void on_hit();
 	static int count;
+	Position &position() { return pos; }
 private:
+	Position pos;
 	double peaks[6];
 	double speed;
 	bool alive;
-	double rot;
 	double rot_speed;
 	double trav_ang;
 	RGB colour;

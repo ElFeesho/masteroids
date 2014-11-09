@@ -66,7 +66,10 @@ public:
 	void render(GfxWrapper *gfx);;
 	static bool button_down(int player, unsigned int button);
 	static bool button_held(int player, unsigned int button);
+	
+	Position &position() { return pos; }
 private:
+	Position pos;
 	int menu_sel;
 	int binding;
 	unsigned long bind_timeout;
