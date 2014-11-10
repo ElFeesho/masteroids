@@ -58,7 +58,6 @@ public:
 	~Ship();
 	bool update();
 	void render(GfxWrapper *gfx);
-	void add_score(int am);
 	void on_hit();
 	
 	Gamepad *getGamepad();
@@ -68,6 +67,8 @@ public:
 
 	Position &position() { return pos; }
 	Shape &shape() { return bodyShape; }
+	
+	Direction &getDirection() { return travelDirection; }
 private:
 	Gamepad *gamepad;
 	ShipListener *listener;

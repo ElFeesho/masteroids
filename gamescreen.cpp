@@ -1,6 +1,7 @@
  #include "gamescreen.h"
 #include "asteroid.h"
 #include "ship.h"
+#include "bullet.h"
 #include "gamepadinputmanager.h"
 #include <stdio.h>
 
@@ -15,7 +16,7 @@ GameScreen::~GameScreen()
 
 void GameScreen::screenHidden()
 {
-	entities.clear();
+	asteroids.clear();
 	if(pauseEnt != NULL)
 	{
 		isPaused = false;
@@ -30,22 +31,26 @@ void GameScreen::screenShown()
   
   for(int i = 0; i < 15; i++)
   {
-	 entities.add(new Asteroid());
+	 asteroids.add(new Asteroid());
   }
-  
-  entities.add(playerOne);
 }
 
 void GameScreen::update(GfxWrapper* gfx)
 {
 	if(!isPaused)
 	{
-		entities.updateAll();
-		entities.renderAll(gfx);
+		playerOne->update();
+		playerBullets[0].updateAll();
+		playerBullets[0].renderAll(gfx);
+		asteroids.updateAll();
+		asteroids.renderAll(gfx);
+		playerOne->render(gfx);
 	}
 	else
 	{
-		entities.renderAll(gfx);
+		asteroids.renderAll(gfx);
+		playerBullets[0].renderAll(gfx);
+		playerOne->render(gfx);
 		pauseEnt->update();
 		pauseEnt->render(gfx);
 	}
@@ -63,6 +68,9 @@ void GameScreen::shipDied(Ship* ship)
 void GameScreen::shipFired(Ship* ship)
 {
 	printf("pew pew\n");
+	
+	playerBullets[0].add(new Bullet(ship, ship->getDirection()));
+	
 }
 
 void GameScreen::shipRequestedPause(Ship* ship)

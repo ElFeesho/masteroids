@@ -124,3 +124,5 @@ void Ship::render(GfxWrapper* gfx)
 	gfx->drawLine(br_x, br_y, position().X(), position().Y(), colour);
 	gfx->drawLine(bl_x, bl_y, position().X(), position().Y(), colour);
 }
+
+

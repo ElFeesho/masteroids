@@ -15,8 +15,6 @@ public:
 
 	virtual Position &position() = 0;
 	virtual Shape &shape() = 0;
-
-
 };
 
 #endif

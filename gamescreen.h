@@ -24,7 +24,8 @@ public:
 	void ingameQuitSelected();
 private:
   ScreenListener* listener;
-  EntityList entities;
+  EntityList asteroids;
+  EntityList playerBullets[4];
   InGame *pauseEnt;
   
   bool isPaused;

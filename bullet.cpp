@@ -1,31 +1,7 @@
-#include <vector>
 #include "bullet.h"
-#include "ship.h"
-#include "options.h"
-#include "engine.h"
-#include <ogcsys.h>
-#include <gccore.h>
-
-#include <math.h>
 
 #include <ogc/lwp_watchdog.h>
 
-#include "GRRLIB.h"
-
-using std::vector;
-
-Bullet::Bullet() : col(RGB(1.0f, 1.0f, 1.0f))
-{
-
-}
-
-Bullet::Bullet(double x, double y, double rot, const RGB &color, Entity *player) : col(color), owner(player), ttl(ticks_to_millisecs(gettime())+1500)
-{
-	position().X(x);
-	position().Y(y);
-	position().Rotation(rot);
-	shape().Radius(5.0f);
-}
 
 Bullet::~Bullet()
 {
@@ -34,10 +10,7 @@ Bullet::~Bullet()
 
 bool Bullet::update()
 {
-	/* Collision Detection and barbaric treatment of CPU :( */
-	// TODO COLLISION DETECTION
-	
-	position().translate(cos(position().Rotation()/180*M_PI)*3.5, sin(position().Rotation()/180*M_PI)*3.5);
+	mover.move(position());
 	
 	if(position().X()>640.0f)
 	{
@@ -67,10 +40,6 @@ void Bullet::render(GfxWrapper* gfx)
 					  position().Y()-shape().Radius(),
 					  shape().Radius()*2, 
 					  shape().Radius()*2, 
-					  col);
+					  RGB::white);
 }
 
-Position &Bullet::position()
-{
-	return pos;
-}
