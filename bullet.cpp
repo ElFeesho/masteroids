@@ -59,12 +59,7 @@ bool Bullet::update()
 		position().Y(480.0f);
 	}
 	
-	if(ticks_to_millisecs(gettime())>ttl)
-	{
-		((Ship*)owner)->dec_bfired();
-		return false;
-	}
-	return true;
+	return (ticks_to_millisecs(gettime())<ttl);
 }
 void Bullet::render(GfxWrapper* gfx)
 {

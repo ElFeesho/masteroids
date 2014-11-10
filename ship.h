@@ -6,11 +6,12 @@
 #include "gfx.h"
 
 #include "mover.h"
+#include "vector.h"
 
 class ShipMover : public Mover
 {
 public:
-	ShipMover()
+	ShipMover() : direction(Direction(0, 0)), movementVector(Vector(0, 0))
 	{
 
 	}
@@ -22,7 +23,12 @@ public:
 
 	void move(Position &position)
 	{
-
+		position.translate(movementVector.X(), movementVector.Y());
+	}
+	
+	void propell(Direction &direction)
+	{
+		movementVector.add(cos(direction.Angle())*direction.Speed(), sin(direction.Angle())*direction.Speed());
 	}
 
 	void setDirection(Direction &direction)
@@ -31,6 +37,7 @@ public:
 	}
 private:
 	Direction direction;
+	Vector movementVector;
 };
 
 class Ship;
@@ -48,45 +55,29 @@ class Ship : public Entity, public GamepadListener
 {
 public:
 	Ship(Gamepad *gamepad, ShipListener *listener);
-	Ship(int padnum);
 	~Ship();
-	void inc_bfired();
-	void dec_bfired();
 	bool update();
 	void render(GfxWrapper *gfx);
 	void add_score(int am);
 	void on_hit();
-	void draw_lives(GfxWrapper *gfx);
-	int get_lives();
-	int get_score();
-
+	
 	Gamepad *getGamepad();
 
    void buttonDown(GamepadButton button);
 	void buttonUp(GamepadButton button);
 
-	static Ship *players[4];
-	static int scores[4];
-
 	Position &position() { return pos; }
 	Shape &shape() { return bodyShape; }
 private:
+	Gamepad *gamepad;
+	ShipListener *listener;
 	ShipMover mover;
-  Gamepad *gamepad;
-  Shape bodyShape;
-  ShipListener *listener;
-	int player_num;
-	double rot; /* Ship Rot */
-	double angle;	/* Travel Angle */
-	double xspeed, yspeed, rotationSpeed;
-	int bullets_fired;
-	int score;
-	int llevel;
-	int lives;
+	Position pos;
+	Shape bodyShape;
+	double rotationSpeed;
 	unsigned long kill_time;
 	RGB colour;
-	double propulsion;
-	Position pos;
+	Direction travelDirection;
 };
 
 #endif

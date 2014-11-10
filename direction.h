@@ -9,8 +9,10 @@ public:
 	Direction(double speed, double angle) : speed(speed), angle(angle) {}
 	~Direction() {}
 	double Speed() { return speed; }
-	double Angle() { return angle/(180*M_PI); }
-
+	double Angle() { return angle; }
+	void Speed(double nSpeed) { speed = nSpeed; }
+	void Angle(double nAngle) { angle = nAngle; }
+	void rotate(double angle) { this->angle += angle; }
 private:
 	double speed, angle;
 };
