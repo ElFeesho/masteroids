@@ -5,6 +5,34 @@
 #include "entity.h"
 #include "gfx.h"
 
+#include "mover.h"
+
+class ShipMover : public Mover
+{
+public:
+	ShipMover()
+	{
+
+	}
+
+	~ShipMover()
+	{
+
+	}
+
+	void move(Position &position)
+	{
+
+	}
+
+	void setDirection(Direction &direction)
+	{
+		this->direction = direction;
+	}
+private:
+	Direction direction;
+};
+
 class Ship;
 
 class ShipListener
@@ -31,18 +59,19 @@ public:
 	void draw_lives(GfxWrapper *gfx);
 	int get_lives();
 	int get_score();
-	
+
 	Gamepad *getGamepad();
-	
+
    void buttonDown(GamepadButton button);
 	void buttonUp(GamepadButton button);
-	
+
 	static Ship *players[4];
 	static int scores[4];
-	
+
 	Position &position() { return pos; }
 	Shape &shape() { return bodyShape; }
 private:
+	ShipMover mover;
   Gamepad *gamepad;
   Shape bodyShape;
   ShipListener *listener;
