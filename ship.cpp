@@ -114,7 +114,7 @@ bool Ship::update()
 			yspeed = 0;
 			rot = 90+(player_num%2)*180;
 
-			
+
 		}
 		return true;
 	}
@@ -122,7 +122,7 @@ bool Ship::update()
 	rot += rotationSpeed;
 	xspeed += cos(rot/180*M_PI)*propulsion;
 	yspeed += sin(rot/180*M_PI)*propulsion;
-	
+
 	position().translate(xspeed, yspeed);
 
 	if(position().X()>640.0+10.0)
@@ -143,7 +143,7 @@ bool Ship::update()
 		position().Y(480.0+10.0);
 	}
 
-	/* Collision Detection and barbaric treatment of CPU :( 
+	/* Collision Detection and barbaric treatment of CPU :(
 	for(vector<Collobj *>::iterator iter = get_engine()->get_collents()->begin(); iter!=get_engine()->get_collents()->end(); iter++)
 	{
 		if(!Options::team_kill) // Bumping into each other causes big BOOM :D
@@ -290,7 +290,7 @@ Gamepad* Ship::getGamepad()
 {
 	return gamepad;
 }
-void Ship::render(GfxWrapper* gfx) 
+void Ship::render(GfxWrapper* gfx)
 {
 	double tp_x = position().X()+cos(rot/180*M_PI)*10.0;
 	double tp_y = position().Y()+sin(rot/180*M_PI)*10.0;

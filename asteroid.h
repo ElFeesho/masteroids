@@ -4,6 +4,28 @@
 #include "entity.h"
 #include "gfx.h"
 
+#include "mover.h"
+
+#include <cmath>
+
+class AsteroidMover : public Mover
+{
+public:
+	AsteroidMover(const Direction &direction) : direction(direction) {}
+	~AsteroidMover() {};
+
+	void move(Position &position) {
+		position.translate(cos(direction.Angle())*direction.Speed(), sin(direction.Angle())*direction.Speed());
+	};
+
+	void setDirection(Direction &direction)
+	{
+		this->direction = direction;
+	}
+private:
+	Direction direction;
+};
+
 class Asteroid : public Entity
 {
 public:
@@ -18,14 +40,12 @@ public:
 	Position &position() { return pos; }
 	Shape &shape() { return asteroidShape; }
 private:
+	Mover *mover;
 	Position pos;
 	Shape asteroidShape;
 	double peaks[6];
-	double speed;
 	bool alive;
 	double rot_speed;
-	double trav_ang;
-	RGB colour;
 };
 
 #endif

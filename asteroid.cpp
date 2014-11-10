@@ -10,19 +10,22 @@
 
 #include "debrisfragment.h"
 
-Asteroid::Asteroid() : speed(0.0f), alive(true), rot_speed(rand()%10-5), trav_ang(rand()%360), colour(RGB(1.0f, 1.0f, 1.0f))
+static inline double createSpeed()
 {
+	double speed = 1+(rand() % (Options::difficulty+2));
+	if(rand()%2 == 1)
+	{
+		speed *= -1;
+	}
+	return speed;
+}
+
+Asteroid::Asteroid() : mover(NULL), alive(true), rot_speed(rand()%10-5)
+{
+	mover = new AsteroidMover(Direction(createSpeed(), rand() % 360));
 	position().Rotation(rand()%360);
 	shape().Radius(25.0f);
-	
-	while(speed == 0)
-	{
-		speed = rand()%(Options::difficulty+2);
-		if(rand()%2)
-		{
-			speed*=-1;
-		}
-	}
+
 	int pos = rand()%4;
 	switch(pos)
 	{
@@ -51,16 +54,12 @@ Asteroid::Asteroid() : speed(0.0f), alive(true), rot_speed(rand()%10-5), trav_an
 	Asteroid::count++;
 }
 
-Asteroid::Asteroid(double scale) : speed(0), alive(true), rot_speed(rand()%10-5), trav_ang(rand()%360), colour(RGB(1.0f, 1.0f, 1.0f))
+Asteroid::Asteroid(double scale) : mover(NULL), alive(true), rot_speed(rand()%10-5)
 {
+	mover = new AsteroidMover(Direction(createSpeed(), rand() % 360));
 	position().Rotation(rand()%360);
 	shape().Radius(scale);
-	while(speed==0)
-	{
-		speed = rand()%(Options::difficulty+2);
-		if(rand()%2)
-			speed*=-1;
-	}
+
 	int pos = rand()%4;
 	switch(pos)
 	{
@@ -91,12 +90,14 @@ Asteroid::Asteroid(double scale) : speed(0), alive(true), rot_speed(rand()%10-5)
 
 Asteroid::~Asteroid()
 {
+	delete mover;
 }
 
 bool Asteroid::update()
 {
 	position().rotate(rot_speed);
-	position().translate(cos(trav_ang/180*M_PI)*speed, sin(trav_ang/180*M_PI)*speed);
+	mover->move(position());
+
 	double radius = shape().Radius();
 	if(position().X()>640.0f+radius)
 		position().X(0.0f-radius);
@@ -118,17 +119,17 @@ void Asteroid::render(GfxWrapper* gfx)
 	for(int i = 0;i<6;i++)
 	{
 		if(i!=5)
-		{	
+		{
 			double rot1 = (position().Rotation() + i*72.0)/180.0*M_PI;
 			double rot2 = (position().Rotation() + (i+1) * 72.0)/180.0*M_PI;
-			
-			gfx->drawLine(position().X()+cos(rot1)*peaks[i], position().Y()+sin(rot1)*peaks[i], position().X()+cos(rot2)*peaks[i+1], position().Y()+sin(rot2)*peaks[i+1],colour);
+
+			gfx->drawLine(position().X()+cos(rot1)*peaks[i], position().Y()+sin(rot1)*peaks[i], position().X()+cos(rot2)*peaks[i+1], position().Y()+sin(rot2)*peaks[i+1], RGB::white);
 		}
 		else
 		{
 			double rot1 = (position().Rotation() + i*72)/180.0*M_PI;
 			double rot2 = position().Rotation()/180.0*M_PI;
-			gfx->drawLine(position().X()+cos(rot1)*peaks[i], position().Y()+sin(rot1)*peaks[i], position().X()+cos(rot2)*peaks[0], position().Y()+sin(rot2)*peaks[0],colour);
+			gfx->drawLine(position().X()+cos(rot1)*peaks[i], position().Y()+sin(rot1)*peaks[i], position().X()+cos(rot2)*peaks[0], position().Y()+sin(rot2)*peaks[0], RGB::white);
 		}
 	}
 }
@@ -138,7 +139,7 @@ void Asteroid::on_hit()
 {
 	int radius = shape().Radius();
 	int diameter = radius*2;
-	
+
 	if(radius > 10.0f)
 	{
 		for(int i = 0; i<2; i++)
@@ -152,7 +153,7 @@ void Asteroid::on_hit()
 	}
 	//get_engine()->add_entity(new Debris(4,position().X(),position().Y(),rot,speed,speed,colour,1500));
 	Asteroid::count--;
-	alive = false;	
+	alive = false;
 }
 
 int Asteroid::count = 0;

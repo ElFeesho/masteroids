@@ -5,9 +5,6 @@
 #include "shape.h"
 
 class GfxWrapper;
-
-class Engine;
-
 class Entity
 {
 public:
@@ -15,9 +12,11 @@ public:
 
 	virtual bool update() = 0;
 	virtual void render(GfxWrapper *gfx) = 0;
-	
+
 	virtual Position &position() = 0;
 	virtual Shape &shape() = 0;
+
+
 };
 
 #endif

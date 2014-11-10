@@ -18,6 +18,7 @@ Shape::~Shape()
 Shape& Shape::operator=(const Shape& other)
 {
 	radius = other.radius;
+	return *this;
 }
 
 bool Shape::operator==(const Shape& other) const
