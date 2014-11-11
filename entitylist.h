@@ -25,7 +25,6 @@ public:
 		{
 			if(entities.at(i) == entity)
 			{
-				printf("REMOVED ENTITY\n");
 				entities.erase(entities.begin()+i);
 				return;
 			}

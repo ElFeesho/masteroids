@@ -54,7 +54,7 @@ Asteroid::Asteroid() : mover(NULL), alive(true), rot_speed(rand()%10-5)
 	Asteroid::count++;
 }
 
-Asteroid::Asteroid(double scale) : mover(NULL), alive(true), rot_speed(rand()%10-5)
+Asteroid::Asteroid(double scale, const Position &nposition) : mover(NULL), alive(true), rot_speed(rand()%10-5), pos(nposition)
 {
 	mover = new AsteroidMover(Direction(createSpeed(), rand() % 360));
 	position().Rotation(rand()%360);
@@ -132,28 +132,6 @@ void Asteroid::render(GfxWrapper* gfx)
 			gfx->drawLine(position().X()+cos(rot1)*peaks[i], position().Y()+sin(rot1)*peaks[i], position().X()+cos(rot2)*peaks[0], position().Y()+sin(rot2)*peaks[0], RGB::white);
 		}
 	}
-}
-
-
-void Asteroid::on_hit()
-{
-	int radius = shape().Radius();
-	int diameter = radius*2;
-
-	if(radius > 10.0f)
-	{
-		for(int i = 0; i<2; i++)
-		{
-			Asteroid *ast = new Asteroid(radius / 2.0f);
-			ast->position().X(position().X()+rand()%(diameter)-radius);
-			ast->position().Y(position().Y()+rand()%(diameter)-radius);
-			//get_engine()->add_entity(ast);
-			// TODO listener emit event
-		}
-	}
-	//get_engine()->add_entity(new Debris(4,position().X(),position().Y(),rot,speed,speed,colour,1500));
-	Asteroid::count--;
-	alive = false;
 }
 
 int Asteroid::count = 0;

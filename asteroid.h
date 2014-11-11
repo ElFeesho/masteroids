@@ -30,12 +30,11 @@ class Asteroid : public Entity
 {
 public:
 	Asteroid();
-	Asteroid(double scale);
+	Asteroid(double scale, const Position &nposition);
 	~Asteroid();
 
 	bool update();
 	void render(GfxWrapper *gfx);
-	void on_hit();
 	static int count;
 	Position &position() { return pos; }
 	Shape &shape() { return asteroidShape; }
