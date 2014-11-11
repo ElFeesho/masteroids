@@ -46,8 +46,10 @@ void GameScreen::update(GfxWrapper* gfx)
 		asteroids.renderAll(gfx);
 		playerOne->render(gfx);
 
-		asteroids.checkCollisions(playerBullets[0], [](Entity* entOne, Entity* entTwo) {
-			printf("COLLIDING WITH ASTEROID\n");
+		asteroids.checkCollisions(playerBullets[0], [&](Entity* asteroid, Entity* bullet) {
+			playerBullets[0].removeEntity(bullet);
+			asteroids.removeEntity(asteroid);
+			printf(":O\n");
 		});
 	}
 	else

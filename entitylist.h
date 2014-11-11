@@ -19,6 +19,19 @@ public:
 	void add(Entity *entity);
 	void updateAll();
 	void renderAll(GfxWrapper *gfx);
+	void removeEntity(Entity *entity)
+	{
+		for(int i = entities.size()-1; i>=0;i--)
+		{
+			if(entities.at(i) == entity)
+			{
+				printf("REMOVED ENTITY\n");
+				entities.erase(entities.begin()+i);
+				return;
+			}
+		}
+	}
+
 	Entity *at(int i) { return entities.at(i); }
 	int size() { return entities.size(); }
 	void clear();

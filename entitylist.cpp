@@ -33,14 +33,14 @@ void EntityList::updateAll()
 
 void EntityList::checkCollisions(EntityList &otherList, function<void(Entity*, Entity*)> callback)
 {
-	for(int i = 0; i < entities.size(); i++)
+	for(int i = entities.size()-1; i >= 0; i--)
 	{
 		if(!(entities.at(i)->shape() == Shape::NONE || entities.at(i)->position() == Position::NONE))
 		{
-			for(int j = 0; j < otherList.size(); j++)
+			for(int j = otherList.size()-1; j >= 0; j--)
 			{
 				Entity *entOne = entities.at(i);
-				Entity *entTwo = otherList.at(i);
+				Entity *entTwo = otherList.at(j);
 				double distX = entOne->position().X() - entTwo->position().X();
 				double distY = entOne->position().Y() - entTwo->position().Y();
 				double hypt = sqrt((distX * distX) + (distY * distY));
