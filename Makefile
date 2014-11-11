@@ -1,4 +1,4 @@
-OBJS=shape.o position.o gamescreen.o menuscreen.o entitylist.o screenmanager.o gamepadinputmanager.o main.o UFO.o about.o asteroid.o bullet.o controlconf.o debrisfragment.o engine.o gameover.o ingame.o menu.o options.o ship.o ufobullet.o libwiiwrap/ogcsys.o libwiiwrap/gccore.o libwiiwrap/ogc/lwp_watchdog.o libwiiwrap/wiiuse/wpad.o sdlgfx.o keyboardsource.o
+OBJS=direction.o shape.o position.o gamescreen.o menuscreen.o entitylist.o screenmanager.o gamepadinputmanager.o main.o UFO.o about.o asteroid.o bullet.o controlconf.o debrisfragment.o engine.o gameover.o ingame.o menu.o options.o ship.o ufobullet.o libwiiwrap/ogcsys.o libwiiwrap/gccore.o libwiiwrap/ogc/lwp_watchdog.o libwiiwrap/wiiuse/wpad.o sdlgfx.o keyboardsource.o
 LIBS=`sdl-config --libs` -lm -lSDL_gfx
 CC=g++
 CFLAGS=`sdl-config --cflags` -Ilibwiiwrap -Wfatal-errors -g

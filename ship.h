@@ -25,7 +25,7 @@ public:
 	{
 		position.translate(movementVector.X(), movementVector.Y());
 	}
-	
+
 	void propell(Direction &direction)
 	{
 		movementVector.add(cos(direction.Angle())*direction.Speed(), sin(direction.Angle())*direction.Speed());
@@ -59,7 +59,7 @@ public:
 	bool update();
 	void render(GfxWrapper *gfx);
 	void on_hit();
-	
+
 	Gamepad *getGamepad();
 
    void buttonDown(GamepadButton button);
@@ -67,8 +67,10 @@ public:
 
 	Position &position() { return pos; }
 	Shape &shape() { return bodyShape; }
-	
-	Direction &getDirection() { return travelDirection; }
+
+	Direction &getDirection() {
+		return travelDirection;
+	}
 private:
 	Gamepad *gamepad;
 	ShipListener *listener;

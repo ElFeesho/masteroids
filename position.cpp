@@ -17,7 +17,10 @@ Position::~Position()
 
 Position& Position::operator=(const Position& other)
 {
-
+	this->x = other.x;
+	this->y = other.y;
+	this->rotation = other.rotation;
+	return *this;
 }
 
 bool Position::operator==(const Position& other) const

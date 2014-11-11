@@ -28,7 +28,7 @@ void GameScreen::screenHidden()
 void GameScreen::screenShown()
 {
   playerOne = new Ship(GamepadInputManager::sharedInstance()->playerOne(), this);
-  
+
   for(int i = 0; i < 15; i++)
   {
 	 asteroids.add(new Asteroid());
@@ -67,10 +67,7 @@ void GameScreen::shipDied(Ship* ship)
 
 void GameScreen::shipFired(Ship* ship)
 {
-	printf("pew pew\n");
-	
 	playerBullets[0].add(new Bullet(ship, ship->getDirection()));
-	
 }
 
 void GameScreen::shipRequestedPause(Ship* ship)
