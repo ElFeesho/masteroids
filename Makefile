@@ -2,7 +2,7 @@ OBJS=direction.o shape.o position.o gamescreen.o menuscreen.o entitylist.o scree
 LIBS=`sdl-config --libs` -lm -lSDL_gfx
 CC=g++
 CFLAGS=`sdl-config --cflags` -Ilibwiiwrap -Wfatal-errors -g
-CXXFLAGS=`sdl-config --cflags` -Ilibwiiwrap -Wfatal-errors -g
+CXXFLAGS=`sdl-config --cflags` -Ilibwiiwrap -Wfatal-errors -g -std=c++11
 PROG=masteroids
 
 all:$(OBJS)

@@ -2,6 +2,7 @@
 
 #include "entity.h"
 #include "gfx.h"
+#include <cmath>
 
 EntityList::EntityList()
 {
@@ -26,6 +27,28 @@ void EntityList::updateAll()
 		{
 			delete entities.at(i);
 			entities.erase(entities.begin()+i);
+		}
+	}
+}
+
+void EntityList::checkCollisions(EntityList &otherList, function<void(Entity*, Entity*)> callback)
+{
+	for(int i = 0; i < entities.size(); i++)
+	{
+		if(!(entities.at(i)->shape() == Shape::NONE || entities.at(i)->position() == Position::NONE))
+		{
+			for(int j = 0; j < otherList.size(); j++)
+			{
+				Entity *entOne = entities.at(i);
+				Entity *entTwo = otherList.at(i);
+				double distX = entOne->position().X() - entTwo->position().X();
+				double distY = entOne->position().Y() - entTwo->position().Y();
+				double hypt = sqrt((distX * distX) + (distY * distY));
+				if(hypt < entOne->shape().Radius() + entTwo->shape().Radius())
+				{
+					callback(entOne, entTwo);
+				}
+			}
 		}
 	}
 }

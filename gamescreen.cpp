@@ -45,6 +45,10 @@ void GameScreen::update(GfxWrapper* gfx)
 		asteroids.updateAll();
 		asteroids.renderAll(gfx);
 		playerOne->render(gfx);
+
+		asteroids.checkCollisions(playerBullets[0], [](Entity* entOne, Entity* entTwo) {
+			printf("COLLIDING WITH ASTEROID\n");
+		});
 	}
 	else
 	{
@@ -63,6 +67,7 @@ void GameScreen::setListener(ScreenListener* listener)
 
 void GameScreen::shipDied(Ship* ship)
 {
+
 }
 
 void GameScreen::shipFired(Ship* ship)
