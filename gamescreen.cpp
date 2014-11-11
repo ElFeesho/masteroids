@@ -44,13 +44,20 @@ void GameScreen::update(GfxWrapper* gfx)
 		playerBullets[0].renderAll(gfx);
 		asteroids.updateAll();
 		asteroids.renderAll(gfx);
+		secondaryAsteroids.updateAll();
+		secondaryAsteroids.renderAll(gfx);
 		playerOne->render(gfx);
 
 		asteroids.checkCollisions(playerBullets[0], [&](Entity* asteroid, Entity* bullet) {
-			asteroids.add(new Asteroid(10.0f, Position(asteroid->position())));
-			asteroids.add(new Asteroid(10.0f, Position(asteroid->position())));
+			secondaryAsteroids.add(new Asteroid(10.0f, Position(asteroid->position())));
+			secondaryAsteroids.add(new Asteroid(10.0f, Position(asteroid->position())));
 			playerBullets[0].removeEntity(bullet);
 			asteroids.removeEntity(asteroid);
+		});
+		
+		secondaryAsteroids.checkCollisions(playerBullets[0], [&](Entity* asteroid, Entity* bullet) {
+			playerBullets[0].removeEntity(bullet);
+			secondaryAsteroids.removeEntity(asteroid);
 		});
 	}
 	else

@@ -4,38 +4,18 @@
 #include "entity.h"
 #include "gfx.h"
 
-#include "mover.h"
+#include "fixeddirectionmover.h"
 
-#include <cmath>
-
-class AsteroidMover : public Mover
-{
-public:
-	AsteroidMover(const Direction &direction) : direction(direction) {}
-	~AsteroidMover() {};
-
-	void move(Position &position) {
-		position.translate(cos(direction.Angle())*direction.Speed(), sin(direction.Angle())*direction.Speed());
-	};
-
-	void setDirection(Direction &direction)
-	{
-		this->direction = direction;
-	}
-private:
-	Direction direction;
-};
 
 class Asteroid : public Entity
 {
 public:
 	Asteroid();
-	Asteroid(double scale, const Position &nposition);
+	Asteroid(double scale, const Position& nposition);
 	~Asteroid();
 
 	bool update();
 	void render(GfxWrapper *gfx);
-	static int count;
 	Position &position() { return pos; }
 	Shape &shape() { return asteroidShape; }
 private:

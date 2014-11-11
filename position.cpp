@@ -7,7 +7,9 @@ Position::Position()
 
 Position::Position(const Position& other)
 {
-
+	x = other.x;
+	y = other.y;
+	rotation = other.rotation;
 }
 
 Position::~Position()

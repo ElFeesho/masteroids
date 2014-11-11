@@ -47,6 +47,7 @@ void EntityList::checkCollisions(EntityList &otherList, function<void(Entity*, E
 				if(hypt < entOne->shape().Radius() + entTwo->shape().Radius())
 				{
 					callback(entOne, entTwo);
+					break;
 				}
 			}
 		}

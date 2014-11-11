@@ -20,8 +20,8 @@ public:
 
 	void setDirection(Direction &direction)
 	{
-		this->direction = Direction(direction);
-		this->direction.Speed(this->direction.Speed()+10.0f);
+		this->direction = Direction(direction.Speed(), direction.Angle());
+		this->direction.Speed(this->direction.Speed()+5.0f);
 	}
 private:
 	Direction direction;
@@ -30,18 +30,9 @@ private:
 class Bullet : public Entity
 {
 public:
-	Bullet(Entity *owner, Direction &travelDirection) : mover(BulletMover()), pos(Position(owner->position())), bulletOwner(owner), direction(travelDirection)
-	{
-		ttl = ticks_to_millisecs(gettime()) + 3000;
-		mover.setDirection(travelDirection);
-		position().X(owner->position().X());
-		position().Y(owner->position().Y());
-		position().Rotation(direction.Angle());
-		position().translate(0.0f, 0.5f);
-		shape().Radius(1.0f);
-	}
+	Bullet(Entity *owner, Direction &travelDirection);
 
-	~Bullet();
+	~Bullet() {};
 	bool update();
 	void render(GfxWrapper *gfx);
 	Position& position() { return pos; }

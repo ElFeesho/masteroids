@@ -8,7 +8,7 @@
 #include "engine.h"
 #include "GRRLIB.h"
 
-#include "debrisfragment.h"
+#include "fixeddirectionmover.h"
 
 static inline double createSpeed()
 {
@@ -22,7 +22,7 @@ static inline double createSpeed()
 
 Asteroid::Asteroid() : mover(NULL), alive(true), rot_speed(rand()%10-5)
 {
-	mover = new AsteroidMover(Direction(createSpeed(), rand() % 360));
+	mover = new FixedDirectionMover(Direction(createSpeed(), rand() % 360));
 	position().Rotation(rand()%360);
 	shape().Radius(25.0f);
 
@@ -51,41 +51,18 @@ Asteroid::Asteroid() : mover(NULL), alive(true), rot_speed(rand()%10-5)
 	{
 		peaks[i] = 25.0f+(rand()%20-10);
 	}
-	Asteroid::count++;
 }
 
 Asteroid::Asteroid(double scale, const Position &nposition) : mover(NULL), alive(true), rot_speed(rand()%10-5), pos(nposition)
 {
-	mover = new AsteroidMover(Direction(createSpeed(), rand() % 360));
+	mover = new FixedDirectionMover(Direction(createSpeed(), rand() % 360));
 	position().Rotation(rand()%360);
 	shape().Radius(scale);
-
-	int pos = rand()%4;
-	switch(pos)
-	{
-		case 0: // Top row
-			position().X(rand()%160*4);
-			position().Y(-scale);
-			break;
-		case 1: // Bottom row
-			position().X(rand()%160*4);
-			position().Y(480+scale);
-			break;
-		case 2: // Left column
-			position().Y(rand()%120*4);
-			position().X(-scale);
-			break;
-		case 3: // Right column
-			position().Y(rand()%120*4);
-			position().X(640+scale);
-			break;
-	}
 
 	for(int i = 0;i<6;i++)
 	{
 		peaks[i] = scale+(rand()%(int)(scale/2)-(scale/4));
 	}
-	Asteroid::count++;
 }
 
 Asteroid::~Asteroid()
@@ -133,6 +110,4 @@ void Asteroid::render(GfxWrapper* gfx)
 		}
 	}
 }
-
-int Asteroid::count = 0;
 

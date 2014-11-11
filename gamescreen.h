@@ -25,6 +25,7 @@ public:
 private:
   ScreenListener* listener;
   EntityList asteroids;
+  EntityList secondaryAsteroids;
   EntityList playerBullets[4];
   InGame *pauseEnt;
   
