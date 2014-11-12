@@ -25,5 +25,6 @@ bool Shape::operator==(const Shape& other) const
 {
 	return other.radius == radius || this == &other;
 }
+Shape::Shape(double radius): radius(radius) {}
 
 Shape Shape::NONE = Shape();

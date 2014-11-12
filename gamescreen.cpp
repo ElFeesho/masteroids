@@ -5,7 +5,7 @@
 #include "gamepadinputmanager.h"
 #include <stdio.h>
 
-GameScreen::GameScreen() : isPaused(false)
+GameScreen::GameScreen() : isPaused(false), debrisFountain(debrisEntities)
 {
 }
 
@@ -39,6 +39,9 @@ void GameScreen::update(GfxWrapper* gfx)
 {
 	if(!isPaused)
 	{
+		debrisEntities.updateAll();
+		debrisEntities.renderAll(gfx);
+		
 		playerOne->update();
 		playerBullets[0].updateAll();
 		playerBullets[0].renderAll(gfx);
@@ -49,10 +52,14 @@ void GameScreen::update(GfxWrapper* gfx)
 		playerOne->render(gfx);
 
 		asteroids.checkCollisions(playerBullets[0], [&](Entity* asteroid, Entity* bullet) {
+			
+			debrisFountain.projectDebris(Direction(3, asteroid->position().Rotation()), asteroid->position(), 5.0f, 10);
+			
 			secondaryAsteroids.add(new Asteroid(10.0f, Position(asteroid->position())));
 			secondaryAsteroids.add(new Asteroid(10.0f, Position(asteroid->position())));
 			playerBullets[0].removeEntity(bullet);
 			asteroids.removeEntity(asteroid);
+			
 		});
 		
 		secondaryAsteroids.checkCollisions(playerBullets[0], [&](Entity* asteroid, Entity* bullet) {

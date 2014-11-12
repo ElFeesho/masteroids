@@ -5,6 +5,7 @@
 #include "entitylist.h"
 #include "ship.h"
 #include "ingame.h"
+#include "debrisfountain.h"
 
 class GameScreen : public Screen, public ShipListener, public InGameListener
 {
@@ -27,6 +28,9 @@ private:
   EntityList asteroids;
   EntityList secondaryAsteroids;
   EntityList playerBullets[4];
+  
+  EntityList debrisEntities;
+  DebrisFountain debrisFountain;
   InGame *pauseEnt;
   
   bool isPaused;

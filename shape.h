@@ -5,6 +5,7 @@ class Shape
 {
 public:
 	Shape();
+	Shape(double radius);
 	Shape(const Shape& other);
 	~Shape();
 	Shape& operator=(const Shape& other);

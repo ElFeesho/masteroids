@@ -9,35 +9,21 @@
 class Debris : public Entity
 {
 public:
-	Debris(Direction &direction, Position &position, Shape &shape) : direction(direction), position(position), shape(shape) {
-	}
-	~Debris() {}
+	Debris(Direction direction, Position pos, Shape shape);
+	~Debris();
 
-	Position& position() {
-		return position;
-	}
+	Position& position();
 
-	Shape& shape() { return shape; }
+	Shape& shape();
 	
-	void render(GfxWrapper* gfx)
-	{
-		gfx->drawLine(position().X()-cos(position().Rotation())*shape().Radius(), 
-						  position().Y()-sin(position().Rotation())*shape().Radius(), 
-						  position().X()+cos(position().Rotation())*shape().Radius(), 
-						  position().Y()+sin(position().Rotation())*shape().Radius(), 
-						  RGB::white);
-	}
+	void render(GfxWrapper* gfx);
 	
-	bool update()
-	{
-		
-		return true;
-	}
+	bool update();
 	
 private:
 	Direction direction;
-	Position position;
-	Shape shape;
+	Position pos;
+	Shape debrisShape;
 	FixedDirectionMover mover;
 };
 
