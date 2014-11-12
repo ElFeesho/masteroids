@@ -5,7 +5,7 @@
 
 #include "font5.h"
 
-InGame::InGame(Gamepad *gamepad, InGameListener *listener) : gamepad(gamepad), listener(listener), menu_sel(0), colour(RGB(1.0f, 1.0f, 1.0f)), colourHighlight(1.0f, 8.0f, 0.0f)
+InGame::InGame(Gamepad *gamepad, InGameListener *listener) : gamepad(gamepad), listener(listener), menu_sel(0)
 {
 	gamepad->addListener(this);
 }
@@ -50,22 +50,22 @@ void InGame::render(GfxWrapper* gfx)
 {
 	gfx->drawRect((320-150), 240-50, 300, 90, RGB::blue);
 
-	gfx->drawText(320-80, 240-40, "Quit Current Game?", colour);
+	gfx->drawText(320-80, 240-40, "Quit Current Game?", RGB::white);
 	if(menu_sel==0)
 	{
-		gfx->drawText(320-140, 240-5, "Continue", colourHighlight);
+		gfx->drawText(320-140, 240-5, "Continue", RGB::yellow);
 	}
 	else
 	{
-		gfx->drawText(320-140, 240-5, "Continue", colour);
+		gfx->drawText(320-140, 240-5, "Continue", RGB::white);
 	}
 	
 	if(menu_sel==1)
 	{
-		gfx->drawText(420, 240-5, "Exit", colourHighlight);
+		gfx->drawText(420, 240-5, "Exit", RGB::yellow);
 	}
 	else
 	{
-		gfx->drawText(420, 240-5, "Exit", colour);
+		gfx->drawText(420, 240-5, "Exit", RGB::white);
 	}
 }

@@ -5,7 +5,7 @@
 #include "gamepadinputmanager.h"
 #include <stdio.h>
 
-GameScreen::GameScreen() : isPaused(false), debrisFountain(debrisEntities)
+GameScreen::GameScreen() : isPaused(false)
 {
 }
 
@@ -41,20 +41,21 @@ void GameScreen::update(GfxWrapper* gfx)
 	{
 		debrisEntities.updateAll();
 		debrisEntities.renderAll(gfx);
-		
+			
 		playerOne->update();
+		playerOne->render(gfx);
+		
 		playerBullets[0].updateAll();
 		playerBullets[0].renderAll(gfx);
+		
 		asteroids.updateAll();
 		asteroids.renderAll(gfx);
+		
 		secondaryAsteroids.updateAll();
 		secondaryAsteroids.renderAll(gfx);
-		playerOne->render(gfx);
-
+		
 		asteroids.checkCollisions(playerBullets[0], [&](Entity* asteroid, Entity* bullet) {
-			
-			debrisFountain.projectDebris(Direction(3, asteroid->position().Rotation()), asteroid->position(), 5.0f, 10);
-			
+			debrisFountain.projectDebris(debrisEntities, asteroid->direction(), asteroid->position(), 1.3f, 6);
 			secondaryAsteroids.add(new Asteroid(10.0f, Position(asteroid->position())));
 			secondaryAsteroids.add(new Asteroid(10.0f, Position(asteroid->position())));
 			playerBullets[0].removeEntity(bullet);
@@ -63,6 +64,7 @@ void GameScreen::update(GfxWrapper* gfx)
 		});
 		
 		secondaryAsteroids.checkCollisions(playerBullets[0], [&](Entity* asteroid, Entity* bullet) {
+			debrisFountain.projectDebris(debrisEntities, asteroid->direction(), asteroid->position(), 1.3f, 6);
 			playerBullets[0].removeEntity(bullet);
 			secondaryAsteroids.removeEntity(asteroid);
 		});
@@ -89,7 +91,7 @@ void GameScreen::shipDied(Ship* ship)
 
 void GameScreen::shipFired(Ship* ship)
 {
-	playerBullets[0].add(new Bullet(ship, ship->getDirection()));
+	playerBullets[0].add(new Bullet(ship, ship->direction()));
 }
 
 void GameScreen::shipRequestedPause(Ship* ship)

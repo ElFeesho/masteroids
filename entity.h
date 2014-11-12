@@ -3,6 +3,7 @@
 
 #include "position.h"
 #include "shape.h"
+#include "direction.h"
 
 class GfxWrapper;
 class Entity
@@ -15,6 +16,7 @@ public:
 
 	virtual Position &position() = 0;
 	virtual Shape &shape() = 0;
+	virtual Direction &direction() = 0;
 };
 
 #endif

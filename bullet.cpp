@@ -2,20 +2,21 @@
 
 #include <ogc/lwp_watchdog.h>
 
-Bullet::Bullet(Entity* owner, Direction& travelDirection): mover(BulletMover()), pos(Position(owner->position())), bulletOwner(owner), direction(travelDirection)
+Bullet::Bullet(Entity* owner, Direction travelDirection): mover(BulletMover()), pos(Position(owner->position())), bulletOwner(owner), travelDirection(travelDirection)
 {
 	ttl = ticks_to_millisecs(gettime()) + 1500;
-	mover.setDirection(travelDirection);
+	this->travelDirection.Speed(3.5f);
+	
 	position().X(owner->position().X());
 	position().Y(owner->position().Y());
-	position().Rotation(direction.Angle());
+	position().Rotation(direction().Angle());
 	position().translate(0.0f, 0.5f);
 	shape().Radius(1.0f);
 }
 
 bool Bullet::update()
 {
-	mover.move(position());
+	mover.move(direction(), position());
 
 	if(position().X()>640.0f)
 	{

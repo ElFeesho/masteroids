@@ -20,9 +20,8 @@ static inline double createSpeed()
 	return speed;
 }
 
-Asteroid::Asteroid() : mover(NULL), alive(true), rot_speed(rand()%10-5)
+Asteroid::Asteroid() : mover(new FixedDirectionMover()), alive(true), rot_speed(rand()%10-5), travelDirection(Direction(createSpeed(), rand() % 360))
 {
-	mover = new FixedDirectionMover(Direction(createSpeed(), rand() % 360));
 	position().Rotation(rand()%360);
 	shape().Radius(25.0f);
 
@@ -53,9 +52,8 @@ Asteroid::Asteroid() : mover(NULL), alive(true), rot_speed(rand()%10-5)
 	}
 }
 
-Asteroid::Asteroid(double scale, const Position &nposition) : mover(NULL), alive(true), rot_speed(rand()%10-5), pos(nposition)
+Asteroid::Asteroid(double scale, const Position &nposition) : mover(new FixedDirectionMover()), alive(true), rot_speed(rand()%10-5), pos(nposition), travelDirection(Direction(createSpeed(), rand() % 360))
 {
-	mover = new FixedDirectionMover(Direction(createSpeed(), rand() % 360));
 	position().Rotation(rand()%360);
 	shape().Radius(scale);
 
@@ -73,7 +71,7 @@ Asteroid::~Asteroid()
 bool Asteroid::update()
 {
 	position().rotate(rot_speed);
-	mover->move(position());
+	mover->move(direction(), position());
 
 	double radius = shape().Radius();
 	if(position().X()>640.0f+radius)

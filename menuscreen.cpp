@@ -21,7 +21,7 @@ void MenuScreen::screenShown()
 		entityList.add(new Asteroid());
 	}
 	
-	activeMenu = new Menu(this);;
+	activeMenu = new Menu(this);
 }
 
 void MenuScreen::screenHidden()

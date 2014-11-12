@@ -18,10 +18,12 @@ public:
 	void render(GfxWrapper *gfx);
 	Position &position() { return pos; }
 	Shape &shape() { return asteroidShape; }
+	Direction& direction() { return travelDirection; }
 private:
 	Mover *mover;
 	Position pos;
 	Shape asteroidShape;
+	Direction travelDirection;
 	double peaks[6];
 	bool alive;
 	double rot_speed;

@@ -1,20 +1,21 @@
 #include "debris.h"
+#include <ogc/lwp_watchdog.h>
 
-Debris::Debris()
+Debris::Debris(Direction ntravelDirection, Position pos, Shape shape) : 
+	travelDirection(ntravelDirection), 
+	pos(pos), 
+	debrisShape(shape), 
+	mover(FixedDirectionMover()), 
+	rotationSpeed(((rand()%10)/10.f)-0.5f),
+	ttl(3000)
 {
-
+	ttl += ticks_to_millisecs(gettime());
 }
 
 Debris::~Debris()
 {
-
-}
-Debris::Debris(Direction direction, Position pos, Shape shape): direction(direction), pos(pos), debrisShape(shape), mover(FixedDirectionMover(direction)) 
-{
 	
 }
-
-Debris::~Debris(){}
 
 Position& Debris::position()
 {
@@ -26,9 +27,15 @@ Shape& Debris::shape()
 	return debrisShape; 
 }
 
+Direction& Debris::direction()
+{
+	return travelDirection;
+}
+
+
 void Debris::render(GfxWrapper* gfx)
 {
-	printf("POS: %.2f %.2f %.2f\n", position().X(), position().Y(), shape().Radius());
+	position().rotate(rotationSpeed);
 	gfx->drawLine(position().X()-cos(position().Rotation())*shape().Radius(), 
 						position().Y()-sin(position().Rotation())*shape().Radius(), 
 						position().X()+cos(position().Rotation())*shape().Radius(), 
@@ -38,6 +45,6 @@ void Debris::render(GfxWrapper* gfx)
 
 bool Debris::update()
 {
-	mover.move(position());
-	return true;
+	mover.move(direction(), position());
+	return ticks_to_millisecs(gettime())<ttl;
 }

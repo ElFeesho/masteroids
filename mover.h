@@ -8,8 +8,7 @@ class Mover
 {
 public:
 	virtual ~Mover() {};
-	virtual void move(Position &position) = 0;
-	virtual void setDirection(Direction &direction) = 0;
+	virtual void move(Direction &direction, Position &position) = 0;
 };
 
 #endif

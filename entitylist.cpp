@@ -62,6 +62,7 @@ void EntityList::clear()
 		entities.erase(entities.begin()+i);
 	}
 }
+
 void EntityList::renderAll(GfxWrapper* gfx){
 	for(int i = 0; i < entities.size(); i++)
 	{

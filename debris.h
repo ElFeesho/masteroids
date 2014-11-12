@@ -9,21 +9,25 @@
 class Debris : public Entity
 {
 public:
-	Debris(Direction direction, Position pos, Shape shape);
+	Debris(Direction travelDirection, Position pos, Shape shape);
 	~Debris();
 
 	Position& position();
 
 	Shape& shape();
 	
+	Direction& direction();
+	
 	void render(GfxWrapper* gfx);
 	
 	bool update();
 	
 private:
-	Direction direction;
+	long ttl;
+	Direction travelDirection;
 	Position pos;
 	Shape debrisShape;
+	double rotationSpeed;
 	FixedDirectionMover mover;
 };
 

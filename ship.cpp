@@ -35,8 +35,7 @@ Ship::~Ship()
 bool Ship::update()
 {	
 	travelDirection.rotate(rotationSpeed);
-	mover.propell(travelDirection);
-	mover.move(position());
+	mover.move(direction(), position());
 	
 	if(position().X()>640.0+10.0)
 	{

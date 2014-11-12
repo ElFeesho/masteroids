@@ -8,13 +8,10 @@
 class FixedDirectionMover : public Mover
 {
 public:
-	FixedDirectionMover(Direction direction);
-	~FixedDirectionMover();
+	FixedDirectionMover() {}
+	~FixedDirectionMover() {}
 	
-	void move(Position &position);;
-	void setDirection(Direction &direction);
-private:
-	Direction direction;
+	void move(Direction &direction, Position &position);
 };
 
 #endif // FIXEDDIRECTIONMOVER_H

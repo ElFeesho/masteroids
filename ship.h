@@ -11,32 +11,17 @@
 class ShipMover : public Mover
 {
 public:
-	ShipMover() : direction(Direction(0, 0)), movementVector(Vector(0, 0))
+	ShipMover() : movementVector(Vector(0, 0)) {}
+
+	~ShipMover() {}
+
+	void move(Direction &direction, Position &position)
 	{
-
-	}
-
-	~ShipMover()
-	{
-
-	}
-
-	void move(Position &position)
-	{
+		movementVector.add(cos(direction.Angle())*direction.Speed(), sin(direction.Angle())*direction.Speed());
 		position.translate(movementVector.X(), movementVector.Y());
 	}
 
-	void propell(Direction &direction)
-	{
-		movementVector.add(cos(direction.Angle())*direction.Speed(), sin(direction.Angle())*direction.Speed());
-	}
-
-	void setDirection(Direction &direction)
-	{
-		this->direction = direction;
-	}
 private:
-	Direction direction;
 	Vector movementVector;
 };
 
@@ -68,7 +53,7 @@ public:
 	Position &position() { return pos; }
 	Shape &shape() { return bodyShape; }
 
-	Direction &getDirection() {
+	Direction &direction() {
 		return travelDirection;
 	}
 private:

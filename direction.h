@@ -20,7 +20,7 @@ public:
 		return (&other == &NONE) || ((other.speed == speed) && (other.angle == angle));
 	}
 
-	static const Direction NONE;
+	static Direction NONE;
 private:
 	double speed, angle;
 };

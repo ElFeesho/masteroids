@@ -11,37 +11,30 @@
 class BulletMover : public Mover
 {
 public:
-	BulletMover() : direction(Direction::NONE) {}
+	BulletMover() {}
 	~BulletMover() {}
 
-	void move(Position &position) {
+	void move(Direction &direction, Position &position) {
 		position.translate(cos(direction.Angle())*direction.Speed(), sin(direction.Angle())*direction.Speed());
-	};
-
-	void setDirection(Direction &direction)
-	{
-		this->direction = Direction(direction.Speed(), direction.Angle());
-		this->direction.Speed(this->direction.Speed()+5.0f);
 	}
-private:
-	Direction direction;
 };
 
 class Bullet : public Entity
 {
 public:
-	Bullet(Entity *owner, Direction &travelDirection);
+	Bullet(Entity *owner, Direction travelDirection);
 
 	~Bullet() {};
 	bool update();
 	void render(GfxWrapper *gfx);
 	Position& position() { return pos; }
 	Shape &shape() { return bulletShape; }
+	Direction& direction() { return travelDirection; }
 
 private:
 	BulletMover mover;
 	Position pos;
-	Direction direction;
+	Direction travelDirection;
 	Shape bulletShape;
 	Entity *bulletOwner;
 	unsigned long ttl;
