@@ -3,10 +3,6 @@
 #include <cstdlib>
 #include <cmath>
 
-#include <ogcsys.h>
-#include <gccore.h>
-#include "engine.h"
-
 #include "time.h"
 
 #include "movers/fixeddirectionmover.h"

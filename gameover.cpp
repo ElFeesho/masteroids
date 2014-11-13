@@ -8,7 +8,7 @@
 #include "ship.h"
 #include "options.h"
 
-#include "game_over_img.h"
+#include "images/game_over_img.h"
 #include "font5.h"
 
 #include "input/gamepadinputmanager.h"

@@ -3,8 +3,8 @@
 
 #include "gfx/gfx.h"
 #include "renderer.h"
-#include "asteroid_banner.h"
-#include "controllers.h"
+#include "images/asteroid_banner.h"
+#include "images/controllers.h"
 
 class MenuRenderer : public Renderer 
 {

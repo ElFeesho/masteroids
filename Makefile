@@ -18,7 +18,6 @@ about.o \
 asteroid.o \
 bullet.o \
 controlconf.o \
-engine.o \
 gameover.o \
 ingame.o \
 menu.o \

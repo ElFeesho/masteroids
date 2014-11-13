@@ -4,9 +4,8 @@
 #include "entity.h"
 #include "gfx/gfx.h"
 #include "input/gamepad.h"
-#include "asteroid_banner.h"
-#include "font5.h"
-#include "controllers.h"
+#include "images/asteroid_banner.h"
+#include "images/controllers.h"
 #include "renderers/menurenderer.h"
 
 class MenuListener

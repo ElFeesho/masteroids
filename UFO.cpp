@@ -1,5 +1,4 @@
 #include "UFO.h"
-#include "engine.h"
 #include <stdlib.h>
 #include <ogcsys.h>
 #include <gccore.h>

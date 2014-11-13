@@ -6,7 +6,7 @@
 #include "input/gamepad.h"
 #include "font5.h"
 #include "options.h"
-#include "controls_img.h"
+#include "images/controls_img.h"
 /*
 	Input is not that difficult...
 */

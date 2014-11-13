@@ -11,7 +11,7 @@
 
 #include "font5.h"
 
-#include "options_img.h"
+#include "images/options_img.h"
 #include "input/gamepadinputmanager.h"
 #include "music.h"
 
@@ -37,7 +37,6 @@ bool Options::update()
 		}
 		return true;
 	}
-
 	
 	return alive;
 }
@@ -147,6 +146,8 @@ void Options::buttonDown(GamepadButton button)
 			listener->optionsControllerConfigSelected();
 		}
 	}
+	
+	optionsRenderer.setMenuSelection(menu_sel);
 
 }
 

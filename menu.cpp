@@ -1,18 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "menu.h"
-#include "engine.h"
 #include "options.h"
 #include "about.h"
-#include <ogcsys.h>
-#include <gccore.h>
 
-#include <ogc/lwp_watchdog.h>
+#include "images/asteroid_banner.h"
+#include "images/controllers.h"
 
-#include "asteroid_banner.h"
-#include "controllers.h"
-
-#include "font5.h"
 #include "input/gamepadinputmanager.h"
 #include "time.h"
 

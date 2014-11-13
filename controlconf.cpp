@@ -5,7 +5,7 @@
 #include <ogc/lwp_watchdog.h>
 #include "controlconf.h"
 
-#include "controls_img.h"
+#include "images/controls_img.h"
 
 using std::sprintf;
 
