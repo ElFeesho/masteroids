@@ -1,10 +1,7 @@
 #include "bullet.h"
 
-#include <ogc/lwp_watchdog.h>
-
-Bullet::Bullet(Entity* owner, Direction travelDirection): mover(BulletMover()), pos(Position(owner->position())), bulletOwner(owner), travelDirection(travelDirection)
+Bullet::Bullet(Entity* owner, Direction travelDirection): mover(BulletMover()), pos(Position(owner->position())), bulletOwner(owner), travelDirection(travelDirection), timeToLive(ElapsedTimeToLive(3000))
 {
-	ttl = ticks_to_millisecs(gettime()) + 1500;
 	this->travelDirection.Speed(3.5f);
 
 	position().X(owner->position().X());
@@ -17,7 +14,7 @@ Bullet::Bullet(Entity* owner, Direction travelDirection): mover(BulletMover()), 
 bool Bullet::update()
 {
 	mover.move(direction(), position());
-	return (ticks_to_millisecs(gettime())<ttl);
+	return aliveMonitor().alive();
 }
 
 void Bullet::render(GfxWrapper* gfx)

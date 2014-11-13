@@ -8,6 +8,7 @@
 #include "direction.h"
 #include "mover.h"
 #include "time.h"
+#include "elapsedtimetolive.h"
 
 class BulletMover : public Mover
 {
@@ -31,15 +32,15 @@ public:
 	Position& position() { return pos; }
 	Shape &shape() { return bulletShape; }
 	Direction& direction() { return travelDirection; }
-	AliveMonitor &aliveMonitor() { return AlwaysAlive::alivemonitor; }
+	AliveMonitor &aliveMonitor() { return timeToLive; }
 
 private:
+	ElapsedTimeToLive timeToLive;
 	BulletMover mover;
 	Position pos;
 	Direction travelDirection;
 	Shape bulletShape;
 	Entity *bulletOwner;
-	unsigned long ttl;
 };
 
 #endif

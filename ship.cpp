@@ -18,7 +18,7 @@
 #include "ingame.h"
 #include "debrisfragment.h"
 
-Ship::Ship(Gamepad *gamepad, ShipListener *listener) : mover(ShipMover()), gamepad(gamepad), listener(listener), colour(RGB(0.0f, 0.0f, 0.0f)), rotationSpeed(0), kill_time(0), travelDirection(Direction(0.0, 0.0))
+Ship::Ship(Gamepad *gamepad, ShipListener *listener) : shipRenderer(ShipRenderer()), mover(ShipMover()), bodyShape(Shape(10.0f)), gamepad(gamepad), listener(listener), colour(RGB(0.0f, 0.0f, 0.0f)), rotationSpeed(0), kill_time(0), travelDirection(Direction(0.0, 0.0))
 {
 	gamepad->addListener(this);
 	shape().Radius(7.5);
@@ -75,15 +75,6 @@ void Ship::buttonUp(GamepadButton button)
   }
 }
 
-void Ship::on_hit()
-{
-	kill_time = ticks_to_millisecs(gettime());
-	//get_engine()->add_entity(new Debris(3, X(), Y(), rot, xspeed, yspeed, colour, 2500));
-	/* Make sure the ship doesn't get hit into by other entities whilst it's disappeared */
-	position().X(-500.0);
-	position().Y(-500.0);
-}
-
 Gamepad* Ship::getGamepad()
 {
 	return gamepad;
@@ -91,17 +82,7 @@ Gamepad* Ship::getGamepad()
 
 void Ship::render(GfxWrapper* gfx)
 {
-	double tp_x = position().X()+cos(travelDirection.Angle())*10.0;
-	double tp_y = position().Y()+sin(travelDirection.Angle())*10.0;
-	double br_x = position().X()+cos((travelDirection.Angle())+2.09)*6;
-	double bl_x = position().X()+cos((travelDirection.Angle())+4.18)*6;
-	double br_y = position().Y()+sin((travelDirection.Angle())+2.09)*6;
-	double bl_y = position().Y()+sin((travelDirection.Angle())+4.18)*6;
-
-	gfx->drawLine(tp_x, tp_y, br_x, br_y, colour);
-	gfx->drawLine(tp_x, tp_y, bl_x, bl_y, colour);
-	gfx->drawLine(br_x, br_y, position().X(), position().Y(), colour);
-	gfx->drawLine(bl_x, bl_y, position().X(), position().Y(), colour);
+	renderer().render(gfx, position(), shape(), direction());
 }
 
 

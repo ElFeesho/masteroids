@@ -47,10 +47,7 @@ Asteroid::Asteroid() : mover(new FixedDirectionMover()), alive(true), rot_speed(
 			break;
 	}
 
-	for(int i = 0;i<6;i++)
-	{
-		peaks[i] = 25.0f+(rand()%20-10);
-	}
+	
 }
 
 Asteroid::Asteroid(double scale, const Position &nposition) : mover(new FixedDirectionMover()), alive(true), rot_speed(rand()%10-5), pos(nposition), travelDirection(Direction(createSpeed(), rand() % 360))
@@ -58,10 +55,6 @@ Asteroid::Asteroid(double scale, const Position &nposition) : mover(new FixedDir
 	position().Rotation(rand()%360);
 	shape().Radius(scale);
 
-	for(int i = 0;i<6;i++)
-	{
-		peaks[i] = scale+(rand()%(int)(scale/2)-(scale/4));
-	}
 }
 
 Asteroid::~Asteroid()
@@ -78,21 +71,6 @@ bool Asteroid::update()
 
 void Asteroid::render(GfxWrapper* gfx)
 {
-	for(int i = 0;i<6;i++)
-	{
-		if(i!=5)
-		{
-			double rot1 = (position().Rotation() + i*72.0)/180.0*M_PI;
-			double rot2 = (position().Rotation() + (i+1) * 72.0)/180.0*M_PI;
-
-			gfx->drawLine(position().X()+cos(rot1)*peaks[i], position().Y()+sin(rot1)*peaks[i], position().X()+cos(rot2)*peaks[i+1], position().Y()+sin(rot2)*peaks[i+1], RGB::white);
-		}
-		else
-		{
-			double rot1 = (position().Rotation() + i*72)/180.0*M_PI;
-			double rot2 = position().Rotation()/180.0*M_PI;
-			gfx->drawLine(position().X()+cos(rot1)*peaks[i], position().Y()+sin(rot1)*peaks[i], position().X()+cos(rot2)*peaks[0], position().Y()+sin(rot2)*peaks[0], RGB::white);
-		}
-	}
+	renderer().render(gfx, position(), shape(), direction());
 }
 

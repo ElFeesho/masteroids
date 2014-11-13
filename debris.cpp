@@ -8,7 +8,8 @@ Debris::Debris(Direction ntravelDirection, Position pos, Shape shape) :
 	debrisShape(shape),
 	mover(FixedDirectionMover()),
 	rotationSpeed(((rand()%10)/10.f)-0.5f),
-	monitor(ElapsedTimeToLive(1500))
+	monitor(ElapsedTimeToLive(1500)),
+	debrisRenderer(DebrisRenderer())
 {
 }
 
@@ -32,19 +33,14 @@ Direction& Debris::direction()
 	return travelDirection;
 }
 
-
 void Debris::render(GfxWrapper* gfx)
 {
-	position().rotate(rotationSpeed);
-	gfx->drawLine(position().X()-cos(position().Rotation())*shape().Radius(),
-						position().Y()-sin(position().Rotation())*shape().Radius(),
-						position().X()+cos(position().Rotation())*shape().Radius(),
-						position().Y()+sin(position().Rotation())*shape().Radius(),
-						RGB::white);
+	renderer().render(gfx, position(), shape(), direction());
 }
 
 bool Debris::update()
 {
 	mover.move(direction(), position(), shape());
+	position().rotate(rotationSpeed);
 	return aliveMonitor().alive();
 }
