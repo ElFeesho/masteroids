@@ -29,7 +29,7 @@ private:
 
 	static double timeMultiplier()
 	{
-		return (double)lastDelta/50.0f;
+		return (double)lastDelta/20.0f;
 	}
 
 	static long lastTick;
