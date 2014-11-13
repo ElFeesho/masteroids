@@ -1,5 +1,7 @@
 #include "optionsrenderer.h"
-#include "../options.h"
+#include "options.h"
+#include "options_img.h"
+#include "font5.h"
 
 void OptionsRenderer::setMenuSelection(int menuSelection)
 {

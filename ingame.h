@@ -11,6 +11,11 @@ public:
 	InGameMenuRenderer() : menu_sel(0) {}
 	~InGameMenuRenderer() {}
 	
+	void setMenuSelection(int menuSelection)
+	{
+		menu_sel = menuSelection;
+	}
+	
 	void render(GfxWrapper* gfx, Position& position, Shape& shape, Direction& direction)
 	{
 		gfx->drawRect((320-150), 240-50, 300, 90, RGB::blue);

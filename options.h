@@ -5,9 +5,6 @@
 #include "gamepad.h"
 #include "gfx.h"
 
-#include "options_img.h"
-#include "font5.h"
-
 #include <string.h>
 
 #include "renderers/optionsrenderer.h"

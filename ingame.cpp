@@ -35,6 +35,7 @@ void InGame::buttonDown(GamepadButton button)
 	{
 		menu_sel = 1;
 	}
+	ingameRenderer.setMenuSelection(menu_sel);
 }
 
 void InGame::buttonUp(GamepadButton button)

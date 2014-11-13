@@ -18,7 +18,6 @@ about.o \
 asteroid.o \
 bullet.o \
 controlconf.o \
-debrisfragment.o \
 engine.o \
 gameover.o \
 ingame.o \
