@@ -4,7 +4,6 @@
 #include "mover.h"
 #include <cmath>
 
-
 class FixedDirectionMover : public Mover
 {
 public:

@@ -5,6 +5,13 @@
 #include "gamepad.h"
 #include "gfx.h"
 
+#include "options_img.h"
+#include "font5.h"
+
+#include <string.h>
+
+#include "renderers/optionsrenderer.h"
+
 class OptionsListener
 {
 public:
@@ -25,6 +32,7 @@ public:
 	Shape& shape() { return Shape::NONE; }
 	Direction& direction() { return Direction::NONE; }
 	AliveMonitor &aliveMonitor() { return AlwaysAlive::alivemonitor; }
+	Renderer& renderer() { return optionsRenderer; }
 
 	void buttonDown(GamepadButton button);
 	void buttonUp(GamepadButton button);
@@ -37,6 +45,7 @@ public:
 	static bool music;
 private:
 	OptionsListener *listener;
+	OptionsRenderer optionsRenderer;
 	bool alive;
 	int menu_sel;
 	unsigned long next_change;

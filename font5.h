@@ -1,5 +1,5 @@
-// Image file from font5.png
-// Converted for being used in GRRLIB
+#ifndef __FONT_FIVE_H__
+#define __FONT_FIVE_H__
 
 const int font5_char_high=2816/256;
 const int font5_char_width=9;
@@ -2823,3 +2823,6 @@ const unsigned short font5[]={
 0xffff,0xffff,0xffff,0xffff,0xffff,0xffff,0xffff,0xffff,0xffff
 };
 
+
+
+#endif

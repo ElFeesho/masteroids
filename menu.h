@@ -4,6 +4,10 @@
 #include "entity.h"
 #include "gfx.h"
 #include "gamepad.h"
+#include "asteroid_banner.h"
+#include "font5.h"
+#include "controllers.h"
+#include "renderers/menurenderer.h"
 
 class MenuListener
 {
@@ -33,8 +37,10 @@ public:
 	Shape &shape() { return Shape::NONE; }
 	Direction& direction() { return Direction::NONE; }
 	AliveMonitor &aliveMonitor() { return AlwaysAlive::alivemonitor; }
+	Renderer &renderer() { return menuRenderer; }
 private:
 	MenuListener *listener;
+	MenuRenderer menuRenderer;
 	unsigned int menu_sel;
 	unsigned long next_change;
 	char ldir;

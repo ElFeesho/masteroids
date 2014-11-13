@@ -10,6 +10,23 @@
 #include "time.h"
 #include "elapsedtimetolive.h"
 
+class BulletRenderer : public Renderer
+{
+public:
+	BulletRenderer() {}
+	~BulletRenderer() {}
+	
+	void render(GfxWrapper* gfx, Position& position, Shape& shape, Direction& direction)
+	{
+		gfx->drawRect(position.X()-shape.Radius(),
+					  position.Y()-shape.Radius(),
+					  shape.Radius()*2,
+					  shape.Radius()*2,
+					  RGB::white);
+	}
+	
+};
+
 class BulletMover : public Mover
 {
 public:
@@ -33,9 +50,11 @@ public:
 	Shape &shape() { return bulletShape; }
 	Direction& direction() { return travelDirection; }
 	AliveMonitor &aliveMonitor() { return timeToLive; }
+	Renderer& renderer() { return bulletRenderer; }
 
 private:
 	ElapsedTimeToLive timeToLive;
+	BulletRenderer bulletRenderer;
 	BulletMover mover;
 	Position pos;
 	Direction travelDirection;

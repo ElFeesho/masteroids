@@ -9,7 +9,7 @@
 
 #include "time.h"
 
-#include "fixeddirectionmover.h"
+#include "movers/fixeddirectionmover.h"
 
 static inline double createSpeed()
 {
@@ -21,7 +21,7 @@ static inline double createSpeed()
 	return speed;
 }
 
-Asteroid::Asteroid() : mover(new FixedDirectionMover()), alive(true), rot_speed(rand()%10-5), travelDirection(Direction(createSpeed(), rand() % 360))
+Asteroid::Asteroid() : mover(new FixedDirectionMover()), astroRenderer(AsteroidRenderer()), rot_speed(rand()%10-5), travelDirection(Direction(createSpeed(), rand() % 360))
 {
 	position().Rotation(rand()%360);
 	shape().Radius(25.0f);
@@ -50,7 +50,7 @@ Asteroid::Asteroid() : mover(new FixedDirectionMover()), alive(true), rot_speed(
 	
 }
 
-Asteroid::Asteroid(double scale, const Position &nposition) : mover(new FixedDirectionMover()), alive(true), rot_speed(rand()%10-5), pos(nposition), travelDirection(Direction(createSpeed(), rand() % 360))
+Asteroid::Asteroid(double scale, const Position &nposition) : mover(new FixedDirectionMover()), astroRenderer(AsteroidRenderer()), rot_speed(rand()%10-5), pos(nposition), travelDirection(Direction(createSpeed(), rand() % 360))
 {
 	position().Rotation(rand()%360);
 	shape().Radius(scale);
@@ -66,7 +66,7 @@ bool Asteroid::update()
 {
 	position().rotate(Time::factorTime(rot_speed));
 	mover->move(direction(), position(), shape());
-	return alive;
+	return aliveMonitor().alive();
 }
 
 void Asteroid::render(GfxWrapper* gfx)

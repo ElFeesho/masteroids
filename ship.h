@@ -5,64 +5,13 @@
 #include "entity.h"
 #include "gfx.h"
 
-#include "mover.h"
+#include "renderers/shiprenderer.h"
+#include "movers/shipmover.h"
 #include "vector.h"
 
 #include "time.h"
 
-class ShipRenderer : public Renderer
-{
-public:
-	void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction) 
-	{
-		double tp_x = position.X()+cos(direction.Angle())*shape.Radius();
-		double tp_y = position.Y()+sin(direction.Angle())*shape.Radius();
-		double br_x = position.X()+cos((direction.Angle())+shape.Radius()/5)*(shape.Radius()*0.6);
-		double bl_x = position.X()+cos((direction.Angle())+shape.Radius()/2)*(shape.Radius()*0.6);
-		double br_y = position.Y()+sin((direction.Angle())+shape.Radius()/5)*(shape.Radius()*0.6);
-		double bl_y = position.Y()+sin((direction.Angle())+shape.Radius()/2)*(shape.Radius()*0.6);
 
-		gfx->drawLine(tp_x, tp_y, br_x, br_y, RGB::white);
-		gfx->drawLine(tp_x, tp_y, bl_x, bl_y, RGB::white);
-		gfx->drawLine(br_x, br_y, position.X(), position.Y(), RGB::white);
-		gfx->drawLine(bl_x, bl_y, position.X(), position.Y(), RGB::white);
-	}
-};
-
-class ShipMover : public Mover
-{
-public:
-	ShipMover() : movementVector(Vector(0, 0)) {}
-
-	~ShipMover() {}
-
-	void move(Direction &direction, Position &position, Shape &shape = Shape::NONE)
-	{
-		movementVector.add(Time::factorTime(cos(direction.Angle())*direction.Speed()), Time::factorTime(sin(direction.Angle())*direction.Speed()));
-		position.translate(movementVector.X(), movementVector.Y());
-
-		if(position.X()>640.0+10.0)
-		{
-			position.X(-10.0);
-		}
-		else if(position.X()<0.0-10.0)
-		{
-			position.X(640.0+10.0);
-		}
-
-		if(position.Y()>480.0+10.0)
-		{
-			position.Y(-10.0);
-		}
-		else if(position.Y()<0.0-10.0)
-		{
-			position.Y(480.0+10.0);
-		}
-	}
-
-private:
-	Vector movementVector;
-};
 
 class Ship;
 
