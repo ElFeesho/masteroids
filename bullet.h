@@ -15,7 +15,7 @@ public:
 	BulletMover() {}
 	~BulletMover() {}
 
-	void move(Direction &direction, Position &position) {
+	void move(Direction &direction, Position &position, Shape &shape = Shape::NONE) {
 		position.translate(Time::factorTime(cos(direction.Angle())*direction.Speed()), Time::factorTime(sin(direction.Angle())*direction.Speed()));
 	}
 };
@@ -31,6 +31,7 @@ public:
 	Position& position() { return pos; }
 	Shape &shape() { return bulletShape; }
 	Direction& direction() { return travelDirection; }
+	AliveMonitor &aliveMonitor() { return AlwaysAlive::alivemonitor; }
 
 private:
 	BulletMover mover;

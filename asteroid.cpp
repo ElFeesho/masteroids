@@ -72,21 +72,7 @@ Asteroid::~Asteroid()
 bool Asteroid::update()
 {
 	position().rotate(Time::factorTime(rot_speed));
-	mover->move(direction(), position());
-
-	double radius = shape().Radius();
-	if(position().X()>640.0f+radius)
-		position().X(0.0f-radius);
-
-	if(position().X()<0.0f-radius)
-		position().X(640.0f+radius);
-
-	if(position().Y()>480.0f+radius)
-		position().Y(0.0f-radius);
-
-	if(position().Y()<0.0f-radius)
-		position().Y(480.0f+radius);
-
+	mover->move(direction(), position(), shape());
 	return alive;
 }
 

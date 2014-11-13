@@ -28,10 +28,11 @@ public:
 
 	void buttonDown(GamepadButton button);
 	void buttonUp(GamepadButton button);
-	
+
 	Position &position() { return Position::NONE; }
 	Shape &shape() { return Shape::NONE; }
 	Direction& direction() { return Direction::NONE; }
+	AliveMonitor &aliveMonitor() { return AlwaysAlive::alivemonitor; }
 private:
 	MenuListener *listener;
 	unsigned int menu_sel;

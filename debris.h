@@ -3,8 +3,22 @@
 #include "entity.h"
 #include "gfx.h"
 #include <cmath>
+#import "time.h"
 
 #include "fixeddirectionmover.h"
+
+class ElapsedTimeToLive : public AliveMonitor
+{
+public:
+	ElapsedTimeToLive(long ttl) : ttl(Time::getMillis()+ttl) {}
+	~ElapsedTimeToLive() {}
+
+	bool alive() {
+		return Time::getMillis() < ttl;
+	}
+private:
+	long ttl;
+};
 
 class Debris : public Entity
 {
@@ -15,18 +29,21 @@ public:
 	Position& position();
 
 	Shape& shape();
-	
+
 	Direction& direction();
-	
+
+	AliveMonitor &aliveMonitor() { return monitor; }
+
 	void render(GfxWrapper* gfx);
-	
+
 	bool update();
-	
+
+
 private:
-	long ttl;
 	Direction travelDirection;
 	Position pos;
 	Shape debrisShape;
+	ElapsedTimeToLive monitor;
 	double rotationSpeed;
 	FixedDirectionMover mover;
 };

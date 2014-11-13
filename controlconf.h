@@ -5,7 +5,7 @@
 #include "gfx.h"
 #include "gamepad.h"
 
-/* 
+/*
 	Input is not that difficult...
 */
 
@@ -23,14 +23,15 @@ public:
 	~ControlConf();
 	bool update() { return true; }
 	void render(GfxWrapper *gfx);
-		
+
 	void buttonDown(GamepadButton button);
 	void buttonUp(GamepadButton button);
-	
+
 	Position &position() { return Position::NONE; }
 	Shape &shape() { return Shape::NONE; }
 	Direction &direction() { return Direction::NONE; }
-	
+	AliveMonitor &aliveMonitor() { return AlwaysAlive::alivemonitor; }
+
 private:
 	ControlConfListener *listener;
 	bool alive;

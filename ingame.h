@@ -25,6 +25,7 @@ public:
 	Position &position() { return Position::NONE; }
 	Shape &shape() { return Shape::NONE; }
 	Direction &direction() { return Direction::NONE; }
+	AliveMonitor &aliveMonitor() { return AlwaysAlive::alivemonitor; }
 private:
 	Gamepad *gamepad;
 	InGameListener *listener;

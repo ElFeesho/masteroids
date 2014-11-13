@@ -6,7 +6,7 @@ Bullet::Bullet(Entity* owner, Direction travelDirection): mover(BulletMover()), 
 {
 	ttl = ticks_to_millisecs(gettime()) + 1500;
 	this->travelDirection.Speed(3.5f);
-	
+
 	position().X(owner->position().X());
 	position().Y(owner->position().Y());
 	position().Rotation(direction().Angle());
@@ -17,27 +17,6 @@ Bullet::Bullet(Entity* owner, Direction travelDirection): mover(BulletMover()), 
 bool Bullet::update()
 {
 	mover.move(direction(), position());
-
-	if(position().X()>640.0f)
-	{
-		position().X(0.0f);
-	}
-
-	if(position().X()<0.0f)
-	{
-		position().X(640.0f);
-	}
-
-	if(position().Y()>480.0f)
-	{
-		position().Y(0.0f);
-	}
-
-	if(position().Y()<0.0f)
-	{
-		position().Y(480.0f);
-	}
-
 	return (ticks_to_millisecs(gettime())<ttl);
 }
 

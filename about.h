@@ -19,13 +19,14 @@ public:
 	~About();
 	bool update() { return true; }
 	void render(GfxWrapper *gfx);
-	
+
 	void buttonUp(GamepadButton button);
 	void buttonDown(GamepadButton button);
-	
+
 	Position& position() { return Position::NONE; }
 	Shape& shape() { return Shape::NONE; }
 	Direction& direction() { return Direction::NONE; }
+	AliveMonitor &aliveMonitor() { return AlwaysAlive::alivemonitor; }
 
 private:
 	AboutListener *listener;

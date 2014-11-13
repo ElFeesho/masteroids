@@ -18,6 +18,7 @@ public:
 	Position &position() { return pos; }
 	Shape &shape() { return asteroidShape; }
 	Direction& direction() { return travelDirection; }
+	AliveMonitor &aliveMonitor() { return AlwaysAlive::alivemonitor; }
 private:
 	Mover *mover;
 	Position pos;

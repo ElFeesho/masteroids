@@ -17,7 +17,7 @@ public:
 
 	~ShipMover() {}
 
-	void move(Direction &direction, Position &position)
+	void move(Direction &direction, Position &position, Shape &shape = Shape::NONE)
 	{
 		movementVector.add(Time::factorTime(cos(direction.Angle())*direction.Speed()), Time::factorTime(sin(direction.Angle())*direction.Speed()));
 		position.translate(movementVector.X(), movementVector.Y());
@@ -72,14 +72,14 @@ public:
 
 	Position &position() { return pos; }
 	Shape &shape() { return bodyShape; }
+	Direction &direction() { return travelDirection; }
+	AliveMonitor &aliveMonitor() { return AlwaysAlive::alivemonitor; };
 
-	Direction &direction() {
-		return travelDirection;
-	}
 private:
 	Gamepad *gamepad;
 	ShipListener *listener;
 	ShipMover mover;
+
 	Position pos;
 	Shape bodyShape;
 	double rotationSpeed;

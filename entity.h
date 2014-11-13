@@ -4,6 +4,7 @@
 #include "position.h"
 #include "shape.h"
 #include "direction.h"
+#include "alivemonitor.h"
 
 class GfxWrapper;
 class Entity
@@ -17,6 +18,7 @@ public:
 	virtual Position &position() = 0;
 	virtual Shape &shape() = 0;
 	virtual Direction &direction() = 0;
+	virtual AliveMonitor &aliveMonitor() = 0;
 };
 
 #endif
