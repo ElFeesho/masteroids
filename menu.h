@@ -2,8 +2,8 @@
 #define __MENU_H__
 
 #include "entity.h"
-#include "gfx.h"
-#include "gamepad.h"
+#include "gfx/gfx.h"
+#include "input/gamepad.h"
 #include "asteroid_banner.h"
 #include "font5.h"
 #include "controllers.h"

@@ -8,12 +8,10 @@
 #include "ship.h"
 #include "options.h"
 
-#include "GRRLIB.h"
 #include "game_over_img.h"
 #include "font5.h"
 
-#include "gamepadinputmanager.h"
-#include "engine.h"
+#include "input/gamepadinputmanager.h"
 
 using std::sprintf;
 

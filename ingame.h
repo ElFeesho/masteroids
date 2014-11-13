@@ -2,8 +2,8 @@
 #define __INGAME_H__
 
 #include "entity.h"
-#include "gfx.h"
-#include "gamepad.h"
+#include "gfx/gfx.h"
+#include "input/gamepad.h"
 
 class InGameMenuRenderer : public Renderer 
 {

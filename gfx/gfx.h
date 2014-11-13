@@ -3,6 +3,13 @@
 
 #include <string>
 
+enum TextAlignment
+{
+	LEFT,
+	CENTRE,
+	RIGHT
+};
+
 class RGB
 {
 public:
@@ -29,9 +36,10 @@ class GfxWrapper
 public:
 	void init(int w, int h);
 
+	int textHeight();
 	void drawLine(int x, int y, int x2, int y2, const RGB &colour) const;
 	void fillScreen(const RGB &colour) const;
-	void drawText(int x, int y, const std::string &text, const RGB &colour) const;
+	void drawText(int x, int y, const std::string &text, const RGB &colour, TextAlignment alignment = LEFT) const;
 	void drawRect(int x, int y, int w, int h, const RGB &colour) const;
 	void drawImg(int x, int y, int w, int h, const unsigned short *imgData) const;
 

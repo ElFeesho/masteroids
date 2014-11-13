@@ -4,7 +4,7 @@
 #include "about_img.h"
 #include "font5.h"
 #include "renderer.h"
-#include "gfx.h"
+#include "gfx/gfx.h"
 
 class AboutRenderer : public Renderer
 {

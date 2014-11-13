@@ -4,7 +4,6 @@
 #include <ogcsys.h>
 #include <gccore.h>
 #include <ogc/lwp_watchdog.h>
-#include "GRRLIB.h"
 
 #include "ufobullet.h"
 

@@ -2,7 +2,7 @@
 #include "asteroid.h"
 #include "ship.h"
 #include "bullet.h"
-#include "gamepadinputmanager.h"
+#include "input/gamepadinputmanager.h"
 #include <stdio.h>
 
 GameScreen::GameScreen() : isPaused(false)

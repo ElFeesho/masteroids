@@ -2,15 +2,12 @@
 #include "ufobullet.h"
 #include "UFO.h"
 #include "options.h"
-#include "engine.h"
 #include <ogcsys.h>
 #include <gccore.h>
 
 #include <math.h>
 
 #include <ogc/lwp_watchdog.h>
-
-#include "GRRLIB.h"
 
 using std::vector;
 

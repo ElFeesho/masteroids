@@ -1,4 +1,4 @@
-#include "gfx.h"
+#include "gfx/gfx.h"
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_gfxPrimitives.h>
@@ -16,15 +16,9 @@ static unsigned int convert16bit_to_24bit(unsigned short colorin)
     return (r << 8) + (g << 16) + (b << 24) + 255;
 }
 
-RGB::RGB(float r, float g, float b) : r(r), g(g), b(b)
-{
+RGB::RGB(float r, float g, float b) : r(r), g(g), b(b) {}
 
-}
-
-RGB::~RGB()
-{
-
-}
+RGB::~RGB() {}
 
 RGB RGB::white = RGB(1.0f, 1.0f, 1.0f);
 RGB RGB::yellow = RGB(1.0f, 0.8f, 0.0f);
@@ -67,12 +61,27 @@ void GfxWrapper::fillScreen(const RGB &colour) const
 	SDL_FillRect(SDL_GetVideoSurface(), NULL, colour.as24bit());
 }
 
-void GfxWrapper::drawText(int x, int y, const string &text, const RGB &colour) const
+int GfxWrapper::textHeight()
+{
+	return font5_char_high;
+}
+
+void GfxWrapper::drawText(int x, int y, const string &text, const RGB &colour, TextAlignment align) const
 {
 	int px,py;
 	int ni;
 	int i;
-
+	
+	int textSize = text.length() * font5_char_width;
+	if(align == CENTRE)
+	{
+		x -= textSize/2;
+	}
+	else if(align == RIGHT)
+	{
+		x -= textSize;
+	}
+	
 	for(i=0; i < text.length(); i++)
 	{
 		ni = (font5_char_width*font5_char_high*(text[i]-1));

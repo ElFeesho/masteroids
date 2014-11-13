@@ -4,39 +4,14 @@
 #include <ogc/lwp_watchdog.h>
 
 #include "entity.h"
-#include "gfx.h"
+#include "gfx/gfx.h"
 #include "direction.h"
 #include "mover.h"
 #include "time.h"
 #include "elapsedtimetolive.h"
 
-class BulletRenderer : public Renderer
-{
-public:
-	BulletRenderer() {}
-	~BulletRenderer() {}
-	
-	void render(GfxWrapper* gfx, Position& position, Shape& shape, Direction& direction)
-	{
-		gfx->drawRect(position.X()-shape.Radius(),
-					  position.Y()-shape.Radius(),
-					  shape.Radius()*2,
-					  shape.Radius()*2,
-					  RGB::white);
-	}
-	
-};
-
-class BulletMover : public Mover
-{
-public:
-	BulletMover() {}
-	~BulletMover() {}
-
-	void move(Direction &direction, Position &position, Shape &shape = Shape::NONE) {
-		position.translate(Time::factorTime(cos(direction.Angle())*direction.Speed()), Time::factorTime(sin(direction.Angle())*direction.Speed()));
-	}
-};
+#include "movers/bulletmover.h"
+#include "renderers/bulletrenderer.h"
 
 class Bullet : public Entity
 {

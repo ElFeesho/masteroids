@@ -4,7 +4,6 @@
 #include <cmath>
 
 #include "entity.h"
-#include "gfx.h"
 
 #include "movers/fixeddirectionmover.h"
 #include "renderers/asteroidrenderer.h"

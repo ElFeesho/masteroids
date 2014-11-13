@@ -1,5 +1,5 @@
 #include "screenmanager.h"
-#include "gfx.h"
+#include "gfx/gfx.h"
 #include "screen.h"
 #include "menuscreen.h"
 #include "gamescreen.h"

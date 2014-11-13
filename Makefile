@@ -11,7 +11,7 @@ gamescreen.o \
 menuscreen.o \
 entitylist.o \
 screenmanager.o \
-gamepadinputmanager.o \
+input/gamepadinputmanager.o \
 main.o \
 UFO.o \
 about.o \
@@ -29,8 +29,8 @@ libwiiwrap/ogcsys.o \
 libwiiwrap/gccore.o \
 libwiiwrap/ogc/lwp_watchdog.o \
 libwiiwrap/wiiuse/wpad.o \
-sdlgfx.o \
-keyboardsource.o
+gfx/sdlgfx.o \
+input/keyboardsource.o
 
 LIBS=`sdl-config --libs` -lm -lSDL_gfx
 CC=g++

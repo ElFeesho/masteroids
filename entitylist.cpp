@@ -1,7 +1,7 @@
 #include "entitylist.h"
 
 #include "entity.h"
-#include "gfx.h"
+#include "gfx/gfx.h"
 #include <cmath>
 
 EntityList::EntityList()

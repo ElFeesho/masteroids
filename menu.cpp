@@ -13,7 +13,7 @@
 #include "controllers.h"
 
 #include "font5.h"
-#include "gamepadinputmanager.h"
+#include "input/gamepadinputmanager.h"
 #include "time.h"
 
 Menu::Menu(MenuListener *listener) : menuRenderer(MenuRenderer()), listener(listener), menu_sel(0), next_change(0), ldir(-1), child(NULL)

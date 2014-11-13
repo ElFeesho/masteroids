@@ -1,13 +1,9 @@
 #ifndef DEBRIS_H
 #define DEBRIS_H
 #include "entity.h"
-#include "gfx.h"
-#include <cmath>
-#include "time.h"
 
 #include "movers/fixeddirectionmover.h"
 #include "elapsedtimetolive.h"
-
 #include "renderers/debrisrender.h"
 
 class Debris : public Entity

@@ -2,8 +2,8 @@
 #define __OPTIONS_H__
 
 #include "entity.h"
-#include "gamepad.h"
-#include "gfx.h"
+#include "input/gamepad.h"
+#include "gfx/gfx.h"
 
 #include <string.h>
 

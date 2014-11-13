@@ -2,7 +2,7 @@
 #define __SCREEN_H__
 
 #include <vector>
-#include "gfx.h"
+#include "gfx/gfx.h"
 #include "entity.h"
 
 using std::vector;

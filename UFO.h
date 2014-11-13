@@ -2,7 +2,7 @@
 #define __UFO_H__
 
 #include "entity.h"
-#include "gfx.h"
+#include "gfx/gfx.h"
 
 class UFO : public Entity
 {

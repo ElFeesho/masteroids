@@ -3,7 +3,7 @@
 
 #include "entity.h"
 
-#include "gfx.h"
+#include "gfx/gfx.h"
 
 class UFOBullet : public Entity
 {

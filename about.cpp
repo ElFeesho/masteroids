@@ -6,7 +6,7 @@
 
 #include "about_img.h"
 
-#include "gamepadinputmanager.h"
+#include "input/gamepadinputmanager.h"
 
 About::About(AboutListener *listener) : aboutRenderer(AboutRenderer()), listener(listener)
 {

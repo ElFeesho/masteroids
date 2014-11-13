@@ -2,7 +2,7 @@
 #define __SHIPRENDERER_H__
 
 #include "renderer.h"
-#include "gfx.h"
+#include "gfx/gfx.h"
 
 class ShipRenderer : public Renderer
 {

@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "entity.h"
-#include "gfx.h"
+#include "gfx/gfx.h"
 #include "screenmanager.h"
 
 using std::vector;

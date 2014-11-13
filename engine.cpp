@@ -9,10 +9,9 @@
 #include "gameover.h"
 #include <gccore.h>
 #include <ogcsys.h>
-#include "GRRLIB.h"
 #include "controlconf.h"
 #include "UFO.h"
-#include "gfx.h"
+#include "gfx/gfx.h"
 
 using std::vector;
 

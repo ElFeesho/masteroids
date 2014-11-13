@@ -6,16 +6,7 @@
 
 #include <math.h>
 
-#include "GRRLIB.h"
-
-#include "font5.h"
-
 #include "ship.h"
-#include "asteroid.h"
-#include "engine.h"
-#include "bullet.h"
-#include "options.h"
-#include "ingame.h"
 #include "movers/shipmover.h"
 
 Ship::Ship(Gamepad *gamepad, ShipListener *listener) : shipRenderer(ShipRenderer()), mover(ShipMover()), bodyShape(Shape(10.0f)), gamepad(gamepad), listener(listener), colour(RGB(0.0f, 0.0f, 0.0f)), rotationSpeed(0), kill_time(0), travelDirection(Direction(0.0, 0.0))

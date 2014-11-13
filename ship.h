@@ -1,9 +1,9 @@
 #ifndef __SHIP_H__
 #define __SHIP_H__
 
-#include "gamepad.h"
+#include "input/gamepad.h"
 #include "entity.h"
-#include "gfx.h"
+#include "gfx/gfx.h"
 
 #include "renderers/shiprenderer.h"
 #include "movers/shipmover.h"

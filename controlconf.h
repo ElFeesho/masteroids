@@ -2,8 +2,8 @@
 #define __CONTROL_CONF_H__
 
 #include "entity.h"
-#include "gfx.h"
-#include "gamepad.h"
+#include "gfx/gfx.h"
+#include "input/gamepad.h"
 #include "font5.h"
 #include "options.h"
 #include "controls_img.h"

@@ -7,12 +7,11 @@
 #include <unistd.h>
 #include "engine.h"
 #include "options.h"
-#include "GRRLIB.h"
 #include "music.h"
-#include "gfx.h"
+#include "gfx/gfx.h"
 #include "time.h"
 
-#include "gamepadinputmanager.h"
+#include "input/gamepadinputmanager.h"
 #include "screenmanager.h"
 
 #ifndef __WII__

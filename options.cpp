@@ -11,9 +11,8 @@
 
 #include "font5.h"
 
-#include "GRRLIB.h"
 #include "options_img.h"
-#include "gamepadinputmanager.h"
+#include "input/gamepadinputmanager.h"
 #include "music.h"
 
 

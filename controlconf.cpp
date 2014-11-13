@@ -9,11 +9,10 @@
 
 using std::sprintf;
 
-#include "GRRLIB.h"
 #include "font5.h"
 
 #include "options.h"
-#include "gamepadinputmanager.h"
+#include "input/gamepadinputmanager.h"
 
 ControlConf::ControlConf(ControlConfListener *listener) : listener(listener), controlConfRenderer(ControlConfRenderer()), menu_sel(0), binding(-1), bind_timeout(0), next_change(ticks_to_millisecs(gettime())+500), ldir(1)
 {
