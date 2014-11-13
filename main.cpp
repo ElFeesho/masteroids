@@ -10,6 +10,7 @@
 #include "GRRLIB.h"
 #include "music.h"
 #include "gfx.h"
+#include "time.h"
 
 #include "gamepadinputmanager.h"
 #include "screenmanager.h"
@@ -18,7 +19,7 @@
 #include <SDL/SDL.h>
 #endif
 
-void ScanPADSandReset(u32 retrace_count) 
+void ScanPADSandReset(u32 retrace_count)
 {
 	GamepadInputManager::sharedInstance()->poll();
 	PAD_ScanPads();
@@ -54,6 +55,7 @@ int main(int argc, char **argv)
 		ScanPADSandReset(0);
 		engine.update(gfxWrapper);
 		gfxWrapper->render();
+		Time::tick();
 
 #ifndef __WII__
 		SDL_Event ev = { 0 };

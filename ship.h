@@ -8,6 +8,8 @@
 #include "mover.h"
 #include "vector.h"
 
+#include "time.h"
+
 class ShipMover : public Mover
 {
 public:
@@ -17,7 +19,7 @@ public:
 
 	void move(Direction &direction, Position &position)
 	{
-		movementVector.add(cos(direction.Angle())*direction.Speed(), sin(direction.Angle())*direction.Speed());
+		movementVector.add(Time::factorTime(cos(direction.Angle())*direction.Speed()), Time::factorTime(sin(direction.Angle())*direction.Speed()));
 		position.translate(movementVector.X(), movementVector.Y());
 	}
 

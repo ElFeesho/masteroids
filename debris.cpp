@@ -1,4 +1,5 @@
 #include "debris.h"
+#include <cstdlib>
 #include <ogc/lwp_watchdog.h>
 
 Debris::Debris(Direction ntravelDirection, Position pos, Shape shape) : 

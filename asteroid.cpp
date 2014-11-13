@@ -6,7 +6,8 @@
 #include <ogcsys.h>
 #include <gccore.h>
 #include "engine.h"
-#include "GRRLIB.h"
+
+#include "time.h"
 
 #include "fixeddirectionmover.h"
 
@@ -70,7 +71,7 @@ Asteroid::~Asteroid()
 
 bool Asteroid::update()
 {
-	position().rotate(rot_speed);
+	position().rotate(Time::factorTime(rot_speed));
 	mover->move(direction(), position());
 
 	double radius = shape().Radius();

@@ -6,7 +6,6 @@
 
 #include "fixeddirectionmover.h"
 
-
 class Asteroid : public Entity
 {
 public:

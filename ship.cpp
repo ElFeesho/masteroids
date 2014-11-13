@@ -33,10 +33,10 @@ Ship::~Ship()
 }
 
 bool Ship::update()
-{	
-	travelDirection.rotate(rotationSpeed);
+{
+	travelDirection.rotate(Time::factorTime(rotationSpeed));
 	mover.move(direction(), position());
-	
+
 	if(position().X()>640.0+10.0)
 	{
 		position().X(-10.0);
@@ -50,7 +50,7 @@ bool Ship::update()
 	{
 		position().Y(-10.0);
 	}
-	
+
 	if(position().Y()<0.0-10.0)
 	{
 		position().Y(480.0+10.0);
