@@ -5,8 +5,6 @@
 #include <wiiuse/wpad.h>
 #include <ogc/lwp.h>
 #include <unistd.h>
-#include "engine.h"
-#include "options.h"
 #include "music.h"
 #include "gfx/gfx.h"
 #include "time.h"
@@ -45,14 +43,14 @@ int main(int argc, char **argv)
 	WPAD_Init();
 	WPAD_Disconnect(WPAD_CHAN_ALL);
 	WPAD_SetIdleTimeout(120);
-	ScreenManager *screenManager = new ScreenManager();
-	Engine engine = Engine(screenManager);
+	
+	ScreenManager screenManager = ScreenManager();
 	for(;;)
 	{
 		gfxWrapper->fillScreen(RGB::black);
 		VIDEO_WaitVSync();
 		ScanPADSandReset(0);
-		engine.update(gfxWrapper);
+		screenManager.update(gfxWrapper);
 		gfxWrapper->render();
 		Time::tick();
 
