@@ -1,5 +1,6 @@
 OBJS=elapsedtimetolive.o \
 renderers/optionsrenderer.o \
+renderers/shiprenderer.o \
 alivemonitor.o \
 time.o debris.o \
 debrisfountain.o \

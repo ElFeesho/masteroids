@@ -9,11 +9,10 @@
 #include "ship.h"
 #include "movers/shipmover.h"
 
-Ship::Ship(Gamepad *gamepad, ShipListener *listener) : shipRenderer(ShipRenderer()), mover(ShipMover()), bodyShape(Shape(10.0f)), gamepad(gamepad), listener(listener), colour(RGB(0.0f, 0.0f, 0.0f)), rotationSpeed(0), kill_time(0), travelDirection(Direction(0.0, 0.0))
+Ship::Ship(Gamepad *gamepad, ShipListener *listener, ShipMover &shipMover) : visible(true), shipRenderer(ShipRenderer()), mover(shipMover), bodyShape(Shape(10.0f)), gamepad(gamepad), listener(listener), rotationSpeed(0), travelDirection(Direction(0.0, 0.0))
 {
 	gamepad->addListener(this);
-	shape().Radius(7.5);
-	colour = RGB(0.0f, 1.0f, 0.0f);
+	shape().Radius(10);
 	position().X(640/4);
 	position().Y(480/4);
 }
@@ -27,7 +26,7 @@ bool Ship::update()
 {
 	travelDirection.rotate(Time::factorTime(rotationSpeed));
 	mover.move(direction(), position());
-	return true;
+	return aliveMonitor().alive();
 }
 
 void Ship::buttonDown(GamepadButton button)
@@ -73,7 +72,10 @@ Gamepad* Ship::getGamepad()
 
 void Ship::render(GfxWrapper* gfx)
 {
-	renderer().render(gfx, position(), shape(), direction());
+	if(isVisible())
+	{
+		renderer().render(gfx, position(), shape(), direction());
+	}
 }
 
 

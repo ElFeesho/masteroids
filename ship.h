@@ -11,8 +11,6 @@
 
 #include "time.h"
 
-
-
 class Ship;
 
 class ShipListener
@@ -27,7 +25,7 @@ public:
 class Ship : public Entity, public GamepadListener
 {
 public:
-	Ship(Gamepad *gamepad, ShipListener *listener);
+	Ship(Gamepad *gamepad, ShipListener *listener, ShipMover &shipMover);
 	~Ship();
 	bool update();
 	void render(GfxWrapper *gfx);
@@ -42,6 +40,9 @@ public:
 	Direction &direction() { return travelDirection; }
 	AliveMonitor &aliveMonitor() { return AlwaysAlive::alivemonitor; };
 	Renderer &renderer() { return shipRenderer; }
+	
+	bool isVisible() { return visible; }
+	void setVisible(bool visibility) { visible = visibility; }
 
 private:
 	Gamepad *gamepad;
@@ -52,9 +53,9 @@ private:
 	Position pos;
 	Shape bodyShape;
 	double rotationSpeed;
-	unsigned long kill_time;
-	RGB colour;
 	Direction travelDirection;
+	
+	bool visible;
 };
 
 #endif

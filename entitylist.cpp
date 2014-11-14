@@ -4,6 +4,14 @@
 #include "gfx/gfx.h"
 #include <cmath>
 
+bool colliding(Entity *entOne, Entity *entTwo)
+{
+	double distX = entOne->position().X() - entTwo->position().X();
+	double distY = entOne->position().Y() - entTwo->position().Y();
+	double hypt = sqrt((distX * distX) + (distY * distY));
+	return (hypt < entOne->shape().Radius() + entTwo->shape().Radius());
+}
+
 EntityList::EntityList()
 {
 
@@ -31,6 +39,18 @@ void EntityList::updateAll()
 	}
 }
 
+void EntityList::checkCollisions(Entity &entity, function<void(Entity*)> callback)
+{
+	for(int i = entities.size()-1; i >= 0; i--)
+	{
+		if(colliding(entities.at(i), &entity))
+		{
+			callback(entities.at(i));
+			break;
+		}
+	}
+}
+
 void EntityList::checkCollisions(EntityList &otherList, function<void(Entity*, Entity*)> callback)
 {
 	for(int i = entities.size()-1; i >= 0; i--)
@@ -39,14 +59,9 @@ void EntityList::checkCollisions(EntityList &otherList, function<void(Entity*, E
 		{
 			for(int j = otherList.size()-1; j >= 0; j--)
 			{
-				Entity *entOne = entities.at(i);
-				Entity *entTwo = otherList.at(j);
-				double distX = entOne->position().X() - entTwo->position().X();
-				double distY = entOne->position().Y() - entTwo->position().Y();
-				double hypt = sqrt((distX * distX) + (distY * distY));
-				if(hypt < entOne->shape().Radius() + entTwo->shape().Radius())
+				if(colliding(entities.at(i), otherList.at(j)))
 				{
-					callback(entOne, entTwo);
+					callback(entities.at(i), otherList.at(j));
 					break;
 				}
 			}

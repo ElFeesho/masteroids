@@ -39,6 +39,8 @@ private:
   Ship *playerTwo;
   Ship *playerThree;
   Ship *playerFour;
+  
+  ShipMover playerOneMover;
 };
 
 #endif // GAMESCREEN_H

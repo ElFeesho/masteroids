@@ -27,7 +27,7 @@ void GameScreen::screenHidden()
 
 void GameScreen::screenShown()
 {
-  playerOne = new Ship(GamepadInputManager::sharedInstance()->playerOne(), this);
+  playerOne = new Ship(GamepadInputManager::sharedInstance()->playerOne(), this, playerOneMover);
 
   for(int i = 0; i < 15; i++)
   {
@@ -66,6 +66,22 @@ void GameScreen::update(GfxWrapper* gfx)
 			debrisFountain.projectDebris(debrisEntities, asteroid->direction(), asteroid->position(), 1.3f, 6);
 			playerBullets[0].removeEntity(bullet);
 			secondaryAsteroids.removeEntity(asteroid);
+		});
+		
+		asteroids.checkCollisions(*playerOne, [&](Entity *hit){
+			if(playerOne->isVisible())
+			{
+				debrisFountain.projectDebris(debrisEntities, Direction(3.5, playerOne->direction().Angle()), playerOne->position(), 1.3f, 6);
+				//playerOne->setVisible(false);
+								
+				playerOne->position().X(640/4);
+				playerOne->position().Y(480/4);
+				
+				playerOne->direction().Angle(0);
+				playerOne->direction().Speed(0);
+				playerOneMover.reset();
+				
+			}
 		});
 	}
 	else

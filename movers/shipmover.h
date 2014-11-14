@@ -35,6 +35,11 @@ public:
 			position.Y(480.0+10.0);
 		}
 	}
+	
+	void reset() {
+		movementVector.X(0);
+		movementVector.Y(0);
+	}
 
 private:
 	Vector movementVector;

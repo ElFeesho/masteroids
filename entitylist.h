@@ -35,6 +35,7 @@ public:
 	int size() { return entities.size(); }
 	void clear();
 
+	void checkCollisions(Entity &entity, function<void(Entity*)> callback);
 	void checkCollisions(EntityList &otherList, function<void(Entity*, Entity*)> callback);
 private:
 	vector<Entity*> entities;
