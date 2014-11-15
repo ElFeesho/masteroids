@@ -2,7 +2,6 @@
 
 #include <SDL/SDL.h>
 
-
 long gettime()
 {
 	return SDL_GetTicks();

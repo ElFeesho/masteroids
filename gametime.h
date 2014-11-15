@@ -1,12 +1,12 @@
 #ifndef __TIME_H__
 #define __TIME_H__
-#include <cstdio>
-#include <ogc/lwp_watchdog.h>
+#include <stdio.h>
+#include "ogc/lwp_watchdog.h"
 
 /**
 Father...
 */
-class Time
+class GameTime
 {
 public:
 	static long getMillis()

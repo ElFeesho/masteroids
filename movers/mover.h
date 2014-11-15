@@ -1,9 +1,9 @@
 #ifndef __MOVER_H__
 #define __MOVER_H__
 
-#include "position.h"
-#include "direction.h"
-#include "shape.h"
+#include "../position.h"
+#include "../direction.h"
+#include "../shape.h"
 
 class Mover
 {

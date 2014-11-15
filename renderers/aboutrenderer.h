@@ -1,10 +1,10 @@
 #ifndef __ABOUT_RENDERER_H__
 #define __ABOUT_RENDERER_H__
 
-#include "about_img.h"
-#include "font5.h"
+#include "../images/about_img.h"
+#include "../font5.h"
 #include "renderer.h"
-#include "gfx/gfx.h"
+#include "../gfx/gfx.h"
 
 class AboutRenderer : public Renderer
 {

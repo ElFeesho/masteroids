@@ -2,7 +2,7 @@
 #define __BULLET_MOVER_H__
 
 #include "mover.h"
-#include "time.h"
+#include "gametime.h"
 
 class BulletMover : public Mover
 {
@@ -11,7 +11,7 @@ public:
 	~BulletMover() {}
 
 	void move(Direction &direction, Position &position, Shape &shape = Shape::NONE) {
-		position.translate(Time::factorTime(cos(direction.Angle())*direction.Speed()), Time::factorTime(sin(direction.Angle())*direction.Speed()));
+		position.translate(GameTime::factorTime(cos(direction.Angle())*direction.Speed()), GameTime::factorTime(sin(direction.Angle())*direction.Speed()));
 		
 		if(position.X() > 640)
 		{

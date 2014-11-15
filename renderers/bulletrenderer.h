@@ -1,7 +1,7 @@
 #ifndef __BULLET_RENDERER_H__
 #define __BULLET_RENDERER_H__
 
-#include "gfx/gfx.h"
+#include "../gfx/gfx.h"
 #include "renderer.h"
 
 class BulletRenderer : public Renderer

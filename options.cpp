@@ -1,22 +1,8 @@
 #include "options.h"
-
-#include <cstdio>
-
-#include <ogcsys.h>
-#include <gccore.h>
-
-#include <ogc/lwp_watchdog.h>
-
-#include "controlconf.h"
-
-#include "font5.h"
-
-#include "images/options_img.h"
 #include "input/gamepadinputmanager.h"
-#include "music.h"
+#include "gametime.h"
 
-
-Options::Options(OptionsListener *listener) : optionsRenderer(OptionsRenderer()), listener(listener), alive(true), menu_sel(0), next_change(ticks_to_millisecs(gettime())+500), ldir(1), child(NULL), colour(RGB(1.0f, 1.0f, 1.0f)), colourHighlight(RGB(1.0f, 0.8f, 0.0f))
+Options::Options(OptionsListener *listener) : optionsRenderer(OptionsRenderer()), listener(listener), alive(true), menu_sel(0), next_change(GameTime::getMillis()+500), ldir(1), child(NULL), colour(RGB(1.0f, 1.0f, 1.0f)), colourHighlight(RGB(1.0f, 0.8f, 0.0f))
 {
 	GamepadInputManager::sharedInstance()->playerOne()->addListener(this);
 }
@@ -49,14 +35,14 @@ void Options::render(GfxWrapper* gfx)
 
 void Options::buttonDown(GamepadButton button)
 {
-	unsigned long cticks = ticks_to_millisecs(gettime());
+	unsigned long cticks = GameTime::getMillis();
 	
 	if(button == BUTTON_UP)
 	{
 		ldir = 0;
 		if(menu_sel>0)
 			menu_sel--;
-		next_change = ticks_to_millisecs(gettime()) + 500;
+		next_change = GameTime::getMillis() + 500;
 	}
 	if(button == BUTTON_DOWN)
 	{
@@ -65,7 +51,7 @@ void Options::buttonDown(GamepadButton button)
 		if(menu_sel<6)
 			menu_sel++;
 
-		next_change = ticks_to_millisecs(gettime()) + 500;
+		next_change = GameTime::getMillis() + 500;
 	}
 	
 	if (button == BUTTON_LEFT)
@@ -161,7 +147,6 @@ void Options::buttonUp(GamepadButton button)
 		listener->optionsMenuClosed();
 	}
 }
-
 
 int Options::lives = 3;
 int Options::difficulty = 1;

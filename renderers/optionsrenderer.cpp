@@ -1,6 +1,6 @@
 #include "optionsrenderer.h"
-#include "options.h"
-#include "images/options_img.h"
+#include "../options.h"
+#include "../images/options_img.h"
 
 #include <string>
 #include <sstream>

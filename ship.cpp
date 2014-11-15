@@ -34,7 +34,7 @@ Ship::~Ship()
 
 bool Ship::update()
 {
-	travelDirection.rotate(Time::factorTime(rotationSpeed));
+	travelDirection.rotate(GameTime::factorTime(rotationSpeed));
 	mover.move(direction(), position());
 	return aliveMonitor().alive();
 }

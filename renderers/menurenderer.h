@@ -1,10 +1,10 @@
 #ifndef __MENURENDERER_H__
 #define __MENURENDERER_H__
 
-#include "gfx/gfx.h"
+#include "../gfx/gfx.h"
 #include "renderer.h"
-#include "images/asteroid_banner.h"
-#include "images/controllers.h"
+#include "../images/asteroid_banner.h"
+#include "../images/controllers.h"
 
 class MenuRenderer : public Renderer 
 {

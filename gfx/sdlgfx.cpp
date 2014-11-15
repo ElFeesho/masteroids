@@ -1,8 +1,8 @@
-#include "gfx/gfx.h"
+#include "gfx.h"
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_gfxPrimitives.h>
-#include "font5.h"
+#include "../font5.h"
 
 #include <string>
 

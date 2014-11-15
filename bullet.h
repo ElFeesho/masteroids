@@ -6,7 +6,7 @@
 #include "entity.h"
 #include "gfx/gfx.h"
 #include "direction.h"
-#include "mover.h"
+#include "movers/mover.h"
 #include "time.h"
 #include "elapsedtimetolive.h"
 

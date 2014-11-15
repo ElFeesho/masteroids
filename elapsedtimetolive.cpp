@@ -1,7 +1,7 @@
 #include "elapsedtimetolive.h"
-#include "time.h"
+#include "gametime.h"
 
-ElapsedTimeToLive::ElapsedTimeToLive(long int ttl): ttl(Time::getMillis()+ttl) 
+ElapsedTimeToLive::ElapsedTimeToLive(long int ttl): ttl(GameTime::getMillis()+ttl)
 {
 	
 }
@@ -13,5 +13,5 @@ ElapsedTimeToLive::~ElapsedTimeToLive()
 
 bool ElapsedTimeToLive::alive()
 {
-	return Time::getMillis() < ttl;
+	return GameTime::getMillis() < ttl;
 }

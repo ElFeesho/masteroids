@@ -5,7 +5,7 @@
 #include "shape.h"
 #include "direction.h"
 #include "alivemonitor.h"
-#include "renderer.h"
+#include "renderers/renderer.h"
 
 class GfxWrapper;
 class Entity

@@ -1,14 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "menu.h"
-#include "options.h"
-#include "about.h"
-
-#include "images/asteroid_banner.h"
-#include "images/controllers.h"
 
 #include "input/gamepadinputmanager.h"
-#include "time.h"
+#include "gametime.h"
 
 Menu::Menu(MenuListener *listener) : menuRenderer(MenuRenderer()), listener(listener), menu_sel(0), next_change(0), ldir(-1), child(NULL)
 {
@@ -22,7 +17,7 @@ Menu::~Menu()
 
 bool Menu::update()
 {
-	unsigned long cticks = Time::getMillis();
+	unsigned long cticks = GameTime::getMillis();
 
 	if(cticks > next_change && next_change != 0)
 	{
@@ -111,14 +106,14 @@ void Menu::buttonDown(GamepadButton button)
 	{
 		ldir = 0;
 		decrementMenu();
-		next_change = Time::getMillis() + 500;
+		next_change = GameTime::getMillis() + 500;
 	}
 	if(button == BUTTON_DOWN)
 	{
 		ldir = 1;
 		incrementMenu();
 
-		next_change = Time::getMillis() + 500;
+		next_change = GameTime::getMillis() + 500;
 	}
 
 }

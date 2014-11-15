@@ -1,20 +1,8 @@
-#include <ogcsys.h>
-#include <gccore.h>
-#include <cstdio>
-#include <wiiuse/wpad.h>
-#include <ogc/lwp_watchdog.h>
 #include "controlconf.h"
-
-#include "images/controls_img.h"
-
-using std::sprintf;
-
-#include "font5.h"
-
-#include "options.h"
 #include "input/gamepadinputmanager.h"
+#include "gametime.h"
 
-ControlConf::ControlConf(ControlConfListener *listener) : listener(listener), controlConfRenderer(ControlConfRenderer()), menu_sel(0), binding(-1), bind_timeout(0), next_change(ticks_to_millisecs(gettime())+500), ldir(1)
+ControlConf::ControlConf(ControlConfListener *listener) : listener(listener), controlConfRenderer(ControlConfRenderer()), menu_sel(0), binding(-1), bind_timeout(0), next_change(GameTime::getMillis()+500), ldir(1)
 {
 	GamepadInputManager::sharedInstance()->playerOne()->addListener(this);
 }

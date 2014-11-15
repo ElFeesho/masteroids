@@ -1,13 +1,9 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <ogcsys.h>
 #include <gccore.h>
 #include <wiiuse/wpad.h>
-#include <ogc/lwp.h>
-#include <unistd.h>
-#include "music.h"
 #include "gfx/gfx.h"
-#include "time.h"
+#include "gametime.h"
 
 #include "input/gamepadinputmanager.h"
 #include "screenmanager.h"
@@ -52,7 +48,7 @@ int main(int argc, char **argv)
 		ScanPADSandReset(0);
 		screenManager.update(gfxWrapper);
 		gfxWrapper->render();
-		Time::tick();
+		GameTime::tick();
 
 #ifndef __WII__
 		SDL_Event ev = { 0 };

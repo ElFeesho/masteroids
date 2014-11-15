@@ -2,7 +2,7 @@
 #define __DEBRIS_RENDERER_H__
 
 #include "renderer.h"
-#include "gfx/gfx.h"
+#include "../gfx/gfx.h"
 
 class DebrisRenderer : public Renderer
 {

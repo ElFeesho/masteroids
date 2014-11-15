@@ -1,10 +1,4 @@
 #include "about.h"
-#include <ogcsys.h>
-#include <gccore.h>
-
-#include "font5.h"
-
-#include "about_img.h"
 
 #include "input/gamepadinputmanager.h"
 

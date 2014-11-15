@@ -1,9 +1,9 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#include "position.h"
-#include "shape.h"
-#include "direction.h"
+#include "../position.h"
+#include "../shape.h"
+#include "../direction.h"
 
 class GfxWrapper;
 

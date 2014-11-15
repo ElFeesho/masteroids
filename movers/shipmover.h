@@ -3,7 +3,7 @@
 
 #include "mover.h"
 #include "vector.h"
-#include "time.h"
+#include "gametime.h"
 
 class ShipMover : public Mover
 {
@@ -14,7 +14,7 @@ public:
 
 	void move(Direction &direction, Position &position, Shape &shape = Shape::NONE)
 	{
-		movementVector.add(Time::factorTime(cos(direction.Angle())*direction.Speed()), Time::factorTime(sin(direction.Angle())*direction.Speed()));
+		movementVector.add(GameTime::factorTime(cos(direction.Angle())*direction.Speed()), GameTime::factorTime(sin(direction.Angle())*direction.Speed()));
 		position.translate(movementVector.X(), movementVector.Y());
 
 		if(position.X()>640.0+10.0)

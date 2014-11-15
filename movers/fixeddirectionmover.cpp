@@ -1,9 +1,9 @@
 #include "fixeddirectionmover.h"
-#include "time.h"
+#include "gametime.h"
 
 void FixedDirectionMover::move(Direction &direction, Position& position, Shape &shape)
 {
-	position.translate(Time::factorTime(cos(direction.Angle())*direction.Speed()), Time::factorTime(sin(direction.Angle())*direction.Speed()));
+	position.translate(GameTime::factorTime(cos(direction.Angle())*direction.Speed()), GameTime::factorTime(sin(direction.Angle())*direction.Speed()));
 
 	double radius = shape.Radius();
 	if(position.X()>640.0f+radius)

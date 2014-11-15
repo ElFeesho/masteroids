@@ -1,7 +1,7 @@
 #ifndef OPTIONSRENDERER_H
 #define OPTIONSRENDERER_H
 
-#include "../renderer.h"
+#include "renderer.h"
 
 class OptionsRenderer : public Renderer
 {

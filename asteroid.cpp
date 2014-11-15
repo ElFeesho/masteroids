@@ -1,11 +1,7 @@
 #include "asteroid.h"
 #include "options.h"
-#include <cstdlib>
-#include <cmath>
 
-#include "time.h"
-
-#include "movers/fixeddirectionmover.h"
+#include "gametime.h"
 
 static inline double createSpeed()
 {
@@ -60,7 +56,7 @@ Asteroid::~Asteroid()
 
 bool Asteroid::update()
 {
-	position().rotate(Time::factorTime(rot_speed));
+	position().rotate(GameTime::factorTime(rot_speed));
 	mover->move(direction(), position(), shape());
 	return aliveMonitor().alive();
 }
