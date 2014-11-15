@@ -11,7 +11,7 @@
 
 using std::stringstream;
 
-GameScreen::GameScreen() : isPaused(false), level(0), playerScores({0,0,0,0}), playerMovers({ShipMover(), ShipMover(), ShipMover(), ShipMover()})
+GameScreen::GameScreen() : isPaused(false), level(0), playerScores({0,0,0,0}), playerMovers({ShipMover(), ShipMover(), ShipMover(), ShipMover()}), playerScorePositions({ Vector(5,5), Vector(635, 5), Vector(5, 460), Vector(635, 460) })
 {
 }
 
@@ -33,9 +33,35 @@ void GameScreen::screenHidden()
 
 void GameScreen::screenShown()
 {
-  players[0] = new Ship(GamepadInputManager::sharedInstance()->playerOne(), this, playerMovers[0]);
-
-  generateLevel();
+	if(Options::players == 1)
+	{
+		playerSpawnLocations[0] = Position(320,240,0); 
+	}
+	else if(Options::players == 2)
+	{
+		playerSpawnLocations[0] = Position(160, 240, 0);
+		playerSpawnLocations[1] = Position(480, 240, 0);
+	}
+	else if(Options::players == 3)
+	{
+		playerSpawnLocations[0] = Position(320, 120, 0);
+		playerSpawnLocations[1] = Position(160, 320, 0);
+		playerSpawnLocations[2] = Position(480, 320, 0);
+	}
+	else if(Options::players == 4)
+	{
+		playerSpawnLocations[0] = Position(160, 120, 0);
+		playerSpawnLocations[1] = Position(480, 120, 0);
+		playerSpawnLocations[2] = Position(160, 320, 0);
+		playerSpawnLocations[3] = Position(480, 320, 0);
+	}
+	
+	for(int i = 0; i < Options::players; i++)
+	{
+		players[i] = new Ship(GamepadInputManager::sharedInstance()->playerOne(), this, playerMovers[i], playerSpawnLocations[i]);
+	}
+	
+	generateLevel();
 }
 
 void GameScreen::generateLevel()
@@ -54,15 +80,7 @@ void GameScreen::update(GfxWrapper* gfx)
 		debrisEntities.updateAll();
 		debrisEntities.renderAll(gfx);
 
-		for(int i = 0; i<Options::players; i++)
-		{
-			players[i]->update();
-			players[i]->render(gfx);
-			playerBullets[i].updateAll();
-			playerBullets[i].renderAll(gfx);
-			
-			checkAsteroidCollisions(i);
-		}
+		updatePlayers(gfx);
 
 		asteroids.updateAll();
 		asteroids.renderAll(gfx);
@@ -100,11 +118,24 @@ void GameScreen::update(GfxWrapper* gfx)
 		pauseEnt->render(gfx);
 	}
 	
-	stringstream sstream;
-	
-	sstream << "SCORE " << playerScores[0];
-	gfx->drawText(5,5,sstream.str(), RGB::green, LEFT);
 }
+
+void GameScreen::updatePlayers(GfxWrapper *gfx)
+{
+	for(int i = 0; i<Options::players; i++)
+	{
+		players[i]->update();
+		players[i]->render(gfx);
+		playerBullets[i].updateAll();
+		playerBullets[i].renderAll(gfx);
+			
+		checkAsteroidCollisions(i);
+		stringstream sstream;
+		sstream << "SCORE: " << playerScores[i];
+		gfx->drawText(playerScorePositions[i].X(), playerScorePositions[i].Y(), sstream.str(), RGB::green, i & 1 ? RIGHT : LEFT);
+	}
+}
+
 
 void GameScreen::checkAsteroidCollisions(int playerNumber)
 {
@@ -138,7 +169,15 @@ void GameScreen::shipDied(Ship* ship)
 
 void GameScreen::shipFired(Ship* ship)
 {
-	playerBullets[0].add(new Bullet(ship, ship->direction()));
+	for(int i = 0; i < Options::players; i++)
+	{
+		if(ship == players[i])
+		{
+			playerBullets[i].add(new Bullet(ship, ship->direction()));
+			break;
+			
+		}
+	}
 }
 
 void GameScreen::shipRequestedPause(Ship* ship)

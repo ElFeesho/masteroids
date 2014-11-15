@@ -5,6 +5,7 @@ class Position
 {
 public:
 	Position();
+	Position(double x, double y, double angle);
 	Position(const Position& other);
 	~Position();
 	Position& operator=(const Position& other);

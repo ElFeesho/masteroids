@@ -39,10 +39,13 @@ private:
   Ship *players[4];
   ShipMover playerMovers[4];
   EntityList playerBullets[4];
+  Vector playerScorePositions[4];
+  Position playerSpawnLocations[4];
   int playerScores[4];
   
   int level;
   void checkAsteroidCollisions(int playerNumber);
+  void updatePlayers(GfxWrapper* gfx);
 };
 
 #endif // GAMESCREEN_H

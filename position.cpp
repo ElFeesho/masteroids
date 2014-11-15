@@ -1,6 +1,11 @@
 #include "position.h"
 
-Position::Position()
+Position::Position() : x(0), y(0), rotation(0)
+{
+
+}
+
+Position::Position(double x, double y, double angle) : x(x), y(y), rotation(angle)
 {
 
 }
