@@ -23,11 +23,12 @@ public:
 	
 	void ingameContinueSelected();
 	void ingameQuitSelected();
+	
+	void generateLevel();
 private:
   ScreenListener* listener;
   EntityList asteroids;
   EntityList secondaryAsteroids;
-  EntityList playerBullets[4];
   
   EntityList debrisEntities;
   DebrisFountain debrisFountain;
@@ -35,12 +36,13 @@ private:
   
   bool isPaused;
   
-  Ship *playerOne;
-  Ship *playerTwo;
-  Ship *playerThree;
-  Ship *playerFour;
+  Ship *players[4];
+  ShipMover playerMovers[4];
+  EntityList playerBullets[4];
+  int playerScores[4];
   
-  ShipMover playerOneMover;
+  int level;
+  void checkAsteroidCollisions(int playerNumber);
 };
 
 #endif // GAMESCREEN_H

@@ -4,8 +4,14 @@
 #include "bullet.h"
 #include "input/gamepadinputmanager.h"
 #include <stdio.h>
+#include "gfx/gfx.h"
+#include "options.h"
+#include <string>
+#include <sstream>
 
-GameScreen::GameScreen() : isPaused(false)
+using std::stringstream;
+
+GameScreen::GameScreen() : isPaused(false), level(0), playerScores({0,0,0,0}), playerMovers({ShipMover(), ShipMover(), ShipMover(), ShipMover()})
 {
 }
 
@@ -27,13 +33,19 @@ void GameScreen::screenHidden()
 
 void GameScreen::screenShown()
 {
-  playerOne = new Ship(GamepadInputManager::sharedInstance()->playerOne(), this, playerOneMover);
+  players[0] = new Ship(GamepadInputManager::sharedInstance()->playerOne(), this, playerMovers[0]);
 
-  for(int i = 0; i < 15; i++)
-  {
-	 asteroids.add(new Asteroid());
-  }
+  generateLevel();
 }
+
+void GameScreen::generateLevel()
+{
+	for(int i = 0; i < 7 + (level/2); i++)
+	{
+		asteroids.add(new Asteroid());
+	}
+}
+
 
 void GameScreen::update(GfxWrapper* gfx)
 {
@@ -42,11 +54,15 @@ void GameScreen::update(GfxWrapper* gfx)
 		debrisEntities.updateAll();
 		debrisEntities.renderAll(gfx);
 
-		playerOne->update();
-		playerOne->render(gfx);
-
-		playerBullets[0].updateAll();
-		playerBullets[0].renderAll(gfx);
+		for(int i = 0; i<Options::players; i++)
+		{
+			players[i]->update();
+			players[i]->render(gfx);
+			playerBullets[i].updateAll();
+			playerBullets[i].renderAll(gfx);
+			
+			checkAsteroidCollisions(i);
+		}
 
 		asteroids.updateAll();
 		asteroids.renderAll(gfx);
@@ -54,45 +70,61 @@ void GameScreen::update(GfxWrapper* gfx)
 		secondaryAsteroids.updateAll();
 		secondaryAsteroids.renderAll(gfx);
 
-		asteroids.checkCollisions(playerBullets[0], [&](Entity* asteroid, Entity* bullet) {
-			debrisFountain.projectDebris(debrisEntities, asteroid->direction(), asteroid->position(), 1.3f, 6);
-			secondaryAsteroids.add(new Asteroid(10.0f, Position(asteroid->position())));
-			secondaryAsteroids.add(new Asteroid(10.0f, Position(asteroid->position())));
-			playerBullets[0].removeEntity(bullet);
-			asteroids.removeEntity(asteroid);
-		});
-
-		secondaryAsteroids.checkCollisions(playerBullets[0], [&](Entity* asteroid, Entity* bullet) {
-			debrisFountain.projectDebris(debrisEntities, asteroid->direction(), asteroid->position(), 1.3f, 6);
-			playerBullets[0].removeEntity(bullet);
-			secondaryAsteroids.removeEntity(asteroid);
-		});
 		
-		asteroids.checkCollisions(*playerOne, [&](Entity *hit){
-			if(playerOne->isVisible())
-			{
-				debrisFountain.projectDebris(debrisEntities, Direction(3.5, playerOne->direction().Angle()), playerOne->position(), 1.3f, 6);
-				//playerOne->setVisible(false);
-								
-				playerOne->position().X(640/4);
-				playerOne->position().Y(480/4);
-				
-				playerOne->direction().Angle(0);
-				playerOne->direction().Speed(0);
-				playerOneMover.reset();
-				
-			}
-		});
+// 		asteroids.checkCollisions(*playerOne, [&](Entity *hit){
+// 			if(playerOne->isVisible())
+// 			{
+// 				debrisFountain.projectDebris(debrisEntities, Direction(3.5, playerOne->direction().Angle()), playerOne->position(), 1.3f, 6);
+// 				//playerOne->setVisible(false);
+// 								
+// 				playerOne->position().X(640/4);
+// 				playerOne->position().Y(480/4);
+// 				
+// 				playerOne->direction().Angle(0);
+// 				playerOne->direction().Speed(0);
+// 				playerOneMover.reset();
+// 				
+// 			}
+// 		});
+		
+		if(asteroids.size() == 0 && secondaryAsteroids.size() == 0)
+		{
+			level++;
+			generateLevel();
+		}
 	}
 	else
 	{
 		asteroids.renderAll(gfx);
-		playerBullets[0].renderAll(gfx);
-		playerOne->render(gfx);
 		pauseEnt->update();
 		pauseEnt->render(gfx);
 	}
+	
+	stringstream sstream;
+	
+	sstream << "SCORE " << playerScores[0];
+	gfx->drawText(5,5,sstream.str(), RGB::green, LEFT);
 }
+
+void GameScreen::checkAsteroidCollisions(int playerNumber)
+{
+	asteroids.checkCollisions(playerBullets[playerNumber], [&](Entity* asteroid, Entity* bullet) {
+		debrisFountain.projectDebris(debrisEntities, asteroid->direction(), asteroid->position(), 1.3f, 6);
+		secondaryAsteroids.add(new Asteroid(10.0f, Position(asteroid->position())));
+		secondaryAsteroids.add(new Asteroid(10.0f, Position(asteroid->position())));
+		playerBullets[playerNumber].removeEntity(bullet);
+		playerScores[playerNumber] += 10;
+		asteroids.removeEntity(asteroid);
+	});
+
+	secondaryAsteroids.checkCollisions(playerBullets[playerNumber], [&](Entity* asteroid, Entity* bullet) {
+		debrisFountain.projectDebris(debrisEntities, asteroid->direction(), asteroid->position(), 1.3f, 6);
+		playerBullets[playerNumber].removeEntity(bullet);
+		playerScores[playerNumber] += 25;
+		secondaryAsteroids.removeEntity(asteroid);
+	});
+}
+
 
 void GameScreen::setListener(ScreenListener* listener)
 {

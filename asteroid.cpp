@@ -9,7 +9,7 @@
 
 static inline double createSpeed()
 {
-	double speed = 1+(rand() % (Options::difficulty+2));
+	double speed = 1+(rand() % (Options::difficulty+1));
 	if(rand()%2 == 1)
 	{
 		speed *= -1;
