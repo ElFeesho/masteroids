@@ -1,16 +1,18 @@
 #include "gamescreen.h"
 #include "asteroid.h"
-#include "ship.h"
 #include "bullet.h"
 #include "input/gamepadinputmanager.h"
-#include "gfx/gfx.h"
 #include "options.h"
-#include <string>
 #include <sstream>
 
 using std::stringstream;
 
-GameScreen::GameScreen() : isPaused(false), level(0), playerScores({0,0,0,0}), playerMovers({ShipMover(), ShipMover(), ShipMover(), ShipMover()}), playerScorePositions({ Vector(5,5), Vector(635, 5), Vector(5, 460), Vector(635, 460) })
+GameScreen::GameScreen() :
+        isPaused(false),
+        level(0),
+        playerScores({0,0,0,0}),
+        playerMovers({ShipMover(), ShipMover(), ShipMover(), ShipMover()}),
+        playerScorePositions({ Vector(5,5), Vector(635, 5), Vector(5, 460), Vector(635, 460) })
 {
 }
 
@@ -22,12 +24,23 @@ GameScreen::~GameScreen()
 void GameScreen::screenHidden()
 {
 	asteroids.clear();
+    secondaryAsteroids.clear();
+    debrisEntities.clear();
 	if(pauseEnt != NULL)
 	{
 		isPaused = false;
 		delete pauseEnt;
 		pauseEnt = NULL;
 	}
+
+    for(int i = 0; i < Options::players; i++)
+    {
+        delete players[i];
+        playersLives[i] = 0;
+        playerMovers[i].reset();
+        playerBullets[i].clear();
+        playerScores[i] = 0;
+    }
 }
 
 void GameScreen::screenShown()
@@ -108,7 +121,7 @@ void GameScreen::checkPlayerDeaths() {
     for(int i = 0; i < Options::players; i++) {
         asteroids.checkCollisions(*players[i], [&](Entity *hit) {
             if (players[i]->isVisible()) {
-                debrisFountain.projectDebris(debrisEntities, Direction(3.5, players[i]->direction().Angle()), players[i]->position(), 1.3f, 6);
+                debrisFountain.projectDebris(debrisEntities, Direction(3.5, players[i]->direction().Angle()), players[i]->position(), 1.3f, 12);
                 players[i]->setVisible(false);
                 playersLives[i]--;
                 if(playersLives[i]>0) {
