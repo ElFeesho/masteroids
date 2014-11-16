@@ -42,10 +42,11 @@ private:
   Vector playerScorePositions[4];
   Position playerSpawnLocations[4];
   int playerScores[4];
-  
+  int playersLives[4];
   int level;
   void checkAsteroidCollisions(int playerNumber);
   void updatePlayers(GfxWrapper* gfx);
+  void checkPlayerDeaths();
 };
 
 #endif // GAMESCREEN_H

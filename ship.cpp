@@ -1,13 +1,4 @@
-#include <gccore.h>
-#include <ogc/lwp_watchdog.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <ogcsys.h>
-
-#include <math.h>
-
 #include "ship.h"
-#include "movers/shipmover.h"
 
 Ship::Ship(Gamepad *gamepad, ShipListener *listener, ShipMover &shipMover, Position spawnLocation) : visible(true), 
 	shipRenderer(ShipRenderer()), 
@@ -21,10 +12,9 @@ Ship::Ship(Gamepad *gamepad, ShipListener *listener, ShipMover &shipMover, Posit
 {
 	gamepad->addListener(this);
 	shape().Radius(10);
-	position().X(640/4);
-	position().Y(480/4);
-	
-	respawn();
+	position().X(spawnLocation.X());
+    position().Y(spawnLocation.Y());
+    position().Rotation(spawnLocation.Rotation());
 }
 
 Ship::~Ship()
@@ -41,9 +31,15 @@ bool Ship::update()
 
 void Ship::respawn()
 {
-	position().X(spawnPosition.X());
-	position().Y(spawnPosition.Y());
-	position().Rotation(spawnPosition.Rotation());
+   GameTime::schedule(1500, [&](){
+        position().X(spawnPosition.X());
+        position().Y(spawnPosition.Y());
+        position().Rotation(spawnPosition.Rotation());
+        travelDirection.Angle(spawnPosition.Rotation());
+        travelDirection.Speed(0);
+        setVisible(true);
+        mover.reset();
+    });
 }
 
 void Ship::buttonDown(GamepadButton button)

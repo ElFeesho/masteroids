@@ -66,6 +66,10 @@ set(SOURCE_FILES
     gameover.h
     gamescreen.cpp
     gamescreen.h
+    gameoverscreen.cpp
+    gameoverscreen.h
+    renderers/gameoverrenderer.cpp
+    renderers/gameoverrenderer.h
     ingame.cpp
     ingame.h
     main.cpp

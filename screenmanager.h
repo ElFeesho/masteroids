@@ -19,6 +19,8 @@ private:
 	Screen *menuScreen;
 	Screen *gameScreen;
 	Screen *gameOverScreen;
+
+    void switchScreen(Screen *newScreen);
 };
 
 #endif

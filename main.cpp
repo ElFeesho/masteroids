@@ -39,7 +39,7 @@ int main(int argc, char **argv)
 	WPAD_Init();
 	WPAD_Disconnect(WPAD_CHAN_ALL);
 	WPAD_SetIdleTimeout(120);
-	
+
 	ScreenManager screenManager = ScreenManager();
 	for(;;)
 	{

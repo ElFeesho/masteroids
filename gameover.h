@@ -4,6 +4,7 @@
 #include "entity.h"
 #include "gfx/gfx.h"
 #include "input/gamepad.h"
+#include "renderers/gameoverrenderer.h"
 
 class GameOver : public Entity, public GamepadListener
 {
@@ -13,11 +14,20 @@ public:
 	bool update();
 	void render(GfxWrapper *gfx);
 
-	void buttonDown(GamepadButton button);
+    Position &position() override;
+
+    Shape &shape() override;
+
+    Direction &direction() override;
+
+    AliveMonitor &aliveMonitor() override;
+
+    Renderer &renderer() override;
+
+    void buttonDown(GamepadButton button);
 	void buttonUp(GamepadButton button);
-private:
-	RGB colour;
-	RGB colourHighlight;
+
+    GameOverRenderer gameOverRenderer;
 };
 
 #endif

@@ -3,7 +3,6 @@
 #include "ship.h"
 #include "bullet.h"
 #include "input/gamepadinputmanager.h"
-#include <stdio.h>
 #include "gfx/gfx.h"
 #include "options.h"
 #include <string>
@@ -58,6 +57,7 @@ void GameScreen::screenShown()
 	
 	for(int i = 0; i < Options::players; i++)
 	{
+        playersLives[i] = Options::lives;
 		players[i] = new Ship(GamepadInputManager::sharedInstance()->playerOne(), this, playerMovers[i], playerSpawnLocations[i]);
 	}
 	
@@ -71,7 +71,6 @@ void GameScreen::generateLevel()
 		asteroids.add(new Asteroid());
 	}
 }
-
 
 void GameScreen::update(GfxWrapper* gfx)
 {
@@ -88,24 +87,9 @@ void GameScreen::update(GfxWrapper* gfx)
 		secondaryAsteroids.updateAll();
 		secondaryAsteroids.renderAll(gfx);
 
-		
-// 		asteroids.checkCollisions(*playerOne, [&](Entity *hit){
-// 			if(playerOne->isVisible())
-// 			{
-// 				debrisFountain.projectDebris(debrisEntities, Direction(3.5, playerOne->direction().Angle()), playerOne->position(), 1.3f, 6);
-// 				//playerOne->setVisible(false);
-// 								
-// 				playerOne->position().X(640/4);
-// 				playerOne->position().Y(480/4);
-// 				
-// 				playerOne->direction().Angle(0);
-// 				playerOne->direction().Speed(0);
-// 				playerOneMover.reset();
-// 				
-// 			}
-// 		});
-		
-		if(asteroids.size() == 0 && secondaryAsteroids.size() == 0)
+        checkPlayerDeaths();
+
+        if(asteroids.size() == 0 && secondaryAsteroids.size() == 0)
 		{
 			level++;
 			generateLevel();
@@ -118,6 +102,37 @@ void GameScreen::update(GfxWrapper* gfx)
 		pauseEnt->render(gfx);
 	}
 	
+}
+
+void GameScreen::checkPlayerDeaths() {
+    for(int i = 0; i < Options::players; i++) {
+        asteroids.checkCollisions(*players[i], [&](Entity *hit) {
+            if (players[i]->isVisible()) {
+                debrisFountain.projectDebris(debrisEntities, Direction(3.5, players[i]->direction().Angle()), players[i]->position(), 1.3f, 6);
+                players[i]->setVisible(false);
+                playersLives[i]--;
+                if(playersLives[i]>0) {
+                    players[i]->respawn();
+                    playerMovers[i].reset();
+                }
+                else
+                {
+                    bool shouldGoToGameover = true;
+                    for(int j = 0; j < Options::players; j++)
+                    {
+                        shouldGoToGameover &= playersLives[j] == 0;
+                    }
+
+                    if(shouldGoToGameover)
+                    {
+                        GameTime::schedule(3000, [&](){
+                           listener->screenClosed(this, 0);
+                        });
+                    }
+                }
+            }
+        });
+    }
 }
 
 void GameScreen::updatePlayers(GfxWrapper *gfx)
