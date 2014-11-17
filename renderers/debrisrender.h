@@ -4,17 +4,15 @@
 #include "renderer.h"
 #include "../gfx/gfx.h"
 
-class DebrisRenderer : public Renderer
-{
+class DebrisRenderer : public Renderer {
 public:
-	void render(GfxWrapper* gfx, Position& position, Shape& shape, Direction& direction)
-	{
-		gfx->drawLine(position.X()-cos(position.Rotation())*shape.Radius(),
-						position.Y()-sin(position.Rotation())*shape.Radius(),
-						position.X()+cos(position.Rotation())*shape.Radius(),
-						position.Y()+sin(position.Rotation())*shape.Radius(),
-						RGB::white);
-	}
+    void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction) {
+        gfx->drawLine(position.X() - cos(position.Rotation()) * shape.Radius(),
+                position.Y() - sin(position.Rotation()) * shape.Radius(),
+                position.X() + cos(position.Rotation()) * shape.Radius(),
+                position.Y() + sin(position.Rotation()) * shape.Radius(),
+                RGB::white);
+    }
 };
 
 #endif

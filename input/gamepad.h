@@ -6,99 +6,96 @@
 
 using std::vector;
 
-enum GamepadButton
-{
-	BUTTON_UP,
-	BUTTON_DOWN,
-	BUTTON_LEFT,
-	BUTTON_RIGHT,
-	BUTTON_FIRE,
-	BUTTON_START
+enum GamepadButton {
+    BUTTON_UP,
+    BUTTON_DOWN,
+    BUTTON_LEFT,
+    BUTTON_RIGHT,
+    BUTTON_FIRE,
+    BUTTON_START
 };
 
-class GamepadSourceListener
-{
+class GamepadSourceListener {
 public:
-	virtual void buttonDown(GamepadButton button) = 0;
-	virtual void buttonUp(GamepadButton button) = 0;
+    virtual void buttonDown(GamepadButton button) = 0;
+
+    virtual void buttonUp(GamepadButton button) = 0;
 };
 
-class GamepadSource
-{
+class GamepadSource {
 public:
-	virtual ~GamepadSource() {}
-	virtual void setListener(GamepadSourceListener *listener) = 0;
-	virtual void poll() = 0;
-	virtual const std::string name() const = 0;
+    virtual ~GamepadSource() {
+    }
+
+    virtual void setListener(GamepadSourceListener *listener) = 0;
+
+    virtual void poll() = 0;
+
+    virtual const std::string name() const = 0;
 };
 
-class GamepadListener
-{
+class GamepadListener {
 public:
-	GamepadListener() {};
-	virtual ~GamepadListener() {};
-	virtual void buttonDown(GamepadButton button) {};
-	virtual void buttonUp(GamepadButton button) {};
+    GamepadListener() {
+    };
+
+    virtual ~GamepadListener() {
+    };
+
+    virtual bool buttonDown(GamepadButton button) = 0;
+
+    virtual bool buttonUp(GamepadButton button) = 0;
 };
 
-class Gamepad : public GamepadSourceListener
-{
+class Gamepad : public GamepadSourceListener {
 public:
-	Gamepad(GamepadSource *source) : source(source)
-	{
-		source->setListener(this);
-	}
+    Gamepad(GamepadSource *source) : source(source) {
+        source->setListener(this);
+    }
 
-	~Gamepad()
-	{
-		source->setListener(0);
-	}
+    ~Gamepad() {
+        source->setListener(0);
+    }
 
-	void addListener(GamepadListener *listener)
-	{
-		listeners.push_back(listener);
-	}
+    void addListener(GamepadListener *listener) {
+        listeners.push_back(listener);
+    }
 
-	void removeListener(GamepadListener *listener)
-	{
-		for(int i = 0; i < listeners.size(); i++)
-		{
-			if(listeners.at(i) == listener)
-			{
-				listeners.erase(listeners.begin()+i);
-			}
-		}
-	}
+    void removeListener(GamepadListener *listener) {
+        for (int i = 0; i < listeners.size(); i++) {
+            if (listeners.at(i) == listener) {
+                listeners.erase(listeners.begin() + i);
+            }
+        }
+    }
 
-	void buttonDown(GamepadButton button)
-	{
-		for(int i = 0; i < listeners.size(); i++)
-		{
-			listeners.at(i)->buttonDown(button);
-		}
-	}
+    void buttonDown(GamepadButton button) {
+        for (int i = listeners.size() - 1; i >= 0; i--) {
+            if (listeners.at(i)->buttonDown(button)) {
+                break;
+            }
+        }
+    }
 
-	void buttonUp(GamepadButton button)
-	{
-		for(int i = 0; i < listeners.size(); i++)
-		{
-			listeners.at(i)->buttonUp(button);
-		}
-	}
+    void buttonUp(GamepadButton button) {
+        for (int i = listeners.size() - 1; i >= 0; i--) {
+            if (listeners.at(i)->buttonUp(button)) {
+                break;
+            }
+        }
+    }
 
-	const std::string name() const
-	{
-		return source->name();
-	}
+    const std::string name() const {
+        return source->name();
+    }
 
-	void poll()
-	{
-		source->poll();
-	}
+    void poll() {
+        source->poll();
+    }
 
 private:
-	vector<GamepadListener*> listeners;
-	GamepadSource *source;
+    vector<GamepadListener *> listeners;
+    GamepadSource *source;
 };
 
 #endif

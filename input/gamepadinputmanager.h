@@ -3,26 +3,31 @@
 
 class Gamepad;
 
-class GamepadInputManager
-{
+class GamepadInputManager {
 public:
-	~GamepadInputManager();
-	static GamepadInputManager *sharedInstance();
-	void poll();
+    ~GamepadInputManager();
 
-	Gamepad *playerOne();
-	Gamepad *playerTwo();
-	Gamepad *playerThree();
-	Gamepad *playerFour();
+    static GamepadInputManager *sharedInstance();
+
+    void poll();
+
+    Gamepad *playerOne();
+
+    Gamepad *playerTwo();
+
+    Gamepad *playerThree();
+
+    Gamepad *playerFour();
+
 private:
-	GamepadInputManager();
+    GamepadInputManager();
 
-	Gamepad *gamepadOne;
-	Gamepad *gamepadTwo;
-	Gamepad *gamepadThree;
-	Gamepad *gamepadFour;
+    Gamepad *gamepadOne;
+    Gamepad *gamepadTwo;
+    Gamepad *gamepadThree;
+    Gamepad *gamepadFour;
 
-	static GamepadInputManager *instance;
+    static GamepadInputManager *instance;
 
 };
 

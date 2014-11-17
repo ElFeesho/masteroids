@@ -13,28 +13,45 @@
 #include "movers/bulletmover.h"
 #include "renderers/bulletrenderer.h"
 
-class Bullet : public Entity
-{
+class Bullet : public Entity {
 public:
-	Bullet(Entity *owner, Direction travelDirection);
+    Bullet(Entity *owner, Direction travelDirection);
 
-	~Bullet() {};
-	bool update();
-	void render(GfxWrapper *gfx);
-	Position& position() { return pos; }
-	Shape &shape() { return bulletShape; }
-	Direction& direction() { return travelDirection; }
-	AliveMonitor &aliveMonitor() { return timeToLive; }
-	Renderer& renderer() { return bulletRenderer; }
+    ~Bullet() {
+    };
+
+    bool update();
+
+    void render(GfxWrapper *gfx);
+
+    Position &position() {
+        return pos;
+    }
+
+    Shape &shape() {
+        return bulletShape;
+    }
+
+    Direction &direction() {
+        return travelDirection;
+    }
+
+    AliveMonitor &aliveMonitor() {
+        return timeToLive;
+    }
+
+    Renderer &renderer() {
+        return bulletRenderer;
+    }
 
 private:
-	ElapsedTimeToLive timeToLive;
-	BulletRenderer bulletRenderer;
-	BulletMover mover;
-	Position pos;
-	Direction travelDirection;
-	Shape bulletShape;
-	Entity *bulletOwner;
+    ElapsedTimeToLive timeToLive;
+    BulletRenderer bulletRenderer;
+    BulletMover mover;
+    Position pos;
+    Direction travelDirection;
+    Shape bulletShape;
+    Entity *bulletOwner;
 };
 
 #endif

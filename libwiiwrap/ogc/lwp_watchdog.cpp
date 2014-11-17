@@ -2,12 +2,10 @@
 
 #include <SDL/SDL.h>
 
-long gettime()
-{
-	return SDL_GetTicks();
+long gettime() {
+    return SDL_GetTicks();
 }
 
-long ticks_to_millisecs(long ticks)
-{
-	return ticks;
+long ticks_to_millisecs(long ticks) {
+    return ticks;
 }

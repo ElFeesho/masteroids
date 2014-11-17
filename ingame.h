@@ -5,71 +5,90 @@
 #include "gfx/gfx.h"
 #include "input/gamepad.h"
 
-class InGameMenuRenderer : public Renderer 
-{
+class InGameMenuRenderer : public Renderer {
 public:
-	InGameMenuRenderer() : menu_sel(0) {}
-	~InGameMenuRenderer() {}
-	
-	void setMenuSelection(int menuSelection)
-	{
-		menu_sel = menuSelection;
-	}
-	
-	void render(GfxWrapper* gfx, Position& position, Shape& shape, Direction& direction)
-	{
-		gfx->drawRect((320-150), 240-50, 300, 90, RGB::blue);
+    InGameMenuRenderer() : menu_sel(0) {
+    }
 
-		gfx->drawText(320-80, 240-40, "Quit Current Game?", RGB::white);
-		if(menu_sel==0)
-		{
-			gfx->drawText(320-140, 240-5, "Continue", RGB::yellow);
-		}
-		else
-		{
-			gfx->drawText(320-140, 240-5, "Continue", RGB::white);
-		}
-		
-		if(menu_sel==1)
-		{
-			gfx->drawText(420, 240-5, "Exit", RGB::yellow);
-		}
-		else
-		{
-			gfx->drawText(420, 240-5, "Exit", RGB::white);
-		}
-	}
+    ~InGameMenuRenderer() {
+    }
+
+    void setMenuSelection(int menuSelection) {
+        menu_sel = menuSelection;
+    }
+
+    void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction) {
+        gfx->drawRect((320 - 150), 240 - 50, 300, 90, RGB::blue);
+
+        gfx->drawText(320 - 80, 240 - 40, "Quit Current Game?", RGB::white);
+        if (menu_sel == 0) {
+            gfx->drawText(320 - 140, 240 - 5, "Continue", RGB::yellow);
+        }
+        else {
+            gfx->drawText(320 - 140, 240 - 5, "Continue", RGB::white);
+        }
+
+        if (menu_sel == 1) {
+            gfx->drawText(420, 240 - 5, "Exit", RGB::yellow);
+        }
+        else {
+            gfx->drawText(420, 240 - 5, "Exit", RGB::white);
+        }
+    }
+
 private:
-	int menu_sel;
+    int menu_sel;
 };
 
-class InGameListener
-{
+class InGameListener {
 public:
-	virtual ~InGameListener(){}
-	virtual void ingameContinueSelected() = 0;
-	virtual void ingameQuitSelected() = 0;
+    virtual ~InGameListener() {
+    }
+
+    virtual void ingameContinueSelected() = 0;
+
+    virtual void ingameQuitSelected() = 0;
 };
 
-class InGame : public Entity, public GamepadListener
-{
+class InGame : public Entity, public GamepadListener {
 public:
-	InGame(Gamepad *gamepad, InGameListener *listener);
-	~InGame();
-	bool update();
-	void render(GfxWrapper *gfx);
-	void buttonDown(GamepadButton button);
-	void buttonUp(GamepadButton button);
-	Position &position() { return Position::NONE; }
-	Shape &shape() { return Shape::NONE; }
-	Direction &direction() { return Direction::NONE; }
-	AliveMonitor &aliveMonitor() { return AlwaysAlive::alivemonitor; }
-	Renderer &renderer(){ return ingameRenderer; }
+    InGame(Gamepad *gamepad, InGameListener *listener);
+
+    ~InGame();
+
+    bool update();
+
+    void render(GfxWrapper *gfx);
+
+    bool buttonDown(GamepadButton button);
+
+    bool buttonUp(GamepadButton button);
+
+    Position &position() {
+        return Position::NONE;
+    }
+
+    Shape &shape() {
+        return Shape::NONE;
+    }
+
+    Direction &direction() {
+        return Direction::NONE;
+    }
+
+    AliveMonitor &aliveMonitor() {
+        return AlwaysAlive::alivemonitor;
+    }
+
+    Renderer &renderer() {
+        return ingameRenderer;
+    }
+
 private:
-	Gamepad *gamepad;
-	InGameListener *listener;
-	InGameMenuRenderer ingameRenderer;
-	int menu_sel;
+    Gamepad *gamepad;
+    InGameListener *listener;
+    InGameMenuRenderer ingameRenderer;
+    int menu_sel;
 };
 
 #endif

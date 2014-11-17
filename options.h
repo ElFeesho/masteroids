@@ -9,47 +9,66 @@
 
 #include "renderers/optionsrenderer.h"
 
-class OptionsListener
-{
+class OptionsListener {
 public:
-	virtual ~OptionsListener() {};
-	virtual void optionsControllerConfigSelected() = 0;
-	virtual void optionsMenuClosed() = 0;
+    virtual ~OptionsListener() {
+    };
+
+    virtual void optionsControllerConfigSelected() = 0;
+
+    virtual void optionsMenuClosed() = 0;
 };
 
-class Options : public Entity, public GamepadListener
-{
+class Options : public Entity, public GamepadListener {
 public:
-	Options(OptionsListener *listener);
-	~Options();
-	bool update();
-	void render(GfxWrapper *gfx);
+    Options(OptionsListener *listener);
 
-	Position& position() { return Position::NONE; }
-	Shape& shape() { return Shape::NONE; }
-	Direction& direction() { return Direction::NONE; }
-	AliveMonitor &aliveMonitor() { return AlwaysAlive::alivemonitor; }
-	Renderer& renderer() { return optionsRenderer; }
+    ~Options();
 
-	void buttonDown(GamepadButton button);
-	void buttonUp(GamepadButton button);
+    bool update();
 
-	static int lives;
-	static int difficulty;
-	static bool team_kill;
-	static int players;
-	static int max_bullets;
-	static bool music;
+    void render(GfxWrapper *gfx);
+
+    Position &position() {
+        return Position::NONE;
+    }
+
+    Shape &shape() {
+        return Shape::NONE;
+    }
+
+    Direction &direction() {
+        return Direction::NONE;
+    }
+
+    AliveMonitor &aliveMonitor() {
+        return AlwaysAlive::alivemonitor;
+    }
+
+    Renderer &renderer() {
+        return optionsRenderer;
+    }
+
+    bool buttonDown(GamepadButton button);
+
+    bool buttonUp(GamepadButton button);
+
+    static int lives;
+    static int difficulty;
+    static bool team_kill;
+    static int players;
+    static int max_bullets;
+    static bool music;
 private:
-	OptionsListener *listener;
-	OptionsRenderer optionsRenderer;
-	bool alive;
-	int menu_sel;
-	unsigned long next_change;
-	char ldir;
-	RGB colour;
-	RGB colourHighlight;
-	Entity *child;
+    OptionsListener *listener;
+    OptionsRenderer optionsRenderer;
+    bool alive;
+    int menu_sel;
+    unsigned long next_change;
+    char ldir;
+    RGB colour;
+    RGB colourHighlight;
+    Entity *child;
 };
 
 #endif

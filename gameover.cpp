@@ -2,33 +2,29 @@
 #include "input/gamepadinputmanager.h"
 
 GameOver::GameOver() : gameOverRenderer(GameOverRenderer()) {
-	GamepadInputManager::sharedInstance()->playerOne()->addListener(this);
+    GamepadInputManager::sharedInstance()->playerOne()->addListener(this);
 }
 
-GameOver::~GameOver()
-{
-	GamepadInputManager::sharedInstance()->playerOne()->removeListener(this);
+GameOver::~GameOver() {
+    GamepadInputManager::sharedInstance()->playerOne()->removeListener(this);
 }
 
-bool GameOver::update()
-{
-	return aliveMonitor().alive();
+bool GameOver::update() {
+    return aliveMonitor().alive();
 }
 
-void GameOver::buttonDown(GamepadButton button)
-{
-
+bool GameOver::buttonDown(GamepadButton button) {
+    return false;
 }
 
-void GameOver::buttonUp(GamepadButton button)
-{
-	if(button == BUTTON_FIRE)
-	{
-	}
+bool GameOver::buttonUp(GamepadButton button) {
+    if (button == BUTTON_FIRE) {
+    }
+    return false;
 }
-void GameOver::render(GfxWrapper* gfx)
-{
-	renderer().render(gfx, position(), shape(), direction());
+
+void GameOver::render(GfxWrapper *gfx) {
+    renderer().render(gfx, position(), shape(), direction());
 }
 
 Position &GameOver::position() {

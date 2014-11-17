@@ -7,14 +7,13 @@
 
 #include "debris.h"
 
-class DebrisFountain
-{
+class DebrisFountain {
 public:
-	DebrisFountain();
-	
-	~DebrisFountain();
-	
-	void projectDebris(EntityList &entityList, Direction direction, Position from, double spread, int amount);
+    DebrisFountain();
+
+    ~DebrisFountain();
+
+    void projectDebris(EntityList &entityList, Direction direction, Position from, double spread, int amount);
 };
 
 #endif // DEBRISFOUNTAIN_H

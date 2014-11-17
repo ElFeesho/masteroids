@@ -3,15 +3,16 @@
 
 #include "alivemonitor.h"
 
-class ElapsedTimeToLive : public AliveMonitor
-{
+class ElapsedTimeToLive : public AliveMonitor {
 public:
-	ElapsedTimeToLive(long ttl);
-	~ElapsedTimeToLive();
+    ElapsedTimeToLive(long ttl);
 
-	bool alive();
+    ~ElapsedTimeToLive();
+
+    bool alive();
+
 private:
-	long ttl;
+    long ttl;
 };
 
 #endif // ELAPSEDTIMETOLIVE_H

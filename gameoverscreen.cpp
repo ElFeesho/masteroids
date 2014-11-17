@@ -7,7 +7,7 @@ GameOverScreen::~GameOverScreen() {
 
 }
 
-void GameOverScreen::setListener(ScreenListener* listener){
+void GameOverScreen::setListener(ScreenListener *listener) {
     this->listener = listener;
 }
 

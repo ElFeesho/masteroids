@@ -4,13 +4,15 @@
 #include "mover.h"
 #include <cmath>
 
-class FixedDirectionMover : public Mover
-{
+class FixedDirectionMover : public Mover {
 public:
-	FixedDirectionMover() {}
-	~FixedDirectionMover() {}
+    FixedDirectionMover() {
+    }
 
-	void move(Direction &direction, Position &position, Shape &shape);
+    ~FixedDirectionMover() {
+    }
+
+    void move(Direction &direction, Position &position, Shape &shape);
 };
 
 #endif // FIXEDDIRECTIONMOVER_H

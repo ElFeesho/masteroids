@@ -7,11 +7,12 @@
 
 class GfxWrapper;
 
-class Renderer
-{
+class Renderer {
 public:
-	virtual ~Renderer() {}
-	virtual void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction) = 0;
+    virtual ~Renderer() {
+    }
+
+    virtual void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction) = 0;
 };
 
 #endif // RENDERER_H

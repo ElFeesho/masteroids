@@ -9,33 +9,40 @@
 #include "entitylist.h"
 #include "controlconf.h"
 
-class MenuScreen : public Screen, public AboutListener, public ControlConfListener, public MenuListener, public OptionsListener
-{
+class MenuScreen
+        : public Screen, public AboutListener, public ControlConfListener, public MenuListener, public OptionsListener {
 public:
-	MenuScreen();
-	~MenuScreen();
+    MenuScreen();
 
-	void update(GfxWrapper *gfx);
-	void setListener(ScreenListener *listener);
+    ~MenuScreen();
 
-	void aboutClosed();
-	
-	void controlConfClosed();
-	
-	void menuStartGameSelected();
-	void menuOptionsSelected();
-	void menuAboutSelected();
-	
-	void optionsControllerConfigSelected();
-	void optionsMenuClosed();
-	
-	void screenShown();
-	void screenHidden();
+    void update(GfxWrapper *gfx);
+
+    void setListener(ScreenListener *listener);
+
+    void aboutClosed();
+
+    void controlConfClosed();
+
+    void menuStartGameSelected();
+
+    void menuOptionsSelected();
+
+    void menuAboutSelected();
+
+    void optionsControllerConfigSelected();
+
+    void optionsMenuClosed();
+
+    void screenShown();
+
+    void screenHidden();
+
 private:
-	Entity *activeMenu;
-	
-	EntityList entityList;
-	ScreenListener *listener;
+    Entity *activeMenu;
+
+    EntityList entityList;
+    ScreenListener *listener;
 };
 
 #endif

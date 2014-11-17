@@ -100,4 +100,6 @@ include_directories(${SDL_INCLUDE_DIR})
 include_directories("libwiiwrap")
 include_directories(".")
 
-target_link_libraries(masteroids -lSDL -lSDL_gfx -lm)
+set(CMAKE_EXE_LINKER_FLAGS "-framework Cocoa")
+
+target_link_libraries(masteroids -lSDLmain -lSDL -lSDL_gfx -lm)

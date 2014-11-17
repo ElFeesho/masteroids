@@ -7,46 +7,57 @@
 #include "ingame.h"
 #include "debrisfountain.h"
 
-class GameScreen : public Screen, public ShipListener, public InGameListener
-{
+class GameScreen : public Screen, public ShipListener, public InGameListener {
 public:
-  GameScreen();
-  ~GameScreen();
-  void screenHidden();
-  void screenShown();
-  void update(GfxWrapper* gfx);
-  void setListener(ScreenListener* listener);
-  
-	void shipDied(Ship* ship);
-	void shipFired(Ship* ship);
-	void shipRequestedPause(Ship* ship);
-	
-	void ingameContinueSelected();
-	void ingameQuitSelected();
-	
-	void generateLevel();
+    GameScreen();
+
+    ~GameScreen();
+
+    void screenHidden();
+
+    void screenShown();
+
+    void update(GfxWrapper *gfx);
+
+    void setListener(ScreenListener *listener);
+
+    void shipDied(Ship *ship);
+
+    void shipFired(Ship *ship);
+
+    void shipRequestedPause(Ship *ship);
+
+    void ingameContinueSelected();
+
+    void ingameQuitSelected();
+
+    void generateLevel();
+
 private:
-  ScreenListener* listener;
-  EntityList asteroids;
-  EntityList secondaryAsteroids;
-  
-  EntityList debrisEntities;
-  DebrisFountain debrisFountain;
-  InGame *pauseEnt;
-  
-  bool isPaused;
-  
-  Ship *players[4];
-  ShipMover playerMovers[4];
-  EntityList playerBullets[4];
-  Vector playerScorePositions[4];
-  Position playerSpawnLocations[4];
-  int playerScores[4];
-  int playersLives[4];
-  int level;
-  void checkAsteroidCollisions(int playerNumber);
-  void updatePlayers(GfxWrapper* gfx);
-  void checkPlayerDeaths();
+    ScreenListener *listener;
+    EntityList asteroids;
+    EntityList secondaryAsteroids;
+
+    EntityList debrisEntities;
+    DebrisFountain debrisFountain;
+    InGame *pauseEnt;
+
+    bool isPaused;
+
+    Ship *players[4];
+    ShipMover playerMovers[4];
+    EntityList playerBullets[4];
+    Vector playerScorePositions[4];
+    Position playerSpawnLocations[4];
+    int playerScores[4];
+    int playersLives[4];
+    int level;
+
+    void checkAsteroidCollisions(int playerNumber);
+
+    void updatePlayers(GfxWrapper *gfx);
+
+    void checkPlayerDeaths();
 };
 
 #endif // GAMESCREEN_H

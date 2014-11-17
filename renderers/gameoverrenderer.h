@@ -6,8 +6,7 @@
 #include <shape.h>
 #include "renderer.h"
 
-class GameOverRenderer : public Renderer
-{
+class GameOverRenderer : public Renderer {
 
 public:
     virtual ~GameOverRenderer();

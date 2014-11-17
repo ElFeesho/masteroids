@@ -4,10 +4,10 @@
 #include "screen.h"
 #include "gameover.h"
 
-class GameOverScreen : public Screen
-{
+class GameOverScreen : public Screen {
 public:
     GameOverScreen();
+
     ~GameOverScreen();
 
     void setListener(ScreenListener *listener) override;
@@ -17,6 +17,7 @@ public:
     void screenShown() override;
 
     void screenHidden() override;
+
 private:
     ScreenListener *listener;
     GameOver gameOverEntity;

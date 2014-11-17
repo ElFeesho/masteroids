@@ -13,52 +13,78 @@
 
 class Ship;
 
-class ShipListener
-{
+class ShipListener {
 public:
-	virtual ~ShipListener(){};
-	virtual void shipRequestedPause(Ship *ship) = 0;
-	virtual void shipDied(Ship *ship) = 0;
-	virtual void shipFired(Ship *ship) = 0;
+    virtual ~ShipListener() {
+    };
+
+    virtual void shipRequestedPause(Ship *ship) = 0;
+
+    virtual void shipDied(Ship *ship) = 0;
+
+    virtual void shipFired(Ship *ship) = 0;
 };
 
-class Ship : public Entity, public GamepadListener
-{
+class Ship : public Entity, public GamepadListener {
 public:
-	Ship(Gamepad *gamepad, ShipListener *listener, ShipMover &shipMover, Position spawnLocation);
-	~Ship();
-	bool update();
-	void render(GfxWrapper *gfx);
-	
-	Gamepad *getGamepad();
+    Ship(Gamepad *gamepad, ShipListener *listener, ShipMover &shipMover, Position spawnLocation);
 
-   void buttonDown(GamepadButton button);
-	void buttonUp(GamepadButton button);
+    ~Ship();
 
-	Position &position() { return pos; }
-	Shape &shape() { return bodyShape; }
-	Direction &direction() { return travelDirection; }
-	AliveMonitor &aliveMonitor() { return AlwaysAlive::alivemonitor; };
-	Renderer &renderer() { return shipRenderer; }
-	
-	bool isVisible() { return visible; }
-	void setVisible(bool visibility) { visible = visibility; }
+    bool update();
 
-	void respawn();
+    void render(GfxWrapper *gfx);
+
+    Gamepad *getGamepad();
+
+    bool buttonDown(GamepadButton button);
+
+    bool buttonUp(GamepadButton button);
+
+    Position &position() {
+        return pos;
+    }
+
+    Shape &shape() {
+        return bodyShape;
+    }
+
+    Direction &direction() {
+        return travelDirection;
+    }
+
+    AliveMonitor &aliveMonitor() {
+        return AlwaysAlive::alivemonitor;
+    };
+
+    Renderer &renderer() {
+        return shipRenderer;
+    }
+
+    bool isVisible() {
+        return visible;
+    }
+
+    void setVisible(bool visibility) {
+        visible = visibility;
+    }
+
+    void respawn();
+
 private:
-	Gamepad *gamepad;
-	ShipListener *listener;
-	ShipMover mover;
-	ShipRenderer shipRenderer;
-	
-	Position spawnPosition;
-	
-	Position pos;
-	Shape bodyShape;
-	double rotationSpeed;
-	Direction travelDirection;
-	
-	bool visible;
+    Gamepad *gamepad;
+    ShipListener *listener;
+    ShipMover mover;
+    ShipRenderer shipRenderer;
+
+    Position spawnPosition;
+
+    Position pos;
+    Shape bodyShape;
+    double rotationSpeed;
+    Direction travelDirection;
+
+    bool visible;
 };
 
 #endif

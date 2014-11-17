@@ -8,44 +8,67 @@
 #include "images/controllers.h"
 #include "renderers/menurenderer.h"
 
-class MenuListener
-{
+class MenuListener {
 public:
-	virtual ~MenuListener(){};
-	virtual void menuStartGameSelected() = 0;
-	virtual void menuOptionsSelected() = 0;
-	virtual void menuAboutSelected() = 0;
+    virtual ~MenuListener() {
+    };
+
+    virtual void menuStartGameSelected() = 0;
+
+    virtual void menuOptionsSelected() = 0;
+
+    virtual void menuAboutSelected() = 0;
 };
 
-class Menu : public Entity, public GamepadListener
-{
+class Menu : public Entity, public GamepadListener {
 public:
-	Menu(MenuListener *listener);
-	~Menu();
-	bool update();
-	void render(GfxWrapper *gfx);
+    Menu(MenuListener *listener);
 
-	void incrementMenu();
-	void decrementMenu();
-	void handleMenuSelection();
+    ~Menu();
 
-	void buttonDown(GamepadButton button);
-	void buttonUp(GamepadButton button);
+    bool update();
 
-	Position &position() { return Position::NONE; }
-	Shape &shape() { return Shape::NONE; }
-	Direction& direction() { return Direction::NONE; }
-	AliveMonitor &aliveMonitor() { return AlwaysAlive::alivemonitor; }
-	Renderer &renderer() { return menuRenderer; }
+    void render(GfxWrapper *gfx);
+
+    void incrementMenu();
+
+    void decrementMenu();
+
+    void handleMenuSelection();
+
+    bool buttonDown(GamepadButton button);
+
+    bool buttonUp(GamepadButton button);
+
+    Position &position() {
+        return Position::NONE;
+    }
+
+    Shape &shape() {
+        return Shape::NONE;
+    }
+
+    Direction &direction() {
+        return Direction::NONE;
+    }
+
+    AliveMonitor &aliveMonitor() {
+        return AlwaysAlive::alivemonitor;
+    }
+
+    Renderer &renderer() {
+        return menuRenderer;
+    }
+
 private:
-	MenuListener *listener;
-	MenuRenderer menuRenderer;
-	unsigned int menu_sel;
-	unsigned long next_change;
-	char ldir;
-	bool active;
-	Entity *child;
-	Position pos;
+    MenuListener *listener;
+    MenuRenderer menuRenderer;
+    unsigned int menu_sel;
+    unsigned long next_change;
+    char ldir;
+    bool active;
+    Entity *child;
+    Position pos;
 };
 
 #endif
