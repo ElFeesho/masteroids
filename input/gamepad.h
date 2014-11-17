@@ -62,24 +62,20 @@ public:
     }
 
     void removeListener(GamepadListener *listener) {
-        for (int i = 0; i < listeners.size(); i++) {
-            if (listeners.at(i) == listener) {
-                listeners.erase(listeners.begin() + i);
-            }
-        }
+        listeners.erase(std::remove_if(listeners.begin(), listeners.end(), [&](GamepadListener *value){ return value == listener; }));
     }
 
     void buttonDown(GamepadButton button) {
-        for (int i = listeners.size() - 1; i >= 0; i--) {
-            if (listeners.at(i)->buttonDown(button)) {
+        for (auto listener : listeners) {
+            if (listener->buttonDown(button)) {
                 break;
             }
         }
     }
 
     void buttonUp(GamepadButton button) {
-        for (int i = listeners.size() - 1; i >= 0; i--) {
-            if (listeners.at(i)->buttonUp(button)) {
+        for (auto listener : listeners) {
+            if (listener->buttonUp(button)) {
                 break;
             }
         }

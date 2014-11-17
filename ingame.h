@@ -4,41 +4,7 @@
 #include "entity.h"
 #include "gfx/gfx.h"
 #include "input/gamepad.h"
-
-class InGameMenuRenderer : public Renderer {
-public:
-    InGameMenuRenderer() : menu_sel(0) {
-    }
-
-    ~InGameMenuRenderer() {
-    }
-
-    void setMenuSelection(int menuSelection) {
-        menu_sel = menuSelection;
-    }
-
-    void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction) {
-        gfx->drawRect((320 - 150), 240 - 50, 300, 90, RGB::blue);
-
-        gfx->drawText(320 - 80, 240 - 40, "Quit Current Game?", RGB::white);
-        if (menu_sel == 0) {
-            gfx->drawText(320 - 140, 240 - 5, "Continue", RGB::yellow);
-        }
-        else {
-            gfx->drawText(320 - 140, 240 - 5, "Continue", RGB::white);
-        }
-
-        if (menu_sel == 1) {
-            gfx->drawText(420, 240 - 5, "Exit", RGB::yellow);
-        }
-        else {
-            gfx->drawText(420, 240 - 5, "Exit", RGB::white);
-        }
-    }
-
-private:
-    int menu_sel;
-};
+#include "renderers/ingamemenurenderer.h"
 
 class InGameListener {
 public:
