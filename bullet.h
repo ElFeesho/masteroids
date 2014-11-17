@@ -44,6 +44,9 @@ public:
         return bulletRenderer;
     }
 
+    bool isVisible() { return true; }
+
+    void setVisible(bool visible) { };
 private:
     ElapsedTimeToLive timeToLive;
     BulletRenderer bulletRenderer;

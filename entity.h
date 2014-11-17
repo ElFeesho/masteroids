@@ -27,6 +27,9 @@ public:
     virtual AliveMonitor &aliveMonitor() = 0;
 
     virtual Renderer &renderer() = 0;
+
+    virtual bool isVisible() = 0;
+    virtual void setVisible(bool visible) = 0;
 };
 
 #endif

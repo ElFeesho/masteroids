@@ -53,6 +53,11 @@ public:
 
     bool buttonUp(GamepadButton button);
 
+
+    bool isVisible() { return true; }
+
+    void setVisible(bool visible) { };
+
     static int lives;
     static int difficulty;
     static bool team_kill;

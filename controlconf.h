@@ -77,6 +77,9 @@ public:
         return controlConfRenderer;
     }
 
+    bool isVisible() { return true; }
+
+    void setVisible(bool visible) { };
 private:
     ControlConfListener *listener;
     ControlConfRenderer controlConfRenderer;

@@ -31,6 +31,9 @@ public:
         return debrisRenderer;
     }
 
+    bool isVisible() { return true; }
+
+    void setVisible(bool visible) { };
 
 private:
     Direction travelDirection;

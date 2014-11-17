@@ -1,7 +1,7 @@
 #include <movers/mover.h>
 #include "actor.h"
 
-Actor::Actor(Renderer *renderer, Mover *mover, AliveMonitor &aliveMonitor) : actorRenderer(renderer), actorMover(mover), actorMonitor(&aliveMonitor) {
+Actor::Actor(Renderer *renderer, Mover *mover, AliveMonitor &aliveMonitor) : visible(true), actorRenderer(renderer), actorMover(mover), actorMonitor(&aliveMonitor) {
 }
 
 Actor::~Actor(){
@@ -36,5 +36,13 @@ AliveMonitor &Actor::aliveMonitor() {
 
 Renderer &Actor::renderer() {
     return *actorRenderer;
+}
+
+bool Actor::isVisible() {
+    return visible;
+}
+
+void Actor::setVisible(bool visible) {
+    this->visible = visible;
 }
 

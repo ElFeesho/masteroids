@@ -50,6 +50,10 @@ public:
         return aboutRenderer;
     }
 
+    bool isVisible() { return true; }
+
+    void setVisible(bool visible) { };
+
 private:
     AboutListener *listener;
     AboutRenderer aboutRenderer;

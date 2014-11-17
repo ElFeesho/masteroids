@@ -31,6 +31,10 @@ public:
     bool buttonUp(GamepadButton button);
 
     GameOverRenderer gameOverRenderer;
+
+    bool isVisible() { return true; }
+
+    void setVisible(bool visible) { };
 };
 
 #endif

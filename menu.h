@@ -60,6 +60,10 @@ public:
         return menuRenderer;
     }
 
+    bool isVisible() { return true; }
+
+    void setVisible(bool visible) { };
+
 private:
     MenuListener *listener;
     MenuRenderer menuRenderer;

@@ -27,7 +27,11 @@ public:
     AliveMonitor &aliveMonitor() override;
 
     Renderer &renderer() override;
+
+    bool isVisible();
+    void setVisible(bool visible);
 private:
+    bool visible;
     Position actorPosition;
     Direction actorDirection;
     Shape actorShape;

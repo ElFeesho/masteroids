@@ -50,6 +50,9 @@ public:
         return ingameRenderer;
     }
 
+    bool isVisible() { return true; }
+
+    void setVisible(bool visible) { };
 private:
     Gamepad *gamepad;
     InGameListener *listener;

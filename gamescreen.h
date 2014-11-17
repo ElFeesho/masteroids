@@ -1,5 +1,6 @@
 #ifndef GAMESCREEN_H
 #define GAMESCREEN_H
+#include "inputdirectioncontroller.h"
 
 #include "screen.h"
 #include "entitylist.h"
@@ -42,7 +43,7 @@ private:
 
     bool isPaused;
 
-    Ship *players[4];
+    Entity *players[4];
     ShipMover playerMovers[4];
     EntityList playerBullets[4];
     Vector playerScorePositions[4];
@@ -50,6 +51,7 @@ private:
     int playerScores[4];
     int playersLives[4];
     int level;
+    InputDirectionController inputControllers[4];
 
     void checkAsteroidCollisions(int playerNumber);
 

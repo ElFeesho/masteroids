@@ -5,6 +5,8 @@
 #include <sstream>
 
 #include "asteroidfactory.h"
+#include "shipfactory.h"
+#include "inputdirectioncontroller.h"
 
 using std::stringstream;
 
@@ -61,7 +63,12 @@ void GameScreen::screenShown() {
 
     for (int i = 0; i < Options::players; i++) {
         playersLives[i] = Options::lives;
-        players[i] = new Ship(GamepadInputManager::sharedInstance()->playerOne(), this, playerMovers[i], playerSpawnLocations[i]);
+        players[i] = ShipFactory::createShip();
+        players[i]->position().X(playerSpawnLocations[i].X());
+        players[i]->position().Y(playerSpawnLocations[i].Y());
+        players[i]->position().Rotation(playerSpawnLocations[i].Rotation());
+        inputControllers[i] = InputDirectionController(GamepadInputManager::sharedInstance()->playerOne(), players[i]->direction());
+        //players[i] = new Ship(GamepadInputManager::sharedInstance()->playerOne(), this, playerMovers[i], playerSpawnLocations[i]);
     }
 
     generateLevel();
@@ -141,7 +148,7 @@ void GameScreen::killPlayer(int playerNumber) {
     players[playerNumber]->setVisible(false);
     playersLives[playerNumber]--;
     if (playersLives[playerNumber] > 0) {
-        players[playerNumber]->respawn();
+        //players[playerNumber]->respawn();
         playerMovers[playerNumber].reset();
     }
     else
