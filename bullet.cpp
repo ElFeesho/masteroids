@@ -7,7 +7,7 @@ Bullet::Bullet(Entity *owner, Direction travelDirection)
           bulletOwner(owner),
           travelDirection(travelDirection),
           timeToLive(ElapsedTimeToLive(3000)) {
-    this->travelDirection.Speed(3.5f);
+    this->travelDirection.Speed(5.5f);
 
     position().X(owner->position().X());
     position().Y(owner->position().Y());

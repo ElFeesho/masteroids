@@ -166,16 +166,11 @@ void GameScreen::setListener(ScreenListener *listener) {
     this->listener = listener;
 }
 
-void GameScreen::shipDied(Ship *ship) {
-
-}
-
 void GameScreen::shipFired(Ship *ship) {
     for (int i = 0; i < Options::players; i++) {
-        if (ship == players[i]) {
+        if (ship == players[i] && playerBullets[i].size() < Options::max_bullets) {
             playerBullets[i].add(new Bullet(ship, ship->direction()));
             break;
-
         }
     }
 }

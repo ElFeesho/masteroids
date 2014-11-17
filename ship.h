@@ -20,8 +20,6 @@ public:
 
     virtual void shipRequestedPause(Ship *ship) = 0;
 
-    virtual void shipDied(Ship *ship) = 0;
-
     virtual void shipFired(Ship *ship) = 0;
 };
 

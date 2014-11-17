@@ -21,8 +21,6 @@ public:
 
     void setListener(ScreenListener *listener);
 
-    void shipDied(Ship *ship);
-
     void shipFired(Ship *ship);
 
     void shipRequestedPause(Ship *ship);
