@@ -102,6 +102,11 @@ include_directories(${SDL_INCLUDE_DIR})
 include_directories("libwiiwrap")
 include_directories(".")
 
-set(CMAKE_EXE_LINKER_FLAGS "-framework Cocoa")
+
+IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+   # Mac OS X specific code
+   SET(OperatingSystem "Mac OS X")
+    set(CMAKE_EXE_LINKER_FLAGS "-framework Cocoa")
+ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
 target_link_libraries(masteroids -lSDLmain -lSDL -lSDL_gfx -lm)
