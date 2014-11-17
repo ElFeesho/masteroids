@@ -1,11 +1,13 @@
 #ifndef GAMESCREEN_H
 #define GAMESCREEN_H
 
+#include <renderers/livesrenderer.h>
 #include "screen.h"
 #include "entitylist.h"
 #include "ship.h"
 #include "ingame.h"
 #include "debrisfountain.h"
+#include "renderers/livesrenderer.h"
 
 class GameScreen : public Screen, public ShipListener, public InGameListener {
 public:
@@ -45,8 +47,9 @@ private:
     Ship *players[4];
     ShipMover playerMovers[4];
     EntityList playerBullets[4];
-    Vector playerScorePositions[4];
+    Position playerScorePositions[4];
     Position playerSpawnLocations[4];
+    LivesRenderer livesRenderer;
     int playerScores[4];
     int playersLives[4];
     int level;

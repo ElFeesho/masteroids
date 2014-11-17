@@ -11,8 +11,12 @@ GameScreen::GameScreen() :
         isPaused(false),
         level(0),
         playerScores{0, 0, 0, 0},
+        pauseEnt(NULL),
         playerMovers{ShipMover(), ShipMover(), ShipMover(), ShipMover()},
-        playerScorePositions{Vector(5, 5), Vector(635, 5), Vector(5, 460), Vector(635, 460)} {
+        playerScorePositions{Position(5, 5, 0), Position(635, 5, 0), Position(5, 460, 0), Position(635, 460, 0)} ,
+        livesRenderer(LivesRenderer())
+{
+
 }
 
 GameScreen::~GameScreen() {
@@ -40,7 +44,7 @@ void GameScreen::screenHidden() {
 
 void GameScreen::screenShown() {
     if (Options::players == 1) {
-        playerSpawnLocations[0] = Position(320, 240, 0);
+        playerSpawnLocations[0] = Position(320, 240, -M_PI_2);
     }
     else if (Options::players == 2) {
         playerSpawnLocations[0] = Position(160, 240, 0);
@@ -164,6 +168,8 @@ void GameScreen::updatePlayers(GfxWrapper *gfx) {
         stringstream sstream;
         sstream << "SCORE: " << playerScores[i];
         gfx->drawText(playerScorePositions[i].X(), playerScorePositions[i].Y(), sstream.str(), RGB::green, i & 1 ? RIGHT : LEFT);
+        livesRenderer.setLives(playersLives[i]);
+        livesRenderer.render(gfx, playerScorePositions[i], Shape::NONE, Direction::NONE);
     }
 }
 
@@ -193,7 +199,7 @@ void GameScreen::setListener(ScreenListener *listener) {
 
 void GameScreen::shipFired(Ship *ship) {
     for (int i = 0; i < Options::players; i++) {
-        if (ship == players[i] && playerBullets[i].size() < Options::max_bullets) {
+        if (ship == players[i] && playerBullets[i].size() < Options::max_bullets && players[i]->isVisible()) {
             playerBullets[i].add(new Bullet(ship, ship->direction()));
             break;
         }

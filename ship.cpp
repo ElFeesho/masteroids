@@ -3,16 +3,16 @@
 Ship::Ship(Gamepad *gamepad, ShipListener *listener, ShipMover &shipMover, Position spawnLocation) : visible(true),
                                                                                                      shipRenderer(ShipRenderer()),
                                                                                                      mover(shipMover),
-                                                                                                     bodyShape(Shape(10.0f)),
+                                                                                                     bodyShape(Shape(8.0f)),
                                                                                                      gamepad(gamepad),
                                                                                                      listener(listener),
                                                                                                      rotationSpeed(0),
                                                                                                      travelDirection(Direction(0.0, 0.0)),
                                                                                                      spawnPosition(spawnLocation) {
     gamepad->addListener(this);
-    shape().Radius(10);
     position().X(spawnLocation.X());
     position().Y(spawnLocation.Y());
+    direction().Angle(spawnLocation.Rotation());
     position().Rotation(spawnLocation.Rotation());
 }
 
@@ -31,8 +31,8 @@ void Ship::respawn() {
         position().X(spawnPosition.X());
         position().Y(spawnPosition.Y());
         position().Rotation(spawnPosition.Rotation());
-        travelDirection.Angle(spawnPosition.Rotation());
-        travelDirection.Speed(0);
+        direction().Angle(spawnPosition.Rotation());
+        direction().Speed(0);
         setVisible(true);
         mover.reset();
     });
@@ -40,10 +40,10 @@ void Ship::respawn() {
 
 bool Ship::buttonDown(GamepadButton button) {
     if (button == BUTTON_RIGHT) {
-        rotationSpeed = 0.1f;
+        rotationSpeed = 0.075f;
     }
     else if (button == BUTTON_LEFT) {
-        rotationSpeed = -0.1f;
+        rotationSpeed = -0.075f;
     }
     else if (button == BUTTON_UP) {
         travelDirection.Speed(0.1f);

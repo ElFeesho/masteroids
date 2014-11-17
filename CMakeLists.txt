@@ -72,6 +72,8 @@ set(SOURCE_FILES
     renderers/gameoverrenderer.h
     renderers/ingamemenurenderer.cpp
     renderers/ingamemenurenderer.h
+    renderers/livesrenderer.cpp
+    renderers/livesrenderer.h
     ingame.cpp
     ingame.h
     main.cpp
