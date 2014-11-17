@@ -102,29 +102,54 @@ void GameScreen::update(GfxWrapper *gfx) {
 
 void GameScreen::checkPlayerDeaths() {
     for (int i = 0; i < Options::players; i++) {
-        asteroids.checkCollisions(*players[i], [&](Entity *hit) {
-            if (players[i]->isVisible()) {
-                debrisFountain.projectDebris(debrisEntities, Direction(3.5, players[i]->direction().Angle()), players[i]->position(), 1.3f, 12);
-                players[i]->setVisible(false);
-                playersLives[i]--;
-                if (playersLives[i] > 0) {
-                    players[i]->respawn();
-                    playerMovers[i].reset();
-                }
-                else {
-                    bool shouldGoToGameover = true;
-                    for (int j = 0; j < Options::players; j++) {
-                        shouldGoToGameover &= playersLives[j] == 0;
+        if (players[i]->isVisible()) {
+            if (Options::team_kill) {
+                for (int j = 0; j < Options::players; j++) {
+                    if (i == j) {
+                        continue;
                     }
 
-                    if (shouldGoToGameover) {
-                        GameTime::schedule(3000, [&]() {
-                            listener->screenClosed(this, 0);
-                        });
-                    }
+                    playerBullets[j].checkCollisions(*players[i], [&](Entity *hit){
+                        debrisFountain.projectDebris(debrisEntities, Direction(3.5, players[i]->direction().Angle()), players[i]->position(), 1.3f, 12);
+                        killPlayer(i);
+                        playerBullets[j].removeEntity(hit);
+                    });
                 }
             }
-        });
+
+            asteroids.checkCollisions(*players[i], [&](Entity *hit) {
+                debrisFountain.projectDebris(debrisEntities, Direction(3.5, players[i]->direction().Angle()), players[i]->position(), 1.3f, 12);
+                killPlayer(i);
+            });
+
+            secondaryAsteroids.checkCollisions(*players[i], [&](Entity *hit) {
+                debrisFountain.projectDebris(debrisEntities, Direction(3.5, players[i]->direction().Angle()), players[i]->position(), 1.3f, 12);
+                killPlayer(i);
+            });
+        }
+    }
+}
+
+void GameScreen::killPlayer(int playerNumber) {
+    players[playerNumber]->setVisible(false);
+    playersLives[playerNumber]--;
+    if (playersLives[playerNumber] > 0) {
+        players[playerNumber]->respawn();
+        playerMovers[playerNumber].reset();
+    }
+    else
+    {
+        bool shouldGoToGameover = true;
+        for (int i = 0; i < Options::players; i++) {
+            shouldGoToGameover &= playersLives[i] == 0;
+        }
+
+        if (shouldGoToGameover)
+        {
+            GameTime::schedule(3000, [&]() {
+                listener->screenClosed(this, 0);
+            });
+        }
     }
 }
 

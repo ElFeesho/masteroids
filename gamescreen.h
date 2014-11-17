@@ -56,6 +56,8 @@ private:
     void updatePlayers(GfxWrapper *gfx);
 
     void checkPlayerDeaths();
+
+    void killPlayer(int playerNumber);
 };
 
 #endif // GAMESCREEN_H
