@@ -1,9 +1,10 @@
 #include "gamescreen.h"
-#include "asteroid.h"
 #include "bullet.h"
 #include "input/gamepadinputmanager.h"
 #include "options.h"
 #include <sstream>
+
+#include "asteroidfactory.h"
 
 using std::stringstream;
 
@@ -68,7 +69,7 @@ void GameScreen::screenShown() {
 
 void GameScreen::generateLevel() {
     for (int i = 0; i < 7 + (level / 2); i++) {
-        asteroids.add(new Asteroid());
+        asteroids.add(AsteroidFactory::createAsteroid(25.f));
     }
 }
 
@@ -119,12 +120,18 @@ void GameScreen::checkPlayerDeaths() {
 
             asteroids.checkCollisions(*players[i], [&](Entity *hit) {
                 debrisFountain.projectDebris(debrisEntities, Direction(3.5, players[i]->direction().Angle()), players[i]->position(), 1.3f, 12);
+                debrisFountain.projectDebris(debrisEntities, hit->direction(), hit->position(), 1.3f, 6);
+                secondaryAsteroids.add(AsteroidFactory::createAsteroid(10.0f, hit->position()));
+                secondaryAsteroids.add(AsteroidFactory::createAsteroid(10.0f, hit->position()));
+
                 killPlayer(i);
+                asteroids.removeEntity(hit);
             });
 
             secondaryAsteroids.checkCollisions(*players[i], [&](Entity *hit) {
                 debrisFountain.projectDebris(debrisEntities, Direction(3.5, players[i]->direction().Angle()), players[i]->position(), 1.3f, 12);
                 killPlayer(i);
+                secondaryAsteroids.removeEntity(hit);
             });
         }
     }
@@ -171,8 +178,8 @@ void GameScreen::updatePlayers(GfxWrapper *gfx) {
 void GameScreen::checkAsteroidCollisions(int playerNumber) {
     asteroids.checkCollisions(playerBullets[playerNumber], [&](Entity *asteroid, Entity *bullet) {
         debrisFountain.projectDebris(debrisEntities, asteroid->direction(), asteroid->position(), 1.3f, 6);
-        secondaryAsteroids.add(new Asteroid(10.0f, Position(asteroid->position())));
-        secondaryAsteroids.add(new Asteroid(10.0f, Position(asteroid->position())));
+        secondaryAsteroids.add(AsteroidFactory::createAsteroid(10.0f, asteroid->position()));
+        secondaryAsteroids.add(AsteroidFactory::createAsteroid(10.0f, asteroid->position()));
         playerBullets[playerNumber].removeEntity(bullet);
         playerScores[playerNumber] += 10;
         asteroids.removeEntity(asteroid);

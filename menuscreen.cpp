@@ -1,6 +1,6 @@
 #include "menuscreen.h"
 
-#include "asteroid.h"
+#include "asteroidfactory.h"
 
 MenuScreen::MenuScreen() {
 
@@ -12,7 +12,7 @@ MenuScreen::~MenuScreen() {
 
 void MenuScreen::screenShown() {
     for (int i = 0; i < 32; i++) {
-        entityList.add(new Asteroid());
+        entityList.add(AsteroidFactory::createAsteroid(25.0f));
     }
 
     activeMenu = new Menu(this);

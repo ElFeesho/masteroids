@@ -13,7 +13,7 @@ public:
         }
     }
 
-    void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction) {
+    void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &unused) {
         for (int i = 0; i < 6; i++) {
             if (i != 5) {
                 double rot1 = (position.Rotation() + i * 72.0) / 180.0 * M_PI;

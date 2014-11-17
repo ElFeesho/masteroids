@@ -44,8 +44,6 @@ set(SOURCE_FILES
     images/about_img.h
     alivemonitor.cpp
     alivemonitor.h
-    asteroid.cpp
-    asteroid.h
     bullet.cpp
     bullet.h
     controlconf.cpp
@@ -93,7 +91,10 @@ set(SOURCE_FILES
     ship.cpp
     ship.h
     gametime.cpp
+    actor.cpp
+    actor.h
     gametime.h
+    asteroidfactory.h
     vector.h)
 
 add_executable(masteroids ${SOURCE_FILES})

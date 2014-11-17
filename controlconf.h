@@ -70,7 +70,7 @@ public:
     }
 
     AliveMonitor &aliveMonitor() {
-        return AlwaysAlive::alivemonitor;
+        return AlwaysAlive::alwaysAlive;
     }
 
     Renderer &renderer() {

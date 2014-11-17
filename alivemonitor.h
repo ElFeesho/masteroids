@@ -22,7 +22,7 @@ public:
         return true;
     }
 
-    static AlwaysAlive alivemonitor;
+    static AlwaysAlive alwaysAlive;
 };
 
 #endif

@@ -5,7 +5,9 @@
 
 class Direction {
 public:
-    Direction(double speed, double angle) : speed(speed), angle(angle) {
+    Direction() : speed(0), spin(0), angle(0) {}
+
+    Direction(double speed, double angle, double spin = 0) : speed(speed), angle(angle), spin(spin) {
     }
 
     Direction(const Direction &copy) : speed(copy.speed), angle(copy.angle) {
@@ -16,6 +18,16 @@ public:
 
     double Speed() {
         return speed;
+    }
+
+    double Spin()
+    {
+        return spin;
+    }
+
+    void Spin(double spin)
+    {
+        this->spin = spin;
     }
 
     double Angle() {
@@ -40,7 +52,7 @@ public:
 
     static Direction NONE;
 private:
-    double speed, angle;
+    double speed, spin, angle;
 };
 
 #endif

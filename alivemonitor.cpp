@@ -1,3 +1,3 @@
 #include "alivemonitor.h"
 
-AlwaysAlive AlwaysAlive::alivemonitor = AlwaysAlive();
+AlwaysAlive AlwaysAlive::alwaysAlive = AlwaysAlive();
