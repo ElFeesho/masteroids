@@ -46,8 +46,6 @@ private:
     Shape asteroidShape;
     AsteroidRenderer astroRenderer;
     Direction travelDirection;
-    double peaks[6];
-    double rot_speed;
 };
 
 #endif

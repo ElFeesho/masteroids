@@ -2,6 +2,7 @@
 #include "gametime.h"
 
 void FixedDirectionMover::move(Direction &direction, Position &position, Shape &shape) {
+    position.rotate(GameTime::factorTime(direction.Spin()));
     position.translate(GameTime::factorTime(cos(direction.Angle()) * direction.Speed()), GameTime::factorTime(sin(direction.Angle()) * direction.Speed()));
 
     double radius = shape.Radius();

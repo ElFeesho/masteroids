@@ -14,8 +14,7 @@ static inline double createSpeed() {
 Asteroid::Asteroid()
         : mover(new FixedDirectionMover()),
           astroRenderer(AsteroidRenderer()),
-          rot_speed(rand() % 10 - 5),
-          travelDirection(Direction(createSpeed(), rand() % 360)) {
+          travelDirection(Direction(createSpeed(), rand() % 360,((double)(rand() % 3) * 0.1) - 0.05)) {
     position().Rotation(rand() % 360);
     shape().Radius(25.0f);
 
@@ -45,9 +44,8 @@ Asteroid::Asteroid()
 Asteroid::Asteroid(double scale, const Position &nposition)
         : mover(new FixedDirectionMover()),
           astroRenderer(AsteroidRenderer()),
-          rot_speed(rand() % 10 - 5),
           pos(nposition),
-          travelDirection(Direction(createSpeed(), rand() % 360)) {
+          travelDirection(Direction(createSpeed(), rand() % 360, ((double)(rand() % 3) * 0.1) - 0.05)) {
     position().Rotation(rand() % 360);
     shape().Radius(scale);
 
@@ -58,7 +56,6 @@ Asteroid::~Asteroid() {
 }
 
 bool Asteroid::update() {
-    position().rotate(GameTime::factorTime(rot_speed));
     mover->move(direction(), position(), shape());
     return aliveMonitor().alive();
 }

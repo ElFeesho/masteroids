@@ -229,7 +229,6 @@ void GameScreen::ingameQuitSelected() {
 }
 
 void GameScreen::respawnShip(int playerNumber) {
-    printf("RESPAWNING: %d\n", playerNumber);
     GameTime::schedule(1500, [&, playerNumber]() {
         players[playerNumber]->position().X(playerSpawnLocations[playerNumber].X());
         players[playerNumber]->position().Y(playerSpawnLocations[playerNumber].Y());
