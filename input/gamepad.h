@@ -1,6 +1,7 @@
 #ifndef __GAMEPAD_H__
 #define __GAMEPAD_H__
 
+#include <algorithm>
 #include <vector>
 #include <string>
 
