@@ -1,21 +1,47 @@
+#include <Tcl/tcl.h>
 #include "shiprenderer.h"
 
-void ShipRenderer::render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction) {
-    double cx = position.X();
-    double cy = position.Y();
+static void renderAt(GfxWrapper *gfx, double x, double y, double radius, double rotation)
+{
+    double cx = x;
+    double cy = y;
 
-    double tpx = position.X() + cos(direction.Angle()) * shape.Radius();
-    double tpy = position.Y() + sin(direction.Angle()) * shape.Radius();
+    double tpx = cx + cos(rotation) * radius;
+    double tpy = cy + sin(rotation) * radius;
 
-    double blx = position.X() + cos(direction.Angle() - M_PI * 0.75) * shape.Radius();
-    double bly = position.Y() + sin(direction.Angle() - M_PI * 0.75) * shape.Radius();
+    double blx = cx + cos(rotation - M_PI * 0.75) * radius;
+    double bly = cy + sin(rotation - M_PI * 0.75) * radius;
 
-    double brx = position.X() + cos(direction.Angle() + M_PI * 0.75) * shape.Radius();
-    double bry = position.Y() + sin(direction.Angle() + M_PI * 0.75) * shape.Radius();
+    double brx = cx + cos(rotation + M_PI * 0.75) * radius;
+    double bry = cy + sin(rotation + M_PI * 0.75) * radius;
 
     gfx->drawLine(cx, cy, blx, bly, RGB::white);
     gfx->drawLine(cx, cy, brx, bry, RGB::white);
 
     gfx->drawLine(blx, bly, tpx, tpy, RGB::white);
     gfx->drawLine(brx, bry, tpx, tpy, RGB::white);
+}
+
+
+void ShipRenderer::render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction) {
+    renderAt(gfx, position.X(), position.Y(), shape.Radius(), direction.Angle());
+    if(position.X()+shape.Radius()>640)
+    {
+        renderAt(gfx, position.X()-640, position.Y(), shape.Radius(), direction.Angle());
+    }
+
+    if(position.X()-shape.Radius()<0)
+    {
+        renderAt(gfx, position.X()+640, position.Y(), shape.Radius(), direction.Angle());
+    }
+
+    if(position.Y()+shape.Radius()>480)
+    {
+        renderAt(gfx, position.X(), position.Y()-480, shape.Radius(), direction.Angle());
+    }
+
+    if(position.Y()-shape.Radius()<0)
+    {
+        renderAt(gfx, position.X(), position.Y()+480, shape.Radius(), direction.Angle());
+    }
 }

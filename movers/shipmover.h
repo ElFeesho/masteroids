@@ -18,18 +18,18 @@ public:
         movementVector.add(GameTime::factorTime(cos(direction.Angle()) * direction.Speed()), GameTime::factorTime(sin(direction.Angle()) * direction.Speed()));
         position.translate(movementVector.X(), movementVector.Y());
 
-        if (position.X() > 640.0 + 10.0) {
-            position.X(-10.0);
+        if (position.X() > 640.0) {
+            position.X(0);
         }
-        else if (position.X() < 0.0 - 10.0) {
-            position.X(640.0 + 10.0);
+        else if (position.X() < 0.0) {
+            position.X(640.0);
         }
 
-        if (position.Y() > 480.0 + 10.0) {
-            position.Y(-10.0);
+        if (position.Y() > 480.0) {
+            position.Y(0.0);
         }
-        else if (position.Y() < 0.0 - 10.0) {
-            position.Y(480.0 + 10.0);
+        else if (position.Y() < 0.0) {
+            position.Y(480.0);
         }
     }
 
