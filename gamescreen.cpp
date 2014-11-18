@@ -4,6 +4,7 @@
 #include "input/gamepadinputmanager.h"
 #include "options.h"
 #include <sstream>
+#include <Python/Python.h>
 
 using std::stringstream;
 
@@ -64,7 +65,13 @@ void GameScreen::screenShown() {
 
     for (int i = 0; i < Options::players; i++) {
         playersLives[i] = Options::lives;
-        players[i] = new Ship(GamepadInputManager::sharedInstance()->playerOne(), this, playerMovers[i], playerSpawnLocations[i]);
+        players[i] = new Ship(GamepadInputManager::sharedInstance()->playerOne(), this, playerMovers[i]);
+        players[i]->position().X(playerSpawnLocations[i].X());
+        players[i]->position().Y(playerSpawnLocations[i].Y());
+        players[i]->position().Rotation(playerSpawnLocations[i].Rotation());
+        players[i]->direction().Angle(playerSpawnLocations[i].Rotation());
+        players[i]->direction().Speed(0);
+        players[i]->setVisible(true);
     }
 
     generateLevel();
@@ -109,12 +116,12 @@ void GameScreen::checkPlayerDeaths() {
         if (players[i]->isVisible()) {
             if (Options::team_kill) {
                 for (int j = 0; j < Options::players; j++) {
+
                     if (i == j) {
                         continue;
                     }
 
                     playerBullets[j].checkCollisions(*players[i], [&](Entity *hit){
-                        debrisFountain.projectDebris(debrisEntities, Direction(3.5, players[i]->direction().Angle()), players[i]->position(), 1.3f, 12);
                         killPlayer(i);
                         playerBullets[j].removeEntity(hit);
                     });
@@ -122,12 +129,10 @@ void GameScreen::checkPlayerDeaths() {
             }
 
             asteroids.checkCollisions(*players[i], [&](Entity *hit) {
-                debrisFountain.projectDebris(debrisEntities, Direction(3.5, players[i]->direction().Angle()), players[i]->position(), 1.3f, 12);
                 killPlayer(i);
             });
 
             secondaryAsteroids.checkCollisions(*players[i], [&](Entity *hit) {
-                debrisFountain.projectDebris(debrisEntities, Direction(3.5, players[i]->direction().Angle()), players[i]->position(), 1.3f, 12);
                 killPlayer(i);
             });
         }
@@ -135,10 +140,12 @@ void GameScreen::checkPlayerDeaths() {
 }
 
 void GameScreen::killPlayer(int playerNumber) {
+    debrisFountain.projectDebris(debrisEntities, Direction(0.5f, players[playerNumber]->direction().Angle()), players[playerNumber]->position(), 1.3f, 12);
     players[playerNumber]->setVisible(false);
     playersLives[playerNumber]--;
     if (playersLives[playerNumber] > 0) {
-        players[playerNumber]->respawn();
+
+        respawnShip(playerNumber);
         playerMovers[playerNumber].reset();
     }
     else
@@ -219,4 +226,17 @@ void GameScreen::ingameContinueSelected() {
 
 void GameScreen::ingameQuitSelected() {
     listener->screenClosed(this, 0);
+}
+
+void GameScreen::respawnShip(int playerNumber) {
+    printf("RESPAWNING: %d\n", playerNumber);
+    GameTime::schedule(1500, [&, playerNumber]() {
+        players[playerNumber]->position().X(playerSpawnLocations[playerNumber].X());
+        players[playerNumber]->position().Y(playerSpawnLocations[playerNumber].Y());
+        players[playerNumber]->position().Rotation(playerSpawnLocations[playerNumber].Rotation());
+        players[playerNumber]->direction().Angle(playerSpawnLocations[playerNumber].Rotation());
+        players[playerNumber]->direction().Speed(0);
+        players[playerNumber]->setVisible(true);
+        players[playerNumber]->mover().reset();
+    });
 }

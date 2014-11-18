@@ -14,6 +14,7 @@ public:
     }
 
     void move(Direction &direction, Position &position, Shape &shape = Shape::NONE) {
+        direction.rotate(GameTime::factorTime(direction.Spin()));
         movementVector.add(GameTime::factorTime(cos(direction.Angle()) * direction.Speed()), GameTime::factorTime(sin(direction.Angle()) * direction.Speed()));
         position.translate(movementVector.X(), movementVector.Y());
 

@@ -13,3 +13,9 @@ Plans
 5. NETWORK PLAY BETWEEN WII AND PC...
 6. ???
 7. Android port
+
+Progress
+--------
+So far a lot of the inheritance (all?) has been removed and control and knowledge has been centralised a bit better into 'Screen' instances.
+Moving towards a set of factories that produce asteroids or ships.
+Input needs some serious re-work though!

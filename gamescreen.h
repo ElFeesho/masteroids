@@ -61,6 +61,8 @@ private:
     void checkPlayerDeaths();
 
     void killPlayer(int playerNumber);
+
+    void respawnShip(int playerNumber);
 };
 
 #endif // GAMESCREEN_H

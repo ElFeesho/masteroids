@@ -5,7 +5,7 @@
 
 class Direction {
 public:
-    Direction(double speed, double angle) : speed(speed), angle(angle) {
+    Direction(double speed, double angle, double spin = 0) : speed(speed), angle(angle), spin(spin) {
     }
 
     Direction(const Direction &copy) : speed(copy.speed), angle(copy.angle) {
@@ -22,6 +22,15 @@ public:
         return angle;
     }
 
+    double Spin() {
+        return spin;
+    }
+
+    void Spin(double nSpin)
+    {
+        spin = nSpin;
+    }
+
     void Speed(double nSpeed) {
         speed = nSpeed;
     }
@@ -34,13 +43,14 @@ public:
         this->angle += angle;
     }
 
+
     bool operator==(const Direction &other) const {
         return (&other == &NONE) || ((other.speed == speed) && (other.angle == angle));
     }
 
     static Direction NONE;
 private:
-    double speed, angle;
+    double speed, spin, angle;
 };
 
 #endif

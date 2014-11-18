@@ -25,7 +25,7 @@ public:
 
 class Ship : public Entity, public GamepadListener {
 public:
-    Ship(Gamepad *gamepad, ShipListener *listener, ShipMover &shipMover, Position spawnLocation);
+    Ship(Gamepad *gamepad, ShipListener *listener, ShipMover &shipMover);
 
     ~Ship();
 
@@ -67,19 +67,20 @@ public:
         visible = visibility;
     }
 
-    void respawn();
+    ShipMover &mover(){
+        return shipMover;
+    }
 
 private:
     Gamepad *gamepad;
     ShipListener *listener;
-    ShipMover mover;
+    ShipMover shipMover;
     ShipRenderer shipRenderer;
 
     Position spawnPosition;
 
     Position pos;
     Shape bodyShape;
-    double rotationSpeed;
     Direction travelDirection;
 
     bool visible;

@@ -1,19 +1,13 @@
 #include "ship.h"
 
-Ship::Ship(Gamepad *gamepad, ShipListener *listener, ShipMover &shipMover, Position spawnLocation) : visible(true),
+Ship::Ship(Gamepad *gamepad, ShipListener *listener, ShipMover &shipMover) : visible(true),
                                                                                                      shipRenderer(ShipRenderer()),
-                                                                                                     mover(shipMover),
+                                                                                                     shipMover(shipMover),
                                                                                                      bodyShape(Shape(8.0f)),
                                                                                                      gamepad(gamepad),
                                                                                                      listener(listener),
-                                                                                                     rotationSpeed(0),
-                                                                                                     travelDirection(Direction(0.0, 0.0)),
-                                                                                                     spawnPosition(spawnLocation) {
+                                                                                                     travelDirection(Direction(0.0, 0.0)) {
     gamepad->addListener(this);
-    position().X(spawnLocation.X());
-    position().Y(spawnLocation.Y());
-    direction().Angle(spawnLocation.Rotation());
-    position().Rotation(spawnLocation.Rotation());
 }
 
 Ship::~Ship() {
@@ -21,32 +15,19 @@ Ship::~Ship() {
 }
 
 bool Ship::update() {
-    travelDirection.rotate(GameTime::factorTime(rotationSpeed));
-    mover.move(direction(), position());
+    mover().move(direction(), position());
     return aliveMonitor().alive();
-}
-
-void Ship::respawn() {
-    GameTime::schedule(1500, [&]() {
-        position().X(spawnPosition.X());
-        position().Y(spawnPosition.Y());
-        position().Rotation(spawnPosition.Rotation());
-        direction().Angle(spawnPosition.Rotation());
-        direction().Speed(0);
-        setVisible(true);
-        mover.reset();
-    });
 }
 
 bool Ship::buttonDown(GamepadButton button) {
     if (button == BUTTON_RIGHT) {
-        rotationSpeed = 0.075f;
+        direction().Spin(0.075f);
     }
     else if (button == BUTTON_LEFT) {
-        rotationSpeed = -0.075f;
+        direction().Spin(-0.075f);
     }
     else if (button == BUTTON_UP) {
-        travelDirection.Speed(0.1f);
+        direction().Speed(0.1f);
     }
     else if (button == BUTTON_FIRE) {
         listener->shipFired(this);
@@ -56,10 +37,10 @@ bool Ship::buttonDown(GamepadButton button) {
 
 bool Ship::buttonUp(GamepadButton button) {
     if (button == BUTTON_LEFT || button == BUTTON_RIGHT) {
-        rotationSpeed = 0;
+        direction().Spin(0.0f);
     }
     else if (button == BUTTON_UP) {
-        travelDirection.Speed(0.0f);
+        direction().Speed(0.0f);
     }
     else if (button == BUTTON_START) {
         listener->shipRequestedPause(this);
@@ -76,5 +57,3 @@ void Ship::render(GfxWrapper *gfx) {
         renderer().render(gfx, position(), shape(), direction());
     }
 }
-
-
