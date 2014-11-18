@@ -63,6 +63,8 @@ private:
     void killPlayer(int playerNumber);
 
     void respawnShip(int playerNumber);
+
+    void checkLevelComplete();
 };
 
 #endif // GAMESCREEN_H

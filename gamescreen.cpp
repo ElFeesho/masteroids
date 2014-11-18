@@ -4,7 +4,6 @@
 #include "input/gamepadinputmanager.h"
 #include "options.h"
 #include <sstream>
-#include <Python/Python.h>
 
 using std::stringstream;
 
@@ -97,11 +96,6 @@ void GameScreen::update(GfxWrapper *gfx) {
         secondaryAsteroids.renderAll(gfx);
 
         checkPlayerDeaths();
-
-        if (asteroids.size() == 0 && secondaryAsteroids.size() == 0) {
-            level++;
-            generateLevel();
-        }
     }
     else {
         asteroids.renderAll(gfx);
@@ -130,10 +124,16 @@ void GameScreen::checkPlayerDeaths() {
 
             asteroids.checkCollisions(*players[i], [&](Entity *hit) {
                 killPlayer(i);
+                asteroids.removeEntity(hit);
+                secondaryAsteroids.add(new Asteroid(10.0f, Position(hit->position())));
+                secondaryAsteroids.add(new Asteroid(10.0f, Position(hit->position())));
             });
 
             secondaryAsteroids.checkCollisions(*players[i], [&](Entity *hit) {
                 killPlayer(i);
+                secondaryAsteroids.removeEntity(hit);
+
+                checkLevelComplete();
             });
         }
     }
@@ -196,6 +196,8 @@ void GameScreen::checkAsteroidCollisions(int playerNumber) {
         playerBullets[playerNumber].removeEntity(bullet);
         playerScores[playerNumber] += 25;
         secondaryAsteroids.removeEntity(asteroid);
+
+        checkLevelComplete();
     });
 }
 
@@ -238,4 +240,13 @@ void GameScreen::respawnShip(int playerNumber) {
         players[playerNumber]->setVisible(true);
         players[playerNumber]->mover().reset();
     });
+}
+
+void GameScreen::checkLevelComplete() {
+    if (asteroids.size() == 0 && secondaryAsteroids.size() == 0) {
+        GameTime::schedule(1500, [&](){
+            level++;
+            generateLevel();
+        });
+    }
 }
