@@ -7,11 +7,11 @@
 
 Menu::Menu(MenuListener *listener)
         : menuRenderer(MenuRenderer()), listener(listener), menu_sel(0), next_change(0), ldir(-1), child(NULL) {
-    GamepadInputManager::sharedInstance()->playerOne()->addListener(this);
+    GamepadInputManager::sharedInstance()->inputForPlayer(0)->addListener(this);
 }
 
 Menu::~Menu() {
-    GamepadInputManager::sharedInstance()->playerOne()->removeListener(this);
+    GamepadInputManager::sharedInstance()->inputForPlayer(0)->removeListener(this);
 }
 
 bool Menu::update() {

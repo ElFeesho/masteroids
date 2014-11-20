@@ -12,11 +12,11 @@ Options::Options(OptionsListener *listener)
           child(NULL),
           colour(RGB(1.0f, 1.0f, 1.0f)),
           colourHighlight(RGB(1.0f, 0.8f, 0.0f)) {
-    GamepadInputManager::sharedInstance()->playerOne()->addListener(this);
+    GamepadInputManager::sharedInstance()->inputForPlayer(0)->addListener(this);
 }
 
 Options::~Options() {
-    GamepadInputManager::sharedInstance()->playerOne()->removeListener(this);
+    GamepadInputManager::sharedInstance()->inputForPlayer(0)->removeListener(this);
 }
 
 bool Options::update() {

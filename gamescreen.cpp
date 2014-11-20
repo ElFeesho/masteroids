@@ -63,7 +63,7 @@ void GameScreen::screenShown() {
 
     for (int i = 0; i < Options::players; i++) {
         playersLives[i] = Options::lives;
-        players[i] = new Ship(GamepadInputManager::sharedInstance()->playerOne(), this, playerMovers[i]);
+        players[i] = new Ship(GamepadInputManager::sharedInstance()->inputForPlayer(i), this, playerMovers[i]);
         players[i]->position().X(playerSpawnLocations[i].X());
         players[i]->position().Y(playerSpawnLocations[i].Y());
         players[i]->position().Rotation(playerSpawnLocations[i].Rotation());

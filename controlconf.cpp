@@ -10,11 +10,11 @@ ControlConf::ControlConf(ControlConfListener *listener)
           bind_timeout(0),
           next_change(GameTime::getMillis() + 500),
           ldir(1) {
-    GamepadInputManager::sharedInstance()->playerOne()->addListener(this);
+    GamepadInputManager::sharedInstance()->inputForPlayer(0)->addListener(this);
 }
 
 ControlConf::~ControlConf() {
-    GamepadInputManager::sharedInstance()->playerOne()->removeListener(this);
+    GamepadInputManager::sharedInstance()->inputForPlayer(0)->removeListener(this);
 }
 
 void ControlConf::render(GfxWrapper *gfx) {

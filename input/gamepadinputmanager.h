@@ -11,21 +11,12 @@ public:
 
     void poll();
 
-    Gamepad *playerOne();
-
-    Gamepad *playerTwo();
-
-    Gamepad *playerThree();
-
-    Gamepad *playerFour();
+    Gamepad *inputForPlayer(int playerNumber);
 
 private:
     GamepadInputManager();
 
-    Gamepad *gamepadOne;
-    Gamepad *gamepadTwo;
-    Gamepad *gamepadThree;
-    Gamepad *gamepadFour;
+    Gamepad *gamepads[4];
 
     static GamepadInputManager *instance;
 

@@ -3,11 +3,11 @@
 #include "input/gamepadinputmanager.h"
 
 About::About(AboutListener *listener) : aboutRenderer(AboutRenderer()), listener(listener) {
-    GamepadInputManager::sharedInstance()->playerOne()->addListener(this);
+    GamepadInputManager::sharedInstance()->inputForPlayer(0)->addListener(this);
 }
 
 About::~About() {
-    GamepadInputManager::sharedInstance()->playerOne()->removeListener(this);
+    GamepadInputManager::sharedInstance()->inputForPlayer(0)->removeListener(this);
 }
 
 void About::render(GfxWrapper *gfx) {

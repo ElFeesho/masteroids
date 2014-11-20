@@ -2,11 +2,11 @@
 #include "input/gamepadinputmanager.h"
 
 GameOver::GameOver() : gameOverRenderer(GameOverRenderer()) {
-    GamepadInputManager::sharedInstance()->playerOne()->addListener(this);
+    GamepadInputManager::sharedInstance()->inputForPlayer(0)->addListener(this);
 }
 
 GameOver::~GameOver() {
-    GamepadInputManager::sharedInstance()->playerOne()->removeListener(this);
+    GamepadInputManager::sharedInstance()->inputForPlayer(0)->removeListener(this);
 }
 
 bool GameOver::update() {
