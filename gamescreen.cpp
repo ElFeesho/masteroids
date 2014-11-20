@@ -3,7 +3,6 @@
 #include "bullet.h"
 #include "input/gamepadinputmanager.h"
 #include "options.h"
-#include <sstream>
 
 using std::stringstream;
 
@@ -13,9 +12,9 @@ GameScreen::GameScreen() :
         playerScores{0, 0, 0, 0},
         pauseEnt(NULL),
         playerMovers{ShipMover(), ShipMover(), ShipMover(), ShipMover()},
-        playerScorePositions{Position(5, 5, 0), Position(635, 5, 0), Position(5, 460, 0), Position(635, 460, 0)} ,
-        livesRenderer(LivesRenderer())
-{
+        playerScorePositions{Position(5, 5, 0), Position(635, 5, 0), Position(5, 440, 0), Position(635, 440, 0)},
+        playerColours{RGB::green, RGB::yellow, RGB::blue, RGB::purple},
+        livesRenderer(LivesRenderer()) {
 
 }
 
@@ -48,18 +47,18 @@ void GameScreen::screenShown() {
     }
     else if (Options::players == 2) {
         playerSpawnLocations[0] = Position(160, 240, 0);
-        playerSpawnLocations[1] = Position(480, 240, 0);
+        playerSpawnLocations[1] = Position(480, 240, -M_PI);
     }
     else if (Options::players == 3) {
-        playerSpawnLocations[0] = Position(320, 120, 0);
-        playerSpawnLocations[1] = Position(160, 320, 0);
-        playerSpawnLocations[2] = Position(480, 320, 0);
+        playerSpawnLocations[0] = Position(320, 120, M_PI_2);
+        playerSpawnLocations[1] = Position(160, 320, -M_PI_4);
+        playerSpawnLocations[2] = Position(480, 320, -M_PI_4*3);
     }
     else if (Options::players == 4) {
-        playerSpawnLocations[0] = Position(160, 120, 0);
-        playerSpawnLocations[1] = Position(480, 120, 0);
-        playerSpawnLocations[2] = Position(160, 320, 0);
-        playerSpawnLocations[3] = Position(480, 320, 0);
+        playerSpawnLocations[0] = Position(160, 120, M_PI_4);
+        playerSpawnLocations[1] = Position(480, 120, M_PI_4*3);
+        playerSpawnLocations[2] = Position(160, 320, -M_PI_4);
+        playerSpawnLocations[3] = Position(480, 320, -M_PI_4*3);
     }
 
     for (int i = 0; i < Options::players; i++) {
@@ -107,35 +106,38 @@ void GameScreen::update(GfxWrapper *gfx) {
 
 void GameScreen::checkPlayerDeaths() {
     for (int i = 0; i < Options::players; i++) {
-        if (players[i]->isVisible()) {
-            if (Options::team_kill) {
-                for (int j = 0; j < Options::players; j++) {
-
-                    if (i == j) {
-                        continue;
-                    }
-
-                    playerBullets[j].checkCollisions(*players[i], [&](Entity *hit){
-                        killPlayer(i);
-                        playerBullets[j].removeEntity(hit);
-                    });
-                }
-            }
-
-            asteroids.checkCollisions(*players[i], [&](Entity *hit) {
-                killPlayer(i);
-                asteroids.removeEntity(hit);
-                secondaryAsteroids.add(new Asteroid(10.0f, Position(hit->position())));
-                secondaryAsteroids.add(new Asteroid(10.0f, Position(hit->position())));
-            });
-
-            secondaryAsteroids.checkCollisions(*players[i], [&](Entity *hit) {
-                killPlayer(i);
-                secondaryAsteroids.removeEntity(hit);
-
-                checkLevelComplete();
-            });
+        if (!players[i]->isVisible()) {
+            continue;
         }
+
+        if (Options::team_kill) {
+            for (int j = 0; j < Options::players; j++) {
+
+                if (i == j) {
+                    continue;
+                }
+
+                playerBullets[j].checkCollisions(*players[i], [&](Entity *hit) {
+                    killPlayer(i);
+                    playerBullets[j].removeEntity(hit);
+                });
+            }
+        }
+
+        asteroids.checkCollisions(*players[i], [&](Entity *hit) {
+            killPlayer(i);
+            asteroids.removeEntity(hit);
+            secondaryAsteroids.add(new Asteroid(10.0f, Position(hit->position())));
+            secondaryAsteroids.add(new Asteroid(10.0f, Position(hit->position())));
+        });
+
+        secondaryAsteroids.checkCollisions(*players[i], [&](Entity *hit) {
+            killPlayer(i);
+            secondaryAsteroids.removeEntity(hit);
+
+            checkLevelComplete();
+        });
+
     }
 }
 
@@ -148,15 +150,13 @@ void GameScreen::killPlayer(int playerNumber) {
         respawnShip(playerNumber);
         playerMovers[playerNumber].reset();
     }
-    else
-    {
+    else {
         bool shouldGoToGameover = true;
         for (int i = 0; i < Options::players; i++) {
             shouldGoToGameover &= playersLives[i] == 0;
         }
 
-        if (shouldGoToGameover)
-        {
+        if (shouldGoToGameover) {
             GameTime::schedule(3000, [&]() {
                 listener->screenClosed(this, 0);
             });
@@ -172,10 +172,16 @@ void GameScreen::updatePlayers(GfxWrapper *gfx) {
         playerBullets[i].renderAll(gfx);
 
         checkAsteroidCollisions(i);
-        stringstream sstream;
-        sstream << "SCORE: " << playerScores[i];
-        gfx->drawText(playerScorePositions[i].X(), playerScorePositions[i].Y(), sstream.str(), RGB::green, i & 1 ? RIGHT : LEFT);
+
+        scoreRenderer.setScore(playerScores[i]);
         livesRenderer.setLives(playersLives[i]);
+        TextAlignment alignment = i & 1 ? RIGHT : LEFT;
+        scoreRenderer.setAlignment(alignment);
+        livesRenderer.setAlignment(alignment);
+        scoreRenderer.setColour(playerColours[i]);
+        livesRenderer.setColour(playerColours[i]);
+
+        scoreRenderer.render(gfx, playerScorePositions[i], Shape::NONE, Direction::NONE);
         livesRenderer.render(gfx, playerScorePositions[i], Shape::NONE, Direction::NONE);
     }
 }
@@ -244,7 +250,7 @@ void GameScreen::respawnShip(int playerNumber) {
 
 void GameScreen::checkLevelComplete() {
     if (asteroids.size() == 0 && secondaryAsteroids.size() == 0) {
-        GameTime::schedule(1500, [&](){
+        GameTime::schedule(1500, [&]() {
             level++;
             generateLevel();
         });

@@ -74,6 +74,8 @@ set(SOURCE_FILES
     renderers/ingamemenurenderer.h
     renderers/livesrenderer.cpp
     renderers/livesrenderer.h
+    renderers/scorerenderer.cpp
+    renderers/scorerenderer.h
     ingame.cpp
     ingame.h
     main.cpp

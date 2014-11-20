@@ -8,6 +8,7 @@
 #include "ingame.h"
 #include "debrisfountain.h"
 #include "renderers/livesrenderer.h"
+#include "renderers/scorerenderer.h"
 
 class GameScreen : public Screen, public ShipListener, public InGameListener {
 public:
@@ -49,7 +50,9 @@ private:
     EntityList playerBullets[4];
     Position playerScorePositions[4];
     Position playerSpawnLocations[4];
+    RGB playerColours[4];
     LivesRenderer livesRenderer;
+    ScoreRenderer scoreRenderer;
     int playerScores[4];
     int playersLives[4];
     int level;

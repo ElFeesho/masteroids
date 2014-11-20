@@ -1,24 +1,24 @@
-#ifndef __LIVES_RENDERER_H__
-#define __LIVES_RENDERER_H__
+#ifndef __SCORE_RENDERER_H__
+#define __SCORE_RENDERER_H__
 
 #include <gfx/gfx.h>
 #include <position.h>
 #include <shape.h>
 #include "renderers/renderer.h"
 
-class LivesRenderer : public Renderer
+class ScoreRenderer : public Renderer
 {
 public:
-    LivesRenderer() : colour(RGB::black) {}
-    ~LivesRenderer() {}
+    ScoreRenderer() : colour(RGB::black) {}
+    ~ScoreRenderer() {}
 
     void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction) override;
 
-    void setLives(int liveCount) { this->liveCount = liveCount; }
+    void setScore(int score) { this->score = score; }
     void setAlignment(TextAlignment alignment) { this->alignment = alignment; }
     void setColour(RGB &colour) { this->colour = colour; }
 private:
-    int liveCount;
+    int score;
     TextAlignment alignment;
     RGB colour;
 };
