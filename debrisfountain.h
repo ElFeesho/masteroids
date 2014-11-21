@@ -13,7 +13,7 @@ public:
 
     ~DebrisFountain();
 
-    void projectDebris(EntityList &entityList, Direction direction, Position from, double spread, int amount);
+    void projectDebris(EntityList &entityList, Direction direction, Position from, double spread, int amount, RGB &colour);
 };
 
 #endif // DEBRISFOUNTAIN_H

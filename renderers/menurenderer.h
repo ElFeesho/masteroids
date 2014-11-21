@@ -18,7 +18,7 @@ public:
         menu_sel = selection;
     }
 
-    void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction) {
+    void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) {
         gfx->drawRect(320 - asteroid_banner_width / 2, 79, asteroid_banner_width + 1, 310, RGB::blue);
         gfx->drawImg(321 - asteroid_banner_width / 2, 80, asteroid_banner_width, asteroid_banner_height, asteroid_banner_data);
         gfx->drawImg(320, 200, controllers_width, controllers_height, controllers_data);

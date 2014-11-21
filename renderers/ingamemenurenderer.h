@@ -10,7 +10,7 @@ public:
     InGameMenuRenderer();
     ~InGameMenuRenderer();
     void setMenuSelection(int menuSelection);
-    void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction);
+    void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) override;
 
 private:
     int menu_sel;

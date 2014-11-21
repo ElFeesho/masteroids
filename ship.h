@@ -71,6 +71,11 @@ public:
         return shipMover;
     }
 
+    void setColour(const RGB &colour)
+    {
+        this->colour = colour;
+    }
+
 private:
     Gamepad *gamepad;
     ShipListener *listener;
@@ -82,6 +87,8 @@ private:
     Position pos;
     Shape bodyShape;
     Direction travelDirection;
+
+    RGB colour;
 
     bool visible;
 };

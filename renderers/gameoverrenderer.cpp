@@ -9,7 +9,7 @@ GameOverRenderer::~GameOverRenderer() {
 
 }
 
-void GameOverRenderer::render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction) {
+void GameOverRenderer::render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction, RGB &colour) {
     if (Options::players == 1) /* 1 player */
     {
         gfx->drawImg((640 - game_over_width) / 2, (480 - game_over_height) / 2, game_over_width, game_over_height, game_over_img);

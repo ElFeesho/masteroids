@@ -14,7 +14,7 @@ public:
     ~AboutRenderer() {
     }
 
-    void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction) {
+    void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) {
         gfx->drawRect(120, 70, 403, 300, RGB::blue);
         gfx->drawImg(321 - about_width / 2, 81, about_width, about_height, about_img);
 

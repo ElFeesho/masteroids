@@ -11,7 +11,7 @@ class GameOverRenderer : public Renderer {
 public:
     virtual ~GameOverRenderer();
 
-    void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction) override;
+    void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) override;
 };
 
 #endif

@@ -9,18 +9,16 @@
 class LivesRenderer : public Renderer
 {
 public:
-    LivesRenderer() : colour(RGB::black) {}
+    LivesRenderer() {}
     ~LivesRenderer() {}
 
-    void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction) override;
+    void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) override;
 
     void setLives(int liveCount) { this->liveCount = liveCount; }
     void setAlignment(TextAlignment alignment) { this->alignment = alignment; }
-    void setColour(RGB &colour) { this->colour = colour; }
 private:
     int liveCount;
     TextAlignment alignment;
-    RGB colour;
 };
 
 #endif

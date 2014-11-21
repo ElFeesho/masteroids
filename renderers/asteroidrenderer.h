@@ -38,7 +38,7 @@ public:
     }
 
 
-    void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction) {
+    void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) {
         if(position.X()+shape.Radius()>640)
         {
             renderAtLocation(gfx, position.X()-640, position.Y(), position.Rotation(), shape.Radius());

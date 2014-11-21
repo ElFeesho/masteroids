@@ -21,7 +21,7 @@ void OptionsRenderer::setMenuSelection(int menuSelection) {
     menu_sel = menuSelection;
 }
 
-void OptionsRenderer::render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction) {
+void OptionsRenderer::render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction, RGB &colour) {
     gfx->drawRect(120, 80, 403, 340, RGB::blue);
     gfx->drawImg(321 - options_width / 2, 81, options_width, options_height, options_img);
 

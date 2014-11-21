@@ -69,6 +69,7 @@ void GameScreen::screenShown() {
         players[i]->position().Rotation(playerSpawnLocations[i].Rotation());
         players[i]->direction().Angle(playerSpawnLocations[i].Rotation());
         players[i]->direction().Speed(0);
+        players[i]->setColour(playerColours[i]);
         players[i]->setVisible(true);
     }
 
@@ -142,7 +143,7 @@ void GameScreen::checkPlayerDeaths() {
 }
 
 void GameScreen::killPlayer(int playerNumber) {
-    debrisFountain.projectDebris(debrisEntities, Direction(0.5f, players[playerNumber]->direction().Angle()), players[playerNumber]->position(), 1.3f, 12);
+    debrisFountain.projectDebris(debrisEntities, Direction(0.5f, players[playerNumber]->direction().Angle()), players[playerNumber]->position(), 1.3f, 12, playerColours[playerNumber]);
     players[playerNumber]->setVisible(false);
     playersLives[playerNumber]--;
     if (playersLives[playerNumber] > 0) {
@@ -178,18 +179,16 @@ void GameScreen::updatePlayers(GfxWrapper *gfx) {
         TextAlignment alignment = i & 1 ? RIGHT : LEFT;
         scoreRenderer.setAlignment(alignment);
         livesRenderer.setAlignment(alignment);
-        scoreRenderer.setColour(playerColours[i]);
-        livesRenderer.setColour(playerColours[i]);
 
-        scoreRenderer.render(gfx, playerScorePositions[i], Shape::NONE, Direction::NONE);
-        livesRenderer.render(gfx, playerScorePositions[i], Shape::NONE, Direction::NONE);
+        scoreRenderer.render(gfx, playerScorePositions[i], Shape::NONE, Direction::NONE, playerColours[i]);
+        livesRenderer.render(gfx, playerScorePositions[i], Shape::NONE, Direction::NONE, playerColours[i]);
     }
 }
 
 
 void GameScreen::checkAsteroidCollisions(int playerNumber) {
     asteroids.checkCollisions(playerBullets[playerNumber], [&](Entity *asteroid, Entity *bullet) {
-        debrisFountain.projectDebris(debrisEntities, asteroid->direction(), asteroid->position(), 1.3f, 6);
+        debrisFountain.projectDebris(debrisEntities, asteroid->direction(), asteroid->position(), 1.3f, 6, RGB::white);
         secondaryAsteroids.add(new Asteroid(10.0f, Position(asteroid->position())));
         secondaryAsteroids.add(new Asteroid(10.0f, Position(asteroid->position())));
         playerBullets[playerNumber].removeEntity(bullet);
@@ -198,7 +197,7 @@ void GameScreen::checkAsteroidCollisions(int playerNumber) {
     });
 
     secondaryAsteroids.checkCollisions(playerBullets[playerNumber], [&](Entity *asteroid, Entity *bullet) {
-        debrisFountain.projectDebris(debrisEntities, asteroid->direction(), asteroid->position(), 1.3f, 6);
+        debrisFountain.projectDebris(debrisEntities, asteroid->direction(), asteroid->position(), 1.3f, 6, RGB::white);
         playerBullets[playerNumber].removeEntity(bullet);
         playerScores[playerNumber] += 25;
         secondaryAsteroids.removeEntity(asteroid);
@@ -215,7 +214,7 @@ void GameScreen::setListener(ScreenListener *listener) {
 void GameScreen::shipFired(Ship *ship) {
     for (int i = 0; i < Options::players; i++) {
         if (ship == players[i] && playerBullets[i].size() < Options::max_bullets && players[i]->isVisible()) {
-            playerBullets[i].add(new Bullet(ship, ship->direction()));
+            playerBullets[i].add(new Bullet(ship, ship->direction(), playerColours[i]));
             break;
         }
     }

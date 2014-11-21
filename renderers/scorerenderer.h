@@ -9,18 +9,16 @@
 class ScoreRenderer : public Renderer
 {
 public:
-    ScoreRenderer() : colour(RGB::black) {}
+    ScoreRenderer() {}
     ~ScoreRenderer() {}
 
-    void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction) override;
+    void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) override;
 
     void setScore(int score) { this->score = score; }
     void setAlignment(TextAlignment alignment) { this->alignment = alignment; }
-    void setColour(RGB &colour) { this->colour = colour; }
 private:
     int score;
     TextAlignment alignment;
-    RGB colour;
 };
 
 #endif

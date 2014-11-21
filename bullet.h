@@ -15,7 +15,7 @@
 
 class Bullet : public Entity {
 public:
-    Bullet(Entity *owner, Direction travelDirection);
+    Bullet(Entity *owner, Direction travelDirection, RGB &bulletColour);
 
     ~Bullet() {
     };
@@ -52,6 +52,7 @@ private:
     Direction travelDirection;
     Shape bulletShape;
     Entity *bulletOwner;
+    RGB colour;
 };
 
 #endif

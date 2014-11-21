@@ -9,7 +9,7 @@
 
 class Debris : public Entity {
 public:
-    Debris(Direction travelDirection, Position pos, Shape shape);
+    Debris(Direction travelDirection, Position pos, Shape shape, RGB &debrisColour);
 
     ~Debris();
 
@@ -40,6 +40,7 @@ private:
     ElapsedTimeToLive monitor;
     double rotationSpeed;
     FixedDirectionMover mover;
+    RGB colour;
 };
 
 #endif // DEBRIS_H

@@ -20,7 +20,7 @@ public:
     ~ControlConfRenderer() {
     }
 
-    void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction) {
+    void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) {
         gfx->drawRect(120, 70, 403, 316, RGB::blue);
         gfx->drawText(135, 80 + font5_char_high * 8, "Not implemented", RGB::white);
     }

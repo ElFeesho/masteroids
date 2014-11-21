@@ -6,7 +6,8 @@ Ship::Ship(Gamepad *gamepad, ShipListener *listener, ShipMover &shipMover) : vis
                                                                                                      bodyShape(Shape(8.0f)),
                                                                                                      gamepad(gamepad),
                                                                                                      listener(listener),
-                                                                                                     travelDirection(Direction(0.0, 0.0)) {
+                                                                                                     travelDirection(Direction(0.0, 0.0)),
+                                                                                                     colour(RGB::white) {
     gamepad->addListener(this);
 }
 
@@ -54,6 +55,6 @@ Gamepad *Ship::getGamepad() {
 
 void Ship::render(GfxWrapper *gfx) {
     if (isVisible()) {
-        renderer().render(gfx, position(), shape(), direction());
+        renderer().render(gfx, position(), shape(), direction(), colour);
     }
 }
