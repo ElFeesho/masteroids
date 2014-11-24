@@ -3,6 +3,7 @@
 #include "bullet.h"
 #include "input/gamepadinputmanager.h"
 #include "options.h"
+#include "asteroidfactory.h"
 
 using std::stringstream;
 
@@ -78,7 +79,7 @@ void GameScreen::screenShown() {
 
 void GameScreen::generateLevel() {
     for (int i = 0; i < 7 + (level / 2); i++) {
-        asteroids.add(new Asteroid());
+        asteroids.add(asteroidFactory.createAsteroid(25.0f));
     }
 }
 
@@ -128,8 +129,7 @@ void GameScreen::checkPlayerDeaths() {
         asteroids.checkCollisions(*players[i], [&](Entity *hit) {
             killPlayer(i);
             asteroids.removeEntity(hit);
-            secondaryAsteroids.add(new Asteroid(10.0f, Position(hit->position())));
-            secondaryAsteroids.add(new Asteroid(10.0f, Position(hit->position())));
+            generateSecondaryAsteroids(hit);
         });
 
         secondaryAsteroids.checkCollisions(*players[i], [&](Entity *hit) {
@@ -140,6 +140,11 @@ void GameScreen::checkPlayerDeaths() {
         });
 
     }
+}
+
+void GameScreen::generateSecondaryAsteroids(Entity *hit) {
+    secondaryAsteroids.add(asteroidFactory.createAsteroid(10.0f, hit->position()));
+    secondaryAsteroids.add(asteroidFactory.createAsteroid(10.0f, hit->position()));
 }
 
 void GameScreen::killPlayer(int playerNumber) {
@@ -189,8 +194,7 @@ void GameScreen::updatePlayers(GfxWrapper *gfx) {
 void GameScreen::checkAsteroidCollisions(int playerNumber) {
     asteroids.checkCollisions(playerBullets[playerNumber], [&](Entity *asteroid, Entity *bullet) {
         debrisFountain.projectDebris(debrisEntities, asteroid->direction(), asteroid->position(), 1.3f, 6, RGB::white);
-        secondaryAsteroids.add(new Asteroid(10.0f, Position(asteroid->position())));
-        secondaryAsteroids.add(new Asteroid(10.0f, Position(asteroid->position())));
+        generateSecondaryAsteroids(asteroid);
         playerBullets[playerNumber].removeEntity(bullet);
         playerScores[playerNumber] += 10;
         asteroids.removeEntity(asteroid);

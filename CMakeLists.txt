@@ -42,10 +42,11 @@ set(SOURCE_FILES
     about.cpp
     about.h
     images/about_img.h
+    actor.cpp
+    actor.h
+    asteroidfactory.h
     alivemonitor.cpp
     alivemonitor.h
-    asteroid.cpp
-    asteroid.h
     bullet.cpp
     bullet.h
     controlconf.cpp

@@ -8,6 +8,7 @@
 #include "about.h"
 #include "entitylist.h"
 #include "controlconf.h"
+#include "asteroidfactory.h"
 
 class MenuScreen
         : public Screen, public AboutListener, public ControlConfListener, public MenuListener, public OptionsListener {
@@ -39,6 +40,7 @@ public:
     void screenHidden();
 
 private:
+    AsteroidFactory asteroidFactory;
     Entity *activeMenu;
 
     EntityList entityList;

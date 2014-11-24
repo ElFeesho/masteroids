@@ -12,7 +12,7 @@ MenuScreen::~MenuScreen() {
 
 void MenuScreen::screenShown() {
     for (int i = 0; i < 32; i++) {
-        entityList.add(new Asteroid());
+        entityList.add(asteroidFactory.createAsteroid(50.0f));
     }
 
     activeMenu = new Menu(this);

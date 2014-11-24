@@ -9,6 +9,7 @@
 #include "debrisfountain.h"
 #include "renderers/livesrenderer.h"
 #include "renderers/scorerenderer.h"
+#include "asteroidfactory.h"
 
 class GameScreen : public Screen, public ShipListener, public InGameListener {
 public:
@@ -35,6 +36,7 @@ public:
     void generateLevel();
 
 private:
+    AsteroidFactory asteroidFactory;
     ScreenListener *listener;
     EntityList asteroids;
     EntityList secondaryAsteroids;
@@ -68,6 +70,8 @@ private:
     void respawnShip(int playerNumber);
 
     void checkLevelComplete();
+
+    void generateSecondaryAsteroids(Entity *hit);
 };
 
 #endif // GAMESCREEN_H
