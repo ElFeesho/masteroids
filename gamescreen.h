@@ -10,6 +10,7 @@
 #include "renderers/livesrenderer.h"
 #include "renderers/scorerenderer.h"
 #include "asteroidfactory.h"
+#include "bulletfactory.h"
 
 class GameScreen : public Screen, public ShipListener, public InGameListener {
 public:
@@ -37,11 +38,12 @@ public:
 
 private:
     AsteroidFactory asteroidFactory;
+    BulletFactory bulletFactory;
     ScreenListener *listener;
     EntityList asteroids;
     EntityList secondaryAsteroids;
-
     EntityList debrisEntities;
+
     DebrisFountain debrisFountain;
     InGame *pauseEnt;
 

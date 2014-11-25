@@ -3,6 +3,7 @@
 #include "input/gamepadinputmanager.h"
 #include "options.h"
 #include "asteroidfactory.h"
+#include "bulletfactory.h"
 
 using std::stringstream;
 
@@ -217,7 +218,8 @@ void GameScreen::setListener(ScreenListener *listener) {
 void GameScreen::shipFired(Ship *ship) {
     for (int i = 0; i < Options::players; i++) {
         if (ship == players[i] && playerBullets[i].size() < Options::max_bullets && players[i]->isVisible()) {
-            playerBullets[i].add(new Bullet(ship, ship->direction(), playerColours[i]));
+            Direction bulletDir = Direction(5.0f, ship->direction().Angle());
+            playerBullets[i].add(bulletFactory.createBullet(playerColours[i], bulletDir, ship->position()));
             break;
         }
     }

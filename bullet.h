@@ -51,7 +51,6 @@ private:
     Position pos;
     Direction travelDirection;
     Shape bulletShape;
-    Entity *bulletOwner;
     RGB colour;
 };
 

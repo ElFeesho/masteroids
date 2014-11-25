@@ -49,11 +49,6 @@ void KeyboardSource::poll() {
         int buttonsDown = ((keyState ^ lastState)) & keyState;
         int buttonsUp = ((keyState ^ lastState)) & lastState;
 
-        for (int i = 0; i < 32; i++) {
-            //printf("%c", buttonsDown & (1 << (31-i)) ? '1' : '0');
-        }
-        //printf("\n");
-
         if (buttonsDown & PAD_BUTTON_UP) {
             listener->buttonDown(BUTTON_UP);
         }
