@@ -1,5 +1,4 @@
 #include "gamescreen.h"
-#include "asteroid.h"
 #include "bullet.h"
 #include "input/gamepadinputmanager.h"
 #include "options.h"

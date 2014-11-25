@@ -1,7 +1,5 @@
 #include "menuscreen.h"
 
-#include "asteroid.h"
-
 MenuScreen::MenuScreen() {
 
 }
