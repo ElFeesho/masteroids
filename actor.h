@@ -21,6 +21,9 @@ public:
     bool update();
     void render(GfxWrapper *gfx);
 
+    void setVisible(bool visible);
+    bool isVisible();
+
 private:
     Mover *actorMover;
     RGB actorColour;
@@ -29,6 +32,7 @@ private:
     Shape actorShape;
     AliveMonitor *actorMonitor;
     Renderer *actorRenderer;
+    bool visible;
 };
 
 #endif

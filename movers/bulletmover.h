@@ -29,6 +29,11 @@ public:
             position.Y(480);
         }
     }
+
+    void reset()
+    {
+
+    }
 };
 
 #endif

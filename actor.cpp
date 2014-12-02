@@ -1,6 +1,6 @@
 #include "actor.h"
 
-Actor::Actor(RGB &colour, Mover *pmover, Renderer *prenderer, AliveMonitor *pmonitor) : actorColour(colour), actorDirection(Direction::NONE), actorPosition(Position::NONE), actorShape(Shape::NONE), actorMover(pmover), actorRenderer(prenderer), actorMonitor(pmonitor)
+Actor::Actor(RGB &colour, Mover *pmover, Renderer *prenderer, AliveMonitor *pmonitor) : actorColour(colour), actorDirection(Direction::NONE), actorPosition(Position::NONE), actorShape(Shape::NONE), actorMover(pmover), actorRenderer(prenderer), actorMonitor(pmonitor), visible(true)
 {
 
 }
@@ -16,7 +16,9 @@ bool Actor::update(){
 }
 
 void Actor::render(GfxWrapper *gfx) {
-    renderer().render(gfx, position(), shape(), direction(), colour());
+    if(isVisible()) {
+        renderer().render(gfx, position(), shape(), direction(), colour());
+    }
 }
 
 Position &Actor::position() {
@@ -45,4 +47,14 @@ RGB &Actor::colour() {
 
 Mover *Actor::mover() {
     return actorMover;
+}
+
+void Actor::setVisible(bool visible)
+{
+    this->visible = visible;
+}
+
+bool Actor::isVisible()
+{
+    return visible;
 }

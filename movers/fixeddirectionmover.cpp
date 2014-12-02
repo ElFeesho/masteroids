@@ -21,3 +21,7 @@ void FixedDirectionMover::move(Direction &direction, Position &position, Shape &
         position.Y(480.0f);
     }
 }
+
+void FixedDirectionMover::reset() {
+
+}

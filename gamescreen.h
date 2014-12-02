@@ -11,6 +11,9 @@
 #include "renderers/scorerenderer.h"
 #include "asteroidfactory.h"
 #include "bulletfactory.h"
+#include "directioncontroller.h"
+
+#include "shipfactory.h"
 
 class GameScreen : public Screen, public ShipListener, public InGameListener {
 public:
@@ -39,6 +42,7 @@ public:
 private:
     AsteroidFactory asteroidFactory;
     BulletFactory bulletFactory;
+    ShipFactory shipFactory;
     ScreenListener *listener;
     EntityList asteroids;
     EntityList secondaryAsteroids;
@@ -49,7 +53,7 @@ private:
 
     bool isPaused;
 
-    Ship *players[4];
+    Actor *players[4];
     ShipMover playerMovers[4];
     EntityList playerBullets[4];
     Position playerScorePositions[4];
@@ -60,6 +64,8 @@ private:
     int playerScores[4];
     int playersLives[4];
     int level;
+
+    DirectionController *directionControllers[4];
 
     void checkAsteroidCollisions(int playerNumber);
 

@@ -13,6 +13,9 @@ public:
     }
 
     void move(Direction &direction, Position &position, Shape &shape);
+
+
+    virtual void reset() override;
 };
 
 #endif // FIXEDDIRECTIONMOVER_H

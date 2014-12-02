@@ -1,9 +1,6 @@
 #include "gamescreen.h"
-#include "bullet.h"
 #include "input/gamepadinputmanager.h"
 #include "options.h"
-#include "asteroidfactory.h"
-#include "bulletfactory.h"
 
 using std::stringstream;
 
@@ -64,13 +61,15 @@ void GameScreen::screenShown() {
 
     for (int i = 0; i < Options::players; i++) {
         playersLives[i] = Options::lives;
-        players[i] = new Ship(GamepadInputManager::sharedInstance()->inputForPlayer(i), this, playerMovers[i]);
+        players[i] = shipFactory.createShip(playerColours[i], playerSpawnLocations[i]);
+        //players[i] = new Ship(GamepadInputManager::sharedInstance()->inputForPlayer(i), this, playerMovers[i]);
         players[i]->position().X(playerSpawnLocations[i].X());
         players[i]->position().Y(playerSpawnLocations[i].Y());
         players[i]->position().Rotation(playerSpawnLocations[i].Rotation());
         players[i]->direction().Angle(playerSpawnLocations[i].Rotation());
         players[i]->direction().Speed(0);
-        players[i]->setColour(playerColours[i]);
+        directionControllers[i] = new DirectionController(players[i]->direction());
+        GamepadInputManager::sharedInstance()->inputForPlayer(i)->addListener(directionControllers[i]);
         players[i]->setVisible(true);
     }
 
@@ -217,11 +216,11 @@ void GameScreen::setListener(ScreenListener *listener) {
 
 void GameScreen::shipFired(Ship *ship) {
     for (int i = 0; i < Options::players; i++) {
-        if (ship == players[i] && playerBullets[i].size() < Options::max_bullets && players[i]->isVisible()) {
-            Direction bulletDir = Direction(5.0f, ship->direction().Angle());
-            playerBullets[i].add(bulletFactory.createBullet(playerColours[i], bulletDir, ship->position()));
-            break;
-        }
+//        if (ship == players[i] && playerBullets[i].size() < Options::max_bullets) {
+//            Direction bulletDir = Direction(5.0f, ship->direction().Angle());
+//            playerBullets[i].add(bulletFactory.createBullet(playerColours[i], bulletDir, ship->position()));
+//            break;
+//        }
     }
 }
 
@@ -248,7 +247,7 @@ void GameScreen::respawnShip(int playerNumber) {
         players[playerNumber]->direction().Angle(playerSpawnLocations[playerNumber].Rotation());
         players[playerNumber]->direction().Speed(0);
         players[playerNumber]->setVisible(true);
-        players[playerNumber]->mover().reset();
+        players[playerNumber]->mover()->reset();
     });
 }
 

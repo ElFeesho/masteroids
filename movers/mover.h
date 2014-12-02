@@ -11,6 +11,7 @@ public:
     };
 
     virtual void move(Direction &direction, Position &position, Shape &shape = Shape::NONE) = 0;
+    virtual void reset() = 0;
 };
 
 #endif
