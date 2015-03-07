@@ -15,9 +15,9 @@ class GfxWrapper;
 class EntityList
 {
 public:
-	EntityList();
+	EntityList() {}
 
-	~EntityList();
+	~EntityList() {}
 
 	void add(Entity *entity);
 

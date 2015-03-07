@@ -10,16 +10,6 @@ bool colliding(Entity *entOne, Entity *entTwo)
 	return (hypt < entOne->shape().Radius() + entTwo->shape().Radius());
 }
 
-EntityList::EntityList()
-{
-
-}
-
-EntityList::~EntityList()
-{
-
-}
-
 void EntityList::add(Entity *entity)
 {
 	entities.push_back(entity);
