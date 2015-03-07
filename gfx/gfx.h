@@ -52,6 +52,8 @@ public:
 	void drawImg(int x, int y, int w, int h, const unsigned short *imgData) const;
 
 	void render();
+
+	void waitForVBlank();
 };
 
 #endif

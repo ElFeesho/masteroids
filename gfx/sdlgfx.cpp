@@ -130,3 +130,14 @@ void GfxWrapper::render()
 {
 	SDL_Flip(SDL_GetVideoSurface());
 }
+
+void GfxWrapper::waitForVBlank()
+{
+	static long lastTicks = 0;
+	long currentTime = SDL_GetTicks();
+	if (currentTime - lastTicks < (1000 / 60))
+	{
+		SDL_Delay((1000 / 60) - (currentTime - lastTicks));
+	}
+	lastTicks = SDL_GetTicks();
+}

@@ -31,12 +31,7 @@ void PAD_Init()
 
 void VIDEO_WaitVSync()
 {
-	long currentTime = SDL_GetTicks();
-	if (currentTime - lastTicks < (1000 / 60))
-	{
-		SDL_Delay((1000 / 60) - (currentTime - lastTicks));
-	}
-	lastTicks = SDL_GetTicks();
+
 }
 
 int getButtonState()

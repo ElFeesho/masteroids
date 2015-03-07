@@ -12,7 +12,11 @@ public:
 
 	void poll();
 
+	bool checkQuit();
+
 	Gamepad *inputForPlayer(int playerNumber);
+
+	void initialise();
 
 private:
 	GamepadInputManager();
