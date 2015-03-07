@@ -5,12 +5,12 @@
 
 class GfxWrapper;
 
-class InGameMenuRenderer : public Renderer
+class PauseDialogRenderer : public Renderer
 {
 public:
-	InGameMenuRenderer();
+	PauseDialogRenderer();
 
-	~InGameMenuRenderer();
+	~PauseDialogRenderer();
 
 	void setMenuSelection(int menuSelection);
 

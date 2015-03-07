@@ -1,7 +1,7 @@
 #ifndef __SCREENMANAGER_H__
 #define __SCREENMANAGER_H__
 
-#include "screen.h"
+#include "screens/screen.h"
 
 class GfxWrapper;
 

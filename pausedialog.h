@@ -4,12 +4,12 @@
 #include "entity.h"
 #include "gfx/gfx.h"
 #include "input/gamepad.h"
-#include "renderers/ingamemenurenderer.h"
+#include "renderers/pausedialogrenderer.h"
 
-class InGameListener
+class PauseDialogListener
 {
 public:
-	virtual ~InGameListener()
+	virtual ~PauseDialogListener()
 	{
 	}
 
@@ -18,12 +18,12 @@ public:
 	virtual void ingameQuitSelected() = 0;
 };
 
-class InGame : public Entity, public GamepadListener
+class PauseDialog : public Entity, public GamepadListener
 {
 public:
-	InGame(Gamepad *gamepad, InGameListener *listener);
+	PauseDialog(Gamepad *gamepad, PauseDialogListener *listener);
 
-	~InGame();
+	~PauseDialog();
 
 	bool update();
 
@@ -55,13 +55,13 @@ public:
 
 	Renderer &renderer()
 	{
-		return ingameRenderer;
+		return pauseDialogRenderer;
 	}
 
 private:
 	Gamepad *gamepad;
-	InGameListener *listener;
-	InGameMenuRenderer ingameRenderer;
+	PauseDialogListener *listener;
+	PauseDialogRenderer pauseDialogRenderer;
 	int menu_sel;
 };
 

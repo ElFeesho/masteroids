@@ -68,32 +68,32 @@ set(SOURCE_FILES
     font5.h
     gameover.cpp
     gameover.h
-    gamescreen.cpp
-    gamescreen.h
-    gameoverscreen.cpp
-    gameoverscreen.h
+    screens/gamescreen.cpp
+    screens/gamescreen.h
+    screens/gameoverscreen.cpp
+    screens/gameoverscreen.h
     renderers/gameoverrenderer.cpp
     renderers/gameoverrenderer.h
-    renderers/ingamemenurenderer.cpp
-    renderers/ingamemenurenderer.h
+    renderers/pausedialogrenderer.cpp
+    renderers/pausedialogrenderer.h
     renderers/livesrenderer.cpp
     renderers/livesrenderer.h
     renderers/scorerenderer.cpp
     renderers/scorerenderer.h
-    ingame.cpp
-    ingame.h
+    pausedialog.cpp
+    pausedialog.h
     main.cpp
     menu.cpp
     menu.h
-    menuscreen.cpp
-    menuscreen.h
+    screens/menuscreen.cpp
+    screens/menuscreen.h
     movers/mover.h
     options.cpp
     options.h
     position.cpp
     position.h
     renderers/renderer.h
-    screen.h
+    screens/screen.h
     screenmanager.cpp
     screenmanager.h
     shape.cpp

@@ -18,7 +18,7 @@
 //	WPAD_ScanPads();
 //	//WPAD_ReadPending(WPAD_CHAN_ALL, NULL);
 //	if (PAD_ButtonsDown(0) & PAD_TRIGGER_Z)
-//	{
+//	{;
 //		//exit(0);
 //	}
 //	//if(!((*(u32*)0xCC003000)>>16))
@@ -45,13 +45,10 @@ int main(int argc, char **argv)
 		gfxWrapper->render();
 		GameTime::tick();
 
-#ifndef __WII__
 		if (GamepadInputManager::sharedInstance()->checkQuit())
 		{
 			break;
 		}
-
-#endif
 	}
 
 	return 0;

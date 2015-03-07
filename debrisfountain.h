@@ -10,9 +10,9 @@
 class DebrisFountain
 {
 public:
-	DebrisFountain();
+	DebrisFountain() {}
 
-	~DebrisFountain();
+	~DebrisFountain() {}
 
 	void projectDebris(EntityList &entityList, Direction direction, Position from, double spread, int amount, RGB &colour);
 };

@@ -1,15 +1,5 @@
 #include "debrisfountain.h"
 
-DebrisFountain::DebrisFountain()
-{
-
-}
-
-DebrisFountain::~DebrisFountain()
-{
-
-}
-
 void DebrisFountain::projectDebris(EntityList &entityList, Direction direction, Position from, double spread, int amount, RGB &colour)
 {
 	double startAngle = direction.Angle() - spread / 2.0;

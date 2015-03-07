@@ -1,27 +1,28 @@
-#include "ingame.h"
+#include <renderers/pausedialogrenderer.h>
+#include "pausedialog.h"
 
-InGame::InGame(Gamepad *gamepad, InGameListener *listener)
-		: ingameRenderer(InGameMenuRenderer()), gamepad(gamepad), listener(listener), menu_sel(0)
+PauseDialog::PauseDialog(Gamepad *gamepad, PauseDialogListener *listener)
+		: pauseDialogRenderer(PauseDialogRenderer()), gamepad(gamepad), listener(listener), menu_sel(0)
 {
 	gamepad->addListener(this);
 }
 
-InGame::~InGame()
+PauseDialog::~PauseDialog()
 {
 	gamepad->removeListener(this);
 }
 
-bool InGame::update()
+bool PauseDialog::update()
 {
 	return aliveMonitor().alive();
 }
 
-void InGame::render(GfxWrapper *gfx)
+void PauseDialog::render(GfxWrapper *gfx)
 {
 	renderer().render(gfx, position(), shape(), direction());
 }
 
-bool InGame::buttonDown(GamepadButton button)
+bool PauseDialog::buttonDown(GamepadButton button)
 {
 	if (button == BUTTON_LEFT)
 	{
@@ -31,11 +32,11 @@ bool InGame::buttonDown(GamepadButton button)
 	{
 		menu_sel = 1;
 	}
-	ingameRenderer.setMenuSelection(menu_sel);
+	pauseDialogRenderer.setMenuSelection(menu_sel);
 	return false;
 }
 
-bool InGame::buttonUp(GamepadButton button)
+bool PauseDialog::buttonUp(GamepadButton button)
 {
 	if (button == BUTTON_FIRE || button == BUTTON_START)
 	{

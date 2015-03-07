@@ -4,7 +4,7 @@
 #include <renderers/livesrenderer.h>
 #include "screen.h"
 #include "entitylist.h"
-#include "ingame.h"
+#include "pausedialog.h"
 #include "debrisfountain.h"
 #include "renderers/livesrenderer.h"
 #include "renderers/scorerenderer.h"
@@ -15,7 +15,7 @@
 #include "shipfactory.h"
 #include "bulletgenerator.h"
 
-class GameScreen : public Screen, public InGameListener
+class GameScreen : public Screen, public PauseDialogListener
 {
 public:
 	GameScreen();
@@ -46,7 +46,7 @@ private:
 	EntityList debrisEntities;
 
 	DebrisFountain debrisFountain;
-	InGame *pauseEnt;
+	PauseDialog *pauseEnt;
 
 	bool isPaused;
 
