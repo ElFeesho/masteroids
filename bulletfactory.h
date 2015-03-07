@@ -10,23 +10,29 @@
 class BulletFactory
 {
 public:
-    BulletFactory() {}
-    ~BulletFactory() {}
+	BulletFactory()
+	{
+	}
 
-    Actor *createBullet(RGB &colour, Direction &direction, Position &position)
-    {
-        Actor *bullet = new Actor(colour, &mover, &renderer, new ElapsedTimeToLive(3000));
-        bullet->direction().Angle(direction.Angle());
-        bullet->direction().Speed(direction.Speed());
-        bullet->position().X(position.X());
-        bullet->position().Y(position.Y());
-        bullet->position().Rotation(position.Rotation());
-        bullet->shape().Radius(1.0f);
-        return bullet;
-    }
+	~BulletFactory()
+	{
+	}
+
+	Actor *createBullet(RGB &colour, Direction &direction, Position &position)
+	{
+		Actor *bullet = new Actor(colour, &mover, &renderer, new ElapsedTimeToLive(3000));
+		bullet->direction().Angle(direction.Angle());
+		bullet->direction().Speed(direction.Speed());
+		bullet->position().X(position.X());
+		bullet->position().Y(position.Y());
+		bullet->position().Rotation(position.Rotation());
+		bullet->shape().Radius(1.0f);
+		return bullet;
+	}
+
 private:
-    BulletMover mover;
-    BulletRenderer renderer;
+	BulletMover mover;
+	BulletRenderer renderer;
 };
 
 #endif

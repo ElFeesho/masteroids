@@ -7,40 +7,43 @@
 #include "elapsedtimetolive.h"
 #include "renderers/debrisrender.h"
 
-class Debris : public Entity {
+class Debris : public Entity
+{
 public:
-    Debris(Direction travelDirection, Position pos, Shape shape, RGB &debrisColour);
+	Debris(Direction travelDirection, Position pos, Shape shape, RGB &debrisColour);
 
-    ~Debris();
+	~Debris();
 
-    Position &position();
+	Position &position();
 
-    Shape &shape();
+	Shape &shape();
 
-    Direction &direction();
+	Direction &direction();
 
-    AliveMonitor &aliveMonitor() {
-        return monitor;
-    }
+	AliveMonitor &aliveMonitor()
+	{
+		return monitor;
+	}
 
-    void render(GfxWrapper *gfx);
+	void render(GfxWrapper *gfx);
 
-    bool update();
+	bool update();
 
-    Renderer &renderer() {
-        return debrisRenderer;
-    }
+	Renderer &renderer()
+	{
+		return debrisRenderer;
+	}
 
 
 private:
-    Direction travelDirection;
-    Position pos;
-    Shape debrisShape;
-    DebrisRenderer debrisRenderer;
-    ElapsedTimeToLive monitor;
-    double rotationSpeed;
-    FixedDirectionMover mover;
-    RGB colour;
+	Direction travelDirection;
+	Position pos;
+	Shape debrisShape;
+	DebrisRenderer debrisRenderer;
+	ElapsedTimeToLive monitor;
+	double rotationSpeed;
+	FixedDirectionMover mover;
+	RGB colour;
 };
 
 #endif // DEBRIS_H

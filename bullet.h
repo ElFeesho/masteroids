@@ -13,45 +13,52 @@
 #include "movers/bulletmover.h"
 #include "renderers/bulletrenderer.h"
 
-class Bullet : public Entity {
+class Bullet : public Entity
+{
 public:
-    Bullet(Entity *owner, Direction travelDirection, RGB &bulletColour);
+	Bullet(Entity *owner, Direction travelDirection, RGB &bulletColour);
 
-    ~Bullet() {
-    };
+	~Bullet()
+	{
+	};
 
-    bool update();
+	bool update();
 
-    void render(GfxWrapper *gfx);
+	void render(GfxWrapper *gfx);
 
-    Position &position() {
-        return pos;
-    }
+	Position &position()
+	{
+		return pos;
+	}
 
-    Shape &shape() {
-        return bulletShape;
-    }
+	Shape &shape()
+	{
+		return bulletShape;
+	}
 
-    Direction &direction() {
-        return travelDirection;
-    }
+	Direction &direction()
+	{
+		return travelDirection;
+	}
 
-    AliveMonitor &aliveMonitor() {
-        return timeToLive;
-    }
+	AliveMonitor &aliveMonitor()
+	{
+		return timeToLive;
+	}
 
-    Renderer &renderer() {
-        return bulletRenderer;
-    }
+	Renderer &renderer()
+	{
+		return bulletRenderer;
+	}
 
 private:
-    ElapsedTimeToLive timeToLive;
-    BulletRenderer bulletRenderer;
-    BulletMover mover;
-    Position pos;
-    Direction travelDirection;
-    Shape bulletShape;
-    RGB colour;
+	ElapsedTimeToLive timeToLive;
+	BulletRenderer bulletRenderer;
+	BulletMover mover;
+	Position pos;
+	Direction travelDirection;
+	Shape bulletShape;
+	RGB colour;
 };
 
 #endif

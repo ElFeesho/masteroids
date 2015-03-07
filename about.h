@@ -6,53 +6,62 @@
 #include "gfx/gfx.h"
 #include "input/gamepad.h"
 
-class AboutListener {
+class AboutListener
+{
 public:
-    virtual ~AboutListener() {
-    }
+	virtual ~AboutListener()
+	{
+	}
 
-    virtual void aboutClosed() = 0;
+	virtual void aboutClosed() = 0;
 };
 
-class About : public Entity, public GamepadListener {
+class About : public Entity, public GamepadListener
+{
 public:
-    About(AboutListener *listener);
+	About(AboutListener *listener);
 
-    ~About();
+	~About();
 
-    bool update() {
-        return aliveMonitor().alive();
-    }
+	bool update()
+	{
+		return aliveMonitor().alive();
+	}
 
-    void render(GfxWrapper *gfx);
+	void render(GfxWrapper *gfx);
 
-    bool buttonUp(GamepadButton button);
+	bool buttonUp(GamepadButton button);
 
-    bool buttonDown(GamepadButton button);
+	bool buttonDown(GamepadButton button);
 
-    Position &position() {
-        return Position::NONE;
-    }
+	Position &position()
+	{
+		return Position::NONE;
+	}
 
-    Shape &shape() {
-        return Shape::NONE;
-    }
+	Shape &shape()
+	{
+		return Shape::NONE;
+	}
 
-    Direction &direction() {
-        return Direction::NONE;
-    }
+	Direction &direction()
+	{
+		return Direction::NONE;
+	}
 
-    AliveMonitor &aliveMonitor() {
-        return AlwaysAlive::alivemonitor;
-    }
+	AliveMonitor &aliveMonitor()
+	{
+		return AlwaysAlive::alivemonitor;
+	}
 
-    Renderer &renderer() {
-        return aboutRenderer;
-    }
+	Renderer &renderer()
+	{
+		return aboutRenderer;
+	}
 
 private:
-    AboutListener *listener;
-    AboutRenderer aboutRenderer;
+	AboutListener *listener;
+	AboutRenderer aboutRenderer;
 };
 
 #endif

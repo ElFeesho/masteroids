@@ -3,52 +3,55 @@
 
 #include <string>
 
-enum TextAlignment {
-    LEFT,
-    CENTRE,
-    RIGHT
+enum TextAlignment
+{
+	LEFT,
+	CENTRE,
+	RIGHT
 };
 
-class RGB {
+class RGB
+{
 public:
-    RGB(float r, float g, float b);
+	RGB(float r, float g, float b);
 
-    ~RGB();
+	~RGB();
 
-    unsigned int as24bit() const;
+	unsigned int as24bit() const;
 
-    unsigned short as16bit() const;
+	unsigned short as16bit() const;
 
-    static RGB white;
-    static RGB blue;
-    static RGB yellow;
-    static RGB black;
-    static RGB purple;
-    static RGB green;
+	static RGB white;
+	static RGB blue;
+	static RGB yellow;
+	static RGB black;
+	static RGB purple;
+	static RGB green;
 
 private:
-    float r;
-    float g;
-    float b;
+	float r;
+	float g;
+	float b;
 };
 
-class GfxWrapper {
+class GfxWrapper
+{
 public:
-    void init(int w, int h);
+	void init(int w, int h);
 
-    int textHeight();
+	int textHeight();
 
-    void drawLine(int x, int y, int x2, int y2, const RGB &colour) const;
+	void drawLine(int x, int y, int x2, int y2, const RGB &colour) const;
 
-    void fillScreen(const RGB &colour) const;
+	void fillScreen(const RGB &colour) const;
 
-    void drawText(int x, int y, const std::string &text, const RGB &colour, TextAlignment alignment = LEFT) const;
+	void drawText(int x, int y, const std::string &text, const RGB &colour, TextAlignment alignment = LEFT) const;
 
-    void drawRect(int x, int y, int w, int h, const RGB &colour) const;
+	void drawRect(int x, int y, int w, int h, const RGB &colour) const;
 
-    void drawImg(int x, int y, int w, int h, const unsigned short *imgData) const;
+	void drawImg(int x, int y, int w, int h, const unsigned short *imgData) const;
 
-    void render();
+	void render();
 };
 
 #endif

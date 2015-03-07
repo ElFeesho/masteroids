@@ -3,25 +3,33 @@
 
 #include "gamepad.h"
 
-class KeyboardSource : public GamepadSource {
+class KeyboardSource : public GamepadSource
+{
 public:
-    KeyboardSource() {}
-    ~KeyboardSource() {}
+	KeyboardSource()
+	{
+	}
 
-    void setListener(GamepadSourceListener *listener) {
-        this->listener = listener;
-    }
+	~KeyboardSource()
+	{
+	}
 
-    void poll();
+	void setListener(GamepadSourceListener *listener)
+	{
+		this->listener = listener;
+	}
 
-    const std::string name() const {
-        return "Keyboard";
-    }
+	void poll();
+
+	const std::string name() const
+	{
+		return "Keyboard";
+	}
 
 private:
-    GamepadSourceListener *listener { 0 };
-    int keyState { 0 };
-    int lastState { 0 };
+	GamepadSourceListener *listener{0};
+	int keyState{0};
+	int lastState{0};
 };
 
 #endif

@@ -8,67 +8,75 @@
 #include "images/controllers.h"
 #include "renderers/menurenderer.h"
 
-class MenuListener {
+class MenuListener
+{
 public:
-    virtual ~MenuListener() {
-    };
+	virtual ~MenuListener()
+	{
+	};
 
-    virtual void menuStartGameSelected() = 0;
+	virtual void menuStartGameSelected() = 0;
 
-    virtual void menuOptionsSelected() = 0;
+	virtual void menuOptionsSelected() = 0;
 
-    virtual void menuAboutSelected() = 0;
+	virtual void menuAboutSelected() = 0;
 };
 
-class Menu : public Entity, public GamepadListener {
+class Menu : public Entity, public GamepadListener
+{
 public:
-    Menu(MenuListener *listener);
+	Menu(MenuListener *listener);
 
-    ~Menu();
+	~Menu();
 
-    bool update();
+	bool update();
 
-    void render(GfxWrapper *gfx);
+	void render(GfxWrapper *gfx);
 
-    void incrementMenu();
+	void incrementMenu();
 
-    void decrementMenu();
+	void decrementMenu();
 
-    void handleMenuSelection();
+	void handleMenuSelection();
 
-    bool buttonDown(GamepadButton button);
+	bool buttonDown(GamepadButton button);
 
-    bool buttonUp(GamepadButton button);
+	bool buttonUp(GamepadButton button);
 
-    Position &position() {
-        return Position::NONE;
-    }
+	Position &position()
+	{
+		return Position::NONE;
+	}
 
-    Shape &shape() {
-        return Shape::NONE;
-    }
+	Shape &shape()
+	{
+		return Shape::NONE;
+	}
 
-    Direction &direction() {
-        return Direction::NONE;
-    }
+	Direction &direction()
+	{
+		return Direction::NONE;
+	}
 
-    AliveMonitor &aliveMonitor() {
-        return AlwaysAlive::alivemonitor;
-    }
+	AliveMonitor &aliveMonitor()
+	{
+		return AlwaysAlive::alivemonitor;
+	}
 
-    Renderer &renderer() {
-        return menuRenderer;
-    }
+	Renderer &renderer()
+	{
+		return menuRenderer;
+	}
 
 private:
-    MenuListener *listener;
-    MenuRenderer menuRenderer;
-    unsigned int menu_sel;
-    unsigned long next_change;
-    char ldir;
-    bool active;
-    Entity *child;
-    Position pos;
+	MenuListener *listener;
+	MenuRenderer menuRenderer;
+	unsigned int menu_sel;
+	unsigned long next_change;
+	char ldir;
+	bool active;
+	Entity *child;
+	Position pos;
 };
 
 #endif

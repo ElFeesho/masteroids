@@ -7,8 +7,13 @@
 class BulletGenerator : public GamepadListener
 {
 public:
-	BulletGenerator(std::function<void()> fireBullet) : onShouldFireBullet(fireBullet){};
-	~BulletGenerator() {};
+	BulletGenerator(std::function<void()> fireBullet) : onShouldFireBullet(fireBullet)
+	{
+	};
+
+	~BulletGenerator()
+	{
+	};
 
 	virtual bool buttonDown(GamepadButton button) override;
 

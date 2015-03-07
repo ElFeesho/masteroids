@@ -33,24 +33,28 @@
 #define WPAD_EXP_NUNCHUK (1 << 1)
 #define WPAD_EXP_CLASSIC (1 << 2)
 
-typedef struct joystick_t {
-    int ang;
-    double mag;
+typedef struct joystick_t
+{
+	int ang;
+	double mag;
 } joystick_t;
 
-typedef struct nunchuk_t {
-    int btns;
-    joystick_t js;
+typedef struct nunchuk_t
+{
+	int btns;
+	joystick_t js;
 } nunchuk_t;
 
-typedef struct classic_t {
-    int btns;
+typedef struct classic_t
+{
+	int btns;
 } classic_t;
 
-typedef struct expansion_t {
-    int type;
-    nunchuk_t nunchuk;
-    classic_t classic;
+typedef struct expansion_t
+{
+	int type;
+	nunchuk_t nunchuk;
+	classic_t classic;
 } expansion_t;
 
 void WPAD_Init();

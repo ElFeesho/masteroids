@@ -12,43 +12,49 @@ class Entity;
 
 class GfxWrapper;
 
-class EntityList {
+class EntityList
+{
 public:
-    EntityList();
+	EntityList();
 
-    ~EntityList();
+	~EntityList();
 
-    void add(Entity *entity);
+	void add(Entity *entity);
 
-    void updateAll();
+	void updateAll();
 
-    void renderAll(GfxWrapper *gfx);
+	void renderAll(GfxWrapper *gfx);
 
-    void removeEntity(Entity *entity) {
-        for (int i = entities.size() - 1; i >= 0; i--) {
-            if (entities.at(i) == entity) {
-                entities.erase(entities.begin() + i);
-                return;
-            }
-        }
-    }
+	void removeEntity(Entity *entity)
+	{
+		for (int i = entities.size() - 1; i >= 0; i--)
+		{
+			if (entities.at(i) == entity)
+			{
+				entities.erase(entities.begin() + i);
+				return;
+			}
+		}
+	}
 
-    Entity *at(int i) {
-        return entities.at(i);
-    }
+	Entity *at(int i)
+	{
+		return entities.at(i);
+	}
 
-    int size() {
-        return entities.size();
-    }
+	int size()
+	{
+		return entities.size();
+	}
 
-    void clear();
+	void clear();
 
-    void checkCollisions(Entity &entity, function<void(Entity *)> callback);
+	void checkCollisions(Entity &entity, function<void(Entity *)> callback);
 
-    void checkCollisions(EntityList &otherList, function<void(Entity *, Entity *)> callback);
+	void checkCollisions(EntityList &otherList, function<void(Entity *, Entity *)> callback);
 
 private:
-    vector<Entity *> entities;
+	vector<Entity *> entities;
 };
 
 #endif

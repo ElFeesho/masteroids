@@ -4,33 +4,36 @@
 #include "entity.h"
 #include "gfx/gfx.h"
 
-class UFO : public Entity {
+class UFO : public Entity
+{
 public:
-    UFO();
+	UFO();
 
-    ~UFO();
+	~UFO();
 
-    bool update(GfxWrapper *gfx);
+	bool update(GfxWrapper *gfx);
 
-    void on_hit();
+	void on_hit();
 
-    Position &position() {
-        return pos;
-    }
+	Position &position()
+	{
+		return pos;
+	}
 
-    Shape &shape() {
-        return ufoShape;
-    }
+	Shape &shape()
+	{
+		return ufoShape;
+	}
 
 private:
-    Shape ufoShape;
-    double xspeed;
-    double yspeed;
-    unsigned long next_think;
-    unsigned long next_fire;
-    bool alive;
-    RGB shipColour;
-    Position pos;
+	Shape ufoShape;
+	double xspeed;
+	double yspeed;
+	unsigned long next_think;
+	unsigned long next_fire;
+	bool alive;
+	RGB shipColour;
+	Position pos;
 };
 
 #endif

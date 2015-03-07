@@ -12,80 +12,94 @@
 	Input is not that difficult...
 */
 
-class ControlConfRenderer : public Renderer {
+class ControlConfRenderer : public Renderer
+{
 public:
-    ControlConfRenderer() : menu_sel(0) {
-    }
+	ControlConfRenderer() : menu_sel(0)
+	{
+	}
 
-    ~ControlConfRenderer() {
-    }
+	~ControlConfRenderer()
+	{
+	}
 
-    void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) {
-        gfx->drawRect(120, 70, 403, 316, RGB::blue);
-        gfx->drawText(135, 80 + font5_char_high * 8, "Not implemented", RGB::white);
-    }
+	void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white)
+	{
+		gfx->drawRect(120, 70, 403, 316, RGB::blue);
+		gfx->drawText(135, 80 + font5_char_high * 8, "Not implemented", RGB::white);
+	}
 
-    void setMenuSelection(int menuSelection) {
-        menu_sel = menuSelection;
-    }
+	void setMenuSelection(int menuSelection)
+	{
+		menu_sel = menuSelection;
+	}
 
 private:
-    int menu_sel;
+	int menu_sel;
 };
 
-class ControlConfListener {
+class ControlConfListener
+{
 public:
-    virtual ~ControlConfListener() {
-    };
+	virtual ~ControlConfListener()
+	{
+	};
 
-    virtual void controlConfClosed() = 0;
+	virtual void controlConfClosed() = 0;
 };
 
-class ControlConf : public Entity, public GamepadListener {
+class ControlConf : public Entity, public GamepadListener
+{
 public:
-    ControlConf(ControlConfListener *listener);
+	ControlConf(ControlConfListener *listener);
 
-    ~ControlConf();
+	~ControlConf();
 
-    bool update() {
-        return true;
-    }
+	bool update()
+	{
+		return true;
+	}
 
-    void render(GfxWrapper *gfx);
+	void render(GfxWrapper *gfx);
 
-    bool buttonDown(GamepadButton button);
+	bool buttonDown(GamepadButton button);
 
-    bool buttonUp(GamepadButton button);
+	bool buttonUp(GamepadButton button);
 
-    Position &position() {
-        return Position::NONE;
-    }
+	Position &position()
+	{
+		return Position::NONE;
+	}
 
-    Shape &shape() {
-        return Shape::NONE;
-    }
+	Shape &shape()
+	{
+		return Shape::NONE;
+	}
 
-    Direction &direction() {
-        return Direction::NONE;
-    }
+	Direction &direction()
+	{
+		return Direction::NONE;
+	}
 
-    AliveMonitor &aliveMonitor() {
-        return AlwaysAlive::alivemonitor;
-    }
+	AliveMonitor &aliveMonitor()
+	{
+		return AlwaysAlive::alivemonitor;
+	}
 
-    Renderer &renderer() {
-        return controlConfRenderer;
-    }
+	Renderer &renderer()
+	{
+		return controlConfRenderer;
+	}
 
 private:
-    ControlConfListener *listener;
-    ControlConfRenderer controlConfRenderer;
-    bool alive;
-    int menu_sel;
-    int binding;
-    unsigned long bind_timeout;
-    unsigned long next_change;
-    char ldir;
+	ControlConfListener *listener;
+	ControlConfRenderer controlConfRenderer;
+	bool alive;
+	int menu_sel;
+	int binding;
+	unsigned long bind_timeout;
+	unsigned long next_change;
+	char ldir;
 };
 
 #endif

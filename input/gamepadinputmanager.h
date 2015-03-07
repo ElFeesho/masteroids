@@ -3,22 +3,23 @@
 
 class Gamepad;
 
-class GamepadInputManager {
+class GamepadInputManager
+{
 public:
-    ~GamepadInputManager();
+	~GamepadInputManager();
 
-    static GamepadInputManager *sharedInstance();
+	static GamepadInputManager *sharedInstance();
 
-    void poll();
+	void poll();
 
-    Gamepad *inputForPlayer(int playerNumber);
+	Gamepad *inputForPlayer(int playerNumber);
 
 private:
-    GamepadInputManager();
+	GamepadInputManager();
 
-    Gamepad *gamepads[4];
+	Gamepad *gamepads[4];
 
-    static GamepadInputManager *instance;
+	static GamepadInputManager *instance;
 
 };
 

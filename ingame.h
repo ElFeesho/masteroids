@@ -6,55 +6,63 @@
 #include "input/gamepad.h"
 #include "renderers/ingamemenurenderer.h"
 
-class InGameListener {
+class InGameListener
+{
 public:
-    virtual ~InGameListener() {
-    }
+	virtual ~InGameListener()
+	{
+	}
 
-    virtual void ingameContinueSelected() = 0;
+	virtual void ingameContinueSelected() = 0;
 
-    virtual void ingameQuitSelected() = 0;
+	virtual void ingameQuitSelected() = 0;
 };
 
-class InGame : public Entity, public GamepadListener {
+class InGame : public Entity, public GamepadListener
+{
 public:
-    InGame(Gamepad *gamepad, InGameListener *listener);
+	InGame(Gamepad *gamepad, InGameListener *listener);
 
-    ~InGame();
+	~InGame();
 
-    bool update();
+	bool update();
 
-    void render(GfxWrapper *gfx);
+	void render(GfxWrapper *gfx);
 
-    bool buttonDown(GamepadButton button);
+	bool buttonDown(GamepadButton button);
 
-    bool buttonUp(GamepadButton button);
+	bool buttonUp(GamepadButton button);
 
-    Position &position() {
-        return Position::NONE;
-    }
+	Position &position()
+	{
+		return Position::NONE;
+	}
 
-    Shape &shape() {
-        return Shape::NONE;
-    }
+	Shape &shape()
+	{
+		return Shape::NONE;
+	}
 
-    Direction &direction() {
-        return Direction::NONE;
-    }
+	Direction &direction()
+	{
+		return Direction::NONE;
+	}
 
-    AliveMonitor &aliveMonitor() {
-        return AlwaysAlive::alivemonitor;
-    }
+	AliveMonitor &aliveMonitor()
+	{
+		return AlwaysAlive::alivemonitor;
+	}
 
-    Renderer &renderer() {
-        return ingameRenderer;
-    }
+	Renderer &renderer()
+	{
+		return ingameRenderer;
+	}
 
 private:
-    Gamepad *gamepad;
-    InGameListener *listener;
-    InGameMenuRenderer ingameRenderer;
-    int menu_sel;
+	Gamepad *gamepad;
+	InGameListener *listener;
+	InGameMenuRenderer ingameRenderer;
+	int menu_sel;
 };
 
 #endif

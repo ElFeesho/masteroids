@@ -5,23 +5,24 @@
 
 class GfxWrapper;
 
-class ScreenManager : public ScreenListener {
+class ScreenManager : public ScreenListener
+{
 public:
-    ScreenManager();
+	ScreenManager();
 
-    ~ScreenManager();
+	~ScreenManager();
 
-    void screenClosed(Screen *screen, int reason);
+	void screenClosed(Screen *screen, int reason);
 
-    void update(GfxWrapper *gfx);
+	void update(GfxWrapper *gfx);
 
 private:
-    Screen *activeScreen;
-    Screen *menuScreen;
-    Screen *gameScreen;
-    Screen *gameOverScreen;
+	Screen *activeScreen;
+	Screen *menuScreen;
+	Screen *gameScreen;
+	Screen *gameOverScreen;
 
-    void switchScreen(Screen *newScreen);
+	void switchScreen(Screen *newScreen);
 };
 
 #endif

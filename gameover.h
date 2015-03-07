@@ -6,31 +6,32 @@
 #include "input/gamepad.h"
 #include "renderers/gameoverrenderer.h"
 
-class GameOver : public Entity, public GamepadListener {
+class GameOver : public Entity, public GamepadListener
+{
 public:
-    GameOver();
+	GameOver();
 
-    ~GameOver();
+	~GameOver();
 
-    bool update();
+	bool update();
 
-    void render(GfxWrapper *gfx);
+	void render(GfxWrapper *gfx);
 
-    Position &position() override;
+	Position &position() override;
 
-    Shape &shape() override;
+	Shape &shape() override;
 
-    Direction &direction() override;
+	Direction &direction() override;
 
-    AliveMonitor &aliveMonitor() override;
+	AliveMonitor &aliveMonitor() override;
 
-    Renderer &renderer() override;
+	Renderer &renderer() override;
 
-    bool buttonDown(GamepadButton button);
+	bool buttonDown(GamepadButton button);
 
-    bool buttonUp(GamepadButton button);
+	bool buttonUp(GamepadButton button);
 
-    GameOverRenderer gameOverRenderer;
+	GameOverRenderer gameOverRenderer;
 };
 
 #endif

@@ -5,15 +5,19 @@
 
 class GfxWrapper;
 
-class InGameMenuRenderer : public Renderer {
+class InGameMenuRenderer : public Renderer
+{
 public:
-    InGameMenuRenderer();
-    ~InGameMenuRenderer();
-    void setMenuSelection(int menuSelection);
-    void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) override;
+	InGameMenuRenderer();
+
+	~InGameMenuRenderer();
+
+	void setMenuSelection(int menuSelection);
+
+	void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) override;
 
 private:
-    int menu_sel;
+	int menu_sel;
 };
 
 #endif

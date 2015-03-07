@@ -1,31 +1,34 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 
-class Shape {
+class Shape
+{
 public:
-    Shape();
+	Shape();
 
-    Shape(double radius);
+	Shape(double radius);
 
-    Shape(const Shape &other);
+	Shape(const Shape &other);
 
-    ~Shape();
+	~Shape();
 
-    Shape &operator=(const Shape &other);
+	Shape &operator=(const Shape &other);
 
-    bool operator==(const Shape &other) const;
+	bool operator==(const Shape &other) const;
 
-    void Radius(double radius) {
-        this->radius = radius;
-    }
+	void Radius(double radius)
+	{
+		this->radius = radius;
+	}
 
-    double Radius() {
-        return radius;
-    }
+	double Radius()
+	{
+		return radius;
+	}
 
-    static Shape NONE;
+	static Shape NONE;
 private:
-    double radius;
+	double radius;
 };
 
 #endif // SHAPE_H

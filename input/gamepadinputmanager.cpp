@@ -2,24 +2,31 @@
 
 #include "keyboardsource.h"
 
-GamepadInputManager::GamepadInputManager() : gamepads{new Gamepad(new KeyboardSource()), new Gamepad(new KeyboardSource()), new Gamepad(new KeyboardSource()), new Gamepad(new KeyboardSource())} {}
-
-GamepadInputManager::~GamepadInputManager() {
+GamepadInputManager::GamepadInputManager()
+		: gamepads{new Gamepad(new KeyboardSource()), new Gamepad(new KeyboardSource()), new Gamepad(new KeyboardSource()), new Gamepad(new KeyboardSource())}
+{
 }
 
-void GamepadInputManager::poll() {
-    for(int i = 0; i < 4; i++)
-    {
-        gamepads[i]->poll();
-    }
+GamepadInputManager::~GamepadInputManager()
+{
 }
 
-Gamepad* GamepadInputManager::inputForPlayer(int playerNumber) {
-    return gamepads[playerNumber];
+void GamepadInputManager::poll()
+{
+	for (int i = 0; i < 4; i++)
+	{
+		gamepads[i]->poll();
+	}
 }
 
-GamepadInputManager *GamepadInputManager::sharedInstance() {
-    return instance;
+Gamepad *GamepadInputManager::inputForPlayer(int playerNumber)
+{
+	return gamepads[playerNumber];
+}
+
+GamepadInputManager *GamepadInputManager::sharedInstance()
+{
+	return instance;
 }
 
 GamepadInputManager *GamepadInputManager::instance = new GamepadInputManager(); 

@@ -4,9 +4,10 @@
 #include "renderer.h"
 #include "../gfx/gfx.h"
 
-class ShipRenderer : public Renderer {
+class ShipRenderer : public Renderer
+{
 public:
-    void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white);
+	void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white);
 };
 
 #endif

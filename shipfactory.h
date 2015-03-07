@@ -9,21 +9,27 @@
 class ShipFactory
 {
 public:
-    ShipFactory() : shipMover(new ShipMover()), shipRenderer(new ShipRenderer()) {}
-    ~ShipFactory(){}
+	ShipFactory() : shipMover(new ShipMover()), shipRenderer(new ShipRenderer())
+	{
+	}
 
-    Actor *createShip(RGB &colour, Position &spawnLocation)
-    {
-        Actor *ship = new Actor(colour, shipMover, shipRenderer, &AlwaysAlive::alivemonitor);
-        ship->position().X(spawnLocation.X());
-        ship->position().Y(spawnLocation.Y());
-        ship->position().Rotation(spawnLocation.Rotation());
-        ship->shape().Radius(10);
-        return ship;
-    }
+	~ShipFactory()
+	{
+	}
+
+	Actor *createShip(RGB &colour, Position &spawnLocation)
+	{
+		Actor *ship = new Actor(colour, shipMover, shipRenderer, &AlwaysAlive::alivemonitor);
+		ship->position().X(spawnLocation.X());
+		ship->position().Y(spawnLocation.Y());
+		ship->position().Rotation(spawnLocation.Rotation());
+		ship->shape().Radius(10);
+		return ship;
+	}
+
 private:
-    ShipMover *shipMover;
-    ShipRenderer *shipRenderer;
+	ShipMover *shipMover;
+	ShipRenderer *shipRenderer;
 };
 
 #endif

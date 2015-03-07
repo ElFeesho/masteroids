@@ -3,20 +3,23 @@
 
 #include "renderer.h"
 
-class OptionsRenderer : public Renderer {
+class OptionsRenderer : public Renderer
+{
 public:
-    OptionsRenderer() : menu_sel(0) {
-    }
+	OptionsRenderer() : menu_sel(0)
+	{
+	}
 
-    ~OptionsRenderer() {
-    }
+	~OptionsRenderer()
+	{
+	}
 
-    void setMenuSelection(int menuSelection);
+	void setMenuSelection(int menuSelection);
 
-    void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white);
+	void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white);
 
 private:
-    int menu_sel;
+	int menu_sel;
 };
 
 #endif // OPTIONSRENDERER_H

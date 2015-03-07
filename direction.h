@@ -3,56 +3,67 @@
 
 #include <cmath>
 
-class Direction {
+class Direction
+{
 public:
-    Direction(double speed, double angle, double spin = 0) : speed(speed), angle(angle), spin(spin) {
-    }
+	Direction(double speed, double angle, double spin = 0) : speed(speed), angle(angle), spin(spin)
+	{
+	}
 
-    Direction(const Direction &copy) : speed(copy.speed), angle(copy.angle) {
-    }
+	Direction(const Direction &copy) : speed(copy.speed), angle(copy.angle)
+	{
+	}
 
-    ~Direction() {
-    }
+	~Direction()
+	{
+	}
 
-    double Speed() {
-        return speed;
-    }
+	double Speed()
+	{
+		return speed;
+	}
 
-    double Angle() {
-        return angle;
-    }
+	double Angle()
+	{
+		return angle;
+	}
 
-    double Spin() {
-        return spin;
-    }
+	double Spin()
+	{
+		return spin;
+	}
 
-    void Spin(double nSpin)
-    {
-        spin = nSpin;
-    }
+	void Spin(double nSpin)
+	{
+		spin = nSpin;
+	}
 
-    void Speed(double nSpeed) {
-        speed = nSpeed;
-    }
+	void Speed(double nSpeed)
+	{
+		speed = nSpeed;
+	}
 
-    void Angle(double nAngle) {
-        angle = nAngle;
-    }
+	void Angle(double nAngle)
+	{
+		angle = nAngle;
+	}
 
-    void rotate(double angle) {
-        this->angle += angle;
-    }
+	void rotate(double angle)
+	{
+		this->angle += angle;
+	}
 
 
-    bool operator==(const Direction &other) const {
-        return (&other == &NONE) || ((other.speed == speed) && (other.angle == angle));
-    }
+	bool operator==(const Direction &other) const
+	{
+		return (&other == &NONE) || ((other.speed == speed) && (other.angle == angle));
+	}
 
-    static Direction NONE;
+	static Direction NONE;
 private:
-    double speed { 0 };
-    double spin { 0 };
-    double angle { 0 };
+	double speed{0};
+	double spin{0};
+	double angle{0};
 };
 
 #endif

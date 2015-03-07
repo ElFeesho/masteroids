@@ -11,40 +11,41 @@
 #include "asteroidfactory.h"
 
 class MenuScreen
-        : public Screen, public AboutListener, public ControlConfListener, public MenuListener, public OptionsListener {
+		: public Screen, public AboutListener, public ControlConfListener, public MenuListener, public OptionsListener
+{
 public:
-    MenuScreen();
+	MenuScreen();
 
-    ~MenuScreen();
+	~MenuScreen();
 
-    void update(GfxWrapper *gfx);
+	void update(GfxWrapper *gfx);
 
-    void setListener(ScreenListener *listener);
+	void setListener(ScreenListener *listener);
 
-    void aboutClosed();
+	void aboutClosed();
 
-    void controlConfClosed();
+	void controlConfClosed();
 
-    void menuStartGameSelected();
+	void menuStartGameSelected();
 
-    void menuOptionsSelected();
+	void menuOptionsSelected();
 
-    void menuAboutSelected();
+	void menuAboutSelected();
 
-    void optionsControllerConfigSelected();
+	void optionsControllerConfigSelected();
 
-    void optionsMenuClosed();
+	void optionsMenuClosed();
 
-    void screenShown();
+	void screenShown();
 
-    void screenHidden();
+	void screenHidden();
 
 private:
-    AsteroidFactory asteroidFactory;
-    Entity *activeMenu;
+	AsteroidFactory asteroidFactory;
+	Entity *activeMenu;
 
-    EntityList entityList;
-    ScreenListener *listener;
+	EntityList entityList;
+	ScreenListener *listener;
 };
 
 #endif

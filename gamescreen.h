@@ -15,68 +15,69 @@
 #include "shipfactory.h"
 #include "bulletgenerator.h"
 
-class GameScreen : public Screen, public InGameListener {
+class GameScreen : public Screen, public InGameListener
+{
 public:
-    GameScreen();
+	GameScreen();
 
-    ~GameScreen();
+	~GameScreen();
 
-    void screenHidden();
+	void screenHidden();
 
-    void screenShown();
+	void screenShown();
 
-    void update(GfxWrapper *gfx);
+	void update(GfxWrapper *gfx);
 
-    void setListener(ScreenListener *listener);
+	void setListener(ScreenListener *listener);
 
-    void ingameContinueSelected();
+	void ingameContinueSelected();
 
-    void ingameQuitSelected();
+	void ingameQuitSelected();
 
-    void generateLevel();
+	void generateLevel();
 
 private:
-    AsteroidFactory asteroidFactory;
-    BulletFactory bulletFactory;
-    ShipFactory shipFactory;
-    ScreenListener *listener;
-    EntityList asteroids;
-    EntityList secondaryAsteroids;
-    EntityList debrisEntities;
+	AsteroidFactory asteroidFactory;
+	BulletFactory bulletFactory;
+	ShipFactory shipFactory;
+	ScreenListener *listener;
+	EntityList asteroids;
+	EntityList secondaryAsteroids;
+	EntityList debrisEntities;
 
-    DebrisFountain debrisFountain;
-    InGame *pauseEnt;
+	DebrisFountain debrisFountain;
+	InGame *pauseEnt;
 
-    bool isPaused;
+	bool isPaused;
 
-    Actor *players[4];
-    ShipMover playerMovers[4];
-    EntityList playerBullets[4];
-    Position playerScorePositions[4];
-    Position playerSpawnLocations[4];
-    BulletGenerator bulletGenerators[4];
-    RGB playerColours[4];
-    LivesRenderer livesRenderer;
-    ScoreRenderer scoreRenderer;
-    int playerScores[4];
-    int playersLives[4];
-    int level;
+	Actor *players[4];
+	ShipMover playerMovers[4];
+	EntityList playerBullets[4];
+	Position playerScorePositions[4];
+	Position playerSpawnLocations[4];
+	BulletGenerator bulletGenerators[4];
+	RGB playerColours[4];
+	LivesRenderer livesRenderer;
+	ScoreRenderer scoreRenderer;
+	int playerScores[4];
+	int playersLives[4];
+	int level;
 
-    DirectionController *directionControllers[4];
+	DirectionController *directionControllers[4];
 
-    void checkAsteroidCollisions(int playerNumber);
+	void checkAsteroidCollisions(int playerNumber);
 
-    void updatePlayers(GfxWrapper *gfx);
+	void updatePlayers(GfxWrapper *gfx);
 
-    void checkPlayerDeaths();
+	void checkPlayerDeaths();
 
-    void killPlayer(int playerNumber);
+	void killPlayer(int playerNumber);
 
-    void respawnShip(int playerNumber);
+	void respawnShip(int playerNumber);
 
-    void checkLevelComplete();
+	void checkLevelComplete();
 
-    void generateSecondaryAsteroids(Entity *hit);
+	void generateSecondaryAsteroids(Entity *hit);
 };
 
 #endif // GAMESCREEN_H

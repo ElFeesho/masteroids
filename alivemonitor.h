@@ -1,28 +1,34 @@
 #ifndef __ALIVEMONITOR_H__
 #define __ALIVEMONITOR_H__
 
-class AliveMonitor {
+class AliveMonitor
+{
 public:
-    virtual ~AliveMonitor() {
-    }
+	virtual ~AliveMonitor()
+	{
+	}
 
-    virtual bool alive() = 0;
+	virtual bool alive() = 0;
 
 };
 
-class AlwaysAlive : public AliveMonitor {
+class AlwaysAlive : public AliveMonitor
+{
 public:
-    AlwaysAlive() {
-    }
+	AlwaysAlive()
+	{
+	}
 
-    ~AlwaysAlive() {
-    }
+	~AlwaysAlive()
+	{
+	}
 
-    bool alive() {
-        return true;
-    }
+	bool alive()
+	{
+		return true;
+	}
 
-    static AlwaysAlive alivemonitor;
+	static AlwaysAlive alivemonitor;
 };
 
 #endif

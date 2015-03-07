@@ -9,23 +9,26 @@ using std::vector;
 
 class Screen;
 
-class ScreenListener {
+class ScreenListener
+{
 public:
-    virtual void screenClosed(Screen *screen, int reason) = 0;
+	virtual void screenClosed(Screen *screen, int reason) = 0;
 };
 
-class Screen {
+class Screen
+{
 public:
-    virtual ~Screen() {
-    };
+	virtual ~Screen()
+	{
+	};
 
-    virtual void setListener(ScreenListener *listener) = 0;
+	virtual void setListener(ScreenListener *listener) = 0;
 
-    virtual void update(GfxWrapper *gfx) = 0;
+	virtual void update(GfxWrapper *gfx) = 0;
 
-    virtual void screenShown() = 0;
+	virtual void screenShown() = 0;
 
-    virtual void screenHidden() = 0;
+	virtual void screenHidden() = 0;
 };
 
 #endif

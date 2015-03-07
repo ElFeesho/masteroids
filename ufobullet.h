@@ -5,27 +5,29 @@
 
 #include "gfx/gfx.h"
 
-class UFOBullet : public Entity {
+class UFOBullet : public Entity
+{
 public:
-    UFOBullet();
+	UFOBullet();
 
-    UFOBullet(double x, double y, double rot, Entity *ufo);
+	UFOBullet(double x, double y, double rot, Entity *ufo);
 
-    ~UFOBullet();
+	~UFOBullet();
 
-    bool update();
+	bool update();
 
-    void render(GfxWrapper *gfx);
+	void render(GfxWrapper *gfx);
 
-    Position &position() {
-        return pos;
-    }
+	Position &position()
+	{
+		return pos;
+	}
 
 private:
-    Position pos;
-    double angle;
-    Entity *owner;
-    unsigned long ttl;
+	Position pos;
+	double angle;
+	Entity *owner;
+	unsigned long ttl;
 };
 
 #endif
