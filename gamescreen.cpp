@@ -223,21 +223,6 @@ void GameScreen::setListener(ScreenListener *listener) {
     this->listener = listener;
 }
 
-void GameScreen::shipFired(Ship *ship) {
-    for (int i = 0; i < Options::players; i++) {
-//        if (ship == players[i] && playerBullets[i].size() < Options::max_bullets) {
-//            Direction bulletDir = Direction(5.0f, ship->direction().Angle());
-//            playerBullets[i].add(bulletFactory.createBullet(playerColours[i], bulletDir, ship->position()));
-//            break;
-//        }
-    }
-}
-
-void GameScreen::shipRequestedPause(Ship *ship) {
-    isPaused = true;
-    pauseEnt = new InGame(ship->getGamepad(), this);
-}
-
 void GameScreen::ingameContinueSelected() {
     isPaused = false;
     delete pauseEnt;

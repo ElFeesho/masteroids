@@ -1,7 +1,6 @@
 #include "entitylist.h"
 
 #include "entity.h"
-#include "gfx/gfx.h"
 
 bool colliding(Entity *entOne, Entity *entTwo) {
     double distX = entOne->position().X() - entTwo->position().X();

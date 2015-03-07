@@ -5,11 +5,8 @@
 
 class KeyboardSource : public GamepadSource {
 public:
-    KeyboardSource() : listener(0), keyState(0), lastState(0) {
-    }
-
-    ~KeyboardSource() {
-    }
+    KeyboardSource() {}
+    ~KeyboardSource() {}
 
     void setListener(GamepadSourceListener *listener) {
         this->listener = listener;
@@ -18,13 +15,13 @@ public:
     void poll();
 
     const std::string name() const {
-        return std::string("Keyboard");
+        return "Keyboard";
     }
 
 private:
-    GamepadSourceListener *listener;
-    int keyState;
-    int lastState;
+    GamepadSourceListener *listener { 0 };
+    int keyState { 0 };
+    int lastState { 0 };
 };
 
 #endif

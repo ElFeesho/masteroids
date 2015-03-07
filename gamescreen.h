@@ -4,7 +4,6 @@
 #include <renderers/livesrenderer.h>
 #include "screen.h"
 #include "entitylist.h"
-#include "ship.h"
 #include "ingame.h"
 #include "debrisfountain.h"
 #include "renderers/livesrenderer.h"
@@ -16,7 +15,7 @@
 #include "shipfactory.h"
 #include "bulletgenerator.h"
 
-class GameScreen : public Screen, public ShipListener, public InGameListener {
+class GameScreen : public Screen, public InGameListener {
 public:
     GameScreen();
 
@@ -29,10 +28,6 @@ public:
     void update(GfxWrapper *gfx);
 
     void setListener(ScreenListener *listener);
-
-    void shipFired(Ship *ship);
-
-    void shipRequestedPause(Ship *ship);
 
     void ingameContinueSelected();
 

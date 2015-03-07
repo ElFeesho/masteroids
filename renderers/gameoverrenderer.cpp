@@ -1,6 +1,5 @@
 #include "gameoverrenderer.h"
 
-#include "ship.h"
 #include "options.h"
 
 #include "images/game_over_img.h"

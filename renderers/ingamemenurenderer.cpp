@@ -1,7 +1,5 @@
 #include "ingamemenurenderer.h"
 
-#include "gfx/gfx.h"
-
 InGameMenuRenderer::InGameMenuRenderer() : menu_sel(0) {
 }
 

@@ -32,7 +32,7 @@ private:
     Shape actorShape;
     AliveMonitor *actorMonitor;
     Renderer *actorRenderer;
-    bool visible;
+    bool visible { true };
 };
 
 #endif

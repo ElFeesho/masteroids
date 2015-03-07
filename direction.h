@@ -50,7 +50,9 @@ public:
 
     static Direction NONE;
 private:
-    double speed, spin, angle;
+    double speed { 0 };
+    double spin { 0 };
+    double angle { 0 };
 };
 
 #endif

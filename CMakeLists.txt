@@ -98,8 +98,6 @@ set(SOURCE_FILES
     screenmanager.h
     shape.cpp
     shape.h
-    ship.cpp
-    ship.h
     gametime.cpp
     gametime.h
     vector.h)

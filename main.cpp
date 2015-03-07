@@ -28,8 +28,6 @@ void ScanPADSandReset(u32 retrace_count) {
     //}
 }
 
-extern u16 *GRRLIB_buffer;
-
 int main(int argc, char **argv) {
     GfxWrapper *gfxWrapper = new GfxWrapper();
     gfxWrapper->init(640, 480);
