@@ -1,3 +1,4 @@
+#include <iostream>
 #include "gamescreen.h"
 #include "input/gamepadinputmanager.h"
 #include "options.h"
@@ -9,6 +10,7 @@ GameScreen::GameScreen() :
         level(0),
         playerScores{0, 0, 0, 0},
         pauseEnt(NULL),
+        bulletGenerators{BulletGenerator([](){}),BulletGenerator([](){}),BulletGenerator([](){}),BulletGenerator([](){})},
         playerMovers{ShipMover(), ShipMover(), ShipMover(), ShipMover()},
         playerScorePositions{Position(5, 5, 0), Position(635, 5, 0), Position(5, 440, 0), Position(635, 440, 0)},
         playerColours{RGB::green, RGB::yellow, RGB::blue, RGB::purple},
@@ -61,6 +63,12 @@ void GameScreen::screenShown() {
 
     for (int i = 0; i < Options::players; i++) {
         playersLives[i] = Options::lives;
+        bulletGenerators[i] = BulletGenerator([&, i](){
+           std::cout << " TEST " << std::endl;
+           Direction bulletDir = Direction(5.0f, players[i]->direction().Angle());
+            playerBullets[i].add(bulletFactory.createBullet(playerColours[i], bulletDir, players[i]->position()));
+        });
+
         players[i] = shipFactory.createShip(playerColours[i], playerSpawnLocations[i]);
         //players[i] = new Ship(GamepadInputManager::sharedInstance()->inputForPlayer(i), this, playerMovers[i]);
         players[i]->position().X(playerSpawnLocations[i].X());
@@ -70,6 +78,7 @@ void GameScreen::screenShown() {
         players[i]->direction().Speed(0);
         directionControllers[i] = new DirectionController(players[i]->direction());
         GamepadInputManager::sharedInstance()->inputForPlayer(i)->addListener(directionControllers[i]);
+        GamepadInputManager::sharedInstance()->inputForPlayer(i)->addListener(&bulletGenerators[i]);
         players[i]->setVisible(true);
     }
 

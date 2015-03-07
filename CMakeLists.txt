@@ -10,6 +10,8 @@ set(SOURCE_FILES
     gfx/sdlgfx.cpp
     images/asteroid_banner.h
     bulletfactory.h
+    bulletgenerator.cpp
+    bulletgenerator.h
     images/controllers.h
     images/controls_img.h
     images/game_over_img.h

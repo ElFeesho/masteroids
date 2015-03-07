@@ -14,6 +14,7 @@
 #include "directioncontroller.h"
 
 #include "shipfactory.h"
+#include "bulletgenerator.h"
 
 class GameScreen : public Screen, public ShipListener, public InGameListener {
 public:
@@ -58,6 +59,7 @@ private:
     EntityList playerBullets[4];
     Position playerScorePositions[4];
     Position playerSpawnLocations[4];
+    BulletGenerator bulletGenerators[4];
     RGB playerColours[4];
     LivesRenderer livesRenderer;
     ScoreRenderer scoreRenderer;
