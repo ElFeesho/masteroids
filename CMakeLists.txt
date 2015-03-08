@@ -29,6 +29,8 @@ set(SOURCE_FILES
     libwiiwrap/gccore.cpp
     libwiiwrap/gccore.h
     libwiiwrap/ogcsys.cpp
+    shipfactory.h
+    directioncontroller.h
     libwiiwrap/ogcsys.h
     movers/bulletmover.h
     movers/fixeddirectionmover.cpp
