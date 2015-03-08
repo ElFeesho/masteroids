@@ -5,6 +5,8 @@
 
 using std::stringstream;
 
+static std::function<void()> pauseHandler;
+
 GameScreen::GameScreen() :
 		isPaused(false),
 		level(0),
@@ -24,7 +26,10 @@ GameScreen::GameScreen() :
 		playerColours{RGB::green, RGB::yellow, RGB::blue, RGB::purple},
 		livesRenderer(LivesRenderer())
 {
-
+	pauseHandler = [&](){
+		isPaused = true;
+		pauseEnt = new PauseDialog(GamepadInputManager::sharedInstance()->inputForPlayer(0), this);
+	};
 }
 
 GameScreen::~GameScreen()
@@ -34,6 +39,7 @@ GameScreen::~GameScreen()
 
 void GameScreen::screenHidden()
 {
+	GamepadInputManager::sharedInstance()->inputForPlayer(0).pause().removeUpHandler(&pauseHandler);
 	asteroids.clear();
 	secondaryAsteroids.clear();
 	debrisEntities.clear();
@@ -58,6 +64,9 @@ void GameScreen::screenHidden()
 
 void GameScreen::screenShown()
 {
+
+	GamepadInputManager::sharedInstance()->inputForPlayer(0).pause().addUpHandler(&pauseHandler);
+
 	if (Options::players == 1)
 	{
 		playerSpawnLocations[0] = Position(320, 240, -M_PI_2);

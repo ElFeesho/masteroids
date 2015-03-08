@@ -29,10 +29,6 @@ public:
 
 	void render(GfxWrapper *gfx);
 
-	bool buttonDown(GamepadButton button);
-
-	bool buttonUp(GamepadButton button);
-
 	Position &position()
 	{
 		return Position::NONE;
@@ -67,6 +63,7 @@ private:
 			[&]()
 			{
 				menu_sel = 0;
+				pauseDialogRenderer.setMenuSelection(menu_sel);
 			}
 	};
 
@@ -74,6 +71,7 @@ private:
 			[&]()
 			{
 				menu_sel = 1;
+				pauseDialogRenderer.setMenuSelection(menu_sel);
 			}
 	};
 

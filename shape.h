@@ -6,7 +6,7 @@ class Shape
 public:
 	Shape();
 
-	Shape(double radius);
+	explicit Shape(double radius);
 
 	Shape(const Shape &other);
 
@@ -28,7 +28,7 @@ public:
 
 	static Shape NONE;
 private:
-	double radius;
+	double radius { 0 };
 };
 
 #endif // SHAPE_H
