@@ -11,29 +11,15 @@ ControlConf::ControlConf(ControlConfListener *listener)
 		  next_change(GameTime::getMillis() + 500),
 		  ldir(1)
 {
-	GamepadInputManager::sharedInstance()->inputForPlayer(0)->addListener(this);
+	GamepadInputManager::sharedInstance()->inputForPlayer(0);
 }
 
 ControlConf::~ControlConf()
 {
-	GamepadInputManager::sharedInstance()->inputForPlayer(0)->removeListener(this);
+	GamepadInputManager::sharedInstance()->inputForPlayer(0);
 }
 
 void ControlConf::render(GfxWrapper *gfx)
 {
 	renderer().render(gfx, position(), shape(), direction());
-}
-
-bool ControlConf::buttonDown(GamepadButton button)
-{
-	return false;
-}
-
-bool ControlConf::buttonUp(GamepadButton button)
-{
-	if (button == BUTTON_START)
-	{
-		listener->controlConfClosed();
-	}
-	return false;
 }

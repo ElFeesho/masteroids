@@ -4,57 +4,81 @@
 #include "input/gamepad.h"
 #include "direction.h"
 
-class DirectionController : public GamepadListener
+class DirectionController
 {
+
 public:
-	DirectionController() : directionToControl(Direction::NONE)
+	DirectionController(GamepadSource &source) : gamepadSource(source), directionToControl(Direction::NONE)
 	{
+		attachListeners();
 	}
 
-	DirectionController(DirectionController &copy) : directionToControl(copy.directionToControl)
+	DirectionController(GamepadSource &source, DirectionController &copy)
+			: gamepadSource(source), directionToControl(copy.directionToControl)
 	{
+		attachListeners();
 	}
 
-	DirectionController(Direction &directon) : directionToControl(directon)
+
+	DirectionController(GamepadSource &source, Direction &directon) : gamepadSource(source), directionToControl(directon)
 	{
+		attachListeners();
 	}
 
 	~DirectionController()
 	{
+		gamepadSource.up().removeDownHandler(&upPressHandler);
+		gamepadSource.up().removeUpHandler(&upReleaseHandler);
+		gamepadSource.left().removeDownHandler(&leftPressHandler);
+		gamepadSource.left().removeUpHandler(&leftReleaseHandler);
+		gamepadSource.right().removeDownHandler(&rightPressHandler);
+		gamepadSource.right().removeUpHandler(&rightReleaseHandler);
 	}
 
-	bool buttonDown(GamepadButton button) override
+	void attachListeners()
 	{
-		if (button == BUTTON_LEFT)
-		{
-			directionToControl.Spin(-0.1f);
-		}
-		else if (button == BUTTON_RIGHT)
-		{
-			directionToControl.Spin(0.1f);
-		}
-		else if (button == BUTTON_UP)
-		{
-			directionToControl.Speed(0.1f);
-		}
-		return true;
-	}
-
-	bool buttonUp(GamepadButton button) override
-	{
-		if (button == BUTTON_LEFT || button == BUTTON_RIGHT)
-		{
-			directionToControl.Spin(0.0f);
-		}
-		else if (button == BUTTON_UP)
-		{
-			directionToControl.Speed(0.0f);
-		}
-		return true;
+		gamepadSource.up().addDownHandler(&upPressHandler);
+		gamepadSource.up().addUpHandler(&upReleaseHandler);
+		gamepadSource.left().addDownHandler(&leftPressHandler);
+		gamepadSource.left().addUpHandler(&leftReleaseHandler);
+		gamepadSource.right().addDownHandler(&rightPressHandler);
+		gamepadSource.right().addUpHandler(&rightReleaseHandler);
 	}
 
 private:
 	Direction &directionToControl;
+	GamepadSource &gamepadSource;
+
+	std::function<void()> upPressHandler{[&]()
+	{
+		directionToControl.Speed(0.1f);
+	}};
+
+	std::function<void()> upReleaseHandler{[&]()
+	{
+		directionToControl.Speed(0.0f);
+	}};
+
+
+	std::function<void()> leftPressHandler{[&]()
+	{
+		directionToControl.Spin(-0.1f);
+	}};
+
+	std::function<void()> leftReleaseHandler{[&]()
+	{
+		directionToControl.Spin(0.0f);
+	}};
+
+	std::function<void()> rightPressHandler{[&]()
+	{
+		directionToControl.Spin(0.1f);
+	}};
+
+	std::function<void()> rightReleaseHandler{[&]()
+	{
+		directionToControl.Spin(0.0f);
+	}};
 };
 
 #endif

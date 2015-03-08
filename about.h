@@ -16,7 +16,7 @@ public:
 	virtual void aboutClosed() = 0;
 };
 
-class About : public Entity, public GamepadListener
+class About : public Entity
 {
 public:
 	About(AboutListener *listener);
@@ -29,10 +29,6 @@ public:
 	}
 
 	void render(GfxWrapper *gfx);
-
-	bool buttonUp(GamepadButton button);
-
-	bool buttonDown(GamepadButton button);
 
 	Position &position()
 	{

@@ -48,7 +48,7 @@ public:
 	virtual void controlConfClosed() = 0;
 };
 
-class ControlConf : public Entity, public GamepadListener
+class ControlConf : public Entity
 {
 public:
 	ControlConf(ControlConfListener *listener);

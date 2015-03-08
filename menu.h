@@ -22,7 +22,7 @@ public:
 	virtual void menuAboutSelected() = 0;
 };
 
-class Menu : public Entity, public GamepadListener
+class Menu : public Entity
 {
 public:
 	Menu(MenuListener *listener);
@@ -38,10 +38,6 @@ public:
 	void decrementMenu();
 
 	void handleMenuSelection();
-
-	bool buttonDown(GamepadButton button);
-
-	bool buttonUp(GamepadButton button);
 
 	Position &position()
 	{

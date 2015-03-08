@@ -29,6 +29,10 @@ GameScreen::GameScreen() :
 
 GameScreen::~GameScreen()
 {
+	for (int i = 0; i < 4; i++)
+	{
+		bulletGenerators[i].detachFromButton(GamepadInputManager::sharedInstance()->inputForPlayer(i).fire());
+	}
 
 }
 
@@ -96,9 +100,9 @@ void GameScreen::screenShown()
 		players[i]->position().Rotation(playerSpawnLocations[i].Rotation());
 		players[i]->direction().Angle(playerSpawnLocations[i].Rotation());
 		players[i]->direction().Speed(0);
-		directionControllers[i] = new DirectionController(players[i]->direction());
-		GamepadInputManager::sharedInstance()->inputForPlayer(i)->addListener(directionControllers[i]);
-		GamepadInputManager::sharedInstance()->inputForPlayer(i)->addListener(&bulletGenerators[i]);
+		directionControllers[i] = new DirectionController(GamepadInputManager::sharedInstance()->inputForPlayer(i), players[i]->direction());
+
+		bulletGenerators[i].attachToButton(GamepadInputManager::sharedInstance()->inputForPlayer(i).fire());
 		players[i]->setVisible(true);
 	}
 

@@ -1,15 +1,20 @@
 #include <renderers/pausedialogrenderer.h>
 #include "pausedialog.h"
 
-PauseDialog::PauseDialog(Gamepad *gamepad, PauseDialogListener *listener)
+PauseDialog::PauseDialog(GamepadSource &gamepad, PauseDialogListener *listener)
 		: pauseDialogRenderer(PauseDialogRenderer()), gamepad(gamepad), listener(listener), menu_sel(0)
 {
-	gamepad->addListener(this);
+
+	gamepad.left().addDownHandler(&leftHandler);
+	gamepad.right().addDownHandler(&rightHandler);
+	gamepad.fire().addDownHandler(&fireHandler);
 }
 
 PauseDialog::~PauseDialog()
 {
-	gamepad->removeListener(this);
+	gamepad.left().removeDownHandler(&leftHandler);
+	gamepad.right().removeDownHandler(&rightHandler);
+	gamepad.fire().removeDownHandler(&fireHandler);
 }
 
 bool PauseDialog::update()
@@ -20,35 +25,4 @@ bool PauseDialog::update()
 void PauseDialog::render(GfxWrapper *gfx)
 {
 	renderer().render(gfx, position(), shape(), direction());
-}
-
-bool PauseDialog::buttonDown(GamepadButton button)
-{
-	if (button == BUTTON_LEFT)
-	{
-		menu_sel = 0;
-	}
-	else if (button == BUTTON_RIGHT)
-	{
-		menu_sel = 1;
-	}
-	pauseDialogRenderer.setMenuSelection(menu_sel);
-	return false;
-}
-
-bool PauseDialog::buttonUp(GamepadButton button)
-{
-	if (button == BUTTON_FIRE || button == BUTTON_START)
-	{
-		if (menu_sel == 0)
-		{
-			listener->ingameContinueSelected();
-		}
-		else
-		{
-			listener->ingameQuitSelected();
-		}
-		return true;
-	}
-	return false;
 }

@@ -6,7 +6,7 @@
 #include "input/gamepad.h"
 #include "renderers/gameoverrenderer.h"
 
-class GameOver : public Entity, public GamepadListener
+class GameOver : public Entity
 {
 public:
 	GameOver();
@@ -26,10 +26,6 @@ public:
 	AliveMonitor &aliveMonitor() override;
 
 	Renderer &renderer() override;
-
-	bool buttonDown(GamepadButton button);
-
-	bool buttonUp(GamepadButton button);
 
 	GameOverRenderer gameOverRenderer;
 };

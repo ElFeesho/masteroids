@@ -6,7 +6,7 @@
 #include "keyboardsource.h"
 
 GamepadInputManager::GamepadInputManager()
-		: gamepads{new Gamepad(new KeyboardSource()), new Gamepad(new KeyboardSource()), new Gamepad(new KeyboardSource()), new Gamepad(new KeyboardSource())}
+		: gamepads{new KeyboardSource(), new KeyboardSource(), new KeyboardSource(), new KeyboardSource()}
 {
 }
 
@@ -46,9 +46,9 @@ void GamepadInputManager::initialise()
 	WPAD_SetIdleTimeout(120);
 }
 
-Gamepad *GamepadInputManager::inputForPlayer(int playerNumber)
+GamepadSource &GamepadInputManager::inputForPlayer(int playerNumber)
 {
-	return gamepads[playerNumber];
+	return *gamepads[playerNumber];
 }
 
 GamepadInputManager *GamepadInputManager::sharedInstance()

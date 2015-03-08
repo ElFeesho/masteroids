@@ -18,10 +18,10 @@ public:
 	virtual void ingameQuitSelected() = 0;
 };
 
-class PauseDialog : public Entity, public GamepadListener
+class PauseDialog : public Entity
 {
 public:
-	PauseDialog(Gamepad *gamepad, PauseDialogListener *listener);
+	PauseDialog(GamepadSource &gamepad, PauseDialogListener *listener);
 
 	~PauseDialog();
 
@@ -59,10 +59,37 @@ public:
 	}
 
 private:
-	Gamepad *gamepad;
+	GamepadSource &gamepad;
 	PauseDialogListener *listener;
 	PauseDialogRenderer pauseDialogRenderer;
 	int menu_sel;
+	std::function<void()> leftHandler{
+			[&]()
+			{
+				menu_sel = 0;
+			}
+	};
+
+	std::function<void()> rightHandler{
+			[&]()
+			{
+				menu_sel = 1;
+			}
+	};
+
+	std::function<void()> fireHandler {
+			[&]()
+			{
+				if(menu_sel == 0)
+				{
+					listener->ingameContinueSelected();
+				}
+				else
+				{
+					listener->ingameQuitSelected();
+				}
+			}
+	};
 };
 
 #endif

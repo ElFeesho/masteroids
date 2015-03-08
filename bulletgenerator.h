@@ -4,7 +4,7 @@
 #include "input/gamepad.h"
 #include <functional>
 
-class BulletGenerator : public GamepadListener
+class BulletGenerator
 {
 public:
 	BulletGenerator(std::function<void()> fireBullet) : onShouldFireBullet(fireBullet)
@@ -15,9 +15,15 @@ public:
 	{
 	};
 
-	virtual bool buttonDown(GamepadButton button) override;
+	void attachToButton(GamepadButton &button)
+	{
+		button.addDownHandler(&onShouldFireBullet);
+	}
 
-	virtual bool buttonUp(GamepadButton button) override;
+	void detachFromButton(GamepadButton &button)
+	{
+		button.removeDownHandler(&onShouldFireBullet);
+	}
 
 private:
 	std::function<void()> onShouldFireBullet;

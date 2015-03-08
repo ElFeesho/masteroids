@@ -1,7 +1,7 @@
 #ifndef __GAMEPAD_INPUTMANAGER_H__
 #define __GAMEPAD_INPUTMANAGER_H__
 
-class Gamepad;
+#include "gamepad.h"
 
 class GamepadInputManager
 {
@@ -14,14 +14,14 @@ public:
 
 	bool checkQuit();
 
-	Gamepad *inputForPlayer(int playerNumber);
+	GamepadSource &inputForPlayer(int playerNumber);
 
 	void initialise();
 
 private:
 	GamepadInputManager();
 
-	Gamepad *gamepads[4];
+	GamepadSource *gamepads[4];
 
 	static GamepadInputManager *instance;
 

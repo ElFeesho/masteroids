@@ -5,15 +5,62 @@
 #include "input/gamepadinputmanager.h"
 #include "gametime.h"
 
+static std::function<void()> firePressHandler;
+
+static std::function<void()> upPressHandler;
+static std::function<void()> downPressHandler;
+static std::function<void()> upReleaseHandler;
+static std::function<void()> downReleaseHandler;
+
 Menu::Menu(MenuListener *listener)
 		: menuRenderer(MenuRenderer()), listener(listener), menu_sel(0), next_change(0), ldir(-1), child(NULL)
 {
-	GamepadInputManager::sharedInstance()->inputForPlayer(0)->addListener(this);
+	firePressHandler = [&](){
+		next_change = 0;
+		ldir = -1;
+		listener->menuOptionsSelected();
+	};
+
+	upPressHandler = [&](){
+		ldir = 0;
+		decrementMenu();
+		next_change = GameTime::getMillis() + 500;
+	};
+
+	downPressHandler = [&](){
+		ldir = 1;
+		incrementMenu();
+
+		next_change = GameTime::getMillis() + 500;
+	};
+
+	upReleaseHandler = [&](){
+		next_change = 0;
+		ldir = -1;
+	};
+
+	downReleaseHandler = [&](){
+		next_change = 0;
+		ldir = -1;
+	};
+
+
+	GamepadInputManager::sharedInstance()->inputForPlayer(0).fire().addUpHandler(&firePressHandler);
+	GamepadInputManager::sharedInstance()->inputForPlayer(0).up().addDownHandler(&upPressHandler);
+	GamepadInputManager::sharedInstance()->inputForPlayer(0).up().addUpHandler(&upReleaseHandler);
+	GamepadInputManager::sharedInstance()->inputForPlayer(0).down().addDownHandler(&downPressHandler);
+	GamepadInputManager::sharedInstance()->inputForPlayer(0).down().addUpHandler(&downReleaseHandler);
 }
 
 Menu::~Menu()
 {
-	GamepadInputManager::sharedInstance()->inputForPlayer(0)->removeListener(this);
+	//GamepadInputManager::sharedInstance()->inputForPlayer(0)->removeListener(this);
+
+	GamepadInputManager::sharedInstance()->inputForPlayer(0).fire().removeUpHandler(&firePressHandler);
+	GamepadInputManager::sharedInstance()->inputForPlayer(0).up().removeDownHandler(&upPressHandler);
+	GamepadInputManager::sharedInstance()->inputForPlayer(0).up().removeUpHandler(&upReleaseHandler);
+	GamepadInputManager::sharedInstance()->inputForPlayer(0).down().removeDownHandler(&downPressHandler);
+	GamepadInputManager::sharedInstance()->inputForPlayer(0).down().removeUpHandler(&downReleaseHandler);
 }
 
 bool Menu::update()
@@ -99,35 +146,4 @@ void Menu::handleMenuSelection()
 			exit(0);
 			break;
 	}
-}
-
-bool Menu::buttonDown(GamepadButton button)
-{
-	if (button == BUTTON_UP)
-	{
-		ldir = 0;
-		decrementMenu();
-		next_change = GameTime::getMillis() + 500;
-	}
-	if (button == BUTTON_DOWN)
-	{
-		ldir = 1;
-		incrementMenu();
-
-		next_change = GameTime::getMillis() + 500;
-	}
-	return false;
-}
-
-bool Menu::buttonUp(GamepadButton button)
-{
-	next_change = 0;
-	ldir = -1;
-
-	if (button == BUTTON_FIRE || button == BUTTON_START)
-	{
-		handleMenuSelection();
-		return true;
-	}
-	return false;
 }

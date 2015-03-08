@@ -2,14 +2,19 @@
 
 #include "input/gamepadinputmanager.h"
 
+static std::function<void()> aboutFinishHandler;
+
 About::About(AboutListener *listener) : aboutRenderer(AboutRenderer()), listener(listener)
 {
-	GamepadInputManager::sharedInstance()->inputForPlayer(0)->addListener(this);
+	aboutFinishHandler = [&](){
+		listener->aboutClosed();
+	};
+	GamepadInputManager::sharedInstance()->inputForPlayer(0).fire().addUpHandler(&aboutFinishHandler);
 }
 
 About::~About()
 {
-	GamepadInputManager::sharedInstance()->inputForPlayer(0)->removeListener(this);
+	GamepadInputManager::sharedInstance()->inputForPlayer(0).fire().removeUpHandler(&aboutFinishHandler);
 }
 
 void About::render(GfxWrapper *gfx)
@@ -17,17 +22,3 @@ void About::render(GfxWrapper *gfx)
 	renderer().render(gfx, position(), shape(), direction());
 }
 
-bool About::buttonDown(GamepadButton button)
-{
-	return false;
-}
-
-bool About::buttonUp(GamepadButton button)
-{
-	if (button == BUTTON_FIRE || button == BUTTON_START)
-	{
-		listener->aboutClosed();
-		return true;
-	}
-	return false;
-}
