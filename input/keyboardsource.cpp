@@ -48,64 +48,93 @@ static int getKeyState()
 }
 
 
+GamepadButton &KeyboardSource::fire()
+{
+	return fireButton;
+}
+
+GamepadButton &KeyboardSource::up()
+{
+	return upButton;
+}
+
+GamepadButton &KeyboardSource::left()
+{
+	return leftButton;
+}
+
+GamepadButton &KeyboardSource::down()
+{
+	return downButton;
+}
+
+GamepadButton &KeyboardSource::right()
+{
+	return rightButton;
+}
+
+GamepadButton &KeyboardSource::pause()
+{
+	return pauseButton;
+}
+
 void KeyboardSource::poll()
 {
-	if (listener)
+	lastState = keyState;
+	keyState = getKeyState();
+
+	int buttonsDown = ((keyState ^ lastState)) & keyState;
+	int buttonsUp = ((keyState ^ lastState)) & lastState;
+
+	if (buttonsDown & PAD_BUTTON_UP)
 	{
-		lastState = keyState;
-		keyState = getKeyState();
-
-		int buttonsDown = ((keyState ^ lastState)) & keyState;
-		int buttonsUp = ((keyState ^ lastState)) & lastState;
-
-		if (buttonsDown & PAD_BUTTON_UP)
-		{
-			listener->buttonDown(BUTTON_UP);
-		}
-		if (buttonsDown & PAD_BUTTON_DOWN)
-		{
-			listener->buttonDown(BUTTON_DOWN);
-		}
-		if (buttonsDown & PAD_BUTTON_LEFT)
-		{
-			listener->buttonDown(BUTTON_LEFT);
-		}
-		if (buttonsDown & PAD_BUTTON_RIGHT)
-		{
-			listener->buttonDown(BUTTON_RIGHT);
-		}
-		if (buttonsDown & PAD_BUTTON_FIRE)
-		{
-			listener->buttonDown(BUTTON_FIRE);
-		}
-		if (buttonsDown & PAD_BUTTON_START)
-		{
-			listener->buttonDown(BUTTON_START);
-		}
-
-		if (buttonsUp & PAD_BUTTON_UP)
-		{
-			listener->buttonUp(BUTTON_UP);
-		}
-		if (buttonsUp & PAD_BUTTON_DOWN)
-		{
-			listener->buttonUp(BUTTON_DOWN);
-		}
-		if (buttonsUp & PAD_BUTTON_LEFT)
-		{
-			listener->buttonUp(BUTTON_LEFT);
-		}
-		if (buttonsUp & PAD_BUTTON_RIGHT)
-		{
-			listener->buttonUp(BUTTON_RIGHT);
-		}
-		if (buttonsUp & PAD_BUTTON_FIRE)
-		{
-			listener->buttonUp(BUTTON_FIRE);
-		}
-		if (buttonsUp & PAD_BUTTON_START)
-		{
-			listener->buttonUp(BUTTON_START);
-		}
+		upButton.notifyDownHandlers();
 	}
+	if (buttonsDown & PAD_BUTTON_DOWN)
+	{
+		downButton.notifyDownHandlers();
+	}
+	if (buttonsDown & PAD_BUTTON_LEFT)
+	{
+		leftButton.notifyDownHandlers();
+	}
+	if (buttonsDown & PAD_BUTTON_RIGHT)
+	{
+		rightButton.notifyDownHandlers();
+	}
+	if (buttonsDown & PAD_BUTTON_FIRE)
+	{
+		fireButton.notifyDownHandlers();
+	}
+	if (buttonsDown & PAD_BUTTON_START)
+	{
+		pauseButton.notifyDownHandlers();
+	}
+
+	if (buttonsUp & PAD_BUTTON_UP)
+	{
+		upButton.notifyUpHandlers();
+	}
+	if (buttonsUp & PAD_BUTTON_DOWN)
+	{
+		downButton.notifyUpHandlers();
+	}
+	if (buttonsUp & PAD_BUTTON_LEFT)
+	{
+		leftButton.notifyUpHandlers();
+	}
+	if (buttonsUp & PAD_BUTTON_RIGHT)
+	{
+		rightButton.notifyUpHandlers();
+	}
+	if (buttonsUp & PAD_BUTTON_FIRE)
+	{
+		fireButton.notifyUpHandlers();
+	}
+	if (buttonsUp & PAD_BUTTON_START)
+	{
+		pauseButton.notifyUpHandlers();
+	}
+
+
 }

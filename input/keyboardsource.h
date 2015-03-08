@@ -14,11 +14,6 @@ public:
 	{
 	}
 
-	void setListener(GamepadSourceListener *listener)
-	{
-		this->listener = listener;
-	}
-
 	void poll();
 
 	const std::string name() const
@@ -27,9 +22,26 @@ public:
 	}
 
 private:
-	GamepadSourceListener *listener{0};
 	int keyState{0};
 	int lastState{0};
+	GamepadButton fireButton { GamepadButton() };
+	GamepadButton upButton { GamepadButton() };
+	GamepadButton leftButton { GamepadButton() };
+	GamepadButton rightButton { GamepadButton() };
+	GamepadButton downButton { GamepadButton() };
+	GamepadButton pauseButton { GamepadButton() };
+public:
+	virtual GamepadButton &fire() override;
+
+	virtual GamepadButton &up() override;
+
+	virtual GamepadButton &left() override;
+
+	virtual GamepadButton &down() override;
+
+	virtual GamepadButton &right() override;
+
+	virtual GamepadButton &pause() override;
 };
 
 #endif
