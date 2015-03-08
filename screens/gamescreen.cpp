@@ -29,10 +29,6 @@ GameScreen::GameScreen() :
 
 GameScreen::~GameScreen()
 {
-	for (int i = 0; i < 4; i++)
-	{
-		bulletGenerators[i].detachFromButton(GamepadInputManager::sharedInstance()->inputForPlayer(i).fire());
-	}
 
 }
 
@@ -55,6 +51,8 @@ void GameScreen::screenHidden()
 		playerMovers[i].reset();
 		playerBullets[i].clear();
 		playerScores[i] = 0;
+
+		bulletGenerators[i].detachFromButton(GamepadInputManager::sharedInstance()->inputForPlayer(i).fire());
 	}
 }
 
@@ -88,7 +86,6 @@ void GameScreen::screenShown()
 		playersLives[i] = Options::lives;
 		bulletGenerators[i] = BulletGenerator([&, i]()
 		{
-			std::cout << " TEST " << std::endl;
 			Direction bulletDir = Direction(5.0f, players[i]->direction().Angle());
 			playerBullets[i].add(bulletFactory.createBullet(playerColours[i], bulletDir, players[i]->position()));
 		});

@@ -17,6 +17,7 @@ set(SOURCE_FILES
     images/game_over_img.h
     images/options_img.h
     input/gamepad.h
+    directioncontroller.h
     input/gamepadinputmanager.cpp
     input/gamepadinputmanager.h
     input/keyboardsource.cpp

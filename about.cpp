@@ -6,8 +6,8 @@ static std::function<void()> aboutFinishHandler;
 
 About::About(AboutListener *listener) : aboutRenderer(AboutRenderer()), listener(listener)
 {
-	aboutFinishHandler = [&](){
-		listener->aboutClosed();
+	aboutFinishHandler = [this](){
+		this->listener->aboutClosed();
 	};
 	GamepadInputManager::sharedInstance()->inputForPlayer(0).fire().addUpHandler(&aboutFinishHandler);
 }
