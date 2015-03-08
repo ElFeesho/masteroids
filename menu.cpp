@@ -18,7 +18,7 @@ Menu::Menu(MenuListener *listener)
 	firePressHandler = [&](){
 		next_change = 0;
 		ldir = -1;
-		listener->menuOptionsSelected();
+		handleMenuSelection();
 	};
 
 	upPressHandler = [&](){
