@@ -95,8 +95,11 @@ void GameScreen::screenShown()
 		playersLives[i] = Options::lives;
 		bulletGenerators[i] = BulletGenerator([&, i]()
 		{
-			Direction bulletDir = Direction(5.0f, players[i]->direction().Angle());
-			playerBullets[i].add(bulletFactory.createBullet(playerColours[i], bulletDir, players[i]->position()));
+			if(playerBullets[i].size() < Options::max_bullets)
+			{
+				Direction bulletDir = Direction(5.0f, players[i]->direction().Angle());
+				playerBullets[i].add(bulletFactory.createBullet(playerColours[i], bulletDir, players[i]->position()));
+			}
 		});
 
 		players[i] = shipFactory.createShip(playerColours[i], playerSpawnLocations[i]);
