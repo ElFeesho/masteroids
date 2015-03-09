@@ -35,6 +35,13 @@ bool Position::operator==(const Position &other) const
 	return x == other.x && y == other.y && rotation == other.rotation;
 }
 
+void Position::set(double x, double y, double rotation)
+{
+	this->x = x;
+	this->y = y;
+	this->rotation = rotation;
+}
+
 double Position::X()
 {
 	return x;

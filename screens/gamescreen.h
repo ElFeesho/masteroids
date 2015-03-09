@@ -2,6 +2,7 @@
 #define GAMESCREEN_H
 
 #include <renderers/livesrenderer.h>
+#include <input/gamepadinputmanager.h>
 #include "screen.h"
 #include "entitylist.h"
 #include "pausedialog.h"
@@ -14,6 +15,9 @@
 
 #include "shipfactory.h"
 #include "bulletgenerator.h"
+#include "playermanager.h"
+
+
 
 class GameScreen : public Screen, public PauseDialogListener
 {
@@ -37,9 +41,10 @@ public:
 	void generateLevel();
 
 private:
+	PlayerManager playerManager;
+
 	AsteroidFactory asteroidFactory;
-	BulletFactory bulletFactory;
-	ShipFactory shipFactory;
+
 	ScreenListener *listener;
 	EntityList asteroids;
 	EntityList secondaryAsteroids;
@@ -49,21 +54,7 @@ private:
 	PauseDialog *pauseEnt;
 
 	bool isPaused;
-
-	Actor *players[4];
-	ShipMover playerMovers[4];
-	EntityList playerBullets[4];
-	Position playerScorePositions[4];
-	Position playerSpawnLocations[4];
-	BulletGenerator bulletGenerators[4];
-	RGB playerColours[4];
-	LivesRenderer livesRenderer;
-	ScoreRenderer scoreRenderer;
-	int playerScores[4];
-	int playersLives[4];
 	int level;
-
-	DirectionController *directionControllers[4];
 
 	void checkAsteroidCollisions(int playerNumber);
 
@@ -72,8 +63,6 @@ private:
 	void checkPlayerDeaths();
 
 	void killPlayer(int playerNumber);
-
-	void respawnShip(int playerNumber);
 
 	void checkLevelComplete();
 

@@ -47,6 +47,8 @@ set(SOURCE_FILES
     renderers/shiprenderer.h
     about.cpp
     about.h
+    playermanager.cpp
+    playermanager.h
     images/about_img.h
     actor.cpp
     actor.h
