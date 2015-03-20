@@ -48,7 +48,6 @@ bool GamepadInputManager::checkQuit()
 		result = true;
 	}
 #else
-	bool result = false;
 	SDL_Event ev = {0};
 
 	while (SDL_PollEvent(&ev))
