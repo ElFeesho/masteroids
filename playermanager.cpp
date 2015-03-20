@@ -1,6 +1,7 @@
 #include <math.h>
 #include "playermanager.h"
 #include "input/gamepadinputmanager.h"
+#include "options.h"
 
 #ifdef __WII__
 #define M_PI        3.14159265358979323846264338327950288   /* pi             */
@@ -10,15 +11,6 @@
 
 PlayerManager::PlayerManager(int playerCount, int lives, int maxBullets, std::function<void()> gameOver)
 		: playingPlayers(playerCount), playerScores{0, 0, 0, 0},
-		  bulletGenerators{BulletGenerator([]()
-		  {
-		  }), BulletGenerator([]()
-		  {
-		  }), BulletGenerator([]()
-		  {
-		  }), BulletGenerator([]()
-		  {
-		  })},
 		  playerMovers{ShipMover(), ShipMover(), ShipMover(), ShipMover()},
 		  playerScorePositions{Position(5, 5, 0), Position(635, 5, 0), Position(5, 440, 0), Position(635, 440, 0)},
 		  playerColours{RGB::green, RGB::yellow, RGB::blue, RGB::purple},
@@ -51,9 +43,9 @@ PlayerManager::PlayerManager(int playerCount, int lives, int maxBullets, std::fu
 	for (int i = 0; i < playingPlayers; i++)
 	{
 		playersLives[i] = lives;
-		bulletGenerators[i] = BulletGenerator([&, i]()
+		bulletGenerators[i] = new BulletGenerator([this, i]()
 		{
-			if (playerBullets[i].size() < maxBullets)
+			if (playerBullets[i].size() < Options::max_bullets)
 			{
 				Direction bulletDir = Direction(5.0f, players[i]->direction().Angle());
 				playerBullets[i].add(bulletFactory.createBullet(playerColours[i], bulletDir, players[i]->position()));
@@ -66,21 +58,12 @@ PlayerManager::PlayerManager(int playerCount, int lives, int maxBullets, std::fu
 		players[i]->direction().Speed(0);
 		directionControllers[i] = new DirectionController(GamepadInputManager::sharedInstance()->inputForPlayer(i), players[i]->direction());
 
-		bulletGenerators[i].attachToButton(GamepadInputManager::sharedInstance()->inputForPlayer(i).fire());
+		bulletGenerators[i]->attachToButton(GamepadInputManager::sharedInstance()->inputForPlayer(i).fire());
 		players[i]->setVisible(true);
 	}
 }
 
 PlayerManager::PlayerManager() : playingPlayers(0), playerScores{0, 0, 0, 0},
-											bulletGenerators{BulletGenerator([]()
-											{
-											}), BulletGenerator([]()
-											{
-											}), BulletGenerator([]()
-											{
-											}), BulletGenerator([]()
-											{
-											})},
 											playerMovers{ShipMover(), ShipMover(), ShipMover(), ShipMover()},
 											playerScorePositions{Position(5, 5, 0), Position(635, 5, 0), Position(5, 440, 0), Position(635, 440, 0)},
 											playerColours{RGB::green, RGB::yellow, RGB::blue, RGB::purple},
@@ -122,7 +105,8 @@ void PlayerManager::shutdown()
 		playerBullets[i].clear();
 		playerScores[i] = 0;
 
-		bulletGenerators[i].detachFromButton(GamepadInputManager::sharedInstance()->inputForPlayer(i).fire());
+		bulletGenerators[i]->detachFromButton(GamepadInputManager::sharedInstance()->inputForPlayer(i).fire());
+		delete bulletGenerators[i];
 	}
 }
 

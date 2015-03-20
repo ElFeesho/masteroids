@@ -47,7 +47,7 @@ private:
 	EntityList playerBullets[4];
 	ShipFactory shipFactory;
 	Position playerSpawnLocations[4];
-	BulletGenerator bulletGenerators[4];
+	BulletGenerator *bulletGenerators[4];
 	RGB playerColours[4];
 	int playerScores[4];
 	int playersLives[4];

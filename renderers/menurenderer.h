@@ -34,7 +34,7 @@ public:
 
 		if (menu_sel == 0)
 		{
-			gfx->drawText(false, menuOffsetX, menuSeparationHeight + menuItemHeight, "Start Game", RGB::yellow, CENTRE);
+			gfx->drawText(true, menuOffsetX, menuSeparationHeight + menuItemHeight, "Start Game", RGB::yellow, CENTRE);
 		}
 		else
 		{
@@ -43,7 +43,7 @@ public:
 
 		if (menu_sel == 1)
 		{
-			gfx->drawText(false, menuOffsetX, menuSeparationHeight + menuItemHeight * 2, "Options", RGB::yellow, CENTRE);
+			gfx->drawText(true, menuOffsetX, menuSeparationHeight + menuItemHeight * 2, "Options", RGB::yellow, CENTRE);
 		}
 		else
 		{
@@ -52,7 +52,7 @@ public:
 
 		if (menu_sel == 2)
 		{
-			gfx->drawText(false, menuOffsetX, menuSeparationHeight + menuItemHeight * 3, "About", RGB::yellow, CENTRE);
+			gfx->drawText(true, menuOffsetX, menuSeparationHeight + menuItemHeight * 3, "About", RGB::yellow, CENTRE);
 		}
 		else
 		{
@@ -61,13 +61,13 @@ public:
 
 		if (menu_sel == 3)
 		{
-			gfx->drawText(false, menuOffsetX, menuSeparationHeight + menuItemHeight * 4, "Exit To HBC", RGB::yellow, CENTRE);
+			gfx->drawText(true, menuOffsetX, menuSeparationHeight + menuItemHeight * 4, "Exit To HBC", RGB::yellow, CENTRE);
 		}
 		else
 		{
 			gfx->drawText(false, menuOffsetX, menuSeparationHeight + menuItemHeight * 4, "Exit To HBC", RGB::white, CENTRE);
 		}
-		gfx->drawText(false, menuOffsetX, 80 + asteroid_banner_height + (gfx->textHeight() + 10) * 10, "Coded by Feesh! - gummybassist@gmail.com", RGB::white);
+		gfx->drawText(false, 320, 80 + asteroid_banner_height + (gfx->textHeight() + 10) * 10, "Coded by Feesh! - gummybassist@gmail.com", RGB::white, TextAlignment::CENTRE);
 	}
 
 private:
