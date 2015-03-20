@@ -1,8 +1,8 @@
 #ifndef GAMESCREEN_H
 #define GAMESCREEN_H
 
-#include <renderers/livesrenderer.h>
-#include <input/gamepadinputmanager.h>
+#include "renderers/livesrenderer.h"
+#include "input/gamepadinputmanager.h"
 #include "screen.h"
 #include "entitylist.h"
 #include "pausedialog.h"

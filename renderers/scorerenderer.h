@@ -1,9 +1,9 @@
 #ifndef __SCORE_RENDERER_H__
 #define __SCORE_RENDERER_H__
 
-#include <gfx/gfx.h>
-#include <position.h>
-#include <shape.h>
+#include "gfx/gfx.h"
+#include "position.h"
+#include "shape.h"
 #include "renderers/renderer.h"
 
 class ScoreRenderer : public Renderer

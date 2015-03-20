@@ -1,9 +1,9 @@
 #ifndef __LIVES_RENDERER_H__
 #define __LIVES_RENDERER_H__
 
-#include <gfx/gfx.h>
-#include <position.h>
-#include <shape.h>
+#include "gfx/gfx.h"
+#include "position.h"
+#include "shape.h"
 #include "renderers/renderer.h"
 
 class LivesRenderer : public Renderer

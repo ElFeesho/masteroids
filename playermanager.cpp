@@ -1,5 +1,12 @@
+#include <math.h>
 #include "playermanager.h"
 #include "input/gamepadinputmanager.h"
+
+#ifdef __WII__
+#define M_PI        3.14159265358979323846264338327950288   /* pi             */
+#define M_PI_2      1.57079632679489661923132169163975144   /* pi/2           */
+#define M_PI_4      0.785398163397448309615660845819875721  /* pi/4           */
+#endif
 
 PlayerManager::PlayerManager(int playerCount, int lives, int maxBullets, std::function<void()> gameOver)
 		: playingPlayers(playerCount), playerScores{0, 0, 0, 0},

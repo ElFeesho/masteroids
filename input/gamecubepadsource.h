@@ -1,17 +1,19 @@
-#ifndef __WII__
-#ifndef __KEYBOARDSOURCE_H__
-#define __KEYBOARDSOURCE_H__
+#ifdef __WII__
+
+#ifndef __GAMECUBEPADSOURCE_H__
+#define __GAMECUBEPADSOURCE_H__
 
 #include "gamepad.h"
 
-class KeyboardSource : public GamepadSource
+class GamecubePadSource : public GamepadSource
 {
 public:
-	KeyboardSource()
+	GamecubePadSource(int padNumber)
 	{
+		this->padNumber = padNumber;
 	}
 
-	~KeyboardSource()
+	~GamecubePadSource()
 	{
 	}
 
@@ -19,10 +21,11 @@ public:
 
 	const std::string name() const
 	{
-		return "Keyboard";
+		return "Gamecube Pad";
 	}
 
 private:
+	int padNumber;
 	int keyState{0};
 	int lastState{0};
 	GamepadButton fireButton { GamepadButton() };
@@ -46,4 +49,5 @@ public:
 };
 
 #endif
+
 #endif

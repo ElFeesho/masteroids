@@ -1,3 +1,5 @@
+#ifndef __WII__
+
 #include "keyboardsource.h"
 
 #include <SDL/SDL.h>
@@ -138,3 +140,5 @@ void KeyboardSource::poll()
 
 
 }
+
+#endif

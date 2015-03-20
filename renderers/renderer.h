@@ -1,7 +1,7 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#include <gfx/gfx.h>
+#include "gfx/gfx.h"
 #include "../position.h"
 #include "../shape.h"
 #include "../direction.h"

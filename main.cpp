@@ -11,28 +11,17 @@
 
 #endif
 
-//void ScanPADSandReset(u32 retrace_count)
-//{
-//
-//	PAD_ScanPads();
-//	WPAD_ScanPads();
-//	//WPAD_ReadPending(WPAD_CHAN_ALL, NULL);
-//	if (PAD_ButtonsDown(0) & PAD_TRIGGER_Z)
-//	{;
-//		//exit(0);
-//	}
-//	//if(!((*(u32*)0xCC003000)>>16))
-//	//{
-//	//	exit(0);
-//	//}
-//}
-
 int main(int argc, char **argv)
 {
+	printf("Main\n");
 	GfxWrapper *gfxWrapper = new GfxWrapper();
+	printf("Initialising graphics\n");
 	gfxWrapper->init(640, 480);
+	printf("Initialised graphics\n");
 
 	GamepadInputManager::sharedInstance()->initialise();
+
+	printf("Initialised input\n");
 
 	ScreenManager screenManager = ScreenManager();
 	for (; ;)

@@ -1,4 +1,4 @@
-#include <renderers/pausedialogrenderer.h>
+#include "renderers/pausedialogrenderer.h"
 #include "pausedialog.h"
 
 PauseDialog::PauseDialog(GamepadSource &gamepad, PauseDialogListener *listener)

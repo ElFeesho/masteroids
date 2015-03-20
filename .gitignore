@@ -1,6 +1,9 @@
 CMakeCache.txt
+build/
 cmake_install.cmake
 .idea
 CMakeFiles
 *.o
 masteroids
+*.elf
+*.dol

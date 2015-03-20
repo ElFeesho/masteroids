@@ -1,7 +1,7 @@
 #ifndef __ACTOR_H__
 #define __ACTOR_H__
 
-#include <movers/mover.h>
+#include "movers/mover.h"
 #include "entity.h"
 
 class Actor : public Entity

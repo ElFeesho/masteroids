@@ -1,9 +1,9 @@
 #ifndef __GAMEOVERRENDERER_H__
 #define __GAMEOVERRENDERER_H__
 
-#include <gfx/gfx.h>
-#include <position.h>
-#include <shape.h>
+#include "gfx/gfx.h"
+#include "position.h"
+#include "shape.h"
 #include "renderer.h"
 
 class GameOverRenderer : public Renderer
