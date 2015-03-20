@@ -4,6 +4,7 @@
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_gfxPrimitives.h>
+#include <SDL/SDL_ttf.h>
 #include "../font5.h"
 
 using std::string;
@@ -51,8 +52,19 @@ unsigned short RGB::as16bit() const
 	return ((unsigned int) (16 * r)) + (((unsigned int) (32.f * g)) << 5) + (((unsigned int) (16.f * b)) << 11);
 }
 
-void GfxWrapper::init(int w, int h)
+SDL_Color fromRGB(RGB colour)
 {
+	SDL_Color returnVal = { .r = (Uint8)(colour.getR() * 255.0f),
+									.g = (Uint8)(colour.getG() * 255.0f),
+									.b = (Uint8)(colour.getB() * 255.0f),
+									.unused = 0};
+	return returnVal;
+}
+
+
+void GfxWrapper::init(int w, int h, ResourceManager *rsrcMan)
+{
+	resourceManager = rsrcMan;
 	SDL_Init(SDL_INIT_VIDEO);
 	SDL_SetVideoMode(w, h, 0, SDL_SWSURFACE);
 }
@@ -72,13 +84,18 @@ int GfxWrapper::textHeight()
 	return font5_char_high;
 }
 
-void GfxWrapper::drawText(int x, int y, const string &text, const RGB &colour, TextAlignment align) const
+void GfxWrapper::drawText(bool bold, int x, int y, const string &text, const RGB &colour, TextAlignment align) const
 {
+	TTF_Font *font = nullptr;
+	font = (TTF_Font *) (bold ? resourceManager->boldFont()->getFont() : resourceManager->regularFont()->getFont());
 	int px, py;
 	int ni;
 	int i;
 
-	int textSize = text.length() * font5_char_width;
+	int textSize;
+	int unused;
+	TTF_SizeText(font, text.c_str(), &textSize, &unused);
+
 	if (align == CENTRE)
 	{
 		x -= textSize / 2;
@@ -88,22 +105,11 @@ void GfxWrapper::drawText(int x, int y, const string &text, const RGB &colour, T
 		x -= textSize;
 	}
 
-	for (i = 0; i < text.length(); i++)
-	{
-		ni = (font5_char_width * font5_char_high * (text[i] - 1));
-		for (py = y; py < y + font5_char_high; py++)
-		{
-			for (px = x; px < x + font5_char_width; px++)
-			{
-				if (font5[ni] != 0xffff)
-				{
-					pixelColor(SDL_GetVideoSurface(), px + i * font5_char_width, py, colour.as24bit());
-				}
-
-				ni++;
-			}
-		}
-	}
+	SDL_Color white = { .r = 255, .g = 255, .b = 255 };
+	SDL_Rect dstRect = { .x = (Sint16)x, .y = (Sint16)y, .w = (Uint16)textSize, .h = (Uint16)unused };
+	SDL_Surface *pSurface = TTF_RenderText_Blended(font, text.c_str(), white);
+	SDL_BlitSurface(pSurface, NULL, SDL_GetVideoSurface(), &dstRect);
+	SDL_FreeSurface(pSurface);
 }
 
 void GfxWrapper::drawRect(int x, int y, int w, int h, const RGB &colour) const

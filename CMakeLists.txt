@@ -105,6 +105,7 @@ set(SOURCE_FILES
     shape.h
     gametime.cpp
     gametime.h
+    gfx/sdlresourcemanager.cpp gfx/resourcemanager.h
     vector.h)
 
 add_executable(masteroids ${SOURCE_FILES})
@@ -120,4 +121,4 @@ IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(CMAKE_EXE_LINKER_FLAGS "-framework Cocoa")
 ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
-target_link_libraries(masteroids -lSDLmain -lSDL -lSDL_gfx -lm)
+target_link_libraries(masteroids -lSDLmain -lSDL -lSDL_gfx -lSDL_ttf -lm)

@@ -24,15 +24,15 @@ public:
 
 		int aboutTextYOffset = 100;
 
-		gfx->drawText(145, aboutTextYOffset + font5_char_high * 6, "MAsteroids for Wii, written by Feesh.", RGB::white);
-		gfx->drawText(145, aboutTextYOffset + font5_char_high * 8, "Thanks go out to:", RGB::white);
-		gfx->drawText(180, aboutTextYOffset + font5_char_high * 10, "Arn` for the cool banner and icon.", RGB::white);
-		gfx->drawText(180, aboutTextYOffset + font5_char_high * 12, "#wiidev IRC channel on Efnet", RGB::white);
-		gfx->drawText(180, aboutTextYOffset + font5_char_high * 14, "Homebrew Channel", RGB::white);
-		gfx->drawText(180, aboutTextYOffset + font5_char_high * 16, "LibOGC and GRRLIB.", RGB::white);
-		gfx->drawText(180, aboutTextYOffset + font5_char_high * 18, "Zaxx and his magical Linux-fu.", RGB::white);
-		gfx->drawText(180, aboutTextYOffset + font5_char_high * 20, "Dare for sucking at Mario Kart", RGB::white);
-		gfx->drawText((640 - 22 * font5_char_width) / 2, aboutTextYOffset + font5_char_high * 22, "Push Start to go back", RGB::white);
+		gfx->drawText(false, 145, aboutTextYOffset + font5_char_high * 6, "MAsteroids for Wii, written by Feesh.", RGB::white);
+		gfx->drawText(false, 145, aboutTextYOffset + font5_char_high * 8, "Thanks go out to:", RGB::white);
+		gfx->drawText(false, 180, aboutTextYOffset + font5_char_high * 10, "Arn` for the cool banner and icon.", RGB::white);
+		gfx->drawText(false, 180, aboutTextYOffset + font5_char_high * 12, "#wiidev IRC channel on Efnet", RGB::white);
+		gfx->drawText(false, 180, aboutTextYOffset + font5_char_high * 14, "Homebrew Channel", RGB::white);
+		gfx->drawText(false, 180, aboutTextYOffset + font5_char_high * 16, "LibOGC and GRRLIB.", RGB::white);
+		gfx->drawText(false, 180, aboutTextYOffset + font5_char_high * 18, "Zaxx and his magical Linux-fu.", RGB::white);
+		gfx->drawText(false, 180, aboutTextYOffset + font5_char_high * 20, "Dare for sucking at Mario Kart", RGB::white);
+		gfx->drawText(false, (640 - 22 * font5_char_width) / 2, aboutTextYOffset + font5_char_high * 22, "Push Start to go back", RGB::white);
 	}
 };
 

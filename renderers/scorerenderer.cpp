@@ -8,5 +8,5 @@ void ScoreRenderer::render(GfxWrapper *gfx, Position &position, Shape &shape, Di
 {
 	stringstream sstream;
 	sstream << "SCORE: " << score;
-	gfx->drawText(position.X(), position.Y(), sstream.str(), colour, alignment);
+	gfx->drawText(false, position.X(), position.Y(), sstream.str(), colour, alignment);
 }

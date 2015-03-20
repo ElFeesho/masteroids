@@ -17,22 +17,22 @@ void PauseDialogRenderer::render(GfxWrapper *gfx, Position &position, Shape &sha
 {
 	gfx->drawRect((320 - 150), 240 - 50, 300, 90, RGB::blue);
 
-	gfx->drawText(320 - 80, 240 - 40, "Quit Current Game?", RGB::white);
+	gfx->drawText(false, 320 - 80, 240 - 40, "Quit Current Game?", RGB::white);
 	if (menu_sel == 0)
 	{
-		gfx->drawText(320 - 140, 240 - 5, "Continue", RGB::yellow);
+		gfx->drawText(false, 320 - 140, 240 - 5, "Continue", RGB::yellow);
 	}
 	else
 	{
-		gfx->drawText(320 - 140, 240 - 5, "Continue", RGB::white);
+		gfx->drawText(false, 320 - 140, 240 - 5, "Continue", RGB::white);
 	}
 
 	if (menu_sel == 1)
 	{
-		gfx->drawText(420, 240 - 5, "Exit", RGB::yellow);
+		gfx->drawText(false, 420, 240 - 5, "Exit", RGB::yellow);
 	}
 	else
 	{
-		gfx->drawText(420, 240 - 5, "Exit", RGB::white);
+		gfx->drawText(false, 420, 240 - 5, "Exit", RGB::white);
 	}
 }

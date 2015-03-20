@@ -6,7 +6,7 @@
 #include <strings.h>
 #include <grrlib.h>
 #include <stdlib.h>
-
+#include "resourcemanager.h"
 #include "../font5.h"
 
 using std::string;
@@ -55,9 +55,9 @@ unsigned short RGB::as16bit() const
 
 void *buffer = 0;
 
-void GfxWrapper::init(int w, int h)
+void GfxWrapper::init(int w, int h, ResourceManager *rsrcManager)
 {
-	//buffer = GRRLIB_MakeBuffer(w, h);
+	resourceManager = rsrcManager;
 	GRRLIB_Init();
 }
 
@@ -76,8 +76,11 @@ int GfxWrapper::textHeight()
 	return font5_char_high;
 }
 
-void GfxWrapper::drawText(int x, int y, const string &text, const RGB &colour, TextAlignment align) const
+void GfxWrapper::drawText(bool bold, int x, int y, const string &text, const RGB &colour, TextAlignment align) const
 {
+	GRRLIB_ttfFont *font = (GRRLIB_ttfFont*)resourceManager->regularFont()->getFont();
+
+	GRRLIB_PrintfTTF(x, y, font, "TEST TEXT", 12, 0xffffffff);
 	//GRRLIB_Print(x, y, 9, 2816 / 256, (char*)text.c_str(), font5, colour.as16bit(), 0);
 }
 

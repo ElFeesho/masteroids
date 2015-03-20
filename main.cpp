@@ -13,10 +13,9 @@
 
 int main(int argc, char **argv)
 {
-	printf("Main\n");
 	GfxWrapper *gfxWrapper = new GfxWrapper();
 	printf("Initialising graphics\n");
-	gfxWrapper->init(640, 480);
+	gfxWrapper->init(640, 480, new ResourceManager());
 	printf("Initialised graphics\n");
 
 	GamepadInputManager::sharedInstance()->initialise();

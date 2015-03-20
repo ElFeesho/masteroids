@@ -31,28 +31,28 @@ void OptionsRenderer::render(GfxWrapper *gfx, Position &position, Shape &shape, 
 
 	stringstream stringBuffer;;
 	stringBuffer << "Lives: " << (Options::lives);
-	gfx->drawText(textPosition, 80 + gfx->textHeight() * 8, stringBuffer.str(), menu_sel == LIVES ? RGB::yellow : RGB::white, CENTRE);
+	gfx->drawText(false, textPosition, 80 + gfx->textHeight() * 8, stringBuffer.str(), menu_sel == LIVES ? RGB::yellow : RGB::white, CENTRE);
 
 	stringBuffer.str("");
 	stringBuffer << "Difficulty: " << difficultyLabels[Options::difficulty];
-	gfx->drawText(textPosition, 80 + gfx->textHeight() * 11, stringBuffer.str(), menu_sel == DIFFICULTY ? RGB::yellow : RGB::white, CENTRE);
+	gfx->drawText(false, textPosition, 80 + gfx->textHeight() * 11, stringBuffer.str(), menu_sel == DIFFICULTY ? RGB::yellow : RGB::white, CENTRE);
 
 	stringBuffer.str("");
 	stringBuffer << "Team Killing: " << (Options::team_kill == 0 ? "Off" : "On");
-	gfx->drawText(textPosition, 80 + gfx->textHeight() * 14, stringBuffer.str(), menu_sel == TEAM_PLAY ? RGB::yellow : RGB::white, CENTRE);
+	gfx->drawText(false, textPosition, 80 + gfx->textHeight() * 14, stringBuffer.str(), menu_sel == TEAM_PLAY ? RGB::yellow : RGB::white, CENTRE);
 
 	stringBuffer.str("");
 	stringBuffer << "Players: " << Options::players;
-	gfx->drawText(textPosition, 80 + gfx->textHeight() * 17, stringBuffer.str(), menu_sel == PLAYER_COUNT ? RGB::yellow : RGB::white, CENTRE);
+	gfx->drawText(false, textPosition, 80 + gfx->textHeight() * 17, stringBuffer.str(), menu_sel == PLAYER_COUNT ? RGB::yellow : RGB::white, CENTRE);
 
 	stringBuffer.str("");
 	stringBuffer << "Max Bullets: " << Options::max_bullets;
-	gfx->drawText(textPosition, 80 + gfx->textHeight() * 20, stringBuffer.str(), menu_sel == MAX_BULLETS ? RGB::yellow : RGB::white, CENTRE);
+	gfx->drawText(false, textPosition, 80 + gfx->textHeight() * 20, stringBuffer.str(), menu_sel == MAX_BULLETS ? RGB::yellow : RGB::white, CENTRE);
 
 	stringBuffer.str("");
 	stringBuffer << "Music: " << (Options::music ? "Yes" : "No");
-	gfx->drawText(textPosition, 80 + gfx->textHeight() * 23, stringBuffer.str(), menu_sel == MUSIC ? RGB::yellow : RGB::white, CENTRE);
+	gfx->drawText(false, textPosition, 80 + gfx->textHeight() * 23, stringBuffer.str(), menu_sel == MUSIC ? RGB::yellow : RGB::white, CENTRE);
 
-	gfx->drawText(textPosition, 80 + gfx->textHeight() * 26, "Configure Controls", menu_sel == CONTROLS ? RGB::yellow : RGB::white, CENTRE);
-	gfx->drawText(textPosition, 80 + gfx->textHeight() * 29, "Start to Exit", RGB::white, CENTRE);
+	gfx->drawText(false, textPosition, 80 + gfx->textHeight() * 26, "Configure Controls", menu_sel == CONTROLS ? RGB::yellow : RGB::white, CENTRE);
+	gfx->drawText(false, textPosition, 80 + gfx->textHeight() * 29, "Start to Exit", RGB::white, CENTRE);
 }
