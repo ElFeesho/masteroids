@@ -60,7 +60,7 @@ bool Options::update()
 	return alive;
 }
 
-void Options::render(GfxWrapper *gfx)
+void Options::render(GfxWrapper &gfx)
 {
 	renderer().render(gfx, position(), shape(), direction());
 }

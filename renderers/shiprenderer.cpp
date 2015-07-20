@@ -5,7 +5,7 @@
 #define M_PI_4      0.785398163397448309615660845819875721  /* pi/4           */
 #endif
 
-static void renderAt(GfxWrapper *gfx, double x, double y, double radius, double rotation, RGB &colour)
+static void renderAt(GfxWrapper &gfx, double x, double y, double radius, double rotation, RGB &colour)
 {
 	double cx = x;
 	double cy = y;
@@ -19,15 +19,15 @@ static void renderAt(GfxWrapper *gfx, double x, double y, double radius, double 
 	double brx = cx + cos(rotation + M_PI * 0.75) * radius;
 	double bry = cy + sin(rotation + M_PI * 0.75) * radius;
 
-	gfx->drawLine(cx, cy, blx, bly, colour);
-	gfx->drawLine(cx, cy, brx, bry, colour);
+    gfx.drawLine(cx, cy, blx, bly, colour);
+    gfx.drawLine(cx, cy, brx, bry, colour);
 
-	gfx->drawLine(blx, bly, tpx, tpy, colour);
-	gfx->drawLine(brx, bry, tpx, tpy, colour);
+    gfx.drawLine(blx, bly, tpx, tpy, colour);
+    gfx.drawLine(brx, bry, tpx, tpy, colour);
 }
 
 
-void ShipRenderer::render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction, RGB &colour)
+void ShipRenderer::render(GfxWrapper &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour)
 {
 	renderAt(gfx, position.X(), position.Y(), shape.Radius(), direction.Angle(), colour);
 	if (position.X() + shape.Radius() > 640)

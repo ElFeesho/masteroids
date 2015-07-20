@@ -68,7 +68,7 @@ void MenuScreen::optionsMenuClosed()
 }
 
 
-void MenuScreen::update(GfxWrapper *gfx)
+void MenuScreen::update(GfxWrapper &gfx)
 {
 	entityList.updateAll();
 	activeMenu->update();

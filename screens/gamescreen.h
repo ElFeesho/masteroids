@@ -30,7 +30,7 @@ public:
 
 	void screenShown();
 
-	void update(GfxWrapper *gfx);
+    void update(GfxWrapper &gfx);
 
 	void setListener(ScreenListener *listener);
 
@@ -58,7 +58,7 @@ private:
 
 	void checkAsteroidCollisions(int playerNumber);
 
-	void updatePlayers(GfxWrapper *gfx);
+    void updatePlayers(GfxWrapper &gfx);
 
 	void checkPlayerDeaths();
 

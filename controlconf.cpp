@@ -19,7 +19,7 @@ ControlConf::~ControlConf()
     GamepadInputManager::sharedInstance().inputForPlayer(0);
 }
 
-void ControlConf::render(GfxWrapper *gfx)
+void ControlConf::render(GfxWrapper &gfx)
 {
 	renderer().render(gfx, position(), shape(), direction());
 }

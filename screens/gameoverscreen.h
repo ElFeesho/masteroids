@@ -13,7 +13,7 @@ public:
 
 	void setListener(ScreenListener *listener) override;
 
-	void update(GfxWrapper *gfx) override;
+    void update(GfxWrapper &gfx) override;
 
 	void screenShown() override;
 

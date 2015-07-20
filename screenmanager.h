@@ -14,7 +14,7 @@ public:
 
 	void screenClosed(Screen *screen, int reason);
 
-	void update(GfxWrapper *gfx);
+    void update(GfxWrapper &gfx);
 
 private:
 	Screen *activeScreen;

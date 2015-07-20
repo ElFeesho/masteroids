@@ -15,7 +15,7 @@ public:
 	{
 	}
 
-	virtual void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) = 0;
+    virtual void render(GfxWrapper &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) = 0;
 };
 
 #endif // RENDERER_H

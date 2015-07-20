@@ -24,7 +24,7 @@ public:
 
 	bool update();
 
-	void render(GfxWrapper *gfx);
+    void render(GfxWrapper &gfx);
 
 	Position &position()
 	{

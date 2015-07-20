@@ -27,7 +27,7 @@ public:
 
 	bool update();
 
-	void render(GfxWrapper *gfx);
+    void render(GfxWrapper &gfx);
 
 	void setVisible(bool visible);
 

@@ -25,7 +25,7 @@ public:
 		return monitor;
 	}
 
-	void render(GfxWrapper *gfx);
+    void render(GfxWrapper &gfx);
 
 	bool update();
 

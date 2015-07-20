@@ -19,9 +19,9 @@ ScreenManager::~ScreenManager()
 
 }
 
-void ScreenManager::update(GfxWrapper *gfx)
+void ScreenManager::update(GfxWrapper &gfx)
 {
-	activeScreen->update(gfx);
+    activeScreen->update(gfx);
 }
 
 void ScreenManager::switchScreen(Screen *newScreen)

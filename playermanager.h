@@ -25,7 +25,7 @@ public:
 
 	void respawnShip(int playerNumber);
 
-	void updatePlayer(int playerNumber, GfxWrapper *gfx);
+    void updatePlayer(int playerNumber, GfxWrapper &gfx);
 
 	EntityList & bulletsForPlayer(int player);
 

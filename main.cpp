@@ -29,7 +29,7 @@ int main(int argc, char **argv)
         gfxWrapper.fillScreen(RGB::black);
 
         GamepadInputManager::sharedInstance().poll();
-        screenManager.update(&gfxWrapper);
+        screenManager.update(gfxWrapper);
         gfxWrapper.render();
 		GameTime::tick();
 

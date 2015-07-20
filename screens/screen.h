@@ -24,7 +24,7 @@ public:
 
 	virtual void setListener(ScreenListener *listener) = 0;
 
-	virtual void update(GfxWrapper *gfx) = 0;
+    virtual void update(GfxWrapper &gfx) = 0;
 
 	virtual void screenShown() = 0;
 

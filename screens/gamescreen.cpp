@@ -56,7 +56,7 @@ void GameScreen::generateLevel()
 	}
 }
 
-void GameScreen::update(GfxWrapper *gfx)
+void GameScreen::update(GfxWrapper &gfx)
 {
 	if (!isPaused)
 	{
@@ -114,7 +114,7 @@ void GameScreen::killPlayer(int playerNumber)
 	playerManager.killPlayer(playerNumber);
 }
 
-void GameScreen::updatePlayers(GfxWrapper *gfx)
+void GameScreen::updatePlayers(GfxWrapper &gfx)
 {
 	for (int i = 0; i < Options::players; i++)
 	{

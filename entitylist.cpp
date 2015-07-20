@@ -66,7 +66,7 @@ void EntityList::clear()
 	}
 }
 
-void EntityList::renderAll(GfxWrapper *gfx)
+void EntityList::renderAll(GfxWrapper &gfx)
 {
 	for (int i = 0; i < entities.size(); i++)
 	{

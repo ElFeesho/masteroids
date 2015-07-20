@@ -18,7 +18,7 @@ public:
 
 	virtual bool update() = 0;
 
-	virtual void render(GfxWrapper *gfx) = 0;
+    virtual void render(GfxWrapper &gfx) = 0;
 
 	virtual Position &position() = 0;
 

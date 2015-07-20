@@ -23,7 +23,7 @@ public:
 
 	void updateAll();
 
-	void renderAll(GfxWrapper *gfx);
+    void renderAll(GfxWrapper &gfx);
 
 	void removeEntity(Entity *entity)
 	{

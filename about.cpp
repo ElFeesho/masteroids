@@ -17,7 +17,7 @@ About::~About()
     GamepadInputManager::sharedInstance().inputForPlayer(0).fire().removeUpHandler(&aboutFinishHandler);
 }
 
-void About::render(GfxWrapper *gfx)
+void About::render(GfxWrapper &gfx)
 {
 	renderer().render(gfx, position(), shape(), direction());
 }

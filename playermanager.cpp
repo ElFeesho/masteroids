@@ -121,7 +121,7 @@ EntityList &PlayerManager::bulletsForPlayer(int player)
 	return playerBullets[player];
 }
 
-void PlayerManager::updatePlayer(int playerNumber, GfxWrapper *gfx)
+void PlayerManager::updatePlayer(int playerNumber, GfxWrapper &gfx)
 {
 	players[playerNumber]->update();
 	players[playerNumber]->render(gfx);

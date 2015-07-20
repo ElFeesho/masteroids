@@ -14,7 +14,7 @@ void GameOverScreen::setListener(ScreenListener *listener)
 	this->listener = listener;
 }
 
-void GameOverScreen::update(GfxWrapper *gfx)
+void GameOverScreen::update(GfxWrapper &gfx)
 {
 	gameOverEntity.update();
 	gameOverEntity.render(gfx);

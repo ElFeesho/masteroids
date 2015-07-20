@@ -24,7 +24,7 @@ bool Actor::update()
 	return actorMonitor->alive();
 }
 
-void Actor::render(GfxWrapper *gfx)
+void Actor::render(GfxWrapper &gfx)
 {
 	if (isVisible())
 	{

@@ -17,7 +17,7 @@ public:
 	{
 	}
 
-	void render(GfxWrapper *gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) override;
+    void render(GfxWrapper &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) override;
 
 	void setLives(int liveCount)
 	{

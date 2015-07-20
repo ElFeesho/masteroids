@@ -33,7 +33,7 @@ Direction &Debris::direction()
 	return travelDirection;
 }
 
-void Debris::render(GfxWrapper *gfx)
+void Debris::render(GfxWrapper &gfx)
 {
 	renderer().render(gfx, position(), shape(), direction(), colour);
 }
