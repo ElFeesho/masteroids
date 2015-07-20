@@ -56,9 +56,9 @@ PlayerManager::PlayerManager(int playerCount, int lives, int maxBullets, std::fu
 		players[i]->position().set(playerSpawnLocations[i].X(), playerSpawnLocations[i].Y(), playerSpawnLocations[i].Rotation());
 		players[i]->direction().Angle(playerSpawnLocations[i].Rotation());
 		players[i]->direction().Speed(0);
-		directionControllers[i] = new DirectionController(GamepadInputManager::sharedInstance()->inputForPlayer(i), players[i]->direction());
+        directionControllers[i] = new DirectionController(GamepadInputManager::sharedInstance().inputForPlayer(i), players[i]->direction());
 
-		bulletGenerators[i]->attachToButton(GamepadInputManager::sharedInstance()->inputForPlayer(i).fire());
+        bulletGenerators[i]->attachToButton(GamepadInputManager::sharedInstance().inputForPlayer(i).fire());
 		players[i]->setVisible(true);
 	}
 }
@@ -105,7 +105,7 @@ void PlayerManager::shutdown()
 		playerBullets[i].clear();
 		playerScores[i] = 0;
 
-		bulletGenerators[i]->detachFromButton(GamepadInputManager::sharedInstance()->inputForPlayer(i).fire());
+        bulletGenerators[i]->detachFromButton(GamepadInputManager::sharedInstance().inputForPlayer(i).fire());
 		delete bulletGenerators[i];
 	}
 }

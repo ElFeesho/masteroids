@@ -13,7 +13,7 @@ GameScreen::GameScreen() :
 {
 	pauseHandler = [&](){
 		isPaused = true;
-		pauseEnt = new PauseDialog(GamepadInputManager::sharedInstance()->inputForPlayer(0), this);
+        pauseEnt = new PauseDialog(GamepadInputManager::sharedInstance().inputForPlayer(0), this);
 	};
 }
 
@@ -24,7 +24,7 @@ GameScreen::~GameScreen()
 
 void GameScreen::screenHidden()
 {
-	GamepadInputManager::sharedInstance()->inputForPlayer(0).pause().removeUpHandler(&pauseHandler);
+    GamepadInputManager::sharedInstance().inputForPlayer(0).pause().removeUpHandler(&pauseHandler);
 	asteroids.clear();
 	secondaryAsteroids.clear();
 	debrisEntities.clear();
@@ -43,7 +43,7 @@ void GameScreen::screenShown()
 	playerManager = PlayerManager(Options::players, Options::lives, Options::max_bullets, [this](){
 		this->listener->screenClosed(this, 0);
 	});
-	GamepadInputManager::sharedInstance()->inputForPlayer(0).pause().addUpHandler(&pauseHandler);
+    GamepadInputManager::sharedInstance().inputForPlayer(0).pause().addUpHandler(&pauseHandler);
 
 	generateLevel();
 }

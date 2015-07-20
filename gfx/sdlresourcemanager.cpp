@@ -32,6 +32,7 @@ private:
 
 ResourceManager::ResourceManager()
 {
+    printf("CTOR ResourceManager\n");
 	TTF_Init();
 	_regularFont = new SDLFont("regularfont.ttf", 16);
 	_boldFont = new SDLFont("boldfont.ttf", 16);
@@ -39,14 +40,15 @@ ResourceManager::ResourceManager()
 
 ResourceManager::~ResourceManager()
 {
+    printf("Resource manager dtor\n");
 }
 
-Font *ResourceManager::boldFont()
+Font *ResourceManager::boldFont() const
 {
 	return _boldFont;
 }
 
-Font *ResourceManager::regularFont()
+Font *ResourceManager::regularFont() const
 {
 	return _regularFont;
 }

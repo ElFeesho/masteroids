@@ -8,22 +8,20 @@ class GamepadInputManager
 public:
 	~GamepadInputManager();
 
-	static GamepadInputManager *sharedInstance();
+    static GamepadInputManager &sharedInstance();
 
-	void poll();
+    void poll();
 
-	bool checkQuit();
+    bool checkQuit();
 
-	GamepadSource &inputForPlayer(int playerNumber);
+    GamepadSource &inputForPlayer(int playerNumber);
 
-	void initialise();
+    void initialise();
 
+    GamepadInputManager();
 private:
-	GamepadInputManager();
 
 	GamepadSource *gamepads[4];
-
-	static GamepadInputManager *instance;
 
 };
 

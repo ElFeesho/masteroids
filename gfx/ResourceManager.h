@@ -13,8 +13,8 @@ public:
 	ResourceManager();
 	~ResourceManager();
 
-	Font *boldFont();
-	Font *regularFont();
+    Font *boldFont() const;
+    Font *regularFont() const;
 
 private:
 	Font *_boldFont;

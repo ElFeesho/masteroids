@@ -48,7 +48,9 @@ private:
 class GfxWrapper
 {
 public:
-	void init(int w, int h, ResourceManager *resourceManager);
+    GfxWrapper(int w, int h, const ResourceManager &resourceManager);
+
+    ~GfxWrapper();
 
 	int textHeight();
 
@@ -66,7 +68,7 @@ public:
 
 	void waitForVBlank();
 private:
-	ResourceManager *resourceManager;
+    const ResourceManager &resourceManager;
 };
 
 #endif

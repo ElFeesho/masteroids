@@ -45,22 +45,22 @@ Menu::Menu(MenuListener *listener)
 	};
 
 
-	GamepadInputManager::sharedInstance()->inputForPlayer(0).fire().addUpHandler(&firePressHandler);
-	GamepadInputManager::sharedInstance()->inputForPlayer(0).up().addDownHandler(&upPressHandler);
-	GamepadInputManager::sharedInstance()->inputForPlayer(0).up().addUpHandler(&upReleaseHandler);
-	GamepadInputManager::sharedInstance()->inputForPlayer(0).down().addDownHandler(&downPressHandler);
-	GamepadInputManager::sharedInstance()->inputForPlayer(0).down().addUpHandler(&downReleaseHandler);
+    GamepadInputManager::sharedInstance().inputForPlayer(0).fire().addUpHandler(&firePressHandler);
+    GamepadInputManager::sharedInstance().inputForPlayer(0).up().addDownHandler(&upPressHandler);
+    GamepadInputManager::sharedInstance().inputForPlayer(0).up().addUpHandler(&upReleaseHandler);
+    GamepadInputManager::sharedInstance().inputForPlayer(0).down().addDownHandler(&downPressHandler);
+    GamepadInputManager::sharedInstance().inputForPlayer(0).down().addUpHandler(&downReleaseHandler);
 }
 
 Menu::~Menu()
 {
 	//GamepadInputManager::sharedInstance()->inputForPlayer(0)->removeListener(this);
 
-	GamepadInputManager::sharedInstance()->inputForPlayer(0).fire().removeUpHandler(&firePressHandler);
-	GamepadInputManager::sharedInstance()->inputForPlayer(0).up().removeDownHandler(&upPressHandler);
-	GamepadInputManager::sharedInstance()->inputForPlayer(0).up().removeUpHandler(&upReleaseHandler);
-	GamepadInputManager::sharedInstance()->inputForPlayer(0).down().removeDownHandler(&downPressHandler);
-	GamepadInputManager::sharedInstance()->inputForPlayer(0).down().removeUpHandler(&downReleaseHandler);
+    GamepadInputManager::sharedInstance().inputForPlayer(0).fire().removeUpHandler(&firePressHandler);
+    GamepadInputManager::sharedInstance().inputForPlayer(0).up().removeDownHandler(&upPressHandler);
+    GamepadInputManager::sharedInstance().inputForPlayer(0).up().removeUpHandler(&upReleaseHandler);
+    GamepadInputManager::sharedInstance().inputForPlayer(0).down().removeDownHandler(&downPressHandler);
+    GamepadInputManager::sharedInstance().inputForPlayer(0).down().removeUpHandler(&downReleaseHandler);
 }
 
 bool Menu::update()

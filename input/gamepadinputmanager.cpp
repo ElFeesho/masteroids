@@ -8,6 +8,8 @@
 #include "keyboardsource.h"
 #include "gamecubepadsource.h"
 
+static GamepadInputManager instance;
+
 GamepadInputManager::GamepadInputManager()
 #ifndef __WII__
 		: gamepads{new KeyboardSource(), new KeyboardSource(), new KeyboardSource(), new KeyboardSource()}
@@ -75,9 +77,7 @@ GamepadSource &GamepadInputManager::inputForPlayer(int playerNumber)
 	return *gamepads[playerNumber];
 }
 
-GamepadInputManager *GamepadInputManager::sharedInstance()
+GamepadInputManager &GamepadInputManager::sharedInstance()
 {
-	return instance;
+    return instance;
 }
-
-GamepadInputManager *GamepadInputManager::instance = new GamepadInputManager();

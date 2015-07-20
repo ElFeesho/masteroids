@@ -13,7 +13,7 @@ Options::Options(OptionsListener *listener)
 		  colour(RGB(1.0f, 1.0f, 1.0f)),
 		  colourHighlight(RGB(1.0f, 0.8f, 0.0f))
 {
-	GamepadSource &gamepadSource = GamepadInputManager::sharedInstance()->inputForPlayer(0);
+    GamepadSource &gamepadSource = GamepadInputManager::sharedInstance().inputForPlayer(0);
 	gamepadSource.up().addDownHandler(&upPressedHandler);
 	gamepadSource.left().addDownHandler(&leftPressedHandler);
 	gamepadSource.right().addDownHandler(&rightPressedHandler);
@@ -30,7 +30,7 @@ Options::Options(OptionsListener *listener)
 
 Options::~Options()
 {
-	GamepadSource &gamepadSource = GamepadInputManager::sharedInstance()->inputForPlayer(0);
+    GamepadSource &gamepadSource = GamepadInputManager::sharedInstance().inputForPlayer(0);
 	gamepadSource.up().removeDownHandler(&upPressedHandler);
 	gamepadSource.down().removeDownHandler(&downPressedHandler);
 	gamepadSource.left().removeDownHandler(&leftPressedHandler);
@@ -49,7 +49,7 @@ bool Options::update()
 {
 	if (child != NULL)
 	{
-		if (!child->update())
+        if (!child->update())
 		{
 			delete child;
 			child = NULL;

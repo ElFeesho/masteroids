@@ -62,11 +62,16 @@ SDL_Color fromRGB(RGB colour)
 }
 
 
-void GfxWrapper::init(int w, int h, ResourceManager *rsrcMan)
+GfxWrapper::GfxWrapper(int w, int h, const ResourceManager &rsrcMan) : resourceManager{rsrcMan}
 {
-	resourceManager = rsrcMan;
+
 	SDL_Init(SDL_INIT_VIDEO);
 	SDL_SetVideoMode(w, h, 0, SDL_SWSURFACE);
+}
+
+GfxWrapper::~GfxWrapper()
+{
+
 }
 
 void GfxWrapper::drawLine(int x, int y, int x2, int y2, const RGB &colour) const
@@ -87,7 +92,7 @@ int GfxWrapper::textHeight()
 void GfxWrapper::drawText(bool bold, int x, int y, const string &text, const RGB &colour, TextAlignment align) const
 {
 	TTF_Font *font = nullptr;
-	font = (TTF_Font *) (bold ? resourceManager->boldFont()->getFont() : resourceManager->regularFont()->getFont());
+    font = (TTF_Font *) (bold ? resourceManager.boldFont()->getFont() : resourceManager.regularFont()->getFont());
 
 	int textSize;
 	int unused;
