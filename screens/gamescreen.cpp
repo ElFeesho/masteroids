@@ -41,7 +41,7 @@ void GameScreen::screenHidden()
 void GameScreen::screenShown()
 {
 	playerManager = PlayerManager(Options::players, Options::lives, Options::max_bullets, [this](){
-		this->listener->screenClosed(this, 0);
+        this->listener->screenClosed(*this, 0);
 	});
     GamepadInputManager::sharedInstance().inputForPlayer(0).pause().addUpHandler(&pauseHandler);
 
@@ -160,7 +160,7 @@ void GameScreen::ingameContinueSelected()
 
 void GameScreen::ingameQuitSelected()
 {
-	listener->screenClosed(this, 0);
+    listener->screenClosed(*this, 0);
 }
 
 void GameScreen::checkLevelComplete()

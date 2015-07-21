@@ -1,72 +1,59 @@
 #include "menuscreen.h"
 
-MenuScreen::MenuScreen()
-{
+MenuScreen::MenuScreen(MenuScreenListener &menuScreenListener) : menuListener(menuScreenListener), menuScreen(this), optionsScreen(this), controllerConfigScreen(this), aboutScreen(this)  {}
 
-}
-
-MenuScreen::~MenuScreen()
-{
-
-}
+MenuScreen::~MenuScreen() {}
 
 void MenuScreen::screenShown()
 {
-	for (int i = 0; i < 32; i++)
+    for (int i = 0; i < 16; i++)
 	{
-		entityList.add(asteroidFactory.createAsteroid(50.0f));
+        entityList.add(asteroidFactory.createAsteroid(75.0f));
 	}
 
-	activeMenu = new Menu(this);
+    activeMenu = &menuScreen;
+    activeMenu->menuScreenPresented();
 }
 
 void MenuScreen::screenHidden()
 {
-	entityList.clear();
-	delete activeMenu;
+    entityList.clear();
 }
 
 void MenuScreen::aboutClosed()
 {
-	delete activeMenu;
-	activeMenu = new Menu(this);
+    activateScreen(&menuScreen);
 }
 
 void MenuScreen::controlConfClosed()
 {
-	delete activeMenu;
-	activeMenu = new Options(this);
+    activateScreen(&optionsScreen);
 }
 
 void MenuScreen::menuStartGameSelected()
 {
-	listener->screenClosed(this, 1);
+    menuListener.menuScreenShouldShowGameScreen();
 }
 
 void MenuScreen::menuOptionsSelected()
 {
-	delete activeMenu;
-	activeMenu = new Options(this);
+    activateScreen(&optionsScreen);
 }
 
 void MenuScreen::menuAboutSelected()
 {
-	delete activeMenu;
-	activeMenu = new About(this);
+    activateScreen(&aboutScreen);
 }
 
 void MenuScreen::optionsControllerConfigSelected()
 {
-	delete activeMenu;
-	activeMenu = new ControlConf(this);
+    activateScreen(&controllerConfigScreen);
 }
 
 void MenuScreen::optionsMenuClosed()
 {
-	delete activeMenu;
-	activeMenu = new Menu(this);
+    activateScreen(&menuScreen);
 }
-
 
 void MenuScreen::update(GfxWrapper &gfx)
 {
@@ -79,4 +66,11 @@ void MenuScreen::update(GfxWrapper &gfx)
 void MenuScreen::setListener(ScreenListener *listener)
 {
 	this->listener = listener;
+}
+
+void MenuScreen::activateScreen(MenuScreenItem *screenItem)
+{
+    activeMenu->menuScreenHidden();
+    activeMenu = screenItem;
+    activeMenu->menuScreenPresented();
 }

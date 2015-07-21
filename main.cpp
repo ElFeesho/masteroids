@@ -15,14 +15,13 @@ int main(int argc, char **argv)
 {
     GfxWrapper gfxWrapper(640, 480, ResourceManager());
 	printf("Initialising graphics\n");
-
 	printf("Initialised graphics\n");
 
     GamepadInputManager::sharedInstance().initialise();
 
 	printf("Initialised input\n");
 
-	ScreenManager screenManager = ScreenManager();
+    ScreenManager screenManager;
 	for (; ;)
 	{
         gfxWrapper.waitForVBlank();

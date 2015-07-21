@@ -8,6 +8,8 @@
 #include "options.h"
 #include "images/controls_img.h"
 
+#include "menuscreenitem.h"
+
 /*
 	Input is not that difficult...
 */
@@ -48,7 +50,7 @@ public:
 	virtual void controlConfClosed() = 0;
 };
 
-class ControlConf : public Entity
+class ControlConf : public MenuScreenItem
 {
 public:
 	ControlConf(ControlConfListener *listener);
@@ -90,6 +92,9 @@ public:
 	{
 		return controlConfRenderer;
 	}
+
+    void menuScreenPresented() override;
+    void menuScreenHidden() override;
 
 private:
 	ControlConfListener *listener;

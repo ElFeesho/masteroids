@@ -44,7 +44,15 @@ Menu::Menu(MenuListener *listener)
 		ldir = -1;
 	};
 
+}
 
+Menu::~Menu()
+{
+	//GamepadInputManager::sharedInstance()->inputForPlayer(0)->removeListener(this);
+}
+
+void Menu::menuScreenPresented()
+{
     GamepadInputManager::sharedInstance().inputForPlayer(0).fire().addUpHandler(&firePressHandler);
     GamepadInputManager::sharedInstance().inputForPlayer(0).up().addDownHandler(&upPressHandler);
     GamepadInputManager::sharedInstance().inputForPlayer(0).up().addUpHandler(&upReleaseHandler);
@@ -52,10 +60,7 @@ Menu::Menu(MenuListener *listener)
     GamepadInputManager::sharedInstance().inputForPlayer(0).down().addUpHandler(&downReleaseHandler);
 }
 
-Menu::~Menu()
-{
-	//GamepadInputManager::sharedInstance()->inputForPlayer(0)->removeListener(this);
-
+void Menu::menuScreenHidden() {
     GamepadInputManager::sharedInstance().inputForPlayer(0).fire().removeUpHandler(&firePressHandler);
     GamepadInputManager::sharedInstance().inputForPlayer(0).up().removeDownHandler(&upPressHandler);
     GamepadInputManager::sharedInstance().inputForPlayer(0).up().removeUpHandler(&upReleaseHandler);

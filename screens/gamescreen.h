@@ -17,8 +17,6 @@
 #include "bulletgenerator.h"
 #include "playermanager.h"
 
-
-
 class GameScreen : public Screen, public PauseDialogListener
 {
 public:
@@ -57,15 +55,10 @@ private:
 	int level;
 
 	void checkAsteroidCollisions(int playerNumber);
-
     void updatePlayers(GfxWrapper &gfx);
-
 	void checkPlayerDeaths();
-
 	void killPlayer(int playerNumber);
-
 	void checkLevelComplete();
-
 	void generateSecondaryAsteroids(Entity *hit);
 };
 

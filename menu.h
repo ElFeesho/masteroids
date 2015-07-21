@@ -7,6 +7,7 @@
 #include "images/asteroid_banner.h"
 #include "images/controllers.h"
 #include "renderers/menurenderer.h"
+#include "menuscreenitem.h"
 
 class MenuListener
 {
@@ -22,12 +23,15 @@ public:
 	virtual void menuAboutSelected() = 0;
 };
 
-class Menu : public Entity
+class Menu : public MenuScreenItem
 {
 public:
 	Menu(MenuListener *listener);
 
 	~Menu();
+
+    void menuScreenPresented() override;
+    void menuScreenHidden() override;
 
 	bool update();
 

@@ -3,53 +3,42 @@
 #include "screens/gamescreen.h"
 #include "screens/gameoverscreen.h"
 
-ScreenManager::ScreenManager()
-		: menuScreen(new MenuScreen()), gameScreen(new GameScreen()), gameOverScreen(new GameOverScreen())
+ScreenManager::ScreenManager() : menuScreen(*this), gameScreen(), gameOverScreen()
 {
-	menuScreen->setListener(this);
-	gameScreen->setListener(this);
-	gameOverScreen->setListener(this);
-
-	activeScreen = menuScreen;
-	menuScreen->screenShown();
+    menuScreen.screenShown();
 }
 
-ScreenManager::~ScreenManager()
-{
-
-}
+ScreenManager::~ScreenManager() {}
 
 void ScreenManager::update(GfxWrapper &gfx)
 {
-    activeScreen->update(gfx);
+    if (gameMode == 0)
+    {
+        menuScreen.update(gfx);
+    }
+    else if(gameMode == 1)
+    {
+        gameScreen.update(gfx);
+    }
+    else if(gameMode == 2)
+    {
+        gameOverScreen.update(gfx);
+    }
 }
 
-void ScreenManager::switchScreen(Screen *newScreen)
+void ScreenManager::switchScreen(Screen &oldScreen, Screen &newScreen)
 {
-	Screen *oldScreen = activeScreen;
-	activeScreen = newScreen;
-	oldScreen->screenHidden();
-	activeScreen->screenShown();
+    oldScreen.screenHidden();
+    newScreen.screenShown();
 }
 
-void ScreenManager::screenClosed(Screen *screen, int reason)
+void ScreenManager::menuScreenShouldShowGameScreen()
 {
-	if (screen == menuScreen)
-	{
-		if (reason == 1)
-		{
-			switchScreen(gameScreen);
-		}
-	}
-	else if (screen == gameScreen)
-	{
-		if (reason == 0)
-		{
-			switchScreen(menuScreen);
-		}
-		else if (reason == 1)
-		{
-			switchScreen(gameOverScreen);
-		}
-	}
+    switchScreen(menuScreen, gameScreen);
+    gameMode = 1;
+}
+
+void ScreenManager::menuScreenShouldExitGame()
+{
+    // ...
 }

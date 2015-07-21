@@ -12,7 +12,7 @@ class Screen;
 class ScreenListener
 {
 public:
-	virtual void screenClosed(Screen *screen, int reason) = 0;
+    virtual void screenClosed(Screen &screen, int reason) = 0;
 };
 
 class Screen
@@ -20,7 +20,7 @@ class Screen
 public:
 	virtual ~Screen()
 	{
-	};
+    }
 
 	virtual void setListener(ScreenListener *listener) = 0;
 

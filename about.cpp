@@ -9,12 +9,12 @@ About::About(AboutListener *listener) : aboutRenderer(AboutRenderer()), listener
 	aboutFinishHandler = [this](){
 		this->listener->aboutClosed();
 	};
-    GamepadInputManager::sharedInstance().inputForPlayer(0).fire().addUpHandler(&aboutFinishHandler);
+
 }
 
 About::~About()
 {
-    GamepadInputManager::sharedInstance().inputForPlayer(0).fire().removeUpHandler(&aboutFinishHandler);
+
 }
 
 void About::render(GfxWrapper &gfx)
@@ -22,3 +22,13 @@ void About::render(GfxWrapper &gfx)
 	renderer().render(gfx, position(), shape(), direction());
 }
 
+
+void About::menuScreenPresented() {
+    GamepadInputManager::sharedInstance().inputForPlayer(0).fire().addUpHandler(&aboutFinishHandler);
+    GamepadInputManager::sharedInstance().inputForPlayer(0).pause().addUpHandler(&aboutFinishHandler);
+}
+
+void About::menuScreenHidden() {
+    GamepadInputManager::sharedInstance().inputForPlayer(0).fire().removeUpHandler(&aboutFinishHandler);
+    GamepadInputManager::sharedInstance().inputForPlayer(0).pause().removeUpHandler(&aboutFinishHandler);
+}

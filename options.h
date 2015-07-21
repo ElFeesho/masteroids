@@ -4,6 +4,7 @@
 #include "entity.h"
 #include "input/gamepad.h"
 #include "gfx/gfx.h"
+#include "menuscreenitem.h"
 
 #include <string.h>
 
@@ -22,7 +23,7 @@ public:
 	virtual void optionsMenuClosed() = 0;
 };
 
-class Options : public Entity
+class Options : public MenuScreenItem
 {
 public:
 	Options(OptionsListener *listener);
@@ -32,6 +33,9 @@ public:
 	bool update();
 
     void render(GfxWrapper &gfx);
+
+    void menuScreenPresented() override;
+    void menuScreenHidden() override;
 
 	Position &position()
 	{

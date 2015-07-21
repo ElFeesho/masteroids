@@ -9,12 +9,22 @@
 #include "entitylist.h"
 #include "controlconf.h"
 #include "asteroidfactory.h"
+#include "menuscreenitem.h"
+
+class MenuScreenListener
+{
+public:
+    virtual ~MenuScreenListener() {}
+
+    virtual void menuScreenShouldShowGameScreen() = 0;
+    virtual void menuScreenShouldExitGame() = 0;
+};
 
 class MenuScreen
 		: public Screen, public AboutListener, public ControlConfListener, public MenuListener, public OptionsListener
 {
 public:
-	MenuScreen();
+    MenuScreen(MenuScreenListener &menuScreenListener);
 
 	~MenuScreen();
 
@@ -41,11 +51,19 @@ public:
 	void screenHidden();
 
 private:
+
+    void activateScreen(MenuScreenItem *screenItem);
+
+    MenuScreenListener &menuListener;
 	AsteroidFactory asteroidFactory;
-	Entity *activeMenu;
+    MenuScreenItem *activeMenu;
 
 	EntityList entityList;
 	ScreenListener *listener;
+    About aboutScreen;
+    ControlConf controllerConfigScreen;
+    Options optionsScreen;
+    Menu menuScreen;
 };
 
 #endif

@@ -5,6 +5,7 @@
 #include "entity.h"
 #include "gfx/gfx.h"
 #include "input/gamepad.h"
+#include "menuscreenitem.h"
 
 class AboutListener
 {
@@ -16,7 +17,7 @@ public:
 	virtual void aboutClosed() = 0;
 };
 
-class About : public Entity
+class About : public MenuScreenItem
 {
 public:
 	About(AboutListener *listener);
@@ -54,6 +55,10 @@ public:
 	{
 		return aboutRenderer;
 	}
+
+    void menuScreenPresented() override;
+
+    void menuScreenHidden() override;
 
 private:
 	AboutListener *listener;

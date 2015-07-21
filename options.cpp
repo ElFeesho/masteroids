@@ -13,41 +13,50 @@ Options::Options(OptionsListener *listener)
 		  colour(RGB(1.0f, 1.0f, 1.0f)),
 		  colourHighlight(RGB(1.0f, 0.8f, 0.0f))
 {
-    GamepadSource &gamepadSource = GamepadInputManager::sharedInstance().inputForPlayer(0);
-	gamepadSource.up().addDownHandler(&upPressedHandler);
-	gamepadSource.left().addDownHandler(&leftPressedHandler);
-	gamepadSource.right().addDownHandler(&rightPressedHandler);
-	gamepadSource.down().addDownHandler(&downPressedHandler);
-	gamepadSource.fire().addDownHandler(&firePressed);
-	gamepadSource.pause().addDownHandler(&pausePressed);
 
-
-	gamepadSource.up().addUpHandler(&buttonReleased);
-	gamepadSource.left().addUpHandler(&buttonReleased);
-	gamepadSource.right().addUpHandler(&buttonReleased);
-	gamepadSource.down().addUpHandler(&buttonReleased);
 }
 
 Options::~Options()
 {
+
+}
+
+
+void Options::menuScreenPresented() {
     GamepadSource &gamepadSource = GamepadInputManager::sharedInstance().inputForPlayer(0);
-	gamepadSource.up().removeDownHandler(&upPressedHandler);
-	gamepadSource.down().removeDownHandler(&downPressedHandler);
-	gamepadSource.left().removeDownHandler(&leftPressedHandler);
-	gamepadSource.right().removeDownHandler(&rightPressedHandler);
-	gamepadSource.fire().removeDownHandler(&firePressed);
-	gamepadSource.pause().removeDownHandler(&pausePressed);
+    gamepadSource.up().addDownHandler(&upPressedHandler);
+    gamepadSource.left().addDownHandler(&leftPressedHandler);
+    gamepadSource.right().addDownHandler(&rightPressedHandler);
+    gamepadSource.down().addDownHandler(&downPressedHandler);
+    gamepadSource.fire().addDownHandler(&firePressed);
+    gamepadSource.pause().addDownHandler(&pausePressed);
 
 
-	gamepadSource.up().removeUpHandler(&buttonReleased);
-	gamepadSource.left().removeUpHandler(&buttonReleased);
-	gamepadSource.right().removeUpHandler(&buttonReleased);
-	gamepadSource.down().removeUpHandler(&buttonReleased);
+    gamepadSource.up().addUpHandler(&buttonReleased);
+    gamepadSource.left().addUpHandler(&buttonReleased);
+    gamepadSource.right().addUpHandler(&buttonReleased);
+    gamepadSource.down().addUpHandler(&buttonReleased);
+}
+
+void Options::menuScreenHidden() {
+    GamepadSource &gamepadSource = GamepadInputManager::sharedInstance().inputForPlayer(0);
+    gamepadSource.up().removeDownHandler(&upPressedHandler);
+    gamepadSource.down().removeDownHandler(&downPressedHandler);
+    gamepadSource.left().removeDownHandler(&leftPressedHandler);
+    gamepadSource.right().removeDownHandler(&rightPressedHandler);
+    gamepadSource.fire().removeDownHandler(&firePressed);
+    gamepadSource.pause().removeDownHandler(&pausePressed);
+
+
+    gamepadSource.up().removeUpHandler(&buttonReleased);
+    gamepadSource.left().removeUpHandler(&buttonReleased);
+    gamepadSource.right().removeUpHandler(&buttonReleased);
+    gamepadSource.down().removeUpHandler(&buttonReleased);
 }
 
 bool Options::update()
 {
-	if (child != NULL)
+    if (child != nullptr)
 	{
         if (!child->update())
 		{
