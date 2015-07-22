@@ -1,0 +1,27 @@
+language: cpp
+
+compiler:
+  - gcc
+  - clang
+
+before_install:
+  - echo $LANG
+  - echo $LC_ALL
+  - if [ $TRAVIS_OS_NAME == linux ]; then sudo apt-get update && sudo apt-get install -y cmake libsdl1.2-dev libsdl-gfx1.2-dev libsdl-ttf1.2-dev; fi
+  - if [ $TRAVIS_OS_NAME == osx ]; then brew update && brew install cmake sdl sdl_gfx sdl_ttf; fi
+
+script: cmake .; make
+
+after_success:
+  - echo Success
+
+branches:
+  only:
+    - master
+
+notifications:
+  email: false
+
+os:
+  - linux
+  - osx
