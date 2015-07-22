@@ -111,7 +111,8 @@ set(SOURCE_FILES
     shape.h
     gametime.cpp
     gametime.h
-    gfx/sdlresourcemanager.cpp gfx/resourcemanager.h
+    gfx/sdlresourcemanager.cpp 
+    gfx/resourcemanager.h
     vector.h)
 
 add_executable(masteroids ${SOURCE_FILES})
