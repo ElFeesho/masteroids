@@ -1,5 +1,6 @@
-#ifndef __SHIPFACTORY_H__
-#define __SHIPFACTORY_H__
+#pragma once
+
+#include <memory>
 
 #include "movers/shipmover.h"
 #include "renderers/shiprenderer.h"
@@ -17,9 +18,9 @@ public:
 	{
 	}
 
-	Actor *createShip(RGB &colour, Position &spawnLocation)
+    Actor* createShip(RGB &colour, Position &spawnLocation)
 	{
-        Actor *ship = new Actor(colour, shipMover, shipRenderer, AlwaysAlive::alivemonitor);
+        Actor* ship = new Actor(colour, shipMover, shipRenderer, std::unique_ptr<AlwaysAlive>(new AlwaysAlive()));
 		ship->position().X(spawnLocation.X());
 		ship->position().Y(spawnLocation.Y());
 		ship->position().Rotation(spawnLocation.Rotation());
@@ -32,4 +33,3 @@ private:
     ShipRenderer shipRenderer;
 };
 
-#endif

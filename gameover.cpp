@@ -38,7 +38,7 @@ Direction &GameOver::direction()
 
 AliveMonitor &GameOver::aliveMonitor()
 {
-	return AlwaysAlive::alivemonitor;
+    return alwaysAliveMonitor;
 }
 
 Renderer &GameOver::renderer()

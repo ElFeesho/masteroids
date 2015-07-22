@@ -1,13 +1,13 @@
 #include "actor.h"
 
-Actor::Actor(RGB &colour, Mover &pmover, const Renderer &prenderer, const AliveMonitor &pmonitor)
+Actor::Actor(RGB &colour, Mover &pmover, const Renderer &prenderer, std::unique_ptr<AliveMonitor> pmonitor)
 		: actorColour(colour),
 		  actorDirection(Direction::NONE),
 		  actorPosition(Position::NONE),
 		  actorShape(Shape::NONE),
 		  actorMover(pmover),
 		  actorRenderer(prenderer),
-		  actorMonitor(pmonitor),
+          actorMonitor(std::move(pmonitor)),
 		  visible(true)
 {
 
@@ -21,7 +21,7 @@ Actor::~Actor()
 bool Actor::update()
 {
     mover().move(direction(), position(), shape());
-    return actorMonitor.alive();
+    return actorMonitor->alive();
 }
 
 void Actor::render(GfxWrapper &gfx)
@@ -49,7 +49,7 @@ Direction &Actor::direction()
 
 const AliveMonitor &Actor::aliveMonitor()
 {
-    return actorMonitor;
+    return *(actorMonitor.get());
 }
 
 const Renderer &Actor::renderer()

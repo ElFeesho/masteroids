@@ -426,6 +426,30 @@ gametime.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gametime.cpp.s
 .PHONY : gametime.cpp.s
 
+gfx/sdlfont.o: gfx/sdlfont.cpp.o
+.PHONY : gfx/sdlfont.o
+
+# target to build an object file
+gfx/sdlfont.cpp.o:
+	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sdlfont.cpp.o
+.PHONY : gfx/sdlfont.cpp.o
+
+gfx/sdlfont.i: gfx/sdlfont.cpp.i
+.PHONY : gfx/sdlfont.i
+
+# target to preprocess a source file
+gfx/sdlfont.cpp.i:
+	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sdlfont.cpp.i
+.PHONY : gfx/sdlfont.cpp.i
+
+gfx/sdlfont.s: gfx/sdlfont.cpp.s
+.PHONY : gfx/sdlfont.s
+
+# target to generate assembly for a file
+gfx/sdlfont.cpp.s:
+	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sdlfont.cpp.s
+.PHONY : gfx/sdlfont.cpp.s
+
 gfx/sdlgfx.o: gfx/sdlgfx.cpp.o
 .PHONY : gfx/sdlgfx.o
 
@@ -1170,6 +1194,9 @@ help:
 	@echo "... gametime.o"
 	@echo "... gametime.i"
 	@echo "... gametime.s"
+	@echo "... gfx/sdlfont.o"
+	@echo "... gfx/sdlfont.i"
+	@echo "... gfx/sdlfont.s"
 	@echo "... gfx/sdlgfx.o"
 	@echo "... gfx/sdlgfx.i"
 	@echo "... gfx/sdlgfx.s"

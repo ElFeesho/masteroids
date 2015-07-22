@@ -100,6 +100,8 @@
       </Unit>
       <Unit filename="/Users/sawczc01/personal/masteroids/gametime.cpp">
       </Unit>
+      <Unit filename="/Users/sawczc01/personal/masteroids/gfx/sdlfont.cpp">
+      </Unit>
       <Unit filename="/Users/sawczc01/personal/masteroids/gfx/sdlgfx.cpp">
       </Unit>
       <Unit filename="/Users/sawczc01/personal/masteroids/gfx/sdlresourcemanager.cpp">
@@ -197,6 +199,8 @@
       <Unit filename="/Users/sawczc01/personal/masteroids/gfx/gfx.h">
       </Unit>
       <Unit filename="/Users/sawczc01/personal/masteroids/gfx/resourcemanager.h">
+      </Unit>
+      <Unit filename="/Users/sawczc01/personal/masteroids/gfx/sdlfont.h">
       </Unit>
       <Unit filename="/Users/sawczc01/personal/masteroids/images/about_img.h">
       </Unit>

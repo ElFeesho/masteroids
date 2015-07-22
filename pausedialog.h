@@ -46,7 +46,7 @@ public:
 
 	AliveMonitor &aliveMonitor()
 	{
-		return AlwaysAlive::alivemonitor;
+        return alwaysAliveMonitor;
 	}
 
 	Renderer &renderer()
@@ -55,6 +55,7 @@ public:
 	}
 
 private:
+    AlwaysAlive alwaysAliveMonitor;
 	GamepadSource &gamepad;
 	PauseDialogListener *listener;
 	PauseDialogRenderer pauseDialogRenderer;

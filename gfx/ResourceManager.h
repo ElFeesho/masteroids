@@ -10,16 +10,16 @@ class Font;
 class ResourceManager
 {
 public:
-	ResourceManager();
+    ResourceManager(const Font &boldFont, const Font &regularFont);
     ResourceManager(ResourceManager &&) = default;
 	~ResourceManager();
 
-    Font *boldFont() const;
-    Font *regularFont() const;
+    const Font &boldFont() const;
+    const Font &regularFont() const;
 
 private:
-	Font *_boldFont;
-	Font *_regularFont;
+    const Font &_boldFont;
+    const Font &_regularFont;
 
 };
 

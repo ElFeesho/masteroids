@@ -7,7 +7,7 @@
 class Actor : public Entity
 {
 public:
-    Actor(RGB &colour, Mover &mover, const Renderer &prenderer, const AliveMonitor &pmonitor);
+    Actor(RGB &colour, Mover &mover, const Renderer &prenderer, std::unique_ptr<AliveMonitor> aliveMonitor);
 
 	~Actor();
 
@@ -39,7 +39,7 @@ private:
 	Direction actorDirection;
 	Position actorPosition;
 	Shape actorShape;
-    const AliveMonitor &actorMonitor;
+    std::unique_ptr<AliveMonitor> actorMonitor;
     const Renderer &actorRenderer;
 	bool visible{true};
 };

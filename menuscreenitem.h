@@ -5,7 +5,7 @@
 class MenuScreenItem : public Entity
 {
 public:
-    virtual ~MenuScreenItem() {};
+    virtual ~MenuScreenItem() {}
     virtual void menuScreenPresented() = 0;
     virtual void menuScreenHidden() = 0;
 };

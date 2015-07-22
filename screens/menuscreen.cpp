@@ -18,6 +18,7 @@ void MenuScreen::screenShown()
 void MenuScreen::screenHidden()
 {
     entityList.clear();
+    activeMenu->menuScreenHidden();
 }
 
 void MenuScreen::aboutClosed()

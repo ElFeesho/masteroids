@@ -27,8 +27,6 @@ public:
 	{
 		return true;
 	}
-
-	static AlwaysAlive alivemonitor;
 };
 
 #endif

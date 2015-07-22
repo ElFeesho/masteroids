@@ -13,7 +13,7 @@ enum TextAlignment
 class Font
 {
 public:
-	virtual void *getFont() = 0;
+    virtual void *getFont() const = 0;
 };
 
 class RGB

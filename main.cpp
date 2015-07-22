@@ -8,12 +8,16 @@
 #ifndef __WII__
 
 #include <SDL/SDL.h>
+#include "gfx/sdlfont.h"
 
 #endif
 
 int main(int argc, char **argv)
 {
-    GfxWrapper gfxWrapper(640, 480, ResourceManager());
+    const Font &boldFont = SDLFont("boldfont.ttf",16);
+    const Font &regularFont = SDLFont("regularfont.ttf", 16);
+    ResourceManager resourceManager(boldFont, regularFont);
+    GfxWrapper gfxWrapper(640, 480, resourceManager);
 	printf("Initialising graphics\n");
 	printf("Initialised graphics\n");
 

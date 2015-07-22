@@ -54,7 +54,7 @@ public:
 
 	AliveMonitor &aliveMonitor()
 	{
-		return AlwaysAlive::alivemonitor;
+        return alwaysAliveMonitor;
 	}
 
 	Renderer &renderer()
@@ -69,6 +69,7 @@ public:
 	static int max_bullets;
 	static bool music;
 private:
+    AlwaysAlive alwaysAliveMonitor;
 	OptionsListener *listener;
 	OptionsRenderer optionsRenderer;
 	bool alive;

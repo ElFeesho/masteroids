@@ -9,6 +9,8 @@ set(SOURCE_FILES
     menuscreenitem.h
     gfx/gfx.h
     gfx/sdlgfx.cpp
+    gfx/sdlfont.cpp
+    gfx/sdlfont.h
     images/asteroid_banner.h
     bulletfactory.h
     bulletgenerator.cpp

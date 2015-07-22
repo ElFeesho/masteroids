@@ -85,7 +85,7 @@ public:
 
 	AliveMonitor &aliveMonitor()
 	{
-		return AlwaysAlive::alivemonitor;
+        return alwaysAliveMonitor;
 	}
 
 	Renderer &renderer()
@@ -97,6 +97,7 @@ public:
     void menuScreenHidden() override;
 
 private:
+    AlwaysAlive alwaysAliveMonitor;
 	ControlConfListener *listener;
 	ControlConfRenderer controlConfRenderer;
 	bool alive;

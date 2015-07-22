@@ -71,7 +71,7 @@ GfxWrapper::GfxWrapper(int w, int h, const ResourceManager &rsrcMan) : resourceM
 
 GfxWrapper::~GfxWrapper()
 {
-
+    // Destroy video surface here
 }
 
 void GfxWrapper::drawLine(int x, int y, int x2, int y2, const RGB &colour) const
@@ -92,7 +92,7 @@ int GfxWrapper::textHeight()
 void GfxWrapper::drawText(bool bold, int x, int y, const string &text, const RGB &colour, TextAlignment align) const
 {
 	TTF_Font *font = nullptr;
-    font = (TTF_Font *) (bold ? resourceManager.boldFont()->getFont() : resourceManager.regularFont()->getFont());
+    font = (TTF_Font *) (bold ? resourceManager.boldFont().getFont() : resourceManager.regularFont().getFont());
 
 	int textSize;
 	int unused;

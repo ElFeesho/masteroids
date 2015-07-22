@@ -60,7 +60,7 @@ public:
 
 	AliveMonitor &aliveMonitor()
 	{
-		return AlwaysAlive::alivemonitor;
+        return alwaysAliveMonitor;
 	}
 
 	Renderer &renderer()
@@ -69,6 +69,7 @@ public:
 	}
 
 private:
+    AlwaysAlive alwaysAliveMonitor;
 	MenuListener *listener;
 	MenuRenderer menuRenderer;
 	unsigned int menu_sel;

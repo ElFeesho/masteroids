@@ -48,7 +48,7 @@ public:
 
 	AliveMonitor &aliveMonitor()
 	{
-		return AlwaysAlive::alivemonitor;
+        return alivemonitor;
 	}
 
 	Renderer &renderer()
@@ -61,6 +61,7 @@ public:
     void menuScreenHidden() override;
 
 private:
+    AlwaysAlive alivemonitor;
 	AboutListener *listener;
 	AboutRenderer aboutRenderer;
 };

@@ -7,23 +7,13 @@
 class BulletGenerator
 {
 public:
-	BulletGenerator(std::function<void()> fireBullet) : onShouldFireBullet(fireBullet)
-	{
-	};
+    BulletGenerator(std::function<void()> fireBullet);
 
-	~BulletGenerator()
-	{
-	};
+    ~BulletGenerator();
 
-	void attachToButton(GamepadButton &button)
-	{
-		button.addDownHandler(&onShouldFireBullet);
-	}
+    void attachToButton(GamepadButton &button);
 
-	void detachFromButton(GamepadButton &button)
-	{
-		button.removeDownHandler(&onShouldFireBullet);
-	}
+    void detachFromButton(GamepadButton &button);
 
 private:
 	std::function<void()> onShouldFireBullet;

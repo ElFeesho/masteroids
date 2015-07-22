@@ -28,6 +28,8 @@ public:
 	Renderer &renderer() override;
 
 	GameOverRenderer gameOverRenderer;
+private:
+    AlwaysAlive alwaysAliveMonitor;
 };
 
 #endif
