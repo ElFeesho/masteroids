@@ -1,5 +1,4 @@
-#ifndef __GFX_H__
-#define __GFX_H__
+#pragma once
 
 #include <string>
 #include "resourcemanager.h"
@@ -70,5 +69,3 @@ public:
 private:
     const ResourceManager &resourceManager;
 };
-
-#endif

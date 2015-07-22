@@ -9,200 +9,169 @@
 #define M_PI_4      0.785398163397448309615660845819875721  /* pi/4           */
 #endif
 
-PlayerManager::PlayerManager(int playerCount, int lives, int maxBullets, std::function<void()> gameOver)
-		: playingPlayers(playerCount), playerScores{0, 0, 0, 0},
-		  playerMovers{ShipMover(), ShipMover(), ShipMover(), ShipMover()},
-		  playerScorePositions{Position(5, 5, 0), Position(635, 5, 0), Position(5, 440, 0), Position(635, 440, 0)},
-		  playerColours{RGB::green, RGB::yellow, RGB::blue, RGB::purple},
-		  livesRenderer(LivesRenderer()),
-		  gameOverCallback(gameOver)
+static RGB playerColours[] = { RGB::green, RGB::yellow, RGB::blue, RGB::purple };
+static Position playerScorePositions[] = {Position(5, 5, 0), Position(635, 5, 0), Position(5, 440, 0), Position(635, 440, 0)};
+
+PlayerManager::PlayerManager(int playerNumber, int lives, int maxBullets, std::function<void()> gameOver)
+    : playerNumber{playerNumber},
+      bulletGenerator{[&]()
 {
-	if (playingPlayers == 1)
-	{
-		playerSpawnLocations[0] = Position(320, 240, -M_PI_2);
-	}
-	else if (playingPlayers == 2)
-	{
-		playerSpawnLocations[0] = Position(160, 240, 0);
-		playerSpawnLocations[1] = Position(480, 240, -M_PI);
-	}
-	else if (playingPlayers == 3)
-	{
-		playerSpawnLocations[0] = Position(320, 120, M_PI_2);
-		playerSpawnLocations[1] = Position(160, 320, -M_PI_4);
-		playerSpawnLocations[2] = Position(480, 320, -M_PI_4 * 3);
-	}
-	else if (playingPlayers == 4)
-	{
-		playerSpawnLocations[0] = Position(160, 120, M_PI_4);
-		playerSpawnLocations[1] = Position(480, 120, M_PI_4 * 3);
-		playerSpawnLocations[2] = Position(160, 320, -M_PI_4);
-		playerSpawnLocations[3] = Position(480, 320, -M_PI_4 * 3);
-	}
+    if (playerBullets.size() < Options::max_bullets)
+    {
+        Direction bulletDir = Direction(5.0f, player->direction().Angle());
+        playerBullets.add(bulletFactory.createBullet(playerColours[playerNumber], bulletDir, player->position()));
+    }
+}},
+      playerScore{0},
+      livesRenderer(),
+      gameOverCallback(gameOver)
+{
+    if (Options::players == 1)
+    {
+        playerSpawnLocation = Position(320, 240, -M_PI_2);
+    }
+    else if (Options::players == 2)
+    {
+        if(playerNumber == 1)
+        {
+            playerSpawnLocation = Position(160, 240, 0);
+        }
+        else
+        {
+            playerSpawnLocation = Position(480, 240, -M_PI);
+        }
+    }
+    else if (Options::players == 3)
+    {
+        if(playerNumber == 1)
+        {
+            playerSpawnLocation = Position(320, 120, M_PI_2);
+        }
+        else if (playerNumber == 2)
+        {
+            playerSpawnLocation = Position(160, 320, -M_PI_4);
+        }
+        else
+        {
+            playerSpawnLocation = Position(480, 320, -M_PI_4 * 3);
+        }
+    }
+    else if (Options::players == 4)
+    {
+        if(playerNumber == 1)
+        {
+            playerSpawnLocation = Position(160, 120, M_PI_4);
+        }
+        else if(playerNumber == 2) {
+            playerSpawnLocation = Position(480, 120, M_PI_4 * 3);
+        }
+        else if(playerNumber == 3) {
+            playerSpawnLocation = Position(160, 320, -M_PI_4);
+        }
+        else
+        {
+            playerSpawnLocation = Position(480, 320, -M_PI_4 * 3);
+        }
+    }
 
-	for (int i = 0; i < playingPlayers; i++)
-	{
-		playersLives[i] = lives;
-		bulletGenerators[i] = new BulletGenerator([this, i]()
-		{
-			if (playerBullets[i].size() < Options::max_bullets)
-			{
-				Direction bulletDir = Direction(5.0f, players[i]->direction().Angle());
-				playerBullets[i].add(bulletFactory.createBullet(playerColours[i], bulletDir, players[i]->position()));
-			}
-		});
+    playersLives = lives;
 
-		players[i] = shipFactory.createShip(playerColours[i], playerSpawnLocations[i]);
-		players[i]->position().set(playerSpawnLocations[i].X(), playerSpawnLocations[i].Y(), playerSpawnLocations[i].Rotation());
-		players[i]->direction().Angle(playerSpawnLocations[i].Rotation());
-		players[i]->direction().Speed(0);
-        directionControllers[i] = new DirectionController(GamepadInputManager::sharedInstance().inputForPlayer(i), players[i]->direction());
+    player = shipFactory.createShip(playerColours[playerNumber-1], playerSpawnLocation);
+    directionController = new DirectionController(GamepadInputManager::sharedInstance().inputForPlayer(playerNumber-1), player->direction());
 
-        bulletGenerators[i]->attachToButton(GamepadInputManager::sharedInstance().inputForPlayer(i).fire());
-		players[i]->setVisible(true);
-	}
+    bulletGenerator.attachToButton(GamepadInputManager::sharedInstance().inputForPlayer(playerNumber-1).fire());
+    player->setVisible(true);
+
 }
 
-PlayerManager::PlayerManager() : playingPlayers(0), playerScores{0, 0, 0, 0},
-											playerMovers{ShipMover(), ShipMover(), ShipMover(), ShipMover()},
-											playerScorePositions{Position(5, 5, 0), Position(635, 5, 0), Position(5, 440, 0), Position(635, 440, 0)},
-											playerColours{RGB::green, RGB::yellow, RGB::blue, RGB::purple},
-											livesRenderer(LivesRenderer()),
-											gameOverCallback([]()
-											{
-											})
+void PlayerManager::checkPlayerBulletCollisions(PlayerManager &playerManager)
 {
-}
-
-
-void PlayerManager::checkPlayerBulletCollisions()
-{
-	for (int i = 0; i < playingPlayers; i++)
-	{
-		for (int j = 0; j < playingPlayers; j++)
-		{
-			if (i == j)
-			{
-				continue;
-			}
-
-			playerBullets[j].checkCollisions(*players[i], [&](Entity *hit)
-			{
-				killPlayer(i);
-				playerBullets[j].removeEntity(hit);
-			});
-		}
-	}
+    playerManager.bulletsForPlayer().checkCollisions(*player, [&](Entity *hit)
+    {
+        killPlayer();
+        playerManager.bulletsForPlayer().removeEntity(hit);
+    });
 }
 
 void PlayerManager::shutdown()
 {
-	for (int i = 0; i < playingPlayers; i++)
-	{
-		delete players[i];
-		playersLives[i] = 0;
-		playerMovers[i].reset();
-		playerBullets[i].clear();
-		playerScores[i] = 0;
+    for (int i = 0; i < playingPlayers; i++)
+    {
+        playersLives = 0;
+        playerBullets.clear();
+        playerScore = 0;
 
-        bulletGenerators[i]->detachFromButton(GamepadInputManager::sharedInstance().inputForPlayer(i).fire());
-		delete bulletGenerators[i];
-	}
+        bulletGenerator.detachFromButton(GamepadInputManager::sharedInstance().inputForPlayer(playerNumber).fire());
+
+    }
 }
 
-
-void PlayerManager::updatePlayerScore(int player, int value)
+void PlayerManager::updatePlayerScore(int value)
 {
-	playerScores[player] += value;
+    playerScore += value;
 }
 
-EntityList &PlayerManager::bulletsForPlayer(int player)
+EntityList &PlayerManager::bulletsForPlayer()
 {
-	return playerBullets[player];
+    return playerBullets;
 }
 
-void PlayerManager::updatePlayer(int playerNumber, GfxWrapper &gfx)
+void PlayerManager::updatePlayer(GfxWrapper &gfx)
 {
-	players[playerNumber]->update();
-	players[playerNumber]->render(gfx);
-	playerBullets[playerNumber].updateAll();
-	playerBullets[playerNumber].renderAll(gfx);
+    player->update();
+    player->render(gfx);
+    playerBullets.updateAll();
+    playerBullets.renderAll(gfx);
 
 
-	scoreRenderer.setScore(playerScores[playerNumber]);
-	livesRenderer.setLives(playersLives[playerNumber]);
-	TextAlignment alignment = playerNumber & 1 ? RIGHT : LEFT;
-	scoreRenderer.setAlignment(alignment);
-	livesRenderer.setAlignment(alignment);
+    scoreRenderer.setScore(playerScore);
+    livesRenderer.setLives(playersLives);
+    TextAlignment alignment = playerNumber & 1 ? RIGHT : LEFT;
+    scoreRenderer.setAlignment(alignment);
+    livesRenderer.setAlignment(alignment);
 
-	scoreRenderer.render(gfx, playerScorePositions[playerNumber], Shape::NONE, Direction::NONE, playerColours[playerNumber]);
-	livesRenderer.render(gfx, playerScorePositions[playerNumber], Shape::NONE, Direction::NONE, playerColours[playerNumber]);
+    scoreRenderer.render(gfx, playerScorePositions[playerNumber-1], Shape::NONE, Direction::NONE, playerColours[playerNumber-1]);
+    livesRenderer.render(gfx, playerScorePositions[playerNumber-1], Shape::NONE, Direction::NONE, playerColours[playerNumber-1]);
 }
 
-
-void PlayerManager::killPlayer(Entity * player)
+void PlayerManager::killPlayer()
 {
-	for (int i = 0; i < playingPlayers; i++)
-	{
-		if ((players[i]) == player)
-		{
-			killPlayer(i);
-			break;
-		}
-	}
+    player->setVisible(false);
+    playersLives--;
+    if (playersLives > 0)
+    {
+        respawnShip();
+    }
+    else
+    {
+        GameTime::schedule(3000, [&]()
+        {
+            gameOverCallback();
+        });
+    }
 }
 
-void PlayerManager::killPlayer(int playerNumber)
+void PlayerManager::respawnShip()
 {
-	players[playerNumber]->setVisible(false);
-	playersLives[playerNumber]--;
-	if (playersLives[playerNumber] > 0)
-	{
-		respawnShip(playerNumber);
-		playerMovers[playerNumber].reset();
-	}
-	else
-	{
-		bool shouldGoToGameover = true;
-		for (int i = 0; i < playingPlayers; i++)
-		{
-			shouldGoToGameover &= playersLives[i] == 0;
-		}
-
-		if (shouldGoToGameover)
-		{
-			GameTime::schedule(3000, [&]()
-			{
-				gameOverCallback();
-			});
-		}
-	}
-}
-
-void PlayerManager::respawnShip(int playerNumber)
-{
-	GameTime::schedule(1500, [&, playerNumber]()
-	{
-		players[playerNumber]->position().X(playerSpawnLocations[playerNumber].X());
-		players[playerNumber]->position().Y(playerSpawnLocations[playerNumber].Y());
-		players[playerNumber]->position().Rotation(playerSpawnLocations[playerNumber].Rotation());
-		players[playerNumber]->direction().Angle(playerSpawnLocations[playerNumber].Rotation());
-		players[playerNumber]->direction().Speed(0);
-		players[playerNumber]->setVisible(true);
-		players[playerNumber]->mover()->reset();
-	});
+    GameTime::schedule(1500, [&]()
+    {
+        player->position().X(playerSpawnLocation.X());
+        player->position().Y(playerSpawnLocation.Y());
+        player->position().Rotation(playerSpawnLocation.Rotation());
+        player->direction().Angle(playerSpawnLocation.Rotation());
+        player->direction().Speed(0);
+        player->setVisible(true);
+        player->mover().reset();
+    });
 }
 
 void PlayerManager::checkCollisionsWithPlayers(EntityList & entityList, std::function<void(Entity * , Entity * )> hitHandler)
 {
-	for (int i = 0; i<playingPlayers; i++)
-	{
-		if (players[i]->isVisible())
-		{
-			entityList.checkCollisions(*players[i], [&](Entity *hitEnt)
-			{
-				hitHandler(players[i], hitEnt);
-			});
-		}
-	}
+    if (player->isVisible())
+    {
+        entityList.checkCollisions(*player, [&](Entity *hitEnt)
+        {
+            hitHandler(player, hitEnt);
+        });
+    }
 }

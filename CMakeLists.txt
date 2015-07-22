@@ -37,9 +37,12 @@ set(SOURCE_FILES
     movers/fixeddirectionmover.cpp
     movers/fixeddirectionmover.h
     movers/shipmover.h
+    movers/shipmover.cpp
     renderers/aboutrenderer.h
     renderers/asteroidrenderer.h
+    renderers/asteroidrenderer.cpp
     renderers/bulletrenderer.h
+    renderers/bulletrenderer.cpp
     renderers/debrisrender.h
     renderers/menurenderer.h
     renderers/optionsrenderer.cpp

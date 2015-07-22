@@ -3,15 +3,21 @@
 
 #include "screen.h"
 #include "gameover.h"
+#include <functional>
+
+class GameOverScreenListener
+{
+public:
+    virtual ~GameOverScreenListener() {}
+    virtual void gameOverScreenShouldClose() = 0;
+};
 
 class GameOverScreen : public Screen
 {
 public:
-	GameOverScreen();
+    GameOverScreen(GameOverScreenListener &listener);
 
 	~GameOverScreen();
-
-	void setListener(ScreenListener *listener) override;
 
     void update(GfxWrapper &gfx) override;
 
@@ -20,8 +26,9 @@ public:
 	void screenHidden() override;
 
 private:
-	ScreenListener *listener;
+    GameOverScreenListener &listener;
 	GameOver gameOverEntity;
+    std::function<void()> closeScreenHandler;
 };
 
 #endif

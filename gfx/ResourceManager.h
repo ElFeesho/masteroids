@@ -11,6 +11,7 @@ class ResourceManager
 {
 public:
 	ResourceManager();
+    ResourceManager(ResourceManager &&) = default;
 	~ResourceManager();
 
     Font *boldFont() const;

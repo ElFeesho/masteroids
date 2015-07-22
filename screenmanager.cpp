@@ -3,39 +3,44 @@
 #include "screens/gamescreen.h"
 #include "screens/gameoverscreen.h"
 
-ScreenManager::ScreenManager() : menuScreen(*this), gameScreen(), gameOverScreen()
+ScreenManager::ScreenManager() : menuScreen(*this), gameScreen(*this), gameOverScreen(*this)
 {
     menuScreen.screenShown();
+    activeScreen = &menuScreen;
 }
 
 ScreenManager::~ScreenManager() {}
 
 void ScreenManager::update(GfxWrapper &gfx)
 {
-    if (gameMode == 0)
-    {
-        menuScreen.update(gfx);
-    }
-    else if(gameMode == 1)
-    {
-        gameScreen.update(gfx);
-    }
-    else if(gameMode == 2)
-    {
-        gameOverScreen.update(gfx);
-    }
+    activeScreen->update(gfx);
 }
 
 void ScreenManager::switchScreen(Screen &oldScreen, Screen &newScreen)
 {
     oldScreen.screenHidden();
     newScreen.screenShown();
+    activeScreen = &newScreen;
 }
 
 void ScreenManager::menuScreenShouldShowGameScreen()
 {
     switchScreen(menuScreen, gameScreen);
-    gameMode = 1;
+}
+
+void ScreenManager::gameScreenShouldShowGameOverScreen()
+{
+    switchScreen(gameScreen, gameOverScreen);
+}
+
+void ScreenManager::gameScreenShouldShowMenu()
+{
+    switchScreen(gameScreen, menuScreen);
+}
+
+void ScreenManager::gameOverScreenShouldClose()
+{
+    switchScreen(gameOverScreen, menuScreen);
 }
 
 void ScreenManager::menuScreenShouldExitGame()

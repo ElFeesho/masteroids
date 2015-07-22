@@ -7,7 +7,7 @@
 class DebrisRenderer : public Renderer
 {
 public:
-    void render(GfxWrapper &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white)
+    void render(GfxWrapper &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) const
 	{
         gfx.drawLine(position.X() - cos(position.Rotation()) * shape.Radius(),
 				position.Y() - sin(position.Rotation()) * shape.Radius(),

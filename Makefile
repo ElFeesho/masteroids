@@ -52,8 +52,8 @@ CMAKE_BINARY_DIR = /Users/sawczc01/personal/masteroids
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/local/Cellar/cmake/3.2.3/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/local/Cellar/cmake/3.2.3/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -690,6 +690,30 @@ movers/fixeddirectionmover.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/movers/fixeddirectionmover.cpp.s
 .PHONY : movers/fixeddirectionmover.cpp.s
 
+movers/shipmover.o: movers/shipmover.cpp.o
+.PHONY : movers/shipmover.o
+
+# target to build an object file
+movers/shipmover.cpp.o:
+	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/movers/shipmover.cpp.o
+.PHONY : movers/shipmover.cpp.o
+
+movers/shipmover.i: movers/shipmover.cpp.i
+.PHONY : movers/shipmover.i
+
+# target to preprocess a source file
+movers/shipmover.cpp.i:
+	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/movers/shipmover.cpp.i
+.PHONY : movers/shipmover.cpp.i
+
+movers/shipmover.s: movers/shipmover.cpp.s
+.PHONY : movers/shipmover.s
+
+# target to generate assembly for a file
+movers/shipmover.cpp.s:
+	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/movers/shipmover.cpp.s
+.PHONY : movers/shipmover.cpp.s
+
 options.o: options.cpp.o
 .PHONY : options.o
 
@@ -785,6 +809,54 @@ position.s: position.cpp.s
 position.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/position.cpp.s
 .PHONY : position.cpp.s
+
+renderers/asteroidrenderer.o: renderers/asteroidrenderer.cpp.o
+.PHONY : renderers/asteroidrenderer.o
+
+# target to build an object file
+renderers/asteroidrenderer.cpp.o:
+	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/asteroidrenderer.cpp.o
+.PHONY : renderers/asteroidrenderer.cpp.o
+
+renderers/asteroidrenderer.i: renderers/asteroidrenderer.cpp.i
+.PHONY : renderers/asteroidrenderer.i
+
+# target to preprocess a source file
+renderers/asteroidrenderer.cpp.i:
+	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/asteroidrenderer.cpp.i
+.PHONY : renderers/asteroidrenderer.cpp.i
+
+renderers/asteroidrenderer.s: renderers/asteroidrenderer.cpp.s
+.PHONY : renderers/asteroidrenderer.s
+
+# target to generate assembly for a file
+renderers/asteroidrenderer.cpp.s:
+	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/asteroidrenderer.cpp.s
+.PHONY : renderers/asteroidrenderer.cpp.s
+
+renderers/bulletrenderer.o: renderers/bulletrenderer.cpp.o
+.PHONY : renderers/bulletrenderer.o
+
+# target to build an object file
+renderers/bulletrenderer.cpp.o:
+	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/bulletrenderer.cpp.o
+.PHONY : renderers/bulletrenderer.cpp.o
+
+renderers/bulletrenderer.i: renderers/bulletrenderer.cpp.i
+.PHONY : renderers/bulletrenderer.i
+
+# target to preprocess a source file
+renderers/bulletrenderer.cpp.i:
+	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/bulletrenderer.cpp.i
+.PHONY : renderers/bulletrenderer.cpp.i
+
+renderers/bulletrenderer.s: renderers/bulletrenderer.cpp.s
+.PHONY : renderers/bulletrenderer.s
+
+# target to generate assembly for a file
+renderers/bulletrenderer.cpp.s:
+	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/bulletrenderer.cpp.s
+.PHONY : renderers/bulletrenderer.cpp.s
 
 renderers/gameoverrenderer.o: renderers/gameoverrenderer.cpp.o
 .PHONY : renderers/gameoverrenderer.o
@@ -1131,6 +1203,9 @@ help:
 	@echo "... movers/fixeddirectionmover.o"
 	@echo "... movers/fixeddirectionmover.i"
 	@echo "... movers/fixeddirectionmover.s"
+	@echo "... movers/shipmover.o"
+	@echo "... movers/shipmover.i"
+	@echo "... movers/shipmover.s"
 	@echo "... options.o"
 	@echo "... options.i"
 	@echo "... options.s"
@@ -1143,6 +1218,12 @@ help:
 	@echo "... position.o"
 	@echo "... position.i"
 	@echo "... position.s"
+	@echo "... renderers/asteroidrenderer.o"
+	@echo "... renderers/asteroidrenderer.i"
+	@echo "... renderers/asteroidrenderer.s"
+	@echo "... renderers/bulletrenderer.o"
+	@echo "... renderers/bulletrenderer.i"
+	@echo "... renderers/bulletrenderer.s"
 	@echo "... renderers/gameoverrenderer.o"
 	@echo "... renderers/gameoverrenderer.i"
 	@echo "... renderers/gameoverrenderer.s"

@@ -10,7 +10,7 @@ public:
 
 	~ElapsedTimeToLive();
 
-	bool alive();
+    bool alive() const;
 
 private:
 	long ttl;

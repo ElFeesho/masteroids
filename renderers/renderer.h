@@ -11,11 +11,9 @@ class GfxWrapper;
 class Renderer
 {
 public:
-	virtual ~Renderer()
-	{
-	}
+    virtual ~Renderer() {}
 
-    virtual void render(GfxWrapper &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) = 0;
+    virtual void render(GfxWrapper &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) const = 0;
 };
 
 #endif // RENDERER_H

@@ -26,9 +26,9 @@ public:
 
 	virtual Direction &direction() = 0;
 
-	virtual AliveMonitor &aliveMonitor() = 0;
+    virtual const AliveMonitor &aliveMonitor() = 0;
 
-	virtual Renderer &renderer() = 0;
+    virtual const Renderer &renderer() = 0;
 };
 
 #endif

@@ -11,7 +11,7 @@ ElapsedTimeToLive::~ElapsedTimeToLive()
 
 }
 
-bool ElapsedTimeToLive::alive()
+bool ElapsedTimeToLive::alive() const
 {
 	return GameTime::getMillis() < ttl;
 }

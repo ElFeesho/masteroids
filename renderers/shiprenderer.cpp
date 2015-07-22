@@ -27,7 +27,7 @@ static void renderAt(GfxWrapper &gfx, double x, double y, double radius, double 
 }
 
 
-void ShipRenderer::render(GfxWrapper &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour)
+void ShipRenderer::render(GfxWrapper &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour) const
 {
 	renderAt(gfx, position.X(), position.Y(), shape.Radius(), direction.Angle(), colour);
 	if (position.X() + shape.Radius() > 640)

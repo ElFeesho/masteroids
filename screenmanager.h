@@ -10,7 +10,7 @@
 
 class GfxWrapper;
 
-class ScreenManager : public MenuScreenListener
+class ScreenManager : public MenuScreenListener, public GameScreenListener, public GameOverScreenListener
 {
 public:
     ScreenManager();
@@ -20,11 +20,14 @@ public:
     void menuScreenShouldExitGame() override;
     void menuScreenShouldShowGameScreen() override;
 
+    void gameScreenShouldShowGameOverScreen() override;
+    void gameScreenShouldShowMenu() override;
+
+    void gameOverScreenShouldClose() override;
 
     void update(GfxWrapper &gfx);
 
 private:
-    int gameMode { 0 };
     Screen *activeScreen;
     MenuScreen menuScreen;
     GameScreen gameScreen;

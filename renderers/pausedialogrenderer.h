@@ -14,7 +14,7 @@ public:
 
 	void setMenuSelection(int menuSelection);
 
-    void render(GfxWrapper &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) override;
+    void render(GfxWrapper &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) const override;
 
 private:
 	int menu_sel;

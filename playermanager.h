@@ -15,42 +15,46 @@
 class PlayerManager
 {
 public:
-	PlayerManager();
+    PlayerManager(PlayerManager &&) = default;
 
-	PlayerManager(int playerCount, int lives, int maxBullets, std::function<void()> gameOver);
+    PlayerManager(int playerNumber, int lives, int maxBullets, std::function<void()> gameOver);
 
-	void killPlayer(int playerNumber);
+    void killPlayer();
 
 	void killPlayer(Entity *player);
 
-	void respawnShip(int playerNumber);
+    void respawnShip();
 
-    void updatePlayer(int playerNumber, GfxWrapper &gfx);
+    void updatePlayer(GfxWrapper &gfx);
 
-	EntityList & bulletsForPlayer(int player);
+    EntityList & bulletsForPlayer();
 
-	void updatePlayerScore(int player, int value);
+    void updatePlayerScore(int value);
 
 	void checkCollisionsWithPlayers(EntityList &entityList, std::function<void(Entity * , Entity * )> hitHandler);
 
-	void checkPlayerBulletCollisions();
+    void checkPlayerBulletCollisions(PlayerManager &);
 
 	void shutdown();
 
 private:
+    int playerNumber;
 	BulletFactory bulletFactory;
 
-	DirectionController *directionControllers[4];
+    DirectionController *directionController;
 	int playingPlayers;
-	Actor *players[4];
-	ShipMover playerMovers[4];
-	EntityList playerBullets[4];
-	ShipFactory shipFactory;
-	Position playerSpawnLocations[4];
-	BulletGenerator *bulletGenerators[4];
-	RGB playerColours[4];
-	int playerScores[4];
-	int playersLives[4];
+
+    Actor *player;
+
+    ShipFactory shipFactory;
+
+    Position playerSpawnLocation;
+
+    BulletGenerator bulletGenerator;
+    EntityList playerBullets;
+
+    int playerScore;
+    int playersLives;
 	Position playerScorePositions[4];
 
 	LivesRenderer livesRenderer;

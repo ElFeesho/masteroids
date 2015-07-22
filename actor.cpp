@@ -1,6 +1,6 @@
 #include "actor.h"
 
-Actor::Actor(RGB &colour, Mover *pmover, Renderer *prenderer, AliveMonitor *pmonitor)
+Actor::Actor(RGB &colour, Mover &pmover, const Renderer &prenderer, const AliveMonitor &pmonitor)
 		: actorColour(colour),
 		  actorDirection(Direction::NONE),
 		  actorPosition(Position::NONE),
@@ -20,8 +20,8 @@ Actor::~Actor()
 
 bool Actor::update()
 {
-	mover()->move(direction(), position(), shape());
-	return actorMonitor->alive();
+    mover().move(direction(), position(), shape());
+    return actorMonitor.alive();
 }
 
 void Actor::render(GfxWrapper &gfx)
@@ -47,14 +47,14 @@ Direction &Actor::direction()
 	return actorDirection;
 }
 
-AliveMonitor &Actor::aliveMonitor()
+const AliveMonitor &Actor::aliveMonitor()
 {
-	return *actorMonitor;
+    return actorMonitor;
 }
 
-Renderer &Actor::renderer()
+const Renderer &Actor::renderer()
 {
-	return *actorRenderer;
+    return actorRenderer;
 }
 
 RGB &Actor::colour()
@@ -62,7 +62,7 @@ RGB &Actor::colour()
 	return actorColour;
 }
 
-Mover *Actor::mover()
+Mover &Actor::mover()
 {
 	return actorMover;
 }

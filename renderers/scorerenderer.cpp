@@ -4,7 +4,7 @@
 
 using std::stringstream;
 
-void ScoreRenderer::render(GfxWrapper &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour)
+void ScoreRenderer::render(GfxWrapper &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour) const
 {
 	stringstream sstream;
 	sstream << "SCORE: " << score;

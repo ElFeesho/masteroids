@@ -8,7 +8,7 @@ public:
 	{
 	}
 
-	virtual bool alive() = 0;
+    virtual bool alive() const = 0;
 
 };
 
@@ -23,7 +23,7 @@ public:
 	{
 	}
 
-	bool alive()
+    bool alive() const
 	{
 		return true;
 	}

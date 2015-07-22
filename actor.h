@@ -7,7 +7,7 @@
 class Actor : public Entity
 {
 public:
-	Actor(RGB &colour, Mover *pmover, Renderer *prenderer, AliveMonitor *pmonitor);
+    Actor(RGB &colour, Mover &mover, const Renderer &prenderer, const AliveMonitor &pmonitor);
 
 	~Actor();
 
@@ -17,30 +17,30 @@ public:
 
 	Shape &shape();
 
-	RGB &colour();
+    RGB &colour();
 
-	AliveMonitor &aliveMonitor();
+    const AliveMonitor &aliveMonitor() override;
 
-	Mover *mover();
+    Mover &mover();
 
-	Renderer &renderer();
+    const Renderer &renderer() override;
 
-	bool update();
+    bool update() override;
 
-    void render(GfxWrapper &gfx);
+    void render(GfxWrapper &gfx) override;
 
-	void setVisible(bool visible);
+    void setVisible(bool visible);
 
 	bool isVisible();
 
 private:
-	Mover *actorMover;
+    Mover &actorMover;
 	RGB actorColour;
 	Direction actorDirection;
 	Position actorPosition;
 	Shape actorShape;
-	AliveMonitor *actorMonitor;
-	Renderer *actorRenderer;
+    const AliveMonitor &actorMonitor;
+    const Renderer &actorRenderer;
 	bool visible{true};
 };
 

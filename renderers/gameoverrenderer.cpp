@@ -9,7 +9,7 @@ GameOverRenderer::~GameOverRenderer()
 
 }
 
-void GameOverRenderer::render(GfxWrapper &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour)
+void GameOverRenderer::render(GfxWrapper &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour) const
 {
 	if (Options::players == 1) /* 1 player */
 	{

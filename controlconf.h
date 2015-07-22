@@ -25,7 +25,7 @@ public:
 	{
 	}
 
-    void render(GfxWrapper &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white)
+    void render(GfxWrapper &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) const
 	{
         gfx.drawRect(120, 70, 403, 316, RGB::blue);
         gfx.drawText(false, 135, 80 + gfx.textHeight() * 8, "Not implemented", RGB::white);

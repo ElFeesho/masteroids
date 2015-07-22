@@ -1,17 +1,16 @@
 #include "gameoverscreen.h"
+#include "input/gamepadinputmanager.h"
 
-GameOverScreen::GameOverScreen() : gameOverEntity(GameOver())
+GameOverScreen::GameOverScreen(GameOverScreenListener &gameOverScreenListener) : listener(gameOverScreenListener), gameOverEntity(GameOver()), closeScreenHandler{[&]{
+    listener.gameOverScreenShouldClose();
+}}
 {
+
 }
 
 GameOverScreen::~GameOverScreen()
 {
 
-}
-
-void GameOverScreen::setListener(ScreenListener *listener)
-{
-	this->listener = listener;
 }
 
 void GameOverScreen::update(GfxWrapper &gfx)
@@ -22,10 +21,10 @@ void GameOverScreen::update(GfxWrapper &gfx)
 
 void GameOverScreen::screenShown()
 {
-
+    GamepadInputManager::sharedInstance().inputForPlayer(0).fire().addUpHandler(&closeScreenHandler);
 }
 
 void GameOverScreen::screenHidden()
 {
-
+    GamepadInputManager::sharedInstance().inputForPlayer(0).fire().removeUpHandler(&closeScreenHandler);
 }

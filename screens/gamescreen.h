@@ -1,6 +1,8 @@
 #ifndef GAMESCREEN_H
 #define GAMESCREEN_H
 
+#include <vector>
+
 #include "renderers/livesrenderer.h"
 #include "input/gamepadinputmanager.h"
 #include "screen.h"
@@ -17,10 +19,19 @@
 #include "bulletgenerator.h"
 #include "playermanager.h"
 
+class GameScreenListener
+{
+public:
+    virtual ~GameScreenListener() {}
+
+    virtual void gameScreenShouldShowGameOverScreen() = 0;
+    virtual void gameScreenShouldShowMenu() = 0;
+};
+
 class GameScreen : public Screen, public PauseDialogListener
 {
 public:
-	GameScreen();
+    GameScreen(GameScreenListener &listener);
 
 	~GameScreen();
 
@@ -30,8 +41,6 @@ public:
 
     void update(GfxWrapper &gfx);
 
-	void setListener(ScreenListener *listener);
-
 	void ingameContinueSelected();
 
 	void ingameQuitSelected();
@@ -39,11 +48,11 @@ public:
 	void generateLevel();
 
 private:
-	PlayerManager playerManager;
+    std::vector<std::unique_ptr<PlayerManager>> playerManagers;
 
 	AsteroidFactory asteroidFactory;
 
-	ScreenListener *listener;
+    GameScreenListener &listener;
 	EntityList asteroids;
 	EntityList secondaryAsteroids;
 	EntityList debrisEntities;
@@ -54,10 +63,9 @@ private:
 	bool isPaused;
 	int level;
 
-	void checkAsteroidCollisions(int playerNumber);
+    void checkAsteroidCollisions(PlayerManager *playerManager);
     void updatePlayers(GfxWrapper &gfx);
-	void checkPlayerDeaths();
-	void killPlayer(int playerNumber);
+    void checkPlayerDeaths();
 	void checkLevelComplete();
 	void generateSecondaryAsteroids(Entity *hit);
 };

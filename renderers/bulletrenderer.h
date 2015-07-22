@@ -1,5 +1,4 @@
-#ifndef __BULLET_RENDERER_H__
-#define __BULLET_RENDERER_H__
+#pragma once
 
 #include "../gfx/gfx.h"
 #include "renderer.h"
@@ -7,23 +6,11 @@
 class BulletRenderer : public Renderer
 {
 public:
-	BulletRenderer()
-	{
-	}
+    BulletRenderer();
 
-	~BulletRenderer()
-	{
-	}
+    ~BulletRenderer();
 
-    void render(GfxWrapper &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white)
-	{
-        gfx.drawRect(position.X() - shape.Radius(),
-				position.Y() - shape.Radius(),
-				shape.Radius() * 2,
-				shape.Radius() * 2,
-				colour);
-	}
+    void render(GfxWrapper &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) const;
 };
 
 
-#endif

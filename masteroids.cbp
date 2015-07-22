@@ -122,6 +122,8 @@
       </Unit>
       <Unit filename="/Users/sawczc01/personal/masteroids/movers/fixeddirectionmover.cpp">
       </Unit>
+      <Unit filename="/Users/sawczc01/personal/masteroids/movers/shipmover.cpp">
+      </Unit>
       <Unit filename="/Users/sawczc01/personal/masteroids/options.cpp">
       </Unit>
       <Unit filename="/Users/sawczc01/personal/masteroids/pausedialog.cpp">
@@ -129,6 +131,10 @@
       <Unit filename="/Users/sawczc01/personal/masteroids/playermanager.cpp">
       </Unit>
       <Unit filename="/Users/sawczc01/personal/masteroids/position.cpp">
+      </Unit>
+      <Unit filename="/Users/sawczc01/personal/masteroids/renderers/asteroidrenderer.cpp">
+      </Unit>
+      <Unit filename="/Users/sawczc01/personal/masteroids/renderers/bulletrenderer.cpp">
       </Unit>
       <Unit filename="/Users/sawczc01/personal/masteroids/renderers/gameoverrenderer.cpp">
       </Unit>
@@ -219,6 +225,8 @@
       <Unit filename="/Users/sawczc01/personal/masteroids/libwiiwrap/wiiuse/wpad.h">
       </Unit>
       <Unit filename="/Users/sawczc01/personal/masteroids/menu.h">
+      </Unit>
+      <Unit filename="/Users/sawczc01/personal/masteroids/menuscreenitem.h">
       </Unit>
       <Unit filename="/Users/sawczc01/personal/masteroids/movers/bulletmover.h">
       </Unit>
