@@ -1,5 +1,6 @@
-#ifndef __ACTOR_H__
-#define __ACTOR_H__
+#pragma once
+
+#include <memory>
 
 #include "movers/mover.h"
 #include "entity.h"
@@ -43,5 +44,3 @@ private:
     const Renderer &actorRenderer;
 	bool visible{true};
 };
-
-#endif

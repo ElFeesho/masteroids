@@ -1,6 +1,6 @@
-#ifndef GAMESCREEN_H
-#define GAMESCREEN_H
+#pragma once
 
+#include <memory>
 #include <vector>
 
 #include "renderers/livesrenderer.h"
@@ -70,4 +70,3 @@ private:
 	void generateSecondaryAsteroids(Entity *hit);
 };
 
-#endif // GAMESCREEN_H

@@ -1,8 +1,9 @@
+#pragma once
+
+#include <memory>
+
 #include "movers/fixeddirectionmover.h"
 #include "actor.h"
-
-#ifndef __ASTEROID_FACTORY_H__
-#define __ASTEROID_FACTORY_H__
 
 #ifdef __WII__
 #define M_PI        3.14159265358979323846264338327950288   /* pi             */
@@ -67,5 +68,3 @@ private:
 	AsteroidRenderer renderers[5];
 	FixedDirectionMover mover;
 };
-
-#endif

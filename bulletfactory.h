@@ -1,5 +1,6 @@
-#ifndef __BULLET_FACTORY_H__
-#define __BULLET_FACTORY_H__
+#pragma once
+
+#include <memory>
 
 #include "movers/bulletmover.h"
 #include "renderers/bulletrenderer.h"
@@ -34,5 +35,3 @@ private:
 	BulletMover mover;
 	BulletRenderer renderer;
 };
-
-#endif
