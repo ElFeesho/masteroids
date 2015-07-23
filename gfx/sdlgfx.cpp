@@ -64,14 +64,17 @@ SDL_Color fromRGB(RGB colour)
 
 GfxWrapper::GfxWrapper(int w, int h, const ResourceManager &rsrcMan) : resourceManager{rsrcMan}
 {
+    if (SDL_Init(SDL_INIT_VIDEO) != 0)
+    {
+        throw "Couldn't initialise SDL";
+    }
 
-	SDL_Init(SDL_INIT_VIDEO);
 	SDL_SetVideoMode(w, h, 0, SDL_SWSURFACE);
 }
 
 GfxWrapper::~GfxWrapper()
 {
-    // Destroy video surface here
+    SDL_Quit();
 }
 
 void GfxWrapper::drawLine(int x, int y, int x2, int y2, const RGB &colour) const

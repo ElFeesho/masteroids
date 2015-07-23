@@ -3,10 +3,7 @@
 
 #include <vector>
 #include <functional>
-
-using std::vector;
-
-using std::function;
+#include <memory>
 
 class Entity;
 
@@ -25,36 +22,20 @@ public:
 
     void renderAll(GfxWrapper &gfx);
 
-	void removeEntity(Entity *entity)
-	{
-		for (int i = entities.size() - 1; i >= 0; i--)
-		{
-			if (entities.at(i) == entity)
-			{
-				entities.erase(entities.begin() + i);
-				return;
-			}
-		}
-	}
+    void removeEntity(Entity *entity);
 
-	Entity *at(int i)
-	{
-		return entities.at(i);
-	}
+    Entity *at(int i);
 
-	int size()
-	{
-		return entities.size();
-	}
+    int size();
 
 	void clear();
 
-	void checkCollisions(Entity &entity, function<void(Entity *)> callback);
+    void checkCollisions(Entity &entity, std::function<void(Entity *)> callback);
 
-	void checkCollisions(EntityList &otherList, function<void(Entity *, Entity *)> callback);
+    void checkCollisions(EntityList &otherList, std::function<void(Entity *, Entity *)> callback);
 
 private:
-	vector<Entity *> entities;
+    std::vector<std::unique_ptr<Entity>> entities;
 };
 
 #endif

@@ -84,6 +84,12 @@ PlayerManager::PlayerManager(int playerNumber, int lives, int maxBullets, std::f
 
 }
 
+PlayerManager::~PlayerManager()
+{
+    delete player;
+    delete directionController;
+}
+
 void PlayerManager::checkPlayerBulletCollisions(PlayerManager &playerManager)
 {
     playerManager.bulletsForPlayer().checkCollisions(*player, [&](Entity *hit)

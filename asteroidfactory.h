@@ -53,7 +53,7 @@ public:
 
 	Actor *createAsteroid(double radius, Position &pos = Position::NONE)
 	{
-        Actor *asteroid = new Actor(RGB::white, mover, renderers[rand() % 5], std::unique_ptr<AlwaysAlive>(new AlwaysAlive()));
+            Actor *asteroid = new Actor(RGB::white, mover, renderers[rand() % 5], std::unique_ptr<AlwaysAlive>(new AlwaysAlive()));
 		asteroid->shape().Radius(radius);
 		asteroid->direction().Angle(randomAngle());
 		asteroid->direction().Speed(randomSpeed());

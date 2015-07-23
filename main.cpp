@@ -18,13 +18,7 @@ int main(int argc, char **argv)
     const Font &regularFont = SDLFont("regularfont.ttf", 16);
     ResourceManager resourceManager(boldFont, regularFont);
     GfxWrapper gfxWrapper(640, 480, resourceManager);
-	printf("Initialising graphics\n");
-	printf("Initialised graphics\n");
-
     GamepadInputManager::sharedInstance().initialise();
-
-	printf("Initialised input\n");
-
     ScreenManager screenManager;
 	for (; ;)
 	{
