@@ -1,5 +1,7 @@
 Masteroids
 ==========
+[![Build Status](https://travis-ci.org/ElFeesho/masteroids.svg?branch=master)](https://travis-ci.org/ElFeesho/masteroids)
+
 Masteroids is a multiplayer implementation of the Atari classic, Asteroids. Masteroids originally was compiled and built for the Nintendo Wii. 
 
 I am now starting to port the game to PC.
