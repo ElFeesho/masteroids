@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include "gamepad.h"
 
 class GamepadInputManager
