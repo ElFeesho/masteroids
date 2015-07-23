@@ -1,5 +1,4 @@
-#ifndef DEBRIS_H
-#define DEBRIS_H
+#pragma once
 
 #include "entity.h"
 
@@ -39,11 +38,10 @@ private:
 	Direction travelDirection;
 	Position pos;
 	Shape debrisShape;
+    RGB colour;
 	DebrisRenderer debrisRenderer;
-	ElapsedTimeToLive monitor;
-	double rotationSpeed;
+    double rotationSpeed;
+    ElapsedTimeToLive monitor;
 	FixedDirectionMover mover;
-	RGB colour;
-};
 
-#endif // DEBRIS_H
+};

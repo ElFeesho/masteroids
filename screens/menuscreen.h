@@ -51,19 +51,20 @@ public:
 	void screenHidden();
 
 private:
+    AsteroidFactory asteroidFactory;
 
     void activateScreen(MenuScreenItem *screenItem);
 
     MenuScreenListener &menuListener;
-	AsteroidFactory asteroidFactory;
     MenuScreenItem *activeMenu;
 
-	EntityList entityList;
+    EntityList entityList;
+
 	ScreenListener *listener;
-    About aboutScreen;
-    ControlConf controllerConfigScreen;
-    Options optionsScreen;
     Menu menuScreen;
+    Options optionsScreen;
+    ControlConf controllerConfigScreen;
+    About aboutScreen;
 };
 
 #endif

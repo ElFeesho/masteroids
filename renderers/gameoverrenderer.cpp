@@ -22,7 +22,6 @@ void GameOverRenderer::render(GfxWrapper &gfx, Position &position, Shape &shape,
 	{
         gfx.drawImg((640 - game_over_width) / 2, (350 - game_over_height) / 2, game_over_width, game_over_height, game_over_img);
 		char score[64] = {0};
-		int highest = -1;
 
 		for (int i = 0; i < Options::players; i++)
 		{

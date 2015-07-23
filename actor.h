@@ -34,8 +34,8 @@ public:
 	bool isVisible();
 
 private:
-    Mover &actorMover;
 	RGB actorColour;
+    Mover &actorMover;
 	Direction actorDirection;
 	Position actorPosition;
 	Shape actorShape;

@@ -6,7 +6,7 @@
 class Direction
 {
 public:
-	Direction(double speed, double angle, double spin = 0) : speed(speed), angle(angle), spin(spin)
+    Direction(double speed, double angle, double spin = 0) : speed(speed), spin(spin), angle(angle)
 	{
 	}
 

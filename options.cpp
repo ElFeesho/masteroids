@@ -3,13 +3,13 @@
 #include "gametime.h"
 
 Options::Options(OptionsListener *listener)
-		: optionsRenderer(OptionsRenderer()),
-		  listener(listener),
-		  alive(true),
+        : listener(listener),
+          optionsRenderer(OptionsRenderer()),
+          alive(true),
 		  menu_sel(0),
 		  next_change(GameTime::getMillis() + 500),
 		  ldir(1),
-		  child(NULL),
+          child(nullptr),
 		  colour(RGB(1.0f, 1.0f, 1.0f)),
 		  colourHighlight(RGB(1.0f, 0.8f, 0.0f))
 {

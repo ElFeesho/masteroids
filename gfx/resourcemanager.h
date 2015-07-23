@@ -18,8 +18,8 @@ public:
     const Font &regularFont() const;
 
 private:
-    const Font &_boldFont;
     const Font &_regularFont;
+    const Font &_boldFont;
 
 };
 

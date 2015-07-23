@@ -25,6 +25,8 @@ public:
 
 	~PauseDialog();
 
+    void shown();
+
 	bool update();
 
     void render(GfxWrapper &gfx);
@@ -87,6 +89,9 @@ private:
 				{
 					listener->ingameQuitSelected();
 				}
+                gamepad.left().removeDownHandler(&leftHandler);
+                gamepad.right().removeDownHandler(&rightHandler);
+                gamepad.fire().removeUpHandler(&fireHandler);
 			}
 	};
 };

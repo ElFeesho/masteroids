@@ -13,7 +13,7 @@ static std::function<void()> upReleaseHandler;
 static std::function<void()> downReleaseHandler;
 
 Menu::Menu(MenuListener *listener)
-		: menuRenderer(MenuRenderer()), listener(listener), menu_sel(0), next_change(0), ldir(-1), child(NULL)
+        : listener(listener), menuRenderer(MenuRenderer()), menu_sel(0), next_change(0), ldir(-1)
 {
 	firePressHandler = [&](){
 		next_change = 0;

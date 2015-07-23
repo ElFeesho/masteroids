@@ -58,7 +58,7 @@ private:
 	EntityList debrisEntities;
 
 	DebrisFountain debrisFountain;
-	PauseDialog *pauseEnt;
+    PauseDialog pauseEnt;
 
 	bool isPaused;
 	int level;

@@ -7,14 +7,14 @@ using std::stringstream;
 static std::function<void()> pauseHandler;
 
 GameScreen::GameScreen(GameScreenListener &screenListener) :
-		isPaused(false),
-		level(0),
-        pauseEnt(NULL),
-        listener(screenListener)
+        listener(screenListener),
+        pauseEnt(GamepadInputManager::sharedInstance().inputForPlayer(0), this),
+        isPaused(false),
+        level(0)
 {
 	pauseHandler = [&](){
-		isPaused = true;
-        pauseEnt = new PauseDialog(GamepadInputManager::sharedInstance().inputForPlayer(0), this);
+        isPaused = true;
+        pauseEnt.shown();
 	};
 }
 
@@ -29,13 +29,7 @@ void GameScreen::screenHidden()
 	asteroids.clear();
 	secondaryAsteroids.clear();
 	debrisEntities.clear();
-	if (pauseEnt != NULL)
-	{
-		isPaused = false;
-		delete pauseEnt;
-		pauseEnt = NULL;
-	}
-
+    isPaused = false;
     playerManagers.clear();
 }
 
@@ -43,9 +37,9 @@ void GameScreen::screenShown()
 {
     GamepadInputManager::sharedInstance().inputForPlayer(0).pause().addUpHandler(&pauseHandler);
 
-    playerManagers.emplace_back(std::make_unique<PlayerManager>(Options::players, Options::lives, Options::max_bullets, [this](){
+    playerManagers.emplace_back(std::unique_ptr<PlayerManager>(new PlayerManager(Options::players, Options::lives, Options::max_bullets, [this](){
         listener.gameScreenShouldShowGameOverScreen();
-    }));
+    })));
 
 	generateLevel();
 }
@@ -78,8 +72,8 @@ void GameScreen::update(GfxWrapper &gfx)
 	else
 	{
 		asteroids.renderAll(gfx);
-		pauseEnt->update();
-		pauseEnt->render(gfx);
+        pauseEnt.update();
+        pauseEnt.render(gfx);
 	}
 
 }
@@ -161,9 +155,7 @@ void GameScreen::checkAsteroidCollisions(PlayerManager *playerManager)
 
 void GameScreen::ingameContinueSelected()
 {
-	isPaused = false;
-	delete pauseEnt;
-	pauseEnt = NULL;
+    isPaused = false;
 }
 
 void GameScreen::ingameQuitSelected()

@@ -2,8 +2,6 @@
 
 #include <SDL/SDL.h>
 
-static long lastTicks = 0;
-
 #define PAD_TRIGGER_Z (1 << 0)
 #define PAD_BUTTON_DOWN (1 << 1)
 #define PAD_BUTTON_UP (1 << 2)

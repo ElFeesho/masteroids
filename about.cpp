@@ -4,7 +4,7 @@
 
 static std::function<void()> aboutFinishHandler;
 
-About::About(AboutListener *listener) : aboutRenderer(AboutRenderer()), listener(listener)
+About::About(AboutListener *listener) : listener(listener), aboutRenderer(AboutRenderer())
 {
 	aboutFinishHandler = [this](){
 		this->listener->aboutClosed();

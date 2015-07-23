@@ -1,11 +1,11 @@
-#ifndef __GAMEPAD_INPUTMANAGER_H__
-#define __GAMEPAD_INPUTMANAGER_H__
+#pragma once
 
 #include "gamepad.h"
 
 class GamepadInputManager
 {
 public:
+    GamepadInputManager();
 	~GamepadInputManager();
 
     static GamepadInputManager &sharedInstance();
@@ -18,11 +18,6 @@ public:
 
     void initialise();
 
-    GamepadInputManager();
 private:
-
-	GamepadSource *gamepads[4];
-
+    std::unique_ptr<GamepadSource> gamepad;
 };
-
-#endif

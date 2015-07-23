@@ -1,5 +1,4 @@
-#ifndef __DIRECTIONCONTROLLER_H__
-#define __DIRECTIONCONTROLLER_H__
+#pragma once
 
 #include "input/gamepad.h"
 #include "direction.h"
@@ -46,8 +45,8 @@ public:
 	}
 
 private:
-	Direction &directionToControl;
 	GamepadSource &gamepadSource;
+    Direction &directionToControl;
 
 	std::function<void()> upPressHandler{[&]()
 	{
@@ -80,5 +79,3 @@ private:
 		directionToControl.Spin(0.0f);
 	}};
 };
-
-#endif

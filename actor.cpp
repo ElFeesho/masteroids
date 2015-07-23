@@ -2,12 +2,12 @@
 
 Actor::Actor(RGB &colour, Mover &pmover, const Renderer &prenderer, std::unique_ptr<AliveMonitor> pmonitor)
 		: actorColour(colour),
-		  actorDirection(Direction::NONE),
-		  actorPosition(Position::NONE),
-		  actorShape(Shape::NONE),
-		  actorMover(pmover),
-		  actorRenderer(prenderer),
+          actorMover(pmover),
+          actorDirection(Direction::NONE),
+          actorPosition(Position::NONE),
+          actorShape(Shape::NONE),
           actorMonitor(std::move(pmonitor)),
+          actorRenderer(prenderer),
 		  visible(true)
 {
 

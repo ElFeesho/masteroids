@@ -76,9 +76,9 @@ private:
 	int menu_sel;
 	unsigned long next_change;
 	char ldir;
+    Entity *child;
 	RGB colour;
-	RGB colourHighlight;
-	Entity *child;
+    RGB colourHighlight;
 
 	std::function<void()> upPressedHandler { [&](){
 		ldir = 0;

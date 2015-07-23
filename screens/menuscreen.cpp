@@ -1,15 +1,19 @@
 #include "menuscreen.h"
 
-MenuScreen::MenuScreen(MenuScreenListener &menuScreenListener) : menuListener(menuScreenListener), menuScreen(this), optionsScreen(this), controllerConfigScreen(this), aboutScreen(this)  {}
+MenuScreen::MenuScreen(MenuScreenListener &menuScreenListener) : menuListener(menuScreenListener), menuScreen(this), optionsScreen(this), controllerConfigScreen(this), aboutScreen(this)
+{
+    for (int i = 0; i < 16; i++)
+    {
+        entityList.add(asteroidFactory.createAsteroid(75.0f));
+    }
+}
 
-MenuScreen::~MenuScreen() {}
+MenuScreen::~MenuScreen() {
+    entityList.clear();
+}
 
 void MenuScreen::screenShown()
 {
-    for (int i = 0; i < 16; i++)
-	{
-        entityList.add(asteroidFactory.createAsteroid(75.0f));
-	}
 
     activeMenu = &menuScreen;
     activeMenu->menuScreenPresented();
@@ -17,7 +21,6 @@ void MenuScreen::screenShown()
 
 void MenuScreen::screenHidden()
 {
-    entityList.clear();
     activeMenu->menuScreenHidden();
 }
 

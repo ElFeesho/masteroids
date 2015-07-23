@@ -10,6 +10,7 @@
 #define PAD_BUTTON_RIGHT (1 << 3)
 #define PAD_BUTTON_FIRE (1 << 4)
 #define PAD_BUTTON_START (1 << 5)
+#define PAD_BUTTON_MASK 0x1f
 
 static int getKeyState()
 {
@@ -46,7 +47,7 @@ static int getKeyState()
 		nkeys |= PAD_BUTTON_START;
 	}
 
-	return nkeys;
+    return nkeys & PAD_BUTTON_MASK;
 }
 
 
@@ -80,11 +81,20 @@ GamepadButton &KeyboardSource::pause()
 	return pauseButton;
 }
 
+KeyboardSource::KeyboardSource()
+{
+    printf("KeyboardSource::ctor\n");
+}
+
+KeyboardSource::~KeyboardSource()
+{
+    printf("KeyboardSource::dtor\n");
+}
+
 void KeyboardSource::poll()
 {
-	lastState = keyState;
-	keyState = getKeyState();
-
+    lastState = keyState;
+    keyState = getKeyState();
 	int buttonsDown = ((keyState ^ lastState)) & keyState;
 	int buttonsUp = ((keyState ^ lastState)) & lastState;
 

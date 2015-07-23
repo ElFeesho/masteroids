@@ -1,5 +1,4 @@
-#ifndef __TIME_H__
-#define __TIME_H__
+#pragma once
 
 #include <stdio.h>
 #include "ogc/lwp_watchdog.h"
@@ -24,8 +23,7 @@ public:
 	}
 
 	static void tick()
-	{
-		long prevTick = lastTick;
+    {
 		lastDelta = getMillis() - lastTick;
 		lastTick = getMillis();
 		// Run through events
@@ -62,5 +60,3 @@ private:
 	static long lastTick;
 	static long lastDelta;
 };
-
-#endif

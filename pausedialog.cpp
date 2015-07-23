@@ -2,19 +2,19 @@
 #include "pausedialog.h"
 
 PauseDialog::PauseDialog(GamepadSource &gamepad, PauseDialogListener *listener)
-		: pauseDialogRenderer(PauseDialogRenderer()), gamepad(gamepad), listener(listener), menu_sel(0)
-{
+        : gamepad(gamepad),
+          listener(listener),
+          pauseDialogRenderer(PauseDialogRenderer()),
+          menu_sel(0)
+{}
 
-	gamepad.left().addDownHandler(&leftHandler);
-	gamepad.right().addDownHandler(&rightHandler);
-	gamepad.fire().addUpHandler(&fireHandler);
-}
+PauseDialog::~PauseDialog() {}
 
-PauseDialog::~PauseDialog()
+void PauseDialog::shown()
 {
-	gamepad.left().removeDownHandler(&leftHandler);
-	gamepad.right().removeDownHandler(&rightHandler);
-	gamepad.fire().removeUpHandler(&fireHandler);
+    gamepad.left().addDownHandler(&leftHandler);
+    gamepad.right().addDownHandler(&rightHandler);
+    gamepad.fire().addUpHandler(&fireHandler);
 }
 
 bool PauseDialog::update()

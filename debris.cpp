@@ -4,12 +4,10 @@
 Debris::Debris(Direction ntravelDirection, Position pos, Shape shape, RGB &debrisColour) :
 		travelDirection(ntravelDirection),
 		pos(pos),
-		debrisShape(shape),
-		mover(FixedDirectionMover()),
-		rotationSpeed(((rand() % 10) / 10.f) - 0.5f),
-		monitor(ElapsedTimeToLive(1500)),
-		debrisRenderer(DebrisRenderer()),
-		colour(debrisColour)
+        debrisShape(shape),
+        colour(debrisColour),
+        rotationSpeed(((rand() % 10) / 10.f) - 0.5f),
+        monitor(1500)
 {
 }
 

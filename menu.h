@@ -75,8 +75,6 @@ private:
 	unsigned int menu_sel;
 	unsigned long next_change;
 	char ldir;
-	bool active;
-	Entity *child;
 	Position pos;
 };
 

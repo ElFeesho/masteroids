@@ -1,5 +1,4 @@
-#ifndef __GAMEPAD_H__
-#define __GAMEPAD_H__
+#pragma once
 
 #include <algorithm>
 #include <vector>
@@ -11,49 +10,21 @@ using std::vector;
 class GamepadButton
 {
 public:
-	GamepadButton()
-	{
-	}
+    GamepadButton();
 
-	~GamepadButton()
-	{
-	}
+    ~GamepadButton();
 
-	void addDownHandler(std::function<void()> *handler)
-	{
-		downHandlers.push_back(handler);
-	}
+    void addDownHandler(std::function<void()> *handler);
 
-	void addUpHandler(std::function<void()> *handler)
-	{
-		upHandlers.push_back(handler);
-	}
+    void addUpHandler(std::function<void()> *handler);
 
-	void removeDownHandler(std::function<void()> *handler)
-	{
-		downHandlers.erase(std::find(downHandlers.begin(), downHandlers.end(), handler));
-	}
+    void removeDownHandler(std::function<void()> *handler);
 
-	void removeUpHandler(std::function<void()> *handler)
-	{
-		upHandlers.erase(std::find(upHandlers.begin(), upHandlers.end(), handler));
-	}
+    void removeUpHandler(std::function<void()> *handler);
 
-	void notifyDownHandlers()
-	{
-		for (auto handler : downHandlers)
-		{
-			(*handler)();
-		}
-	}
+    void notifyDownHandlers();
 
-	void notifyUpHandlers()
-	{
-		for (auto handler : upHandlers)
-		{
-			(*handler)();
-		}
-	}
+    void notifyUpHandlers();
 
 private:
 	vector<std::function<void()>*> downHandlers;
@@ -83,6 +54,3 @@ public:
 
 	virtual const std::string name() const = 0;
 };
-
-
-#endif

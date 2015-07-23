@@ -12,7 +12,7 @@ static GamepadInputManager instance;
 
 GamepadInputManager::GamepadInputManager()
 #ifndef __WII__
-		: gamepads{new KeyboardSource(), new KeyboardSource(), new KeyboardSource(), new KeyboardSource()}
+        : gamepad{std::unique_ptr<KeyboardSource>(new KeyboardSource())}
 #else
 		: gamepads{new GamecubePadSource(0), new GamecubePadSource(1), new GamecubePadSource(2), new GamecubePadSource(3)}
 #endif
@@ -27,9 +27,9 @@ void GamepadInputManager::poll()
 {
 	PAD_ScanPads();
 	WPAD_ScanPads();
-	for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 1; i++)
 	{
-		gamepads[i]->poll();
+        gamepad->poll();
 	}
 }
 
@@ -74,7 +74,7 @@ void GamepadInputManager::initialise()
 
 GamepadSource &GamepadInputManager::inputForPlayer(int playerNumber)
 {
-	return *gamepads[playerNumber];
+    return *(gamepad.get());
 }
 
 GamepadInputManager &GamepadInputManager::sharedInstance()

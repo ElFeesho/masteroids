@@ -7,13 +7,10 @@
 class KeyboardSource : public GamepadSource
 {
 public:
-	KeyboardSource()
-	{
-	}
-
-	~KeyboardSource()
-	{
-	}
+    KeyboardSource();
+    KeyboardSource(KeyboardSource &) = delete;
+    KeyboardSource(KeyboardSource &&) = delete;
+    ~KeyboardSource();
 
 	void poll();
 

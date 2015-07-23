@@ -1,10 +1,9 @@
-#ifndef POSITION_H
-#define POSITION_H
+#pragma once
 
 class Position
 {
 public:
-	Position();
+    Position() = default;
 
 	Position(double x, double y, double angle);
 
@@ -36,9 +35,8 @@ public:
 
 	static Position NONE;
 private:
-	double rotation{0};
-	double y{0};
-	double x{0};
+    double x{0};
+    double y{0};
+    double rotation{0};
 };
 
-#endif // POSITION_H

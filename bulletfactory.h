@@ -20,7 +20,7 @@ public:
 
 	Actor *createBullet(RGB &colour, Direction &direction, Position &position)
     {
-        Actor *bullet = new Actor(colour, mover, renderer, std::make_unique<ElapsedTimeToLive>(3000));
+        Actor *bullet = new Actor(colour, mover, renderer, std::unique_ptr<ElapsedTimeToLive>(new ElapsedTimeToLive(3000)));
 		bullet->direction().Angle(direction.Angle());
 		bullet->direction().Speed(direction.Speed());
 		bullet->position().X(position.X());

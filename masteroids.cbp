@@ -106,6 +106,8 @@
       </Unit>
       <Unit filename="/Users/sawczc01/personal/masteroids/gfx/sdlresourcemanager.cpp">
       </Unit>
+      <Unit filename="/Users/sawczc01/personal/masteroids/input/gamepad.cpp">
+      </Unit>
       <Unit filename="/Users/sawczc01/personal/masteroids/input/gamepadinputmanager.cpp">
       </Unit>
       <Unit filename="/Users/sawczc01/personal/masteroids/input/keyboardsource.cpp">

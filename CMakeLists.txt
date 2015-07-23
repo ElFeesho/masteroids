@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.4)
 project(masteroids)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y -g")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -g -fPIC -Wall")
 
 find_package(SDL REQUIRED)
 
@@ -20,6 +20,7 @@ set(SOURCE_FILES
     images/game_over_img.h
     images/options_img.h
     input/gamepad.h
+    input/gamepad.cpp
     directioncontroller.h
     input/gamepadinputmanager.cpp
     input/gamepadinputmanager.h
