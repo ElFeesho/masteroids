@@ -1,5 +1,5 @@
 #ifndef __WII__
-#include <SDL/SDL.h>
+#include <SFML/Main.hpp>
 #endif
 #include <wiiuse/wpad.h>
 #include <gccore.h>
@@ -50,16 +50,7 @@ bool GamepadInputManager::checkQuit()
 		result = true;
 	}
 #else
-	SDL_Event ev = {0};
 
-	while (SDL_PollEvent(&ev))
-	{
-		if (ev.type == SDL_QUIT)
-		{
-			result = true;
-			break;
-		}
-	}
 #endif
 	return result;
 }

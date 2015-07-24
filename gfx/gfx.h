@@ -27,9 +27,9 @@ public:
 
 	unsigned short as16bit() const;
 
-	float getR() { return r; }
-	float getG() { return g; }
-	float getB() { return b; }
+    float getR() const { return r; }
+    float getG() const { return g; }
+    float getB() const { return b; }
 
 	static RGB white;
 	static RGB blue;
@@ -47,7 +47,7 @@ private:
 class GfxWrapper
 {
 public:
-    GfxWrapper(int w, int h, const ResourceManager &resourceManager);
+    GfxWrapper(const ResourceManager &resourceManager);
 
     ~GfxWrapper();
 

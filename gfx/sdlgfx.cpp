@@ -62,14 +62,14 @@ SDL_Color fromRGB(RGB colour)
 }
 
 
-GfxWrapper::GfxWrapper(int w, int h, const ResourceManager &rsrcMan) : resourceManager{rsrcMan}
+GfxWrapper::GfxWrapper(const ResourceManager &rsrcMan) : resourceManager{rsrcMan}
 {
     if (SDL_Init(SDL_INIT_VIDEO) != 0)
     {
         throw "Couldn't initialise SDL";
     }
 
-	SDL_SetVideoMode(w, h, 0, SDL_SWSURFACE);
+    SDL_SetVideoMode(640, 480, 0, SDL_SWSURFACE);
 }
 
 GfxWrapper::~GfxWrapper()

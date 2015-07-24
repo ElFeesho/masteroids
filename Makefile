@@ -52,8 +52,8 @@ CMAKE_BINARY_DIR = /Users/sawczc01/personal/masteroids
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/local/Cellar/cmake/3.2.3/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/local/Cellar/cmake/3.2.3/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -426,77 +426,77 @@ gametime.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gametime.cpp.s
 .PHONY : gametime.cpp.s
 
-gfx/sdlfont.o: gfx/sdlfont.cpp.o
-.PHONY : gfx/sdlfont.o
+gfx/sfmlfont.o: gfx/sfmlfont.cpp.o
+.PHONY : gfx/sfmlfont.o
 
 # target to build an object file
-gfx/sdlfont.cpp.o:
-	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sdlfont.cpp.o
-.PHONY : gfx/sdlfont.cpp.o
+gfx/sfmlfont.cpp.o:
+	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sfmlfont.cpp.o
+.PHONY : gfx/sfmlfont.cpp.o
 
-gfx/sdlfont.i: gfx/sdlfont.cpp.i
-.PHONY : gfx/sdlfont.i
+gfx/sfmlfont.i: gfx/sfmlfont.cpp.i
+.PHONY : gfx/sfmlfont.i
 
 # target to preprocess a source file
-gfx/sdlfont.cpp.i:
-	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sdlfont.cpp.i
-.PHONY : gfx/sdlfont.cpp.i
+gfx/sfmlfont.cpp.i:
+	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sfmlfont.cpp.i
+.PHONY : gfx/sfmlfont.cpp.i
 
-gfx/sdlfont.s: gfx/sdlfont.cpp.s
-.PHONY : gfx/sdlfont.s
+gfx/sfmlfont.s: gfx/sfmlfont.cpp.s
+.PHONY : gfx/sfmlfont.s
 
 # target to generate assembly for a file
-gfx/sdlfont.cpp.s:
-	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sdlfont.cpp.s
-.PHONY : gfx/sdlfont.cpp.s
+gfx/sfmlfont.cpp.s:
+	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sfmlfont.cpp.s
+.PHONY : gfx/sfmlfont.cpp.s
 
-gfx/sdlgfx.o: gfx/sdlgfx.cpp.o
-.PHONY : gfx/sdlgfx.o
+gfx/sfmlgfx.o: gfx/sfmlgfx.cpp.o
+.PHONY : gfx/sfmlgfx.o
 
 # target to build an object file
-gfx/sdlgfx.cpp.o:
-	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sdlgfx.cpp.o
-.PHONY : gfx/sdlgfx.cpp.o
+gfx/sfmlgfx.cpp.o:
+	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sfmlgfx.cpp.o
+.PHONY : gfx/sfmlgfx.cpp.o
 
-gfx/sdlgfx.i: gfx/sdlgfx.cpp.i
-.PHONY : gfx/sdlgfx.i
+gfx/sfmlgfx.i: gfx/sfmlgfx.cpp.i
+.PHONY : gfx/sfmlgfx.i
 
 # target to preprocess a source file
-gfx/sdlgfx.cpp.i:
-	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sdlgfx.cpp.i
-.PHONY : gfx/sdlgfx.cpp.i
+gfx/sfmlgfx.cpp.i:
+	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sfmlgfx.cpp.i
+.PHONY : gfx/sfmlgfx.cpp.i
 
-gfx/sdlgfx.s: gfx/sdlgfx.cpp.s
-.PHONY : gfx/sdlgfx.s
+gfx/sfmlgfx.s: gfx/sfmlgfx.cpp.s
+.PHONY : gfx/sfmlgfx.s
 
 # target to generate assembly for a file
-gfx/sdlgfx.cpp.s:
-	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sdlgfx.cpp.s
-.PHONY : gfx/sdlgfx.cpp.s
+gfx/sfmlgfx.cpp.s:
+	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sfmlgfx.cpp.s
+.PHONY : gfx/sfmlgfx.cpp.s
 
-gfx/sdlresourcemanager.o: gfx/sdlresourcemanager.cpp.o
-.PHONY : gfx/sdlresourcemanager.o
+gfx/sfmlresourcemanager.o: gfx/sfmlresourcemanager.cpp.o
+.PHONY : gfx/sfmlresourcemanager.o
 
 # target to build an object file
-gfx/sdlresourcemanager.cpp.o:
-	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sdlresourcemanager.cpp.o
-.PHONY : gfx/sdlresourcemanager.cpp.o
+gfx/sfmlresourcemanager.cpp.o:
+	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sfmlresourcemanager.cpp.o
+.PHONY : gfx/sfmlresourcemanager.cpp.o
 
-gfx/sdlresourcemanager.i: gfx/sdlresourcemanager.cpp.i
-.PHONY : gfx/sdlresourcemanager.i
+gfx/sfmlresourcemanager.i: gfx/sfmlresourcemanager.cpp.i
+.PHONY : gfx/sfmlresourcemanager.i
 
 # target to preprocess a source file
-gfx/sdlresourcemanager.cpp.i:
-	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sdlresourcemanager.cpp.i
-.PHONY : gfx/sdlresourcemanager.cpp.i
+gfx/sfmlresourcemanager.cpp.i:
+	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sfmlresourcemanager.cpp.i
+.PHONY : gfx/sfmlresourcemanager.cpp.i
 
-gfx/sdlresourcemanager.s: gfx/sdlresourcemanager.cpp.s
-.PHONY : gfx/sdlresourcemanager.s
+gfx/sfmlresourcemanager.s: gfx/sfmlresourcemanager.cpp.s
+.PHONY : gfx/sfmlresourcemanager.s
 
 # target to generate assembly for a file
-gfx/sdlresourcemanager.cpp.s:
-	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sdlresourcemanager.cpp.s
-.PHONY : gfx/sdlresourcemanager.cpp.s
+gfx/sfmlresourcemanager.cpp.s:
+	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sfmlresourcemanager.cpp.s
+.PHONY : gfx/sfmlresourcemanager.cpp.s
 
 input/gamepad.o: input/gamepad.cpp.o
 .PHONY : input/gamepad.o
@@ -1218,15 +1218,15 @@ help:
 	@echo "... gametime.o"
 	@echo "... gametime.i"
 	@echo "... gametime.s"
-	@echo "... gfx/sdlfont.o"
-	@echo "... gfx/sdlfont.i"
-	@echo "... gfx/sdlfont.s"
-	@echo "... gfx/sdlgfx.o"
-	@echo "... gfx/sdlgfx.i"
-	@echo "... gfx/sdlgfx.s"
-	@echo "... gfx/sdlresourcemanager.o"
-	@echo "... gfx/sdlresourcemanager.i"
-	@echo "... gfx/sdlresourcemanager.s"
+	@echo "... gfx/sfmlfont.o"
+	@echo "... gfx/sfmlfont.i"
+	@echo "... gfx/sfmlfont.s"
+	@echo "... gfx/sfmlgfx.o"
+	@echo "... gfx/sfmlgfx.i"
+	@echo "... gfx/sfmlgfx.s"
+	@echo "... gfx/sfmlresourcemanager.o"
+	@echo "... gfx/sfmlresourcemanager.i"
+	@echo "... gfx/sfmlresourcemanager.s"
 	@echo "... input/gamepad.o"
 	@echo "... input/gamepad.i"
 	@echo "... input/gamepad.s"

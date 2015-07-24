@@ -2,7 +2,7 @@
 
 #include "keyboardsource.h"
 
-#include <SDL/SDL.h>
+#include <SFML/Window.hpp>
 
 #define PAD_BUTTON_DOWN (1 << 0)
 #define PAD_BUTTON_UP (1 << 1)
@@ -14,35 +14,34 @@
 
 static int getKeyState()
 {
-	int nkeys = 0;
-	Uint8 *keys = SDL_GetKeyState(NULL);
+    int nkeys = 0;
 
-	if (keys[SDLK_UP])
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
 	{
 		nkeys |= PAD_BUTTON_UP;
 	}
 
-	if (keys[SDLK_DOWN])
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
 	{
 		nkeys |= PAD_BUTTON_DOWN;
 	}
 
-	if (keys[SDLK_LEFT])
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
 	{
 		nkeys |= PAD_BUTTON_LEFT;
 	}
 
-	if (keys[SDLK_RIGHT])
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
 	{
 		nkeys |= PAD_BUTTON_RIGHT;
 	}
 
-	if (keys[SDLK_SPACE])
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
 	{
 		nkeys |= PAD_BUTTON_FIRE;
 	}
 
-	if (keys[SDLK_RETURN])
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Return))
 	{
 		nkeys |= PAD_BUTTON_START;
 	}

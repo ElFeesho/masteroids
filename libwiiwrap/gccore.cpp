@@ -1,7 +1,5 @@
 #include "gccore.h"
 
-#include <SDL/SDL.h>
-
 #define PAD_TRIGGER_Z (1 << 0)
 #define PAD_BUTTON_DOWN (1 << 1)
 #define PAD_BUTTON_UP (1 << 2)
@@ -19,12 +17,12 @@ static int BUTTON_DOWN_STATE = 0;
 
 void VIDEO_Init()
 {
-	SDL_Init(SDL_INIT_VIDEO);
+    //SDL_Init(SDL_INIT_VIDEO);
 }
 
 void PAD_Init()
 {
-	SDL_Init(SDL_INIT_JOYSTICK);
+    //SDL_Init(SDL_INIT_JOYSTICK);
 }
 
 void VIDEO_WaitVSync()
@@ -34,38 +32,8 @@ void VIDEO_WaitVSync()
 
 int getButtonState()
 {
-	int nkeys = 0;
-	Uint8 *keys = SDL_GetKeyState(NULL);
-	if (keys[SDLK_UP])
-	{
-		nkeys |= PAD_BUTTON_UP;
-	}
-	if (keys[SDLK_DOWN])
-	{
-		nkeys |= PAD_BUTTON_DOWN;
-	}
-	if (keys[SDLK_LEFT])
-	{
-		nkeys |= PAD_BUTTON_LEFT;
-	}
-	if (keys[SDLK_RIGHT])
-	{
-		nkeys |= PAD_BUTTON_RIGHT;
-	}
-	if (keys[SDLK_SPACE])
-	{
-		nkeys |= PAD_BUTTON_A;
-	}
-	if (keys[SDLK_c])
-	{
-		nkeys |= PAD_BUTTON_B;
-	}
-	if (keys[SDLK_RETURN])
-	{
-		nkeys |= PAD_BUTTON_START;
-	}
 
-	return nkeys;
+    return 0;
 }
 
 void PAD_ScanPads()

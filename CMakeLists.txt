@@ -3,14 +3,12 @@ project(masteroids)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -g -fPIC -Wall")
 
-find_package(SDL REQUIRED)
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
+find_package(SFML 2 REQUIRED system window graphics network audio)
 
 set(SOURCE_FILES
     menuscreenitem.h
     gfx/gfx.h
-    gfx/sdlgfx.cpp
-    gfx/sdlfont.cpp
-    gfx/sdlfont.h
     images/asteroid_banner.h
     bulletfactory.h
     bulletgenerator.cpp
@@ -112,13 +110,15 @@ set(SOURCE_FILES
     shape.h
     gametime.cpp
     gametime.h
-    gfx/sdlresourcemanager.cpp 
+    gfx/sfmlresourcemanager.cpp
+    gfx/sfmlfont.cpp
+    gfx/sfmlfont.h
+    gfx/sfmlgfx.cpp
     gfx/resourcemanager.h
     vector.h)
 
 add_executable(masteroids ${SOURCE_FILES})
 
-include_directories(${SDL_INCLUDE_DIR})
 include_directories("libwiiwrap")
 include_directories(".")
 
@@ -129,4 +129,4 @@ IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(CMAKE_EXE_LINKER_FLAGS "-framework Cocoa")
 ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
-target_link_libraries(masteroids -lSDLmain -lSDL -lSDL_gfx -lSDL_ttf -lm)
+target_link_libraries(masteroids -lm ${SFML_LIBRARIES})
