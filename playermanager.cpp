@@ -12,16 +12,10 @@
 static RGB playerColours[] = { RGB::green, RGB::yellow, RGB::blue, RGB::purple };
 static Position playerScorePositions[] = {Position(5, 5, 0), Position(635, 5, 0), Position(5, 440, 0), Position(635, 440, 0)};
 
+static std::function<void()> *fireHandler;
+
 PlayerManager::PlayerManager(int playerNumber, int lives, int maxBullets, std::function<void()> gameOver)
     : playerNumber{playerNumber},
-      bulletGenerator{[&]()
-{
-    if (playerBullets.size() < Options::max_bullets)
-    {
-        Direction bulletDir = Direction(5.0f, player->direction().Angle());
-        playerBullets.add(bulletFactory.createBullet(playerColours[playerNumber], bulletDir, player->position()));
-    }
-}},
       playerScore{0},
       livesRenderer(),
       gameOverCallback(gameOver)
@@ -79,13 +73,22 @@ PlayerManager::PlayerManager(int playerNumber, int lives, int maxBullets, std::f
     player = shipFactory.createShip(playerColours[playerNumber-1], playerSpawnLocation);
     directionController = new DirectionController(GamepadInputManager::sharedInstance().inputForPlayer(playerNumber-1), player->direction());
 
-    bulletGenerator.attachToButton(GamepadInputManager::sharedInstance().inputForPlayer(playerNumber-1).fire());
-    player->setVisible(true);
+    //bulletGenerator.attachToButton(GamepadInputManager::sharedInstance().inputForPlayer(playerNumber-1).fire());
+    // SET THIS IN GAMEINPUTMANAGER
+    fireHandler = new std::function<void()>([&]() {
+        if (playerBullets.size() < Options::max_bullets)
+        {
+            Direction bulletDir(5.0f, player->direction().Angle());
+            playerBullets.add(bulletFactory.createBullet(playerColours[playerNumber], bulletDir, player->position()));
+        }
+    });
 
+    GamepadInputManager::sharedInstance().inputForPlayer(0).fire().addDownHandler(fireHandler);
 }
 
 PlayerManager::~PlayerManager()
 {
+    delete fireHandler;
     delete player;
     delete directionController;
 }
@@ -107,8 +110,7 @@ void PlayerManager::shutdown()
         playerBullets.clear();
         playerScore = 0;
 
-        bulletGenerator.detachFromButton(GamepadInputManager::sharedInstance().inputForPlayer(playerNumber).fire());
-
+        GamepadInputManager::sharedInstance().inputForPlayer(0).fire().removeDownHandler(fireHandler);
     }
 }
 

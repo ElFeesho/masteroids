@@ -51,7 +51,6 @@ private:
 
     Position playerSpawnLocation;
 
-    BulletGenerator bulletGenerator;
     EntityList playerBullets;
 
     int playerScore;

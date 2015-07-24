@@ -10,7 +10,7 @@
 #define PAD_BUTTON_RIGHT (1 << 3)
 #define PAD_BUTTON_FIRE (1 << 4)
 #define PAD_BUTTON_START (1 << 5)
-#define PAD_BUTTON_MASK 0x1f
+#define PAD_BUTTON_MASK 0x3f
 
 static int getKeyState()
 {

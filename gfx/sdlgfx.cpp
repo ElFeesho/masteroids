@@ -110,7 +110,7 @@ void GfxWrapper::drawText(bool bold, int x, int y, const string &text, const RGB
 		x -= textSize;
 	}
 
-	SDL_Rect dstRect = { .x = (Sint16)x, .y = (Sint16)y, .w = (Uint16)textSize, .h = (Uint16)unused };
+    SDL_Rect dstRect = { .x = (Sint16)x, .y = (Sint16)y, .w = (Uint16)textSize, .h = (Uint16)unused };
 	SDL_Surface *pSurface = TTF_RenderText_Blended(font, text.c_str(), fromRGB(colour));
 	SDL_BlitSurface(pSurface, NULL, SDL_GetVideoSurface(), &dstRect);
 	SDL_FreeSurface(pSurface);

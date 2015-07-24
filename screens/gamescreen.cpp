@@ -4,18 +4,17 @@
 
 using std::stringstream;
 
-static std::function<void()> pauseHandler;
-
 GameScreen::GameScreen(GameScreenListener &screenListener) :
         listener(screenListener),
         pauseEnt(GamepadInputManager::sharedInstance().inputForPlayer(0), this),
         isPaused(false),
-        level(0)
+        level(0),
+        pauseHandler(new std::function<void()>([&](){
+            isPaused = true;
+            pauseEnt.shown();
+        }))
 {
-	pauseHandler = [&](){
-        isPaused = true;
-        pauseEnt.shown();
-	};
+
 }
 
 GameScreen::~GameScreen()
@@ -25,7 +24,7 @@ GameScreen::~GameScreen()
 
 void GameScreen::screenHidden()
 {
-    GamepadInputManager::sharedInstance().inputForPlayer(0).pause().removeUpHandler(&pauseHandler);
+    GamepadInputManager::sharedInstance().inputForPlayer(0).pause().removeUpHandler(pauseHandler.get());
 	asteroids.clear();
 	secondaryAsteroids.clear();
 	debrisEntities.clear();
@@ -35,7 +34,7 @@ void GameScreen::screenHidden()
 
 void GameScreen::screenShown()
 {
-    GamepadInputManager::sharedInstance().inputForPlayer(0).pause().addUpHandler(&pauseHandler);
+    GamepadInputManager::sharedInstance().inputForPlayer(0).pause().addUpHandler(pauseHandler.get());
 
     playerManagers.emplace_back(std::unique_ptr<PlayerManager>(new PlayerManager(Options::players, Options::lives, Options::max_bullets, [this](){
         listener.gameScreenShouldShowGameOverScreen();

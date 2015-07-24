@@ -1,4 +1,5 @@
 .DS_Store
+CMakeLists.txt.user
 CMakeCache.txt
 build/
 cmake_install.cmake

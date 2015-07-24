@@ -68,5 +68,7 @@ private:
     void checkPlayerDeaths();
 	void checkLevelComplete();
 	void generateSecondaryAsteroids(Entity *hit);
+
+    std::unique_ptr<std::function<void()>> pauseHandler;
 };
 
