@@ -6,8 +6,8 @@ compiler:
 before_install:
   - echo $LANG
   - echo $LC_ALL
-  - if [ $TRAVIS_OS_NAME == linux ]; then sudo apt-get update && sudo apt-get install -y cmake libsdl1.2-dev libsdl-gfx1.2-dev libsdl-ttf2.0-dev; fi
-  - if [ $TRAVIS_OS_NAME == osx ]; then brew update && brew install cmake sdl sdl_gfx sdl_ttf; fi
+  - if [ $TRAVIS_OS_NAME == linux ]; then sudo apt-get update && sudo apt-get install -y cmake libsfml-dev; fi
+  - if [ $TRAVIS_OS_NAME == osx ]; then brew update && brew install cmake sfml; fi
 
 script: cmake .; make
 
