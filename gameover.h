@@ -15,7 +15,7 @@ public:
 
 	bool update();
 
-    void render(GfxWrapper &gfx);
+    void render(Gfx &gfx);
 
 	Position &position() override;
 

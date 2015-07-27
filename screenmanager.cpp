@@ -11,7 +11,7 @@ ScreenManager::ScreenManager() : menuScreen(*this), gameScreen(*this), gameOverS
 
 ScreenManager::~ScreenManager() {}
 
-void ScreenManager::update(GfxWrapper &gfx)
+void ScreenManager::update(Gfx &gfx)
 {
     activeScreen->update(gfx);
 }

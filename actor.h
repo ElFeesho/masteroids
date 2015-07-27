@@ -28,7 +28,7 @@ public:
 
     bool update() override;
 
-    void render(GfxWrapper &gfx) override;
+    void render(Gfx &gfx) override;
 
     void setVisible(bool visible);
 

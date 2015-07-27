@@ -124,7 +124,7 @@ EntityList &PlayerManager::bulletsForPlayer()
     return playerBullets;
 }
 
-void PlayerManager::updatePlayer(GfxWrapper &gfx)
+void PlayerManager::updatePlayer(Gfx &gfx)
 {
     player->update();
     player->render(gfx);
@@ -134,7 +134,7 @@ void PlayerManager::updatePlayer(GfxWrapper &gfx)
 
     scoreRenderer.setScore(playerScore);
     livesRenderer.setLives(playersLives);
-    TextAlignment alignment = playerNumber & 1 ? RIGHT : LEFT;
+    TextAlignment alignment = playerNumber & 1 ? TextAlignment::RIGHT : TextAlignment::LEFT;
     scoreRenderer.setAlignment(alignment);
     livesRenderer.setAlignment(alignment);
 

@@ -29,7 +29,7 @@ public:
 		return aliveMonitor().alive();
 	}
 
-    void render(GfxWrapper &gfx);
+    void render(Gfx &gfx);
 
 	Position &position()
 	{

@@ -28,7 +28,7 @@ public:
 
 	~MenuScreen();
 
-    void update(GfxWrapper &gfx);
+    void update(Gfx &gfx);
 
 	void setListener(ScreenListener *listener);
 

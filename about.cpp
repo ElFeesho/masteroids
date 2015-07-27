@@ -17,7 +17,7 @@ About::~About()
 
 }
 
-void About::render(GfxWrapper &gfx)
+void About::render(Gfx &gfx)
 {
 	renderer().render(gfx, position(), shape(), direction());
 }

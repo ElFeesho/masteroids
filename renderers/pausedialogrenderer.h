@@ -3,7 +3,7 @@
 
 #include "renderer.h"
 
-class GfxWrapper;
+class Gfx;
 
 class PauseDialogRenderer : public Renderer
 {
@@ -14,7 +14,7 @@ public:
 
 	void setMenuSelection(int menuSelection);
 
-    void render(GfxWrapper &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) const override;
+    void render(Gfx &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) const override;
 
 private:
 	int menu_sel;

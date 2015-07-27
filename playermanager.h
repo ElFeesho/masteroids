@@ -26,7 +26,7 @@ public:
 
     void respawnShip();
 
-    void updatePlayer(GfxWrapper &gfx);
+    void updatePlayer(Gfx &gfx);
 
     EntityList & bulletsForPlayer();
 

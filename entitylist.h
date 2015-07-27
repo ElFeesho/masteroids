@@ -7,7 +7,7 @@
 
 class Entity;
 
-class GfxWrapper;
+class Gfx;
 
 class EntityList
 {
@@ -20,7 +20,7 @@ public:
 
 	void updateAll();
 
-    void renderAll(GfxWrapper &gfx);
+    void renderAll(Gfx &gfx);
 
     void removeEntity(Entity *entity);
 

@@ -22,7 +22,7 @@ public:
 	{
     }
 
-    virtual void update(GfxWrapper &gfx) = 0;
+    virtual void update(Gfx &gfx) = 0;
 
 	virtual void screenShown() = 0;
 

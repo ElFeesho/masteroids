@@ -7,16 +7,15 @@
 
 #ifndef __WII__
 
+#include "gfx/sfmlgfx.h"
 #include "gfx/sfmlfont.h"
 
 #endif
 
 int main(int argc, char **argv)
 {
-    const Font &boldFont = SFMLFont("boldfont.ttf",16);
-    const Font &regularFont = SFMLFont("regularfont.ttf", 16);
-    ResourceManager resourceManager(boldFont, regularFont);
-    GfxWrapper gfxWrapper(resourceManager);
+
+    SFMLGfx gfxWrapper;
     GamepadInputManager::sharedInstance().initialise();
     ScreenManager screenManager;
 	for (; ;)

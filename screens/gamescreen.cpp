@@ -51,7 +51,7 @@ void GameScreen::generateLevel()
 	}
 }
 
-void GameScreen::update(GfxWrapper &gfx)
+void GameScreen::update(Gfx &gfx)
 {
 	if (!isPaused)
 	{
@@ -121,7 +121,7 @@ void GameScreen::generateSecondaryAsteroids(Entity *hit)
 //	playerManager.killPlayer(playerNumber);
 //}
 
-void GameScreen::updatePlayers(GfxWrapper &gfx)
+void GameScreen::updatePlayers(Gfx &gfx)
 {
     for(auto &playerManager : playerManagers)
     {

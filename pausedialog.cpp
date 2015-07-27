@@ -22,7 +22,7 @@ bool PauseDialog::update()
 	return aliveMonitor().alive();
 }
 
-void PauseDialog::render(GfxWrapper &gfx)
+void PauseDialog::render(Gfx &gfx)
 {
 	renderer().render(gfx, position(), shape(), direction());
 }

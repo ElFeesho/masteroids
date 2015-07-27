@@ -39,7 +39,7 @@ public:
 
 	void screenShown();
 
-    void update(GfxWrapper &gfx);
+    void update(Gfx &gfx);
 
 	void ingameContinueSelected();
 
@@ -64,7 +64,7 @@ private:
 	int level;
 
     void checkAsteroidCollisions(PlayerManager *playerManager);
-    void updatePlayers(GfxWrapper &gfx);
+    void updatePlayers(Gfx &gfx);
     void checkPlayerDeaths();
 	void checkLevelComplete();
 	void generateSecondaryAsteroids(Entity *hit);

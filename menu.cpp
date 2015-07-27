@@ -103,7 +103,7 @@ bool Menu::update()
 	return true;
 }
 
-void Menu::render(GfxWrapper &gfx)
+void Menu::render(Gfx &gfx)
 {
 	renderer().render(gfx, position(), shape(), direction());
 }

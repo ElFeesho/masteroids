@@ -8,7 +8,7 @@ AsteroidRenderer::AsteroidRenderer()
     }
 }
 
-void AsteroidRenderer::renderAtLocation(GfxWrapper &gfx, int x, int y, double rotation, double radius) const
+void AsteroidRenderer::renderAtLocation(Gfx &gfx, int x, int y, double rotation, double radius) const
 {
     double sliceStep = ((2 * M_PI) / 5.0);
     for (int i = 0; i < 6; i++)
@@ -35,7 +35,7 @@ void AsteroidRenderer::renderAtLocation(GfxWrapper &gfx, int x, int y, double ro
     }
 }
 
-void AsteroidRenderer::render(GfxWrapper &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour) const
+void AsteroidRenderer::render(Gfx &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour) const
 {
     if (position.X() + shape.Radius() > 640)
     {

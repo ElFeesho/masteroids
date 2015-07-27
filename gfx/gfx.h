@@ -3,7 +3,7 @@
 #include <string>
 #include "resourcemanager.h"
 
-enum TextAlignment
+enum class TextAlignment
 {
 	LEFT,
 	CENTRE,
@@ -19,19 +19,32 @@ public:
 class RGB
 {
 public:
-	RGB(float r, float g, float b);
+    RGB(float r, float g, float b) : r(r), g(g), b(b) {}
 
-	~RGB();
+    ~RGB() {}
 
-	unsigned int as24bit() const;
+    unsigned int as24bit() const {
+        int red = 255.0f * r;
+        int green = 255.0f * g;
+        int blue = 255.0f * b;
+        int packed = 0;
 
-	unsigned short as16bit() const;
+        if (red || green || blue)
+        {
+            packed = 0x000000ff | ((red << 24) | (green << 16) | (blue << 8));
+        }
+        return packed;
+    }
+
+    unsigned short as16bit() const {
+        return ((unsigned int) (16 * r)) + (((unsigned int) (32.f * g)) << 5) + (((unsigned int) (16.f * b)) << 11);
+    }
 
     float getR() const { return r; }
     float getG() const { return g; }
     float getB() const { return b; }
 
-	static RGB white;
+    static RGB white;
 	static RGB blue;
 	static RGB yellow;
 	static RGB black;
@@ -44,28 +57,36 @@ private:
 	float b;
 };
 
-class GfxWrapper
+struct Rect
+{
+    float x;
+    float y;
+    float w;
+    float h;
+
+    Rect(float x, float y, float w, float h) : x(x), y(y), w(w), h(h) {}
+};
+
+class Gfx
 {
 public:
-    GfxWrapper(const ResourceManager &resourceManager);
 
-    ~GfxWrapper();
+    virtual ~Gfx() {}
 
-	int textHeight();
+    virtual Rect measureText(const std::string &string) = 0;
 
-	void drawLine(int x, int y, int x2, int y2, const RGB &colour) const;
+    virtual void drawLine(int x, int y, int x2, int y2, const RGB &colour) = 0;
 
-	void fillScreen(const RGB &colour) const;
+    virtual void fillScreen(const RGB &colour) = 0;
 
-	void drawText(bool bold, int x, int y, const std::string &text, const RGB &colour, TextAlignment alignment = LEFT) const;
+    virtual void drawText(bool bold, int x, int y, const std::string &text, const RGB &colour, TextAlignment alignment = TextAlignment::LEFT) = 0;
 
-	void drawRect(int x, int y, int w, int h, const RGB &colour) const;
+    virtual void drawRect(int x, int y, int w, int h, const RGB &colour) = 0;
 
-	void drawImg(int x, int y, int w, int h, const unsigned short *imgData) const;
+    virtual void drawImg(int x, int y, int w, int h, const unsigned short *imgData) = 0;
 
-	void render();
+    virtual void render() = 0;
 
-	void waitForVBlank();
+    virtual void waitForVBlank() = 0;
 private:
-    const ResourceManager &resourceManager;
 };

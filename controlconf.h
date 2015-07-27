@@ -25,10 +25,10 @@ public:
 	{
 	}
 
-    void render(GfxWrapper &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) const
+    void render(Gfx &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) const
 	{
         gfx.drawRect(120, 70, 403, 316, RGB::blue);
-        gfx.drawText(false, 135, 80 + gfx.textHeight() * 8, "Not implemented", RGB::white);
+        gfx.drawText(false, 135, 80 + gfx.measureText("W").h * 8, "Not implemented", RGB::white);
 	}
 
 	void setMenuSelection(int menuSelection)
@@ -62,7 +62,7 @@ public:
 		return true;
 	}
 
-    void render(GfxWrapper &gfx);
+    void render(Gfx &gfx);
 
 	bool buttonDown(GamepadButton button);
 

@@ -19,7 +19,7 @@ ControlConf::~ControlConf()
 
 }
 
-void ControlConf::render(GfxWrapper &gfx)
+void ControlConf::render(Gfx &gfx)
 {
 	renderer().render(gfx, position(), shape(), direction());
 }

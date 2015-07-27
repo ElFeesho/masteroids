@@ -8,7 +8,7 @@
 #include "screens/gameoverscreen.h"
 #include "screens/menuscreen.h"
 
-class GfxWrapper;
+class Gfx;
 
 class ScreenManager : public MenuScreenListener, public GameScreenListener, public GameOverScreenListener
 {
@@ -25,7 +25,7 @@ public:
 
     void gameOverScreenShouldClose() override;
 
-    void update(GfxWrapper &gfx);
+    void update(Gfx &gfx);
 
 private:
     Screen *activeScreen;

@@ -7,7 +7,7 @@
 #include "alivemonitor.h"
 #include "renderers/renderer.h"
 
-class GfxWrapper;
+class Gfx;
 
 class Entity
 {
@@ -18,7 +18,7 @@ public:
 
 	virtual bool update() = 0;
 
-    virtual void render(GfxWrapper &gfx) = 0;
+    virtual void render(Gfx &gfx) = 0;
 
 	virtual Position &position() = 0;
 

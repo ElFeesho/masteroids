@@ -5,7 +5,7 @@
 #define M_PI_4      0.785398163397448309615660845819875721  /* pi/4           */
 #endif
 
-static void renderAt(GfxWrapper &gfx, double x, double y, double radius, double rotation, RGB &colour)
+static void renderAt(Gfx &gfx, double x, double y, double radius, double rotation, RGB &colour)
 {
 	double cx = x;
 	double cy = y;
@@ -27,7 +27,7 @@ static void renderAt(GfxWrapper &gfx, double x, double y, double radius, double 
 }
 
 
-void ShipRenderer::render(GfxWrapper &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour) const
+void ShipRenderer::render(Gfx &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour) const
 {
 	renderAt(gfx, position.X(), position.Y(), shape.Radius(), direction.Angle(), colour);
 	if (position.X() + shape.Radius() > 640)

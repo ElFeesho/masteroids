@@ -16,7 +16,7 @@ bool GameOver::update()
 	return aliveMonitor().alive();
 }
 
-void GameOver::render(GfxWrapper &gfx)
+void GameOver::render(Gfx &gfx)
 {
 	renderer().render(gfx, position(), shape(), direction());
 }

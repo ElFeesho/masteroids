@@ -13,7 +13,7 @@ GameOverScreen::~GameOverScreen()
 
 }
 
-void GameOverScreen::update(GfxWrapper &gfx)
+void GameOverScreen::update(Gfx &gfx)
 {
 	gameOverEntity.update();
 	gameOverEntity.render(gfx);

@@ -3,9 +3,9 @@
 
 using std::stringstream;
 
-void LivesRenderer::render(GfxWrapper &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour) const
+void LivesRenderer::render(Gfx &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour) const
 {
 	stringstream sstream;
 	sstream << "LIVES: " << liveCount;
-    gfx.drawText(false, position.X(), position.Y() + gfx.textHeight() + 3, sstream.str(), colour, alignment);
+    gfx.drawText(false, position.X(), position.Y() + gfx.measureText(sstream.str()).h + 3, sstream.str(), colour, alignment);
 }

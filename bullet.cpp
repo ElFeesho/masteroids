@@ -21,7 +21,7 @@ bool Bullet::update()
 	return aliveMonitor().alive();
 }
 
-void Bullet::render(GfxWrapper &gfx)
+void Bullet::render(Gfx &gfx)
 {
 	renderer().render(gfx, position(), shape(), direction(), colour);
 }

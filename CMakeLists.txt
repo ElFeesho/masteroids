@@ -114,6 +114,7 @@ set(SOURCE_FILES
     gfx/sfmlfont.cpp
     gfx/sfmlfont.h
     gfx/sfmlgfx.cpp
+    gfx/sfmlgfx.h
     gfx/resourcemanager.h
     vector.h)
 

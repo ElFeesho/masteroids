@@ -13,7 +13,7 @@ void PauseDialogRenderer::setMenuSelection(int menuSelection)
 	menu_sel = menuSelection;
 }
 
-void PauseDialogRenderer::render(GfxWrapper &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour) const
+void PauseDialogRenderer::render(Gfx &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour) const
 {
     gfx.drawRect((320 - 150), 240 - 50, 300, 90, RGB::blue);
 

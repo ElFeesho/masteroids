@@ -19,7 +19,7 @@ public:
 
 	~GameOverScreen();
 
-    void update(GfxWrapper &gfx) override;
+    void update(Gfx &gfx) override;
 
 	void screenShown() override;
 
