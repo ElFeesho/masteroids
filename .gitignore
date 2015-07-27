@@ -1,4 +1,5 @@
 Makefile
+masteroids_test
 masteroids.dSYM
 .DS_Store
 CMakeLists.txt.user
