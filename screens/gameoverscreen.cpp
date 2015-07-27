@@ -1,7 +1,7 @@
 #include "gameoverscreen.h"
 #include "input/gamepadinputmanager.h"
 
-GameOverScreen::GameOverScreen(GameOverScreenListener &gameOverScreenListener) : listener(gameOverScreenListener), gameOverEntity(GameOver()), closeScreenHandler{[&]{
+GameOverScreen::GameOverScreen(GameOverScreenListener &gameOverScreenListener) : listener(gameOverScreenListener), gameOverEntity(), closeScreenHandler{[&]{
     listener.gameOverScreenShouldClose();
 }}
 {

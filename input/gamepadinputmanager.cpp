@@ -3,6 +3,7 @@
 #endif
 #include <wiiuse/wpad.h>
 #include <gccore.h>
+#include <iostream>
 #include "gamepadinputmanager.h"
 
 #include "keyboardsource.h"
@@ -17,10 +18,12 @@ GamepadInputManager::GamepadInputManager()
 		: gamepads{new GamecubePadSource(0), new GamecubePadSource(1), new GamecubePadSource(2), new GamecubePadSource(3)}
 #endif
 {
+	std::cout << "GamepadInputManager" << std::endl;
 }
 
 GamepadInputManager::~GamepadInputManager()
 {
+    std::cout << "~GamepadInputManager" << std::endl;
 }
 
 void GamepadInputManager::poll()

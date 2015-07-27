@@ -1,3 +1,4 @@
+#include <iostream>
 #include "about.h"
 
 #include "input/gamepadinputmanager.h"
@@ -6,7 +7,8 @@ static std::function<void()> aboutFinishHandler;
 
 About::About(AboutListener *listener) : listener(listener), aboutRenderer(AboutRenderer())
 {
-	aboutFinishHandler = [this](){
+    std::cout << "About" << std::endl;
+    aboutFinishHandler = [this](){
 		this->listener->aboutClosed();
 	};
 
@@ -14,7 +16,7 @@ About::About(AboutListener *listener) : listener(listener), aboutRenderer(AboutR
 
 About::~About()
 {
-
+    std::cout << "~About" << std::endl;
 }
 
 void About::render(Gfx &gfx)

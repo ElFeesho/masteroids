@@ -1,11 +1,14 @@
+#include <iostream>
 #include "gamepad.h"
 
 GamepadButton::GamepadButton()
 {
+    std::cout << "GamepadButton" << std::endl;
 }
 
 GamepadButton::~GamepadButton()
 {
+    std::cout << "~GamepadButton" << std::endl;
 }
 
 void GamepadButton::addDownHandler(std::function<void ()> *handler)

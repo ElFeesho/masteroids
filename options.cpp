@@ -10,8 +10,8 @@ Options::Options(OptionsListener *listener)
 		  next_change(GameTime::getMillis() + 500),
 		  ldir(1),
           child(nullptr),
-		  colour(RGB(1.0f, 1.0f, 1.0f)),
-		  colourHighlight(RGB(1.0f, 0.8f, 0.0f))
+          colour(1.0f, 1.0f, 1.0f),
+          colourHighlight(1.0f, 0.8f, 0.0f)
 {
 
 }

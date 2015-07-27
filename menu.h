@@ -21,6 +21,8 @@ public:
 	virtual void menuOptionsSelected() = 0;
 
 	virtual void menuAboutSelected() = 0;
+
+	virtual void menuExitSelected() = 0;
 };
 
 class Menu : public MenuScreenItem

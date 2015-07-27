@@ -82,12 +82,12 @@ GamepadButton &KeyboardSource::pause()
 
 KeyboardSource::KeyboardSource()
 {
-    printf("KeyboardSource::ctor\n");
+    printf("KeyboardSource\n");
 }
 
 KeyboardSource::~KeyboardSource()
 {
-    printf("KeyboardSource::dtor\n");
+    printf("~KeyboardSource\n");
 }
 
 void KeyboardSource::poll()

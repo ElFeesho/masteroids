@@ -15,18 +15,11 @@ public:
 class AlwaysAlive : public AliveMonitor
 {
 public:
-	AlwaysAlive()
-	{
-	}
+	AlwaysAlive();
 
-	~AlwaysAlive()
-	{
-	}
+	~AlwaysAlive();
 
-    bool alive() const
-	{
-		return true;
-	}
+	bool alive() const;
 };
 
 #endif

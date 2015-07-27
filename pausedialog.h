@@ -56,25 +56,28 @@ public:
 		return pauseDialogRenderer;
 	}
 
+	void reset();
+
 private:
     AlwaysAlive alwaysAliveMonitor;
 	GamepadSource &gamepad;
 	PauseDialogListener *listener;
 	PauseDialogRenderer pauseDialogRenderer;
 	int menu_sel;
+	void highlightMenu(int menuSelection);
+
 	std::function<void()> leftHandler{
 			[&]()
 			{
-				menu_sel = 0;
-				pauseDialogRenderer.setMenuSelection(menu_sel);
+				highlightMenu(0);
 			}
 	};
+
 
 	std::function<void()> rightHandler{
 			[&]()
 			{
-				menu_sel = 1;
-				pauseDialogRenderer.setMenuSelection(menu_sel);
+				highlightMenu(1);
 			}
 	};
 

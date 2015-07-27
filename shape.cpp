@@ -1,33 +1,17 @@
 #include "shape.h"
 
-Shape::Shape()
-{
+Shape::Shape(double radius) : radius(radius) {}
 
+void Shape::Radius(double radius) {
+	this->radius = radius;
 }
 
-Shape::Shape(const Shape &other)
-{
-	radius = other.radius;
+double Shape::Radius() {
+	return radius;
 }
 
-Shape::~Shape()
-{
-
+bool Shape::operator==(Shape &rhs) {
+	return radius == rhs.radius;
 }
 
-Shape &Shape::operator=(const Shape &other)
-{
-	radius = other.radius;
-	return *this;
-}
-
-bool Shape::operator==(const Shape &other) const
-{
-	return other.radius == radius || this == &other;
-}
-
-Shape::Shape(double radius) : radius(radius)
-{
-}
-
-Shape Shape::NONE = Shape();
+Shape Shape::NONE = Shape(0.0);

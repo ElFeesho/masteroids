@@ -11,9 +11,10 @@ ScreenManager::ScreenManager() : menuScreen(*this), gameScreen(*this), gameOverS
 
 ScreenManager::~ScreenManager() {}
 
-void ScreenManager::update(Gfx &gfx)
+bool ScreenManager::update(Gfx &gfx)
 {
     activeScreen->update(gfx);
+    return shouldRun;
 }
 
 void ScreenManager::switchScreen(Screen &oldScreen, Screen &newScreen)
@@ -45,5 +46,5 @@ void ScreenManager::gameOverScreenShouldClose()
 
 void ScreenManager::menuScreenShouldExitGame()
 {
-    // ...
+    shouldRun = false;
 }

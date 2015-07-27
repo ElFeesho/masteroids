@@ -60,8 +60,6 @@ set(SOURCE_FILES
     asteroidfactory.h
     alivemonitor.cpp
     alivemonitor.h
-    bullet.cpp
-    bullet.h
     controlconf.cpp
     controlconf.h
     debris.cpp
@@ -116,9 +114,10 @@ set(SOURCE_FILES
     gfx/sfmlgfx.cpp
     gfx/sfmlgfx.h
     gfx/resourcemanager.h
+     asteroidfactory.cpp
     vector.h)
 
-add_executable(masteroids ${SOURCE_FILES})
+add_executable(masteroids ${SOURCE_FILES} movers/bulletmover.cpp)
 
 include_directories("libwiiwrap")
 include_directories(".")

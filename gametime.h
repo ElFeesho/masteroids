@@ -7,6 +7,8 @@
 #include <utility>
 #include <functional>
 
+#include <SFML/System.hpp>
+
 using std::vector;
 using std::pair;
 using std::function;
@@ -17,9 +19,9 @@ Father...
 class GameTime
 {
 public:
-	static long getMillis()
+	static unsigned long getMillis()
 	{
-		return ticks_to_millisecs(gettime());
+		return clockTime.getElapsedTime().asMilliseconds();
 	}
 
 	static void tick()
@@ -59,4 +61,6 @@ private:
 
 	static long lastTick;
 	static long lastDelta;
+
+	static sf::Clock clockTime;
 };

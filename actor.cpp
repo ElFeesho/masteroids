@@ -1,3 +1,4 @@
+#include <iostream>
 #include "actor.h"
 
 Actor::Actor(RGB &colour, Mover &pmover, const Renderer &prenderer, std::unique_ptr<AliveMonitor> pmonitor)
@@ -10,12 +11,12 @@ Actor::Actor(RGB &colour, Mover &pmover, const Renderer &prenderer, std::unique_
           actorRenderer(prenderer),
 		  visible(true)
 {
-
+	std::cout << "Actor" << std::endl;
 }
 
 Actor::~Actor()
 {
-
+	std::cout << "~Actor" << std::endl;
 }
 
 bool Actor::update()

@@ -16,7 +16,6 @@ ControlConf::ControlConf(ControlConfListener *listener)
 
 ControlConf::~ControlConf()
 {
-
 }
 
 void ControlConf::render(Gfx &gfx)

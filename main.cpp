@@ -14,17 +14,19 @@
 
 int main(int argc, char **argv)
 {
-
-    SFMLGfx gfxWrapper;
+    sf::RenderWindow window(sf::VideoMode(1280, 960), "Masteroids", sf::Style::Close);
+    window.setVerticalSyncEnabled(true);
+    SFMLGfx gfxWrapper(window);
     GamepadInputManager::sharedInstance().initialise();
     ScreenManager screenManager;
-	for (; ;)
+    bool shouldRun = true;
+	while(shouldRun && window.isOpen())
 	{
         gfxWrapper.waitForVBlank();
         gfxWrapper.fillScreen(RGB::black);
 
         GamepadInputManager::sharedInstance().poll();
-        screenManager.update(gfxWrapper);
+        shouldRun = screenManager.update(gfxWrapper);
         gfxWrapper.render();
 		GameTime::tick();
 
@@ -32,6 +34,15 @@ int main(int argc, char **argv)
 		{
 			break;
 		}
+
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            // "close requested" event: we close the window
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            }
+        }
 	}
 
 	return 0;

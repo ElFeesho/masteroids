@@ -73,13 +73,11 @@ PlayerManager::PlayerManager(int playerNumber, int lives, int maxBullets, std::f
     player = shipFactory.createShip(playerColours[playerNumber-1], playerSpawnLocation);
     directionController = new DirectionController(GamepadInputManager::sharedInstance().inputForPlayer(playerNumber-1), player->direction());
 
-    //bulletGenerator.attachToButton(GamepadInputManager::sharedInstance().inputForPlayer(playerNumber-1).fire());
-    // SET THIS IN GAMEINPUTMANAGER
     fireHandler = new std::function<void()>([&]() {
         if (playerBullets.size() < Options::max_bullets)
         {
             Direction bulletDir(5.0f, player->direction().Angle());
-            playerBullets.add(bulletFactory.createBullet(playerColours[playerNumber], bulletDir, player->position()));
+            playerBullets.add(bulletFactory.createBullet(RGB::green, bulletDir, player->position()));
         }
     });
 
@@ -88,6 +86,7 @@ PlayerManager::PlayerManager(int playerNumber, int lives, int maxBullets, std::f
 
 PlayerManager::~PlayerManager()
 {
+    shutdown();
     delete fireHandler;
     delete player;
     delete directionController;
@@ -138,8 +137,8 @@ void PlayerManager::updatePlayer(Gfx &gfx)
     scoreRenderer.setAlignment(alignment);
     livesRenderer.setAlignment(alignment);
 
-    scoreRenderer.render(gfx, playerScorePositions[playerNumber-1], Shape::NONE, Direction::NONE, playerColours[playerNumber-1]);
-    livesRenderer.render(gfx, playerScorePositions[playerNumber-1], Shape::NONE, Direction::NONE, playerColours[playerNumber-1]);
+    scoreRenderer.render(gfx, playerScorePositions[playerNumber-1], Shape::NONE, Direction::NONE, RGB::green);
+    livesRenderer.render(gfx, playerScorePositions[playerNumber-1], Shape::NONE, Direction::NONE, RGB::green);
 }
 
 void PlayerManager::killPlayer()

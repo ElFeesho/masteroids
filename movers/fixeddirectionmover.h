@@ -7,13 +7,9 @@
 class FixedDirectionMover : public Mover
 {
 public:
-	FixedDirectionMover()
-	{
-	}
+	FixedDirectionMover();
 
-	~FixedDirectionMover()
-	{
-	}
+	~FixedDirectionMover();
 
 	void move(Direction &direction, Position &position, Shape &shape);
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <string>
 #include "resourcemanager.h"
 
@@ -19,9 +20,21 @@ public:
 class RGB
 {
 public:
-    RGB(float r, float g, float b) : r(r), g(g), b(b) {}
+    RGB(float r, float g, float b) : r(r), g(g), b(b) {
+        std::cout << "RGB" << std::endl;
+    }
 
-    ~RGB() {}
+    RGB(RGB &copy) {
+        std::cout << "RGB copy ctor" << std::endl;
+        std::cout << copy.r << " " << copy.g << " " << copy.b << std::endl;
+        r = copy.r;
+        g = copy.g;
+        b = copy.b;
+    }
+
+    ~RGB() {
+        std::cout << "~RGB" << std::endl;
+    }
 
     unsigned int as24bit() const {
         int red = 255.0f * r;
@@ -37,7 +50,7 @@ public:
     }
 
     unsigned short as16bit() const {
-        return ((unsigned int) (16 * r)) + (((unsigned int) (32.f * g)) << 5) + (((unsigned int) (16.f * b)) << 11);
+        return ((unsigned int) (16.f * r)) + (((unsigned int) (32.f * g)) << 5) + (((unsigned int) (16.f * b)) << 11);
     }
 
     float getR() const { return r; }

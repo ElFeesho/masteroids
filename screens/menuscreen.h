@@ -41,6 +41,7 @@ public:
 	void menuOptionsSelected();
 
 	void menuAboutSelected();
+    void menuExitSelected();
 
 	void optionsControllerConfigSelected();
 
@@ -65,6 +66,7 @@ private:
     Options optionsScreen;
     ControlConf controllerConfigScreen;
     About aboutScreen;
+
 };
 
 #endif

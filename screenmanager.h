@@ -25,7 +25,7 @@ public:
 
     void gameOverScreenShouldClose() override;
 
-    void update(Gfx &gfx);
+    bool update(Gfx &gfx);
 
 private:
     Screen *activeScreen;
@@ -34,6 +34,8 @@ private:
     GameOverScreen gameOverScreen;
 
     void switchScreen(Screen &from, Screen &newScreen);
+
+    bool shouldRun { true };
 };
 
 #endif

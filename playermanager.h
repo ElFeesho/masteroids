@@ -55,7 +55,6 @@ private:
 
     int playerScore;
     int playersLives;
-	Position playerScorePositions[4];
 
 	LivesRenderer livesRenderer;
 	ScoreRenderer scoreRenderer;

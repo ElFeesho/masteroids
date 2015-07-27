@@ -48,26 +48,13 @@ public:
 	void generateLevel();
 
 private:
-    std::vector<std::unique_ptr<PlayerManager>> playerManagers;
-
 	AsteroidFactory asteroidFactory;
-
     GameScreenListener &listener;
 	EntityList asteroids;
-	EntityList secondaryAsteroids;
-	EntityList debrisEntities;
-
-	DebrisFountain debrisFountain;
     PauseDialog pauseEnt;
 
 	bool isPaused;
 	int level;
-
-    void checkAsteroidCollisions(PlayerManager *playerManager);
-    void updatePlayers(Gfx &gfx);
-    void checkPlayerDeaths();
-	void checkLevelComplete();
-	void generateSecondaryAsteroids(Entity *hit);
 
     std::unique_ptr<std::function<void()>> pauseHandler;
 };

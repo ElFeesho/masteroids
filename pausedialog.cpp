@@ -1,14 +1,19 @@
+#include <iostream>
 #include "renderers/pausedialogrenderer.h"
 #include "pausedialog.h"
 
 PauseDialog::PauseDialog(GamepadSource &gamepad, PauseDialogListener *listener)
         : gamepad(gamepad),
           listener(listener),
-          pauseDialogRenderer(PauseDialogRenderer()),
+          pauseDialogRenderer(),
           menu_sel(0)
-{}
+{
+    std::cout << "PauseDialog::CTOR" << std::endl;
+}
 
-PauseDialog::~PauseDialog() {}
+PauseDialog::~PauseDialog() {
+    std::cout << "PauseDialog::DTOR" << std::endl;
+}
 
 void PauseDialog::shown()
 {
@@ -25,4 +30,13 @@ bool PauseDialog::update()
 void PauseDialog::render(Gfx &gfx)
 {
 	renderer().render(gfx, position(), shape(), direction());
+}
+
+void PauseDialog::reset() {
+    highlightMenu(0);
+}
+
+void PauseDialog::highlightMenu(int menuSelection) {
+    menu_sel = menuSelection;
+    pauseDialogRenderer.setMenuSelection(menu_sel);
 }

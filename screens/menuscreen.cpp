@@ -49,6 +49,11 @@ void MenuScreen::menuAboutSelected()
     activateScreen(&aboutScreen);
 }
 
+void MenuScreen::menuExitSelected()
+{
+    menuListener.menuScreenShouldExitGame();
+}
+
 void MenuScreen::optionsControllerConfigSelected()
 {
     activateScreen(&controllerConfigScreen);
