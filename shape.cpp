@@ -1,9 +1,9 @@
 #include "shape.h"
 
-Shape::Shape(double radius) : radius(radius) {}
+Shape::Shape(double nradius) : radius(nradius) {}
 
-void Shape::Radius(double radius) {
-	this->radius = radius;
+void Shape::Radius(double nradius) {
+	this->radius = nradius;
 }
 
 double Shape::Radius() {

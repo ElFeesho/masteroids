@@ -22,9 +22,9 @@ public:
 		menu_sel = selection;
 	}
 
-    void render(Gfx &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) const override
+    void render(Gfx &gfx, Position &, Shape &, Direction &, RGB &) const override
 	{
-        gfx.drawRect(320 - asteroid_banner_width / 2, 79, asteroid_banner_width + 1, 310, RGB::blue);
+        gfx.drawRect(320 - asteroid_banner_width / 2, 79, asteroid_banner_width + 1, 310, RGB::BLUE);
         gfx.drawImg(321 - asteroid_banner_width / 2, 80, asteroid_banner_width, asteroid_banner_height, asteroid_banner_data);
         gfx.drawImg(320, 200, controllers_width, controllers_height, controllers_data);
 
@@ -37,40 +37,40 @@ public:
 
 		if (menu_sel == 0)
 		{
-            gfx.drawText(true, menuOffsetX, menuSeparationHeight + menuItemHeight, "Start Game", RGB::yellow, TextAlignment::CENTRE);
+            gfx.drawText(true, menuOffsetX, menuSeparationHeight + menuItemHeight, "Start Game", RGB::YELLOW, TextAlignment::CENTRE);
 		}
 		else
 		{
-            gfx.drawText(false, menuOffsetX, menuSeparationHeight + menuItemHeight, "Start Game", RGB::white, TextAlignment::CENTRE);
+            gfx.drawText(false, menuOffsetX, menuSeparationHeight + menuItemHeight, "Start Game", RGB::WHITE, TextAlignment::CENTRE);
 		}
 
 		if (menu_sel == 1)
 		{
-            gfx.drawText(true, menuOffsetX, menuSeparationHeight + menuItemHeight * 2, "Options", RGB::yellow, TextAlignment::CENTRE);
+            gfx.drawText(true, menuOffsetX, menuSeparationHeight + menuItemHeight * 2, "Options", RGB::YELLOW, TextAlignment::CENTRE);
 		}
 		else
 		{
-            gfx.drawText(false, menuOffsetX, menuSeparationHeight + menuItemHeight * 2, "Options", RGB::white, TextAlignment::CENTRE);
+            gfx.drawText(false, menuOffsetX, menuSeparationHeight + menuItemHeight * 2, "Options", RGB::WHITE, TextAlignment::CENTRE);
 		}
 
 		if (menu_sel == 2)
 		{
-            gfx.drawText(true, menuOffsetX, menuSeparationHeight + menuItemHeight * 3, "About", RGB::yellow, TextAlignment::CENTRE);
+            gfx.drawText(true, menuOffsetX, menuSeparationHeight + menuItemHeight * 3, "About", RGB::YELLOW, TextAlignment::CENTRE);
 		}
 		else
 		{
-            gfx.drawText(false, menuOffsetX, menuSeparationHeight + menuItemHeight * 3, "About", RGB::white, TextAlignment::CENTRE);
+            gfx.drawText(false, menuOffsetX, menuSeparationHeight + menuItemHeight * 3, "About", RGB::WHITE, TextAlignment::CENTRE);
 		}
 
 		if (menu_sel == 3)
 		{
-            gfx.drawText(true, menuOffsetX, menuSeparationHeight + menuItemHeight * 4, "Exit To HBC", RGB::yellow, TextAlignment::CENTRE);
+            gfx.drawText(true, menuOffsetX, menuSeparationHeight + menuItemHeight * 4, "Exit To HBC", RGB::YELLOW, TextAlignment::CENTRE);
 		}
 		else
 		{
-            gfx.drawText(false, menuOffsetX, menuSeparationHeight + menuItemHeight * 4, "Exit To HBC", RGB::white, TextAlignment::CENTRE);
+            gfx.drawText(false, menuOffsetX, menuSeparationHeight + menuItemHeight * 4, "Exit To HBC", RGB::WHITE, TextAlignment::CENTRE);
 		}
-        gfx.drawText(false, 320, 80 + asteroid_banner_height + (textHeight + 10) * 10, "Coded by Feesh! - gummybassist@gmail.com", RGB::white, TextAlignment::CENTRE);
+        gfx.drawText(false, 320, 80 + asteroid_banner_height + (textHeight + 10) * 10, "Coded by Feesh! - gummybassist@gmail.com", RGB::WHITE, TextAlignment::CENTRE);
 	}
 
 private:

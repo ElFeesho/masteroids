@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <string>
-#include "resourcemanager.h"
 
 enum class TextAlignment
 {
@@ -20,7 +19,7 @@ public:
 class RGB
 {
 public:
-    RGB(float r, float g, float b) : r(r), g(g), b(b) {
+    RGB(float red, float green, float blue) : r(red), g(green), b(blue) {
         std::cout << "RGB" << std::endl;
     }
 
@@ -37,14 +36,14 @@ public:
     }
 
     unsigned int as24bit() const {
-        int red = 255.0f * r;
-        int green = 255.0f * g;
-        int blue = 255.0f * b;
+        int redF = 255.0f * r;
+        int greenF = 255.0f * g;
+        int blueF = 255.0f * b;
         int packed = 0;
 
-        if (red || green || blue)
+        if (redF || greenF || blueF)
         {
-            packed = 0x000000ff | ((red << 24) | (green << 16) | (blue << 8));
+            packed = 0x000000ff | ((redF << 24) | (greenF << 16) | (blueF << 8));
         }
         return packed;
     }
@@ -57,12 +56,12 @@ public:
     float getG() const { return g; }
     float getB() const { return b; }
 
-    static RGB white;
-	static RGB blue;
-	static RGB yellow;
-	static RGB black;
-	static RGB purple;
-	static RGB green;
+    static RGB WHITE;
+	static RGB BLUE;
+	static RGB YELLOW;
+	static RGB BLACK;
+	static RGB PURPLE;
+	static RGB GREEN;
 
 private:
 	float r;
@@ -77,7 +76,7 @@ struct Rect
     float w;
     float h;
 
-    Rect(float x, float y, float w, float h) : x(x), y(y), w(w), h(h) {}
+    Rect(float xPos, float yPos, float width, float height) : x(xPos), y(yPos), w(width), h(height) {}
 };
 
 class Gfx

@@ -5,12 +5,12 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-RGB RGB::white(1.0f, 1.0f, 1.0f);
-RGB RGB::blue(0.0f, 0.5f, 1.0f);
-RGB RGB::yellow(1.0f, 5.0f, 0.0f);
-RGB RGB::black(0.0f, 0.0f, 0.0f);
-RGB RGB::purple(1.0f, 0.0f, 1.0f);
-RGB RGB::green(0.0f, 1.0f, 0.0f);
+RGB RGB::WHITE(1.0f, 1.0f, 1.0f);
+RGB RGB::BLUE(0.0f, 0.5f, 1.0f);
+RGB RGB::YELLOW(1.0f, 5.0f, 0.0f);
+RGB RGB::BLACK(0.0f, 0.0f, 0.0f);
+RGB RGB::PURPLE(1.0f, 0.0f, 1.0f);
+RGB RGB::GREEN(0.0f, 1.0f, 0.0f);
 
 SFMLGfx::SFMLGfx(sf::RenderWindow &window) : app(window)
 {
@@ -24,15 +24,24 @@ SFMLGfx::~SFMLGfx()
 }
 
 
-Rect SFMLGfx::measureText(const std::string &text)
+Rect SFMLGfx::measureText(const std::string &inputText)
 {
-    return Rect(0, 0, 0, 12*2);
+    sf::Text text;
+    sf::Font font;
+    font.loadFromFile("regularfont.ttf");
+    text.setFont(font);
+    text.setString(inputText);
+    text.setCharacterSize(2*14);
+    const sf::FloatRect &rect = text.getLocalBounds();
+
+    return Rect(0, 0, rect.width, rect.height);
 }
 
 void SFMLGfx::drawLine(int x, int y, int x2, int y2, const RGB &colour)
 {
+
     sf::Vertex vertices[] = {
-        sf::Vector2f(x*2, y*2), sf::Vector2f(x2*2, y2*2)
+            sf::Vertex(sf::Vector2f(x*2, y*2), sf::Color(colour.getR()*255.0f, colour.getG()*255.0f, colour.getB()*255.0f)), sf::Vertex(sf::Vector2f(x2*2, y2*2),sf::Color(colour.getR()*255.0f, colour.getG()*255.0f, colour.getB()*255.0f))
     };
 
     app.draw(vertices, 2, sf::Lines);
@@ -79,7 +88,7 @@ void SFMLGfx::drawRect(int x, int y, int w, int h, const RGB &colour)
     app.draw(shape);
 }
 
-void SFMLGfx::drawImg(int xpos, int ypos, int width, int height, const unsigned short *data)
+void SFMLGfx::drawImg(int, int, int, int, const unsigned short *)
 {
 
 }

@@ -44,12 +44,12 @@ void PAD_ScanPads()
 	BUTTON_DOWN_STATE = ((BUTTON_STATE ^ BUTTON_LASTSTATE)) & BUTTON_STATE;
 }
 
-int PAD_ButtonsDown(int padButton)
+int PAD_ButtonsDown(int)
 {
 	return BUTTON_DOWN_STATE;
 }
 
-int PAD_ButtonsHeld(int padNumber)
+int PAD_ButtonsHeld(int)
 {
 	return BUTTON_STATE & BUTTON_LASTSTATE;
 }

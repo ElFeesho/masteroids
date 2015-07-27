@@ -68,9 +68,9 @@ Mover &Actor::mover()
 	return actorMover;
 }
 
-void Actor::setVisible(bool visible)
+void Actor::setVisible(bool nvisible)
 {
-	this->visible = visible;
+	this->visible = nvisible;
 }
 
 bool Actor::isVisible()

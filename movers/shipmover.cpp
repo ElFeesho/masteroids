@@ -8,7 +8,7 @@ ShipMover::~ShipMover() {
     std::cout << "ShipMover dtor " << this << std::endl;
 }
 
-void ShipMover::move(Direction &direction, Position &position, Shape &shape) {
+void ShipMover::move(Direction &direction, Position &position, Shape &) {
     direction.rotate(GameTime::factorTime(direction.Spin()));
     movementVector.add(GameTime::factorTime(cos(direction.Angle()) * direction.Speed()),
                        GameTime::factorTime(sin(direction.Angle()) * direction.Speed()));

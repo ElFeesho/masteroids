@@ -17,7 +17,7 @@
 class ControlConfRenderer : public Renderer
 {
 public:
-	ControlConfRenderer() : menu_sel(0)
+	ControlConfRenderer()
 	{
 	}
 
@@ -25,19 +25,11 @@ public:
 	{
 	}
 
-    void render(Gfx &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) const
+    void render(Gfx &gfx, Position &, Shape &, Direction &, RGB &) const
 	{
-        gfx.drawRect(120, 70, 403, 316, RGB::blue);
-        gfx.drawText(false, 135, 80 + gfx.measureText("W").h * 8, "Not implemented", RGB::white);
+        gfx.drawRect(120, 70, 403, 316, RGB::BLUE);
+        gfx.drawText(false, 135, 80 + gfx.measureText("W").h * 8, "Not implemented", RGB::WHITE);
 	}
-
-	void setMenuSelection(int menuSelection)
-	{
-		menu_sel = menuSelection;
-	}
-
-private:
-	int menu_sel;
 };
 
 class ControlConfListener
@@ -57,10 +49,7 @@ public:
 
 	~ControlConf();
 
-	bool update()
-	{
-		return true;
-	}
+	bool update();
 
     void render(Gfx &gfx);
 
@@ -68,30 +57,15 @@ public:
 
 	bool buttonUp(GamepadButton button);
 
-	Position &position()
-	{
-		return Position::NONE;
-	}
+	Position & position();
 
-	Shape &shape()
-	{
-		return Shape::NONE;
-	}
+	Shape & shape();
 
-	Direction &direction()
-	{
-		return Direction::NONE;
-	}
+	Direction & direction();
 
-	AliveMonitor &aliveMonitor()
-	{
-        return alwaysAliveMonitor;
-	}
+	AliveMonitor &aliveMonitor();
 
-	Renderer &renderer()
-	{
-		return controlConfRenderer;
-	}
+	Renderer & renderer();
 
     void menuScreenPresented() override;
     void menuScreenHidden() override;

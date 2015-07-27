@@ -1,7 +1,7 @@
 #include "elapsedtimetolive.h"
 #include "gametime.h"
 
-ElapsedTimeToLive::ElapsedTimeToLive(long int ttl) : ttl(GameTime::getMillis() + ttl)
+ElapsedTimeToLive::ElapsedTimeToLive(unsigned long nttl) : ttl(GameTime::getMillis() + nttl)
 {
 
 }

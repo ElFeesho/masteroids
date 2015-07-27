@@ -13,7 +13,7 @@ class Renderer
 public:
     virtual ~Renderer() {}
 
-    virtual void render(Gfx &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) const = 0;
+    virtual void render(Gfx &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::WHITE) const = 0;
 };
 
 #endif // RENDERER_H

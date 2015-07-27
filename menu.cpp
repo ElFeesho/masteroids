@@ -13,8 +13,8 @@ static std::function<void()> downPressHandler;
 static std::function<void()> upReleaseHandler;
 static std::function<void()> downReleaseHandler;
 
-Menu::Menu(MenuListener *listener)
-        : listener(listener), menuRenderer(MenuRenderer()), menu_sel(0), next_change(0), ldir(-1) {
+Menu::Menu(MenuListener *nlistener)
+        : listener(nlistener), menuRenderer(MenuRenderer()), menu_sel(0), next_change(0), ldir(-1) {
     std::cout << "Menu" << std::endl;
     firePressHandler = [&]() {
         next_change = 0;

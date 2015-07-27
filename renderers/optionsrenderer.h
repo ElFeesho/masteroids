@@ -16,7 +16,7 @@ public:
 
 	void setMenuSelection(int menuSelection);
 
-    void render(Gfx &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) const;
+    void render(Gfx &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::WHITE) const;
 
 private:
 	int menu_sel;

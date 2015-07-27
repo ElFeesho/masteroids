@@ -2,8 +2,8 @@
 #include "input/gamepadinputmanager.h"
 #include "gametime.h"
 
-Options::Options(OptionsListener *listener)
-        : listener(listener),
+Options::Options(OptionsListener *nlistener)
+        : listener(nlistener),
           optionsRenderer(OptionsRenderer()),
           alive(true),
 		  menu_sel(0),

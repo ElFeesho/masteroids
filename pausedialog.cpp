@@ -2,9 +2,9 @@
 #include "renderers/pausedialogrenderer.h"
 #include "pausedialog.h"
 
-PauseDialog::PauseDialog(GamepadSource &gamepad, PauseDialogListener *listener)
-        : gamepad(gamepad),
-          listener(listener),
+PauseDialog::PauseDialog(GamepadSource &ngamepad, PauseDialogListener *nlistener)
+        : gamepad(ngamepad),
+          listener(nlistener),
           pauseDialogRenderer(),
           menu_sel(0)
 {

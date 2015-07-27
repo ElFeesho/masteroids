@@ -52,8 +52,8 @@ CMAKE_BINARY_DIR = /Users/sawczc01/personal/masteroids
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/local/Cellar/cmake/3.2.3/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/local/Cellar/cmake/3.2.3/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -69,6 +69,16 @@ rebuild_cache:
 # Special rule for the target rebuild_cache
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/local/Cellar/cmake/3.2.3/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+.PHONY : test/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -114,12 +124,26 @@ masteroids/fast:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/build
 .PHONY : masteroids/fast
 
+#=============================================================================
+# Target rules for targets named masteroids_test
+
+# Build rule for target.
+masteroids_test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 masteroids_test
+.PHONY : masteroids_test
+
+# fast build rule for target.
+masteroids_test/fast:
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/build
+.PHONY : masteroids_test/fast
+
 about.o: about.cpp.o
 .PHONY : about.o
 
 # target to build an object file
 about.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/about.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/about.cpp.o
 .PHONY : about.cpp.o
 
 about.i: about.cpp.i
@@ -128,6 +152,7 @@ about.i: about.cpp.i
 # target to preprocess a source file
 about.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/about.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/about.cpp.i
 .PHONY : about.cpp.i
 
 about.s: about.cpp.s
@@ -136,6 +161,7 @@ about.s: about.cpp.s
 # target to generate assembly for a file
 about.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/about.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/about.cpp.s
 .PHONY : about.cpp.s
 
 actor.o: actor.cpp.o
@@ -144,6 +170,7 @@ actor.o: actor.cpp.o
 # target to build an object file
 actor.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/actor.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/actor.cpp.o
 .PHONY : actor.cpp.o
 
 actor.i: actor.cpp.i
@@ -152,6 +179,7 @@ actor.i: actor.cpp.i
 # target to preprocess a source file
 actor.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/actor.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/actor.cpp.i
 .PHONY : actor.cpp.i
 
 actor.s: actor.cpp.s
@@ -160,6 +188,7 @@ actor.s: actor.cpp.s
 # target to generate assembly for a file
 actor.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/actor.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/actor.cpp.s
 .PHONY : actor.cpp.s
 
 alivemonitor.o: alivemonitor.cpp.o
@@ -168,6 +197,7 @@ alivemonitor.o: alivemonitor.cpp.o
 # target to build an object file
 alivemonitor.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/alivemonitor.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/alivemonitor.cpp.o
 .PHONY : alivemonitor.cpp.o
 
 alivemonitor.i: alivemonitor.cpp.i
@@ -176,6 +206,7 @@ alivemonitor.i: alivemonitor.cpp.i
 # target to preprocess a source file
 alivemonitor.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/alivemonitor.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/alivemonitor.cpp.i
 .PHONY : alivemonitor.cpp.i
 
 alivemonitor.s: alivemonitor.cpp.s
@@ -184,31 +215,35 @@ alivemonitor.s: alivemonitor.cpp.s
 # target to generate assembly for a file
 alivemonitor.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/alivemonitor.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/alivemonitor.cpp.s
 .PHONY : alivemonitor.cpp.s
 
-bullet.o: bullet.cpp.o
-.PHONY : bullet.o
+asteroidfactory.o: asteroidfactory.cpp.o
+.PHONY : asteroidfactory.o
 
 # target to build an object file
-bullet.cpp.o:
-	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/bullet.cpp.o
-.PHONY : bullet.cpp.o
+asteroidfactory.cpp.o:
+	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/asteroidfactory.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/asteroidfactory.cpp.o
+.PHONY : asteroidfactory.cpp.o
 
-bullet.i: bullet.cpp.i
-.PHONY : bullet.i
+asteroidfactory.i: asteroidfactory.cpp.i
+.PHONY : asteroidfactory.i
 
 # target to preprocess a source file
-bullet.cpp.i:
-	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/bullet.cpp.i
-.PHONY : bullet.cpp.i
+asteroidfactory.cpp.i:
+	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/asteroidfactory.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/asteroidfactory.cpp.i
+.PHONY : asteroidfactory.cpp.i
 
-bullet.s: bullet.cpp.s
-.PHONY : bullet.s
+asteroidfactory.s: asteroidfactory.cpp.s
+.PHONY : asteroidfactory.s
 
 # target to generate assembly for a file
-bullet.cpp.s:
-	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/bullet.cpp.s
-.PHONY : bullet.cpp.s
+asteroidfactory.cpp.s:
+	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/asteroidfactory.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/asteroidfactory.cpp.s
+.PHONY : asteroidfactory.cpp.s
 
 bulletgenerator.o: bulletgenerator.cpp.o
 .PHONY : bulletgenerator.o
@@ -216,6 +251,7 @@ bulletgenerator.o: bulletgenerator.cpp.o
 # target to build an object file
 bulletgenerator.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/bulletgenerator.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/bulletgenerator.cpp.o
 .PHONY : bulletgenerator.cpp.o
 
 bulletgenerator.i: bulletgenerator.cpp.i
@@ -224,6 +260,7 @@ bulletgenerator.i: bulletgenerator.cpp.i
 # target to preprocess a source file
 bulletgenerator.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/bulletgenerator.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/bulletgenerator.cpp.i
 .PHONY : bulletgenerator.cpp.i
 
 bulletgenerator.s: bulletgenerator.cpp.s
@@ -232,6 +269,7 @@ bulletgenerator.s: bulletgenerator.cpp.s
 # target to generate assembly for a file
 bulletgenerator.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/bulletgenerator.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/bulletgenerator.cpp.s
 .PHONY : bulletgenerator.cpp.s
 
 controlconf.o: controlconf.cpp.o
@@ -240,6 +278,7 @@ controlconf.o: controlconf.cpp.o
 # target to build an object file
 controlconf.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/controlconf.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/controlconf.cpp.o
 .PHONY : controlconf.cpp.o
 
 controlconf.i: controlconf.cpp.i
@@ -248,6 +287,7 @@ controlconf.i: controlconf.cpp.i
 # target to preprocess a source file
 controlconf.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/controlconf.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/controlconf.cpp.i
 .PHONY : controlconf.cpp.i
 
 controlconf.s: controlconf.cpp.s
@@ -256,6 +296,7 @@ controlconf.s: controlconf.cpp.s
 # target to generate assembly for a file
 controlconf.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/controlconf.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/controlconf.cpp.s
 .PHONY : controlconf.cpp.s
 
 debris.o: debris.cpp.o
@@ -264,6 +305,7 @@ debris.o: debris.cpp.o
 # target to build an object file
 debris.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/debris.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/debris.cpp.o
 .PHONY : debris.cpp.o
 
 debris.i: debris.cpp.i
@@ -272,6 +314,7 @@ debris.i: debris.cpp.i
 # target to preprocess a source file
 debris.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/debris.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/debris.cpp.i
 .PHONY : debris.cpp.i
 
 debris.s: debris.cpp.s
@@ -280,6 +323,7 @@ debris.s: debris.cpp.s
 # target to generate assembly for a file
 debris.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/debris.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/debris.cpp.s
 .PHONY : debris.cpp.s
 
 debrisfountain.o: debrisfountain.cpp.o
@@ -288,6 +332,7 @@ debrisfountain.o: debrisfountain.cpp.o
 # target to build an object file
 debrisfountain.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/debrisfountain.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/debrisfountain.cpp.o
 .PHONY : debrisfountain.cpp.o
 
 debrisfountain.i: debrisfountain.cpp.i
@@ -296,6 +341,7 @@ debrisfountain.i: debrisfountain.cpp.i
 # target to preprocess a source file
 debrisfountain.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/debrisfountain.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/debrisfountain.cpp.i
 .PHONY : debrisfountain.cpp.i
 
 debrisfountain.s: debrisfountain.cpp.s
@@ -304,6 +350,7 @@ debrisfountain.s: debrisfountain.cpp.s
 # target to generate assembly for a file
 debrisfountain.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/debrisfountain.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/debrisfountain.cpp.s
 .PHONY : debrisfountain.cpp.s
 
 direction.o: direction.cpp.o
@@ -312,6 +359,7 @@ direction.o: direction.cpp.o
 # target to build an object file
 direction.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/direction.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/direction.cpp.o
 .PHONY : direction.cpp.o
 
 direction.i: direction.cpp.i
@@ -320,6 +368,7 @@ direction.i: direction.cpp.i
 # target to preprocess a source file
 direction.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/direction.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/direction.cpp.i
 .PHONY : direction.cpp.i
 
 direction.s: direction.cpp.s
@@ -328,6 +377,7 @@ direction.s: direction.cpp.s
 # target to generate assembly for a file
 direction.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/direction.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/direction.cpp.s
 .PHONY : direction.cpp.s
 
 elapsedtimetolive.o: elapsedtimetolive.cpp.o
@@ -336,6 +386,7 @@ elapsedtimetolive.o: elapsedtimetolive.cpp.o
 # target to build an object file
 elapsedtimetolive.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/elapsedtimetolive.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/elapsedtimetolive.cpp.o
 .PHONY : elapsedtimetolive.cpp.o
 
 elapsedtimetolive.i: elapsedtimetolive.cpp.i
@@ -344,6 +395,7 @@ elapsedtimetolive.i: elapsedtimetolive.cpp.i
 # target to preprocess a source file
 elapsedtimetolive.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/elapsedtimetolive.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/elapsedtimetolive.cpp.i
 .PHONY : elapsedtimetolive.cpp.i
 
 elapsedtimetolive.s: elapsedtimetolive.cpp.s
@@ -352,6 +404,7 @@ elapsedtimetolive.s: elapsedtimetolive.cpp.s
 # target to generate assembly for a file
 elapsedtimetolive.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/elapsedtimetolive.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/elapsedtimetolive.cpp.s
 .PHONY : elapsedtimetolive.cpp.s
 
 entitylist.o: entitylist.cpp.o
@@ -360,6 +413,7 @@ entitylist.o: entitylist.cpp.o
 # target to build an object file
 entitylist.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/entitylist.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/entitylist.cpp.o
 .PHONY : entitylist.cpp.o
 
 entitylist.i: entitylist.cpp.i
@@ -368,6 +422,7 @@ entitylist.i: entitylist.cpp.i
 # target to preprocess a source file
 entitylist.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/entitylist.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/entitylist.cpp.i
 .PHONY : entitylist.cpp.i
 
 entitylist.s: entitylist.cpp.s
@@ -376,6 +431,7 @@ entitylist.s: entitylist.cpp.s
 # target to generate assembly for a file
 entitylist.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/entitylist.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/entitylist.cpp.s
 .PHONY : entitylist.cpp.s
 
 gameover.o: gameover.cpp.o
@@ -384,6 +440,7 @@ gameover.o: gameover.cpp.o
 # target to build an object file
 gameover.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gameover.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/gameover.cpp.o
 .PHONY : gameover.cpp.o
 
 gameover.i: gameover.cpp.i
@@ -392,6 +449,7 @@ gameover.i: gameover.cpp.i
 # target to preprocess a source file
 gameover.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gameover.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/gameover.cpp.i
 .PHONY : gameover.cpp.i
 
 gameover.s: gameover.cpp.s
@@ -400,6 +458,7 @@ gameover.s: gameover.cpp.s
 # target to generate assembly for a file
 gameover.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gameover.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/gameover.cpp.s
 .PHONY : gameover.cpp.s
 
 gametime.o: gametime.cpp.o
@@ -408,6 +467,7 @@ gametime.o: gametime.cpp.o
 # target to build an object file
 gametime.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gametime.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/gametime.cpp.o
 .PHONY : gametime.cpp.o
 
 gametime.i: gametime.cpp.i
@@ -416,6 +476,7 @@ gametime.i: gametime.cpp.i
 # target to preprocess a source file
 gametime.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gametime.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/gametime.cpp.i
 .PHONY : gametime.cpp.i
 
 gametime.s: gametime.cpp.s
@@ -424,31 +485,8 @@ gametime.s: gametime.cpp.s
 # target to generate assembly for a file
 gametime.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gametime.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/gametime.cpp.s
 .PHONY : gametime.cpp.s
-
-gfx/sfmlfont.o: gfx/sfmlfont.cpp.o
-.PHONY : gfx/sfmlfont.o
-
-# target to build an object file
-gfx/sfmlfont.cpp.o:
-	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sfmlfont.cpp.o
-.PHONY : gfx/sfmlfont.cpp.o
-
-gfx/sfmlfont.i: gfx/sfmlfont.cpp.i
-.PHONY : gfx/sfmlfont.i
-
-# target to preprocess a source file
-gfx/sfmlfont.cpp.i:
-	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sfmlfont.cpp.i
-.PHONY : gfx/sfmlfont.cpp.i
-
-gfx/sfmlfont.s: gfx/sfmlfont.cpp.s
-.PHONY : gfx/sfmlfont.s
-
-# target to generate assembly for a file
-gfx/sfmlfont.cpp.s:
-	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sfmlfont.cpp.s
-.PHONY : gfx/sfmlfont.cpp.s
 
 gfx/sfmlgfx.o: gfx/sfmlgfx.cpp.o
 .PHONY : gfx/sfmlgfx.o
@@ -456,6 +494,7 @@ gfx/sfmlgfx.o: gfx/sfmlgfx.cpp.o
 # target to build an object file
 gfx/sfmlgfx.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sfmlgfx.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/gfx/sfmlgfx.cpp.o
 .PHONY : gfx/sfmlgfx.cpp.o
 
 gfx/sfmlgfx.i: gfx/sfmlgfx.cpp.i
@@ -464,6 +503,7 @@ gfx/sfmlgfx.i: gfx/sfmlgfx.cpp.i
 # target to preprocess a source file
 gfx/sfmlgfx.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sfmlgfx.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/gfx/sfmlgfx.cpp.i
 .PHONY : gfx/sfmlgfx.cpp.i
 
 gfx/sfmlgfx.s: gfx/sfmlgfx.cpp.s
@@ -472,31 +512,8 @@ gfx/sfmlgfx.s: gfx/sfmlgfx.cpp.s
 # target to generate assembly for a file
 gfx/sfmlgfx.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sfmlgfx.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/gfx/sfmlgfx.cpp.s
 .PHONY : gfx/sfmlgfx.cpp.s
-
-gfx/sfmlresourcemanager.o: gfx/sfmlresourcemanager.cpp.o
-.PHONY : gfx/sfmlresourcemanager.o
-
-# target to build an object file
-gfx/sfmlresourcemanager.cpp.o:
-	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sfmlresourcemanager.cpp.o
-.PHONY : gfx/sfmlresourcemanager.cpp.o
-
-gfx/sfmlresourcemanager.i: gfx/sfmlresourcemanager.cpp.i
-.PHONY : gfx/sfmlresourcemanager.i
-
-# target to preprocess a source file
-gfx/sfmlresourcemanager.cpp.i:
-	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sfmlresourcemanager.cpp.i
-.PHONY : gfx/sfmlresourcemanager.cpp.i
-
-gfx/sfmlresourcemanager.s: gfx/sfmlresourcemanager.cpp.s
-.PHONY : gfx/sfmlresourcemanager.s
-
-# target to generate assembly for a file
-gfx/sfmlresourcemanager.cpp.s:
-	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/gfx/sfmlresourcemanager.cpp.s
-.PHONY : gfx/sfmlresourcemanager.cpp.s
 
 input/gamepad.o: input/gamepad.cpp.o
 .PHONY : input/gamepad.o
@@ -504,6 +521,7 @@ input/gamepad.o: input/gamepad.cpp.o
 # target to build an object file
 input/gamepad.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/input/gamepad.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/input/gamepad.cpp.o
 .PHONY : input/gamepad.cpp.o
 
 input/gamepad.i: input/gamepad.cpp.i
@@ -512,6 +530,7 @@ input/gamepad.i: input/gamepad.cpp.i
 # target to preprocess a source file
 input/gamepad.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/input/gamepad.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/input/gamepad.cpp.i
 .PHONY : input/gamepad.cpp.i
 
 input/gamepad.s: input/gamepad.cpp.s
@@ -520,6 +539,7 @@ input/gamepad.s: input/gamepad.cpp.s
 # target to generate assembly for a file
 input/gamepad.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/input/gamepad.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/input/gamepad.cpp.s
 .PHONY : input/gamepad.cpp.s
 
 input/gamepadinputmanager.o: input/gamepadinputmanager.cpp.o
@@ -528,6 +548,7 @@ input/gamepadinputmanager.o: input/gamepadinputmanager.cpp.o
 # target to build an object file
 input/gamepadinputmanager.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/input/gamepadinputmanager.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/input/gamepadinputmanager.cpp.o
 .PHONY : input/gamepadinputmanager.cpp.o
 
 input/gamepadinputmanager.i: input/gamepadinputmanager.cpp.i
@@ -536,6 +557,7 @@ input/gamepadinputmanager.i: input/gamepadinputmanager.cpp.i
 # target to preprocess a source file
 input/gamepadinputmanager.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/input/gamepadinputmanager.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/input/gamepadinputmanager.cpp.i
 .PHONY : input/gamepadinputmanager.cpp.i
 
 input/gamepadinputmanager.s: input/gamepadinputmanager.cpp.s
@@ -544,6 +566,7 @@ input/gamepadinputmanager.s: input/gamepadinputmanager.cpp.s
 # target to generate assembly for a file
 input/gamepadinputmanager.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/input/gamepadinputmanager.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/input/gamepadinputmanager.cpp.s
 .PHONY : input/gamepadinputmanager.cpp.s
 
 input/keyboardsource.o: input/keyboardsource.cpp.o
@@ -552,6 +575,7 @@ input/keyboardsource.o: input/keyboardsource.cpp.o
 # target to build an object file
 input/keyboardsource.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/input/keyboardsource.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/input/keyboardsource.cpp.o
 .PHONY : input/keyboardsource.cpp.o
 
 input/keyboardsource.i: input/keyboardsource.cpp.i
@@ -560,6 +584,7 @@ input/keyboardsource.i: input/keyboardsource.cpp.i
 # target to preprocess a source file
 input/keyboardsource.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/input/keyboardsource.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/input/keyboardsource.cpp.i
 .PHONY : input/keyboardsource.cpp.i
 
 input/keyboardsource.s: input/keyboardsource.cpp.s
@@ -568,6 +593,7 @@ input/keyboardsource.s: input/keyboardsource.cpp.s
 # target to generate assembly for a file
 input/keyboardsource.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/input/keyboardsource.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/input/keyboardsource.cpp.s
 .PHONY : input/keyboardsource.cpp.s
 
 libwiiwrap/gccore.o: libwiiwrap/gccore.cpp.o
@@ -576,6 +602,7 @@ libwiiwrap/gccore.o: libwiiwrap/gccore.cpp.o
 # target to build an object file
 libwiiwrap/gccore.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/libwiiwrap/gccore.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/libwiiwrap/gccore.cpp.o
 .PHONY : libwiiwrap/gccore.cpp.o
 
 libwiiwrap/gccore.i: libwiiwrap/gccore.cpp.i
@@ -584,6 +611,7 @@ libwiiwrap/gccore.i: libwiiwrap/gccore.cpp.i
 # target to preprocess a source file
 libwiiwrap/gccore.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/libwiiwrap/gccore.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/libwiiwrap/gccore.cpp.i
 .PHONY : libwiiwrap/gccore.cpp.i
 
 libwiiwrap/gccore.s: libwiiwrap/gccore.cpp.s
@@ -592,6 +620,7 @@ libwiiwrap/gccore.s: libwiiwrap/gccore.cpp.s
 # target to generate assembly for a file
 libwiiwrap/gccore.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/libwiiwrap/gccore.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/libwiiwrap/gccore.cpp.s
 .PHONY : libwiiwrap/gccore.cpp.s
 
 libwiiwrap/ogc/lwp_watchdog.o: libwiiwrap/ogc/lwp_watchdog.cpp.o
@@ -600,6 +629,7 @@ libwiiwrap/ogc/lwp_watchdog.o: libwiiwrap/ogc/lwp_watchdog.cpp.o
 # target to build an object file
 libwiiwrap/ogc/lwp_watchdog.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/libwiiwrap/ogc/lwp_watchdog.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/libwiiwrap/ogc/lwp_watchdog.cpp.o
 .PHONY : libwiiwrap/ogc/lwp_watchdog.cpp.o
 
 libwiiwrap/ogc/lwp_watchdog.i: libwiiwrap/ogc/lwp_watchdog.cpp.i
@@ -608,6 +638,7 @@ libwiiwrap/ogc/lwp_watchdog.i: libwiiwrap/ogc/lwp_watchdog.cpp.i
 # target to preprocess a source file
 libwiiwrap/ogc/lwp_watchdog.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/libwiiwrap/ogc/lwp_watchdog.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/libwiiwrap/ogc/lwp_watchdog.cpp.i
 .PHONY : libwiiwrap/ogc/lwp_watchdog.cpp.i
 
 libwiiwrap/ogc/lwp_watchdog.s: libwiiwrap/ogc/lwp_watchdog.cpp.s
@@ -616,6 +647,7 @@ libwiiwrap/ogc/lwp_watchdog.s: libwiiwrap/ogc/lwp_watchdog.cpp.s
 # target to generate assembly for a file
 libwiiwrap/ogc/lwp_watchdog.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/libwiiwrap/ogc/lwp_watchdog.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/libwiiwrap/ogc/lwp_watchdog.cpp.s
 .PHONY : libwiiwrap/ogc/lwp_watchdog.cpp.s
 
 libwiiwrap/ogcsys.o: libwiiwrap/ogcsys.cpp.o
@@ -624,6 +656,7 @@ libwiiwrap/ogcsys.o: libwiiwrap/ogcsys.cpp.o
 # target to build an object file
 libwiiwrap/ogcsys.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/libwiiwrap/ogcsys.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/libwiiwrap/ogcsys.cpp.o
 .PHONY : libwiiwrap/ogcsys.cpp.o
 
 libwiiwrap/ogcsys.i: libwiiwrap/ogcsys.cpp.i
@@ -632,6 +665,7 @@ libwiiwrap/ogcsys.i: libwiiwrap/ogcsys.cpp.i
 # target to preprocess a source file
 libwiiwrap/ogcsys.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/libwiiwrap/ogcsys.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/libwiiwrap/ogcsys.cpp.i
 .PHONY : libwiiwrap/ogcsys.cpp.i
 
 libwiiwrap/ogcsys.s: libwiiwrap/ogcsys.cpp.s
@@ -640,6 +674,7 @@ libwiiwrap/ogcsys.s: libwiiwrap/ogcsys.cpp.s
 # target to generate assembly for a file
 libwiiwrap/ogcsys.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/libwiiwrap/ogcsys.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/libwiiwrap/ogcsys.cpp.s
 .PHONY : libwiiwrap/ogcsys.cpp.s
 
 libwiiwrap/wiiuse/wpad.o: libwiiwrap/wiiuse/wpad.cpp.o
@@ -648,6 +683,7 @@ libwiiwrap/wiiuse/wpad.o: libwiiwrap/wiiuse/wpad.cpp.o
 # target to build an object file
 libwiiwrap/wiiuse/wpad.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/libwiiwrap/wiiuse/wpad.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/libwiiwrap/wiiuse/wpad.cpp.o
 .PHONY : libwiiwrap/wiiuse/wpad.cpp.o
 
 libwiiwrap/wiiuse/wpad.i: libwiiwrap/wiiuse/wpad.cpp.i
@@ -656,6 +692,7 @@ libwiiwrap/wiiuse/wpad.i: libwiiwrap/wiiuse/wpad.cpp.i
 # target to preprocess a source file
 libwiiwrap/wiiuse/wpad.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/libwiiwrap/wiiuse/wpad.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/libwiiwrap/wiiuse/wpad.cpp.i
 .PHONY : libwiiwrap/wiiuse/wpad.cpp.i
 
 libwiiwrap/wiiuse/wpad.s: libwiiwrap/wiiuse/wpad.cpp.s
@@ -664,6 +701,7 @@ libwiiwrap/wiiuse/wpad.s: libwiiwrap/wiiuse/wpad.cpp.s
 # target to generate assembly for a file
 libwiiwrap/wiiuse/wpad.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/libwiiwrap/wiiuse/wpad.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/libwiiwrap/wiiuse/wpad.cpp.s
 .PHONY : libwiiwrap/wiiuse/wpad.cpp.s
 
 main.o: main.cpp.o
@@ -696,6 +734,7 @@ menu.o: menu.cpp.o
 # target to build an object file
 menu.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/menu.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/menu.cpp.o
 .PHONY : menu.cpp.o
 
 menu.i: menu.cpp.i
@@ -704,6 +743,7 @@ menu.i: menu.cpp.i
 # target to preprocess a source file
 menu.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/menu.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/menu.cpp.i
 .PHONY : menu.cpp.i
 
 menu.s: menu.cpp.s
@@ -712,7 +752,35 @@ menu.s: menu.cpp.s
 # target to generate assembly for a file
 menu.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/menu.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/menu.cpp.s
 .PHONY : menu.cpp.s
+
+movers/bulletmover.o: movers/bulletmover.cpp.o
+.PHONY : movers/bulletmover.o
+
+# target to build an object file
+movers/bulletmover.cpp.o:
+	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/movers/bulletmover.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/movers/bulletmover.cpp.o
+.PHONY : movers/bulletmover.cpp.o
+
+movers/bulletmover.i: movers/bulletmover.cpp.i
+.PHONY : movers/bulletmover.i
+
+# target to preprocess a source file
+movers/bulletmover.cpp.i:
+	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/movers/bulletmover.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/movers/bulletmover.cpp.i
+.PHONY : movers/bulletmover.cpp.i
+
+movers/bulletmover.s: movers/bulletmover.cpp.s
+.PHONY : movers/bulletmover.s
+
+# target to generate assembly for a file
+movers/bulletmover.cpp.s:
+	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/movers/bulletmover.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/movers/bulletmover.cpp.s
+.PHONY : movers/bulletmover.cpp.s
 
 movers/fixeddirectionmover.o: movers/fixeddirectionmover.cpp.o
 .PHONY : movers/fixeddirectionmover.o
@@ -720,6 +788,7 @@ movers/fixeddirectionmover.o: movers/fixeddirectionmover.cpp.o
 # target to build an object file
 movers/fixeddirectionmover.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/movers/fixeddirectionmover.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/movers/fixeddirectionmover.cpp.o
 .PHONY : movers/fixeddirectionmover.cpp.o
 
 movers/fixeddirectionmover.i: movers/fixeddirectionmover.cpp.i
@@ -728,6 +797,7 @@ movers/fixeddirectionmover.i: movers/fixeddirectionmover.cpp.i
 # target to preprocess a source file
 movers/fixeddirectionmover.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/movers/fixeddirectionmover.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/movers/fixeddirectionmover.cpp.i
 .PHONY : movers/fixeddirectionmover.cpp.i
 
 movers/fixeddirectionmover.s: movers/fixeddirectionmover.cpp.s
@@ -736,6 +806,7 @@ movers/fixeddirectionmover.s: movers/fixeddirectionmover.cpp.s
 # target to generate assembly for a file
 movers/fixeddirectionmover.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/movers/fixeddirectionmover.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/movers/fixeddirectionmover.cpp.s
 .PHONY : movers/fixeddirectionmover.cpp.s
 
 movers/shipmover.o: movers/shipmover.cpp.o
@@ -744,6 +815,7 @@ movers/shipmover.o: movers/shipmover.cpp.o
 # target to build an object file
 movers/shipmover.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/movers/shipmover.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/movers/shipmover.cpp.o
 .PHONY : movers/shipmover.cpp.o
 
 movers/shipmover.i: movers/shipmover.cpp.i
@@ -752,6 +824,7 @@ movers/shipmover.i: movers/shipmover.cpp.i
 # target to preprocess a source file
 movers/shipmover.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/movers/shipmover.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/movers/shipmover.cpp.i
 .PHONY : movers/shipmover.cpp.i
 
 movers/shipmover.s: movers/shipmover.cpp.s
@@ -760,6 +833,7 @@ movers/shipmover.s: movers/shipmover.cpp.s
 # target to generate assembly for a file
 movers/shipmover.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/movers/shipmover.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/movers/shipmover.cpp.s
 .PHONY : movers/shipmover.cpp.s
 
 options.o: options.cpp.o
@@ -768,6 +842,7 @@ options.o: options.cpp.o
 # target to build an object file
 options.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/options.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/options.cpp.o
 .PHONY : options.cpp.o
 
 options.i: options.cpp.i
@@ -776,6 +851,7 @@ options.i: options.cpp.i
 # target to preprocess a source file
 options.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/options.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/options.cpp.i
 .PHONY : options.cpp.i
 
 options.s: options.cpp.s
@@ -784,6 +860,7 @@ options.s: options.cpp.s
 # target to generate assembly for a file
 options.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/options.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/options.cpp.s
 .PHONY : options.cpp.s
 
 pausedialog.o: pausedialog.cpp.o
@@ -792,6 +869,7 @@ pausedialog.o: pausedialog.cpp.o
 # target to build an object file
 pausedialog.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/pausedialog.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/pausedialog.cpp.o
 .PHONY : pausedialog.cpp.o
 
 pausedialog.i: pausedialog.cpp.i
@@ -800,6 +878,7 @@ pausedialog.i: pausedialog.cpp.i
 # target to preprocess a source file
 pausedialog.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/pausedialog.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/pausedialog.cpp.i
 .PHONY : pausedialog.cpp.i
 
 pausedialog.s: pausedialog.cpp.s
@@ -808,6 +887,7 @@ pausedialog.s: pausedialog.cpp.s
 # target to generate assembly for a file
 pausedialog.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/pausedialog.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/pausedialog.cpp.s
 .PHONY : pausedialog.cpp.s
 
 playermanager.o: playermanager.cpp.o
@@ -816,6 +896,7 @@ playermanager.o: playermanager.cpp.o
 # target to build an object file
 playermanager.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/playermanager.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/playermanager.cpp.o
 .PHONY : playermanager.cpp.o
 
 playermanager.i: playermanager.cpp.i
@@ -824,6 +905,7 @@ playermanager.i: playermanager.cpp.i
 # target to preprocess a source file
 playermanager.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/playermanager.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/playermanager.cpp.i
 .PHONY : playermanager.cpp.i
 
 playermanager.s: playermanager.cpp.s
@@ -832,6 +914,7 @@ playermanager.s: playermanager.cpp.s
 # target to generate assembly for a file
 playermanager.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/playermanager.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/playermanager.cpp.s
 .PHONY : playermanager.cpp.s
 
 position.o: position.cpp.o
@@ -840,6 +923,7 @@ position.o: position.cpp.o
 # target to build an object file
 position.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/position.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/position.cpp.o
 .PHONY : position.cpp.o
 
 position.i: position.cpp.i
@@ -848,6 +932,7 @@ position.i: position.cpp.i
 # target to preprocess a source file
 position.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/position.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/position.cpp.i
 .PHONY : position.cpp.i
 
 position.s: position.cpp.s
@@ -856,6 +941,7 @@ position.s: position.cpp.s
 # target to generate assembly for a file
 position.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/position.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/position.cpp.s
 .PHONY : position.cpp.s
 
 renderers/asteroidrenderer.o: renderers/asteroidrenderer.cpp.o
@@ -864,6 +950,7 @@ renderers/asteroidrenderer.o: renderers/asteroidrenderer.cpp.o
 # target to build an object file
 renderers/asteroidrenderer.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/asteroidrenderer.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/renderers/asteroidrenderer.cpp.o
 .PHONY : renderers/asteroidrenderer.cpp.o
 
 renderers/asteroidrenderer.i: renderers/asteroidrenderer.cpp.i
@@ -872,6 +959,7 @@ renderers/asteroidrenderer.i: renderers/asteroidrenderer.cpp.i
 # target to preprocess a source file
 renderers/asteroidrenderer.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/asteroidrenderer.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/renderers/asteroidrenderer.cpp.i
 .PHONY : renderers/asteroidrenderer.cpp.i
 
 renderers/asteroidrenderer.s: renderers/asteroidrenderer.cpp.s
@@ -880,6 +968,7 @@ renderers/asteroidrenderer.s: renderers/asteroidrenderer.cpp.s
 # target to generate assembly for a file
 renderers/asteroidrenderer.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/asteroidrenderer.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/renderers/asteroidrenderer.cpp.s
 .PHONY : renderers/asteroidrenderer.cpp.s
 
 renderers/bulletrenderer.o: renderers/bulletrenderer.cpp.o
@@ -888,6 +977,7 @@ renderers/bulletrenderer.o: renderers/bulletrenderer.cpp.o
 # target to build an object file
 renderers/bulletrenderer.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/bulletrenderer.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/renderers/bulletrenderer.cpp.o
 .PHONY : renderers/bulletrenderer.cpp.o
 
 renderers/bulletrenderer.i: renderers/bulletrenderer.cpp.i
@@ -896,6 +986,7 @@ renderers/bulletrenderer.i: renderers/bulletrenderer.cpp.i
 # target to preprocess a source file
 renderers/bulletrenderer.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/bulletrenderer.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/renderers/bulletrenderer.cpp.i
 .PHONY : renderers/bulletrenderer.cpp.i
 
 renderers/bulletrenderer.s: renderers/bulletrenderer.cpp.s
@@ -904,6 +995,7 @@ renderers/bulletrenderer.s: renderers/bulletrenderer.cpp.s
 # target to generate assembly for a file
 renderers/bulletrenderer.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/bulletrenderer.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/renderers/bulletrenderer.cpp.s
 .PHONY : renderers/bulletrenderer.cpp.s
 
 renderers/gameoverrenderer.o: renderers/gameoverrenderer.cpp.o
@@ -912,6 +1004,7 @@ renderers/gameoverrenderer.o: renderers/gameoverrenderer.cpp.o
 # target to build an object file
 renderers/gameoverrenderer.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/gameoverrenderer.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/renderers/gameoverrenderer.cpp.o
 .PHONY : renderers/gameoverrenderer.cpp.o
 
 renderers/gameoverrenderer.i: renderers/gameoverrenderer.cpp.i
@@ -920,6 +1013,7 @@ renderers/gameoverrenderer.i: renderers/gameoverrenderer.cpp.i
 # target to preprocess a source file
 renderers/gameoverrenderer.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/gameoverrenderer.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/renderers/gameoverrenderer.cpp.i
 .PHONY : renderers/gameoverrenderer.cpp.i
 
 renderers/gameoverrenderer.s: renderers/gameoverrenderer.cpp.s
@@ -928,6 +1022,7 @@ renderers/gameoverrenderer.s: renderers/gameoverrenderer.cpp.s
 # target to generate assembly for a file
 renderers/gameoverrenderer.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/gameoverrenderer.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/renderers/gameoverrenderer.cpp.s
 .PHONY : renderers/gameoverrenderer.cpp.s
 
 renderers/livesrenderer.o: renderers/livesrenderer.cpp.o
@@ -936,6 +1031,7 @@ renderers/livesrenderer.o: renderers/livesrenderer.cpp.o
 # target to build an object file
 renderers/livesrenderer.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/livesrenderer.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/renderers/livesrenderer.cpp.o
 .PHONY : renderers/livesrenderer.cpp.o
 
 renderers/livesrenderer.i: renderers/livesrenderer.cpp.i
@@ -944,6 +1040,7 @@ renderers/livesrenderer.i: renderers/livesrenderer.cpp.i
 # target to preprocess a source file
 renderers/livesrenderer.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/livesrenderer.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/renderers/livesrenderer.cpp.i
 .PHONY : renderers/livesrenderer.cpp.i
 
 renderers/livesrenderer.s: renderers/livesrenderer.cpp.s
@@ -952,6 +1049,7 @@ renderers/livesrenderer.s: renderers/livesrenderer.cpp.s
 # target to generate assembly for a file
 renderers/livesrenderer.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/livesrenderer.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/renderers/livesrenderer.cpp.s
 .PHONY : renderers/livesrenderer.cpp.s
 
 renderers/optionsrenderer.o: renderers/optionsrenderer.cpp.o
@@ -960,6 +1058,7 @@ renderers/optionsrenderer.o: renderers/optionsrenderer.cpp.o
 # target to build an object file
 renderers/optionsrenderer.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/optionsrenderer.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/renderers/optionsrenderer.cpp.o
 .PHONY : renderers/optionsrenderer.cpp.o
 
 renderers/optionsrenderer.i: renderers/optionsrenderer.cpp.i
@@ -968,6 +1067,7 @@ renderers/optionsrenderer.i: renderers/optionsrenderer.cpp.i
 # target to preprocess a source file
 renderers/optionsrenderer.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/optionsrenderer.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/renderers/optionsrenderer.cpp.i
 .PHONY : renderers/optionsrenderer.cpp.i
 
 renderers/optionsrenderer.s: renderers/optionsrenderer.cpp.s
@@ -976,6 +1076,7 @@ renderers/optionsrenderer.s: renderers/optionsrenderer.cpp.s
 # target to generate assembly for a file
 renderers/optionsrenderer.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/optionsrenderer.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/renderers/optionsrenderer.cpp.s
 .PHONY : renderers/optionsrenderer.cpp.s
 
 renderers/pausedialogrenderer.o: renderers/pausedialogrenderer.cpp.o
@@ -984,6 +1085,7 @@ renderers/pausedialogrenderer.o: renderers/pausedialogrenderer.cpp.o
 # target to build an object file
 renderers/pausedialogrenderer.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/pausedialogrenderer.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/renderers/pausedialogrenderer.cpp.o
 .PHONY : renderers/pausedialogrenderer.cpp.o
 
 renderers/pausedialogrenderer.i: renderers/pausedialogrenderer.cpp.i
@@ -992,6 +1094,7 @@ renderers/pausedialogrenderer.i: renderers/pausedialogrenderer.cpp.i
 # target to preprocess a source file
 renderers/pausedialogrenderer.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/pausedialogrenderer.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/renderers/pausedialogrenderer.cpp.i
 .PHONY : renderers/pausedialogrenderer.cpp.i
 
 renderers/pausedialogrenderer.s: renderers/pausedialogrenderer.cpp.s
@@ -1000,6 +1103,7 @@ renderers/pausedialogrenderer.s: renderers/pausedialogrenderer.cpp.s
 # target to generate assembly for a file
 renderers/pausedialogrenderer.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/pausedialogrenderer.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/renderers/pausedialogrenderer.cpp.s
 .PHONY : renderers/pausedialogrenderer.cpp.s
 
 renderers/scorerenderer.o: renderers/scorerenderer.cpp.o
@@ -1008,6 +1112,7 @@ renderers/scorerenderer.o: renderers/scorerenderer.cpp.o
 # target to build an object file
 renderers/scorerenderer.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/scorerenderer.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/renderers/scorerenderer.cpp.o
 .PHONY : renderers/scorerenderer.cpp.o
 
 renderers/scorerenderer.i: renderers/scorerenderer.cpp.i
@@ -1016,6 +1121,7 @@ renderers/scorerenderer.i: renderers/scorerenderer.cpp.i
 # target to preprocess a source file
 renderers/scorerenderer.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/scorerenderer.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/renderers/scorerenderer.cpp.i
 .PHONY : renderers/scorerenderer.cpp.i
 
 renderers/scorerenderer.s: renderers/scorerenderer.cpp.s
@@ -1024,6 +1130,7 @@ renderers/scorerenderer.s: renderers/scorerenderer.cpp.s
 # target to generate assembly for a file
 renderers/scorerenderer.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/scorerenderer.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/renderers/scorerenderer.cpp.s
 .PHONY : renderers/scorerenderer.cpp.s
 
 renderers/shiprenderer.o: renderers/shiprenderer.cpp.o
@@ -1032,6 +1139,7 @@ renderers/shiprenderer.o: renderers/shiprenderer.cpp.o
 # target to build an object file
 renderers/shiprenderer.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/shiprenderer.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/renderers/shiprenderer.cpp.o
 .PHONY : renderers/shiprenderer.cpp.o
 
 renderers/shiprenderer.i: renderers/shiprenderer.cpp.i
@@ -1040,6 +1148,7 @@ renderers/shiprenderer.i: renderers/shiprenderer.cpp.i
 # target to preprocess a source file
 renderers/shiprenderer.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/shiprenderer.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/renderers/shiprenderer.cpp.i
 .PHONY : renderers/shiprenderer.cpp.i
 
 renderers/shiprenderer.s: renderers/shiprenderer.cpp.s
@@ -1048,6 +1157,7 @@ renderers/shiprenderer.s: renderers/shiprenderer.cpp.s
 # target to generate assembly for a file
 renderers/shiprenderer.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/renderers/shiprenderer.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/renderers/shiprenderer.cpp.s
 .PHONY : renderers/shiprenderer.cpp.s
 
 screenmanager.o: screenmanager.cpp.o
@@ -1056,6 +1166,7 @@ screenmanager.o: screenmanager.cpp.o
 # target to build an object file
 screenmanager.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/screenmanager.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/screenmanager.cpp.o
 .PHONY : screenmanager.cpp.o
 
 screenmanager.i: screenmanager.cpp.i
@@ -1064,6 +1175,7 @@ screenmanager.i: screenmanager.cpp.i
 # target to preprocess a source file
 screenmanager.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/screenmanager.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/screenmanager.cpp.i
 .PHONY : screenmanager.cpp.i
 
 screenmanager.s: screenmanager.cpp.s
@@ -1072,6 +1184,7 @@ screenmanager.s: screenmanager.cpp.s
 # target to generate assembly for a file
 screenmanager.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/screenmanager.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/screenmanager.cpp.s
 .PHONY : screenmanager.cpp.s
 
 screens/gameoverscreen.o: screens/gameoverscreen.cpp.o
@@ -1080,6 +1193,7 @@ screens/gameoverscreen.o: screens/gameoverscreen.cpp.o
 # target to build an object file
 screens/gameoverscreen.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/screens/gameoverscreen.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/screens/gameoverscreen.cpp.o
 .PHONY : screens/gameoverscreen.cpp.o
 
 screens/gameoverscreen.i: screens/gameoverscreen.cpp.i
@@ -1088,6 +1202,7 @@ screens/gameoverscreen.i: screens/gameoverscreen.cpp.i
 # target to preprocess a source file
 screens/gameoverscreen.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/screens/gameoverscreen.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/screens/gameoverscreen.cpp.i
 .PHONY : screens/gameoverscreen.cpp.i
 
 screens/gameoverscreen.s: screens/gameoverscreen.cpp.s
@@ -1096,6 +1211,7 @@ screens/gameoverscreen.s: screens/gameoverscreen.cpp.s
 # target to generate assembly for a file
 screens/gameoverscreen.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/screens/gameoverscreen.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/screens/gameoverscreen.cpp.s
 .PHONY : screens/gameoverscreen.cpp.s
 
 screens/gamescreen.o: screens/gamescreen.cpp.o
@@ -1104,6 +1220,7 @@ screens/gamescreen.o: screens/gamescreen.cpp.o
 # target to build an object file
 screens/gamescreen.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/screens/gamescreen.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/screens/gamescreen.cpp.o
 .PHONY : screens/gamescreen.cpp.o
 
 screens/gamescreen.i: screens/gamescreen.cpp.i
@@ -1112,6 +1229,7 @@ screens/gamescreen.i: screens/gamescreen.cpp.i
 # target to preprocess a source file
 screens/gamescreen.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/screens/gamescreen.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/screens/gamescreen.cpp.i
 .PHONY : screens/gamescreen.cpp.i
 
 screens/gamescreen.s: screens/gamescreen.cpp.s
@@ -1120,6 +1238,7 @@ screens/gamescreen.s: screens/gamescreen.cpp.s
 # target to generate assembly for a file
 screens/gamescreen.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/screens/gamescreen.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/screens/gamescreen.cpp.s
 .PHONY : screens/gamescreen.cpp.s
 
 screens/menuscreen.o: screens/menuscreen.cpp.o
@@ -1128,6 +1247,7 @@ screens/menuscreen.o: screens/menuscreen.cpp.o
 # target to build an object file
 screens/menuscreen.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/screens/menuscreen.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/screens/menuscreen.cpp.o
 .PHONY : screens/menuscreen.cpp.o
 
 screens/menuscreen.i: screens/menuscreen.cpp.i
@@ -1136,6 +1256,7 @@ screens/menuscreen.i: screens/menuscreen.cpp.i
 # target to preprocess a source file
 screens/menuscreen.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/screens/menuscreen.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/screens/menuscreen.cpp.i
 .PHONY : screens/menuscreen.cpp.i
 
 screens/menuscreen.s: screens/menuscreen.cpp.s
@@ -1144,6 +1265,7 @@ screens/menuscreen.s: screens/menuscreen.cpp.s
 # target to generate assembly for a file
 screens/menuscreen.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/screens/menuscreen.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/screens/menuscreen.cpp.s
 .PHONY : screens/menuscreen.cpp.s
 
 shape.o: shape.cpp.o
@@ -1152,6 +1274,7 @@ shape.o: shape.cpp.o
 # target to build an object file
 shape.cpp.o:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/shape.cpp.o
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/shape.cpp.o
 .PHONY : shape.cpp.o
 
 shape.i: shape.cpp.i
@@ -1160,6 +1283,7 @@ shape.i: shape.cpp.i
 # target to preprocess a source file
 shape.cpp.i:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/shape.cpp.i
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/shape.cpp.i
 .PHONY : shape.cpp.i
 
 shape.s: shape.cpp.s
@@ -1168,7 +1292,32 @@ shape.s: shape.cpp.s
 # target to generate assembly for a file
 shape.cpp.s:
 	$(MAKE) -f CMakeFiles/masteroids.dir/build.make CMakeFiles/masteroids.dir/shape.cpp.s
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/shape.cpp.s
 .PHONY : shape.cpp.s
+
+testmain.o: testmain.cpp.o
+.PHONY : testmain.o
+
+# target to build an object file
+testmain.cpp.o:
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/testmain.cpp.o
+.PHONY : testmain.cpp.o
+
+testmain.i: testmain.cpp.i
+.PHONY : testmain.i
+
+# target to preprocess a source file
+testmain.cpp.i:
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/testmain.cpp.i
+.PHONY : testmain.cpp.i
+
+testmain.s: testmain.cpp.s
+.PHONY : testmain.s
+
+# target to generate assembly for a file
+testmain.cpp.s:
+	$(MAKE) -f CMakeFiles/masteroids_test.dir/build.make CMakeFiles/masteroids_test.dir/testmain.cpp.s
+.PHONY : testmain.cpp.s
 
 # Help Target
 help:
@@ -1179,6 +1328,8 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... masteroids"
+	@echo "... test"
+	@echo "... masteroids_test"
 	@echo "... about.o"
 	@echo "... about.i"
 	@echo "... about.s"
@@ -1188,9 +1339,9 @@ help:
 	@echo "... alivemonitor.o"
 	@echo "... alivemonitor.i"
 	@echo "... alivemonitor.s"
-	@echo "... bullet.o"
-	@echo "... bullet.i"
-	@echo "... bullet.s"
+	@echo "... asteroidfactory.o"
+	@echo "... asteroidfactory.i"
+	@echo "... asteroidfactory.s"
 	@echo "... bulletgenerator.o"
 	@echo "... bulletgenerator.i"
 	@echo "... bulletgenerator.s"
@@ -1218,15 +1369,9 @@ help:
 	@echo "... gametime.o"
 	@echo "... gametime.i"
 	@echo "... gametime.s"
-	@echo "... gfx/sfmlfont.o"
-	@echo "... gfx/sfmlfont.i"
-	@echo "... gfx/sfmlfont.s"
 	@echo "... gfx/sfmlgfx.o"
 	@echo "... gfx/sfmlgfx.i"
 	@echo "... gfx/sfmlgfx.s"
-	@echo "... gfx/sfmlresourcemanager.o"
-	@echo "... gfx/sfmlresourcemanager.i"
-	@echo "... gfx/sfmlresourcemanager.s"
 	@echo "... input/gamepad.o"
 	@echo "... input/gamepad.i"
 	@echo "... input/gamepad.s"
@@ -1254,6 +1399,9 @@ help:
 	@echo "... menu.o"
 	@echo "... menu.i"
 	@echo "... menu.s"
+	@echo "... movers/bulletmover.o"
+	@echo "... movers/bulletmover.i"
+	@echo "... movers/bulletmover.s"
 	@echo "... movers/fixeddirectionmover.o"
 	@echo "... movers/fixeddirectionmover.i"
 	@echo "... movers/fixeddirectionmover.s"
@@ -1311,6 +1459,9 @@ help:
 	@echo "... shape.o"
 	@echo "... shape.i"
 	@echo "... shape.s"
+	@echo "... testmain.o"
+	@echo "... testmain.i"
+	@echo "... testmain.s"
 .PHONY : help
 
 

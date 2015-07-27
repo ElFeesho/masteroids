@@ -11,27 +11,27 @@ void WPAD_ScanPads()
 
 }
 
-void WPAD_SetIdleTimeout(int timeout)
+void WPAD_SetIdleTimeout(int)
 {
 
 }
 
-void WPAD_Disconnect(int channel)
+void WPAD_Disconnect(int)
 {
 
 }
 
-int WPAD_ButtonsDown(int padNumber)
-{
-	return 0;
-}
-
-int WPAD_ButtonsHeld(int padNumber)
+int WPAD_ButtonsDown(int)
 {
 	return 0;
 }
 
-void WPAD_Expansion(int padNumber, expansion_t *expansion)
+int WPAD_ButtonsHeld(int)
+{
+	return 0;
+}
+
+void WPAD_Expansion(int, expansion_t *)
 {
 
 }

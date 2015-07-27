@@ -5,7 +5,7 @@
 
 static std::function<void()> aboutFinishHandler;
 
-About::About(AboutListener *listener) : listener(listener), aboutRenderer(AboutRenderer())
+About::About(AboutListener *nlistener) : listener(nlistener), aboutRenderer(AboutRenderer())
 {
     std::cout << "About" << std::endl;
     aboutFinishHandler = [this](){

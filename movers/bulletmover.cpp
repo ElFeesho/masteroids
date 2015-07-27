@@ -9,7 +9,7 @@ BulletMover::~BulletMover() {
     std::cout << "~BulletMover" << std::endl;
 }
 
-void BulletMover::move(Direction &direction, Position &position, Shape &shape) {
+void BulletMover::move(Direction &direction, Position &position, Shape &) {
     position.translate(GameTime::factorTime(cos(direction.Angle() * direction.Speed())),
                        GameTime::factorTime(sin(direction.Angle() * direction.Speed())));
 

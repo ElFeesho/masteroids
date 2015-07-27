@@ -9,8 +9,8 @@ class AsteroidRenderer : public Renderer
 {
 public:
     AsteroidRenderer();
-    void renderAtLocation(Gfx &gfx, int x, int y, double rotation, double radius) const;
-    void render(Gfx &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) const override;
+    void renderAtLocation(Gfx &gfx, int x, int y, double rotation, double radius, RGB &colour) const;
+    void render(Gfx &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::WHITE) const override;
 
 private:
 	double peaks[6];

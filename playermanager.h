@@ -17,7 +17,7 @@ class PlayerManager
 public:
     PlayerManager(PlayerManager &&) = default;
 
-    PlayerManager(int playerNumber, int lives, int maxBullets, std::function<void()> gameOver);
+    PlayerManager(int playerNumber, int lives, std::function<void()> gameOver);
     ~PlayerManager();
 
     void killPlayer();

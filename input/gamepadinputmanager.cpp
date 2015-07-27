@@ -30,10 +30,7 @@ void GamepadInputManager::poll()
 {
 	PAD_ScanPads();
 	WPAD_ScanPads();
-    for (int i = 0; i < 1; i++)
-	{
-        gamepad->poll();
-	}
+    gamepad->poll();
 }
 
 bool GamepadInputManager::checkQuit()
@@ -66,7 +63,7 @@ void GamepadInputManager::initialise()
 	WPAD_SetIdleTimeout(120);
 }
 
-GamepadSource &GamepadInputManager::inputForPlayer(int playerNumber)
+GamepadSource &GamepadInputManager::inputForPlayer(int)
 {
     return *(gamepad.get());
 }

@@ -72,9 +72,9 @@ void MenuScreen::update(Gfx &gfx)
 	activeMenu->render(gfx);
 }
 
-void MenuScreen::setListener(ScreenListener *listener)
+void MenuScreen::setListener(ScreenListener *nlistener)
 {
-	this->listener = listener;
+	this->listener = nlistener;
 }
 
 void MenuScreen::activateScreen(MenuScreenItem *screenItem)

@@ -9,14 +9,15 @@
 #define M_PI_4      0.785398163397448309615660845819875721  /* pi/4           */
 #endif
 
-static RGB playerColours[] = { RGB::green, RGB::yellow, RGB::blue, RGB::purple };
+static RGB playerColours[] = { RGB::GREEN, RGB::YELLOW, RGB::BLUE, RGB::PURPLE};
 static Position playerScorePositions[] = {Position(5, 5, 0), Position(635, 5, 0), Position(5, 440, 0), Position(635, 440, 0)};
 
 static std::function<void()> *fireHandler;
 
-PlayerManager::PlayerManager(int playerNumber, int lives, int maxBullets, std::function<void()> gameOver)
-    : playerNumber{playerNumber},
+PlayerManager::PlayerManager(int nplayerNumber, int lives, std::function<void()> gameOver)
+    : playerNumber{nplayerNumber},
       playerScore{0},
+      playersLives{lives},
       livesRenderer(),
       gameOverCallback(gameOver)
 {
@@ -77,7 +78,7 @@ PlayerManager::PlayerManager(int playerNumber, int lives, int maxBullets, std::f
         if (playerBullets.size() < Options::max_bullets)
         {
             Direction bulletDir(5.0f, player->direction().Angle());
-            playerBullets.add(bulletFactory.createBullet(RGB::green, bulletDir, player->position()));
+            playerBullets.add(bulletFactory.createBullet(RGB::GREEN, bulletDir, player->position()));
         }
     });
 
@@ -137,8 +138,8 @@ void PlayerManager::updatePlayer(Gfx &gfx)
     scoreRenderer.setAlignment(alignment);
     livesRenderer.setAlignment(alignment);
 
-    scoreRenderer.render(gfx, playerScorePositions[playerNumber-1], Shape::NONE, Direction::NONE, RGB::green);
-    livesRenderer.render(gfx, playerScorePositions[playerNumber-1], Shape::NONE, Direction::NONE, RGB::green);
+    scoreRenderer.render(gfx, playerScorePositions[playerNumber-1], Shape::NONE, Direction::NONE, RGB::GREEN);
+    livesRenderer.render(gfx, playerScorePositions[playerNumber-1], Shape::NONE, Direction::NONE, RGB::GREEN);
 }
 
 void PlayerManager::killPlayer()

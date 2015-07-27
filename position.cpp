@@ -1,6 +1,6 @@
 #include "position.h"
 
-Position::Position(double x, double y, double angle) : x(x), y(y), rotation(angle)
+Position::Position(double initialX, double initialY, double angle) : x(initialX), y(initialY), rotation(angle)
 {
 
 }
@@ -30,11 +30,11 @@ bool Position::operator==(const Position &other) const
 	return x == other.x && y == other.y && rotation == other.rotation;
 }
 
-void Position::set(double x, double y, double rotation)
+void Position::set(double nx, double ny, double angle)
 {
-	this->x = x;
-	this->y = y;
-	this->rotation = rotation;
+	this->x = nx;
+	this->y = ny;
+	this->rotation = angle;
 }
 
 double Position::X()
@@ -42,9 +42,9 @@ double Position::X()
 	return x;
 }
 
-void Position::X(double x)
+void Position::X(double nx)
 {
-	this->x = x;
+	this->x = nx;
 }
 
 
@@ -53,9 +53,9 @@ double Position::Y()
 	return y;
 }
 
-void Position::Y(double y)
+void Position::Y(double ny)
 {
-	this->y = y;
+	this->y = ny;
 }
 
 
@@ -64,20 +64,20 @@ double Position::Rotation()
 	return rotation;
 }
 
-void Position::Rotation(double rotation)
+void Position::Rotation(double nrotation)
 {
-	this->rotation = rotation;
+	this->rotation = nrotation;
 }
 
-void Position::rotate(double angle)
+void Position::rotate(double nangle)
 {
-	rotation += angle;
+	rotation += nangle;
 }
 
-void Position::translate(double x, double y)
+void Position::translate(double nx, double ny)
 {
-	this->x += x;
-	this->y += y;
+	this->x += nx;
+	this->y += ny;
 }
 
 Position Position::NONE = Position();

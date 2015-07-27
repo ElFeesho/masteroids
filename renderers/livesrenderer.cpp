@@ -3,7 +3,7 @@
 
 using std::stringstream;
 
-void LivesRenderer::render(Gfx &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour) const
+void LivesRenderer::render(Gfx &gfx, Position &position, Shape &, Direction &, RGB &colour) const
 {
 	stringstream sstream;
 	sstream << "LIVES: " << liveCount;

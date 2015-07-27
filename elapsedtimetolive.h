@@ -6,14 +6,14 @@
 class ElapsedTimeToLive : public AliveMonitor
 {
 public:
-	ElapsedTimeToLive(long ttl);
+	ElapsedTimeToLive(unsigned long ttl);
 
 	~ElapsedTimeToLive();
 
     bool alive() const;
 
 private:
-	long ttl;
+	unsigned long ttl;
 };
 
 #endif // ELAPSEDTIMETOLIVE_H

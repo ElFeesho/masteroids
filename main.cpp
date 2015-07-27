@@ -8,11 +8,10 @@
 #ifndef __WII__
 
 #include "gfx/sfmlgfx.h"
-#include "gfx/sfmlfont.h"
 
 #endif
 
-int main(int argc, char **argv)
+int main(int, char **)
 {
     sf::RenderWindow window(sf::VideoMode(1280, 960), "Masteroids", sf::Style::Close);
     window.setVerticalSyncEnabled(true);
@@ -23,7 +22,7 @@ int main(int argc, char **argv)
 	while(shouldRun && window.isOpen())
 	{
         gfxWrapper.waitForVBlank();
-        gfxWrapper.fillScreen(RGB::black);
+        gfxWrapper.fillScreen(RGB::BLACK);
 
         GamepadInputManager::sharedInstance().poll();
         shouldRun = screenManager.update(gfxWrapper);

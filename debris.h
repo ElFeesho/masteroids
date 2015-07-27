@@ -19,19 +19,13 @@ public:
 
 	Direction &direction();
 
-	AliveMonitor &aliveMonitor()
-	{
-		return monitor;
-	}
+	AliveMonitor & aliveMonitor();
 
     void render(Gfx &gfx);
 
 	bool update();
 
-	Renderer &renderer()
-	{
-		return debrisRenderer;
-	}
+	Renderer & renderer();
 
 
 private:

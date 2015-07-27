@@ -17,16 +17,16 @@ public:
 	{
 	}
 
-    void render(Gfx &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::white) const override;
+    void render(Gfx &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::WHITE) const override;
 
-	void setLives(int liveCount)
+	void setLives(int nliveCount)
 	{
-		this->liveCount = liveCount;
+		this->liveCount = nliveCount;
 	}
 
-	void setAlignment(TextAlignment alignment)
+	void setAlignment(TextAlignment nalignment)
 	{
-		this->alignment = alignment;
+		this->alignment = nalignment;
 	}
 
 private:

@@ -4,7 +4,7 @@
 class Vector
 {
 public:
-	Vector(double x, double y) : x(x), y(y)
+	Vector(double initialX, double initialY) : x(initialX), y(initialY)
 	{
 	}
 
@@ -22,20 +22,20 @@ public:
 		return y;
 	}
 
-	void X(double x)
+	void X(double nx)
 	{
-		this->x = x;
+		this->x = nx;
 	}
 
-	void Y(double y)
+	void Y(double ny)
 	{
-		this->y = y;
+		this->y = ny;
 	}
 
-	void add(double x, double y)
+	void add(double nx, double ny)
 	{
-		this->x += x;
-		this->y += y;
+		this->x += nx;
+		this->y += ny;
 	}
 
 private:

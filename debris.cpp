@@ -1,9 +1,9 @@
 #include "debris.h"
 #include <cstdlib>
 
-Debris::Debris(Direction ntravelDirection, Position pos, Shape shape, RGB &debrisColour) :
+Debris::Debris(Direction ntravelDirection, Position npos, Shape shape, RGB &debrisColour) :
 		travelDirection(ntravelDirection),
-		pos(pos),
+		pos(npos),
         debrisShape(shape),
         colour(debrisColour),
         rotationSpeed(((rand() % 10) / 10.f) - 0.5f),
@@ -41,4 +41,12 @@ bool Debris::update()
 	mover.move(direction(), position(), shape());
 	position().rotate(rotationSpeed);
 	return aliveMonitor().alive();
+}
+
+AliveMonitor &Debris::aliveMonitor() {
+	return monitor;
+}
+
+Renderer &Debris::renderer() {
+	return debrisRenderer;
 }
