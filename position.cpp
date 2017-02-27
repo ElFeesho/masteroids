@@ -30,11 +30,6 @@ bool Position::operator==(const Position &other) const
 	return x == other.x && y == other.y && rotation == other.rotation;
 }
 
-bool Position::operator!=(const Position &other) const
-{
-	return x != other.x && y != other.y && rotation != other.rotation;
-}
-
 void Position::set(double nx, double ny, double angle)
 {
 	this->x = nx;

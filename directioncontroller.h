@@ -5,7 +5,6 @@
 
 class DirectionController
 {
-private:
 
 public:
 	DirectionController(GamepadSource &source) : gamepadSource(source), directionToControl(Direction::NONE)
@@ -27,53 +26,56 @@ public:
 
 	~DirectionController()
 	{
-		gamepadSource.up().removeDownHandler();
-		gamepadSource.up().removeUpHandler();
-		gamepadSource.left().removeDownHandler();
-		gamepadSource.left().removeUpHandler();
-		gamepadSource.right().removeDownHandler();
-		gamepadSource.right().removeUpHandler();
+		gamepadSource.up().removeDownHandler(&upPressHandler);
+		gamepadSource.up().removeUpHandler(&upReleaseHandler);
+		gamepadSource.left().removeDownHandler(&leftPressHandler);
+		gamepadSource.left().removeUpHandler(&leftReleaseHandler);
+		gamepadSource.right().removeDownHandler(&rightPressHandler);
+		gamepadSource.right().removeUpHandler(&rightReleaseHandler);
 	}
 
 	void attachListeners()
 	{
-		gamepadSource.up().addDownHandler(upPressHandler);
-		gamepadSource.up().addUpHandler(upReleaseHandler);
-		gamepadSource.left().addDownHandler(leftPressHandler);
-		gamepadSource.left().addUpHandler(leftReleaseHandler);
-		gamepadSource.right().addDownHandler(rightPressHandler);
-		gamepadSource.right().addUpHandler(rightReleaseHandler);
+		gamepadSource.up().addDownHandler(&upPressHandler);
+		gamepadSource.up().addUpHandler(&upReleaseHandler);
+		gamepadSource.left().addDownHandler(&leftPressHandler);
+		gamepadSource.left().addUpHandler(&leftReleaseHandler);
+		gamepadSource.right().addDownHandler(&rightPressHandler);
+		gamepadSource.right().addUpHandler(&rightReleaseHandler);
 	}
 
 private:
 	GamepadSource &gamepadSource;
     Direction &directionToControl;
 
-	ButtonCommandLambda upPressHandler;
+	std::function<void()> upPressHandler{[&]()
+	{
+		directionToControl.Speed(0.1f);
+	}};
 
-	ButtonCommandLambda upReleaseHandler{std::unique_ptr<std::function<void()>>([&]()
+	std::function<void()> upReleaseHandler{[&]()
 	{
 		directionToControl.Speed(0.0f);
-	})};
+	}};
 
 
-	ButtonCommandLambda leftPressHandler{std::unique_ptr<std::function<void()>>([&]()
+	std::function<void()> leftPressHandler{[&]()
 	{
 		directionToControl.Spin(-0.1f);
-	})};
+	}};
 
-	ButtonCommandLambda leftReleaseHandler{std::unique_ptr<std::function<void()>>([&]()
+	std::function<void()> leftReleaseHandler{[&]()
 	{
 		directionToControl.Spin(0.0f);
-	})};
+	}};
 
-	ButtonCommandLambda rightPressHandler{std::unique_ptr<std::function<void()>>([&]()
+	std::function<void()> rightPressHandler{[&]()
 	{
 		directionToControl.Spin(0.1f);
-	})};
+	}};
 
-	ButtonCommandLambda rightReleaseHandler{std::unique_ptr<std::function<void()>>([&]()
+	std::function<void()> rightReleaseHandler{[&]()
 	{
 		directionToControl.Spin(0.0f);
-	})};
+	}};
 };

@@ -12,7 +12,6 @@ public:
 	static Shape NONE;
 
 	bool operator==(Shape &rhs);
-	bool operator!=(Shape &rhs);
 private:
 	double radius { 0 };
 };

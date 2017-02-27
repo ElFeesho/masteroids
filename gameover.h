@@ -13,9 +13,9 @@ public:
 
 	~GameOver();
 
-	bool update() override;
+	bool update();
 
-    void render(Gfx &gfx) override;
+    void render(Gfx &gfx);
 
 	Position &position() override;
 
@@ -23,9 +23,9 @@ public:
 
 	Direction &direction() override;
 
-	const AliveMonitor & aliveMonitor() override;
+	AliveMonitor &aliveMonitor() override;
 
-	const Renderer & renderer() override;
+	Renderer &renderer() override;
 
 	GameOverRenderer gameOverRenderer;
 private:

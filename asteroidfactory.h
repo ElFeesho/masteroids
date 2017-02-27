@@ -20,7 +20,7 @@ public:
 
 	~AsteroidFactory();
 
-	std::shared_ptr<Actor> createAsteroid(double radius, Position pos = Position::NONE);
+	Actor * createAsteroid(double radius, Position pos = Position::NONE);
 
 private:
 	AsteroidRenderer renderers[5];

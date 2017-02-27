@@ -35,9 +35,9 @@ public:
     void menuScreenPresented() override;
     void menuScreenHidden() override;
 
-	bool update() override ;
+	bool update();
 
-    void render(Gfx &gfx) override ;
+    void render(Gfx &gfx);
 
 	void incrementMenu();
 
@@ -45,15 +45,30 @@ public:
 
 	void handleMenuSelection();
 
-	Position & position() override;
+	Position &position()
+	{
+		return Position::NONE;
+	}
 
-	Shape & shape() override;
+	Shape &shape()
+	{
+		return Shape::NONE;
+	}
 
-	Direction & direction() override;
+	Direction &direction()
+	{
+		return Direction::NONE;
+	}
 
-	const AliveMonitor & aliveMonitor() override;
+	AliveMonitor &aliveMonitor()
+	{
+        return alwaysAliveMonitor;
+	}
 
-	const Renderer & renderer() override;
+	Renderer &renderer()
+	{
+		return menuRenderer;
+	}
 
 private:
     AlwaysAlive alwaysAliveMonitor;

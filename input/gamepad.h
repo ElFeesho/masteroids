@@ -7,68 +7,50 @@
 
 using std::vector;
 
-class ButtonCommand
+class GamepadButton
 {
-public:
-    virtual ~ButtonCommand() {};
-    virtual void buttonAction() = 0;
-};
-
-class ButtonCommandLambda : public ButtonCommand
-{
-public:
-    ButtonCommandLambda(std::unique_ptr<std::function<void()>> &&handler);
-    virtual void buttonAction() override;
-private:
-    std::unique_ptr<std::function<void()>> actionHandler;
-};
-
-class GamepadButton {
-private:
-    class EmptyCommand : public ButtonCommand
-    {
-    public:
-        void buttonAction() override {}
-    };
 public:
     GamepadButton();
 
-    void addDownHandler(ButtonCommand &downHandler);
+    ~GamepadButton();
 
-    void addUpHandler(ButtonCommand &upHandler);
+    void addDownHandler(std::function<void()> *handler);
 
-    void removeDownHandler();
+    void addUpHandler(std::function<void()> *handler);
 
-    void removeUpHandler();
+    void removeDownHandler(std::function<void()> *handler);
+
+    void removeUpHandler(std::function<void()> *handler);
 
     void notifyDownHandlers();
 
     void notifyUpHandlers();
 
 private:
-    ButtonCommand *downHandler;
-    ButtonCommand *upHandler;
-
-    EmptyCommand empty;
+	vector<std::function<void()>*> downHandlers;
+	vector<std::function<void()>*> upHandlers;
 };
 
-class GamepadSource {
+class GamepadSource
+{
 public:
-    virtual ~GamepadSource() { }
+	virtual ~GamepadSource()
+	{
+	}
 
-    virtual void poll() = 0;
+	virtual void poll() = 0;
 
-    virtual GamepadButton &fire() = 0;
+	virtual GamepadButton &fire() = 0;
 
-    virtual GamepadButton &up() = 0;
+	virtual GamepadButton &up() = 0;
 
-    virtual GamepadButton &left() = 0;
+	virtual GamepadButton &left() = 0;
 
-    virtual GamepadButton &down() = 0;
+	virtual GamepadButton &down() = 0;
 
-    virtual GamepadButton &right() = 0;
+	virtual GamepadButton &right() = 0;
 
-    virtual GamepadButton &pause() = 0;
+	virtual GamepadButton &pause() = 0;
 
-    virtual const std::string name() const = 0;
+	virtual const std::string name() const = 0;
 };

@@ -1,7 +1,9 @@
 #include "gameoverscreen.h"
 #include "input/gamepadinputmanager.h"
 
-GameOverScreen::GameOverScreen(GameOverScreenListener &gameOverScreenListener) : listener(gameOverScreenListener), gameOverEntity(), closeScreenHandler{gameOverScreenListener}
+GameOverScreen::GameOverScreen(GameOverScreenListener &gameOverScreenListener) : listener(gameOverScreenListener), gameOverEntity(), closeScreenHandler{[&]{
+    listener.gameOverScreenShouldClose();
+}}
 {
 
 }
@@ -19,14 +21,10 @@ void GameOverScreen::update(Gfx &gfx)
 
 void GameOverScreen::screenShown()
 {
-    GamepadInputManager::sharedInstance().inputForPlayer(0).fire().addUpHandler(closeScreenHandler);
+    GamepadInputManager::sharedInstance().inputForPlayer(0).fire().addUpHandler(&closeScreenHandler);
 }
 
 void GameOverScreen::screenHidden()
 {
-    GamepadInputManager::sharedInstance().inputForPlayer(0).fire().removeUpHandler();
-}
-
-void GameOverScreen::CloseScreenHandler::buttonAction() {
-    listener.gameOverScreenShouldClose();
+    GamepadInputManager::sharedInstance().inputForPlayer(0).fire().removeUpHandler(&closeScreenHandler);
 }

@@ -11,7 +11,8 @@ public:
 
 	~FixedDirectionMover();
 
-	void move(Direction &direction, Position &position, Shape &shape) override;
+	void move(Direction &direction, Position &position, Shape &shape);
+
 
 	virtual void reset() override;
 };

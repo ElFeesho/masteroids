@@ -54,20 +54,20 @@ Menu::~Menu() {
 
 void Menu::menuScreenPresented() {
     GamepadSource &source = GamepadInputManager::sharedInstance().inputForPlayer(0);
-    source.fire().addUpHandler(firePressHandler);
-    source.up().addDownHandler(upPressHandler);
-    source.up().addUpHandler(upReleaseHandler);
-    source.down().addDownHandler(downPressHandler);
-    source.down().addUpHandler(downReleaseHandler);
+    source.fire().addUpHandler(&firePressHandler);
+    source.up().addDownHandler(&upPressHandler);
+    source.up().addUpHandler(&upReleaseHandler);
+    source.down().addDownHandler(&downPressHandler);
+    source.down().addUpHandler(&downReleaseHandler);
 }
 
 void Menu::menuScreenHidden() {
     GamepadSource &source = GamepadInputManager::sharedInstance().inputForPlayer(0);
-    source.fire().removeUpHandler();
-    source.up().removeDownHandler();
-    source.up().removeUpHandler();
-    source.down().removeDownHandler();
-    source.down().removeUpHandler();
+    source.fire().removeUpHandler(&firePressHandler);
+    source.up().removeDownHandler(&upPressHandler);
+    source.up().removeUpHandler(&upReleaseHandler);
+    source.down().removeDownHandler(&downPressHandler);
+    source.down().removeUpHandler(&downReleaseHandler);
 }
 
 bool Menu::update() {
@@ -134,24 +134,4 @@ void Menu::handleMenuSelection() {
             listener->menuExitSelected();
             break;
     }
-}
-
-Position &Menu::position() {
-    return Position::NONE;
-}
-
-Shape &Menu::shape() {
-    return Shape::NONE;
-}
-
-Direction &Menu::direction() {
-    return Direction::NONE;
-}
-
-const AliveMonitor &Menu::aliveMonitor() {
-    return alwaysAliveMonitor;
-}
-
-const Renderer &Menu::renderer() {
-    return menuRenderer;
 }

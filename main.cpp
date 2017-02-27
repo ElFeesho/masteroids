@@ -1,3 +1,4 @@
+
 #include "gfx/gfx.h"
 #include "gametime.h"
 
@@ -10,26 +11,38 @@
 
 #endif
 
-int main(int, char **) {
-    SFMLGfx gfxWrapper;
+int main(int, char **)
+{
+    sf::RenderWindow window(sf::VideoMode(1280, 960), "Masteroids", sf::Style::Close);
+    window.setVerticalSyncEnabled(true);
+    SFMLGfx gfxWrapper(window);
     GamepadInputManager::sharedInstance().initialise();
     ScreenManager screenManager;
-
-    for (;;) {
+    bool shouldRun = true;
+	while(shouldRun && window.isOpen())
+	{
         gfxWrapper.waitForVBlank();
         gfxWrapper.fillScreen(RGB::BLACK);
 
         GamepadInputManager::sharedInstance().poll();
-        if (!screenManager.update(gfxWrapper))
-        {
-            break;
-        }
+        shouldRun = screenManager.update(gfxWrapper);
         gfxWrapper.render();
-        GameTime::tick();
-        if (GamepadInputManager::sharedInstance().checkQuit() && gfxWrapper.checkQuit()) {
-            break;
-        }
-    }
+		GameTime::tick();
 
-    return 0;
+        if (GamepadInputManager::sharedInstance().checkQuit())
+		{
+			break;
+		}
+
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            // "close requested" event: we close the window
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            }
+        }
+	}
+
+	return 0;
 }

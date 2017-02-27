@@ -36,12 +36,12 @@ Direction &GameOver::direction()
 	return Direction::NONE;
 }
 
-const AliveMonitor &GameOver::aliveMonitor()
+AliveMonitor &GameOver::aliveMonitor()
 {
     return alwaysAliveMonitor;
 }
 
-const Renderer &GameOver::renderer()
+Renderer &GameOver::renderer()
 {
 	return gameOverRenderer;
 }

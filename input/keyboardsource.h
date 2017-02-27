@@ -12,9 +12,9 @@ public:
     KeyboardSource(KeyboardSource &&) = delete;
     ~KeyboardSource();
 
-	void poll() override;
+	void poll();
 
-	const std::string name() const override
+	const std::string name() const
 	{
 		return "Keyboard";
 	}

@@ -13,30 +13,31 @@ using std::vector;
 using std::pair;
 using std::function;
 
+/**
+Father...
+*/
 class GameTime
 {
-	using eventFunc = function<void()>;
-	using eventTuple = pair<long, eventFunc>;
 public:
 	static unsigned long getMillis()
 	{
-		return (unsigned long) clockTime.getElapsedTime().asMilliseconds();
+		return clockTime.getElapsedTime().asMilliseconds();
 	}
 
 	static void tick()
     {
 		lastDelta = getMillis() - lastTick;
 		lastTick = getMillis();
-
-		vector<eventTuple> executeList;
-		std::remove_copy_if(pendingEvents.begin(), pendingEvents.end(), std::back_inserter(executeList), [](eventTuple event)
+		// Run through events
+		for (int i = pendingEvents.size() - 1; i >= 0; i--)
 		{
-			return event.first < lastTick;
-		});
+			if (pendingEvents.at(i).first < lastTick)
+			{
+				pendingEvents.at(i).second();
+				pendingEvents.erase(pendingEvents.begin() + i);
+			}
+		}
 
-		std::for_each(executeList.begin(), executeList.end(), [](eventTuple event){
-			event.second();
-		});
 	}
 
 	static double factorTime(double input)
@@ -44,9 +45,9 @@ public:
 		return input * timeMultiplier();
 	}
 
-	static void schedule(long delay, eventFunc event)
+	static void schedule(long delay, function<void()> event)
 	{
-		pendingEvents.push_back(eventTuple(lastTick + delay, event));
+		pendingEvents.push_back(pair<long, function<void()>>(lastTick + delay, event));
 	}
 
 private:
@@ -56,7 +57,7 @@ private:
 		return (double) lastDelta / 20.0f;
 	}
 
-	static vector<eventTuple> pendingEvents;
+	static vector<pair<long, function<void()>>> pendingEvents;
 
 	static long lastTick;
 	static long lastDelta;
