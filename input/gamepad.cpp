@@ -1,48 +1,39 @@
 #include <iostream>
 #include "gamepad.h"
 
-GamepadButton::GamepadButton()
-{
-    std::cout << "GamepadButton" << std::endl;
+void GamepadButton::addDownHandler(ButtonCommand &down) {
+    downHandler = &down;
 }
 
-GamepadButton::~GamepadButton()
-{
-    std::cout << "~GamepadButton" << std::endl;
+void GamepadButton::addUpHandler(ButtonCommand &up) {
+    upHandler = &up;
 }
 
-void GamepadButton::addDownHandler(std::function<void ()> *handler)
-{
-    downHandlers.push_back(handler);
+void GamepadButton::removeDownHandler() {
+    downHandler = &empty;
 }
 
-void GamepadButton::addUpHandler(std::function<void ()> *handler)
-{
-    upHandlers.push_back(handler);
+void GamepadButton::removeUpHandler() {
+    upHandler = &empty;
 }
 
-void GamepadButton::removeDownHandler(std::function<void ()> *handler)
-{
-    downHandlers.erase(std::find(downHandlers.begin(), downHandlers.end(), handler));
+void GamepadButton::notifyDownHandlers() {
+    downHandler->buttonAction();
 }
 
-void GamepadButton::removeUpHandler(std::function<void ()> *handler)
-{
-    upHandlers.erase(std::find(upHandlers.begin(), upHandlers.end(), handler));
+void GamepadButton::notifyUpHandlers() {
+    upHandler->buttonAction();
 }
 
-void GamepadButton::notifyDownHandlers()
-{
-    for (auto handler : downHandlers)
-    {
-        (*handler)();
-    }
+GamepadButton::GamepadButton() : downHandler{&empty}, upHandler{&empty} {
+
 }
 
-void GamepadButton::notifyUpHandlers()
-{
-    for (auto handler : upHandlers)
-    {
-        (*handler)();
-    }
+ButtonCommandLambda::ButtonCommandLambda(std::unique_ptr<std::function<void()>> &&handler) : actionHandler{std::move(handler)} {
+
 }
+
+void ButtonCommandLambda::buttonAction() {
+    (*actionHandler)();
+}
+

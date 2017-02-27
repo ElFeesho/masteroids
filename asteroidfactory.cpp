@@ -2,6 +2,7 @@
 // Created by Christopher Sawczuk on 27/07/2015.
 //
 
+#include <memory>
 #include <iostream>
 #include "asteroidfactory.h"
 
@@ -23,8 +24,8 @@ AsteroidFactory::~AsteroidFactory() {
     std::cout << "~AsteroidFactory" << std::endl;
 }
 
-Actor *AsteroidFactory::createAsteroid(double radius, Position pos) {
-    Actor *asteroid = new Actor(RGB::WHITE, mover, renderers[rand() % 5], std::unique_ptr<AlwaysAlive>(new AlwaysAlive()));
+std::shared_ptr<Actor> AsteroidFactory::createAsteroid(double radius, Position pos) {
+    std::shared_ptr<Actor> asteroid = std::make_shared<Actor>(RGB::WHITE, mover, renderers[rand() % 5], std::unique_ptr<AlwaysAlive>(new AlwaysAlive()));
     asteroid->shape().Radius(radius);
     asteroid->direction().Angle(randomAngle());
     asteroid->direction().Speed(randomSpeed());

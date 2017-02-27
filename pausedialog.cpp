@@ -17,9 +17,9 @@ PauseDialog::~PauseDialog() {
 
 void PauseDialog::shown()
 {
-    gamepad.left().addDownHandler(&leftHandler);
-    gamepad.right().addDownHandler(&rightHandler);
-    gamepad.fire().addUpHandler(&fireHandler);
+    gamepad.left().addDownHandler(leftHandler);
+    gamepad.right().addDownHandler(rightHandler);
+    gamepad.fire().addUpHandler(fireHandler);
 }
 
 bool PauseDialog::update()

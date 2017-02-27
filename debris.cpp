@@ -9,11 +9,12 @@ Debris::Debris(Direction ntravelDirection, Position npos, Shape shape, RGB &debr
         rotationSpeed(((rand() % 10) / 10.f) - 0.5f),
         monitor(1500)
 {
+	std::cout << "Debris" << std::endl;
 }
 
 Debris::~Debris()
 {
-
+	std::cout << "~Debris" << std::endl;
 }
 
 Position &Debris::position()
@@ -43,10 +44,10 @@ bool Debris::update()
 	return aliveMonitor().alive();
 }
 
-AliveMonitor &Debris::aliveMonitor() {
+const AliveMonitor &Debris::aliveMonitor() {
 	return monitor;
 }
 
-Renderer &Debris::renderer() {
+const Renderer &Debris::renderer() {
 	return debrisRenderer;
 }

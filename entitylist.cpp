@@ -2,94 +2,78 @@
 
 #include "entity.h"
 
-bool colliding(Entity *entOne, Entity *entTwo)
+bool colliding(Entity &entOne, Entity &entTwo)
 {
-	double distX = entOne->position().X() - entTwo->position().X();
-	double distY = entOne->position().Y() - entTwo->position().Y();
+	double distX = entOne.position().X() - entTwo.position().X();
+	double distY = entOne.position().Y() - entTwo.position().Y();
 	double hypt = sqrt((distX * distX) + (distY * distY));
-	return (hypt < entOne->shape().Radius() + entTwo->shape().Radius());
+	return (hypt < entOne.shape().Radius() + entTwo.shape().Radius());
 }
 
-void EntityList::add(Entity *entity)
-{
-    entities.emplace_back(entity);
+
+void EntityList::add(std::shared_ptr<Entity> entity) {
+	entities.push_back(entity);
 }
 
 void EntityList::updateAll()
 {
-	for (int i = entities.size() - 1; i >= 0; i--)
-	{
-		if (!entities.at(i)->update())
-		{
-			entities.erase(entities.begin() + i);
-		}
-	}
+	std::remove_if(entities.begin(), entities.end(), [](std::shared_ptr<Entity> entity){ return !entity->update(); });
 }
 
-void EntityList::checkCollisions(Entity &entity, std::function<void(Entity *)> callback)
+void EntityList::checkCollisions(Entity &entity, std::function<void(Entity &)> callback)
 {
-	for (int i = entities.size() - 1; i >= 0; i--)
+	for (unsigned long i = entities.size(); i >  0; --i)
 	{
-        if (colliding(entities.at(i).get(), &entity))
+        if (colliding(*entities.at(i), entity))
 		{
-            callback(entities.at(i).get());
+            callback(*entities.at(i));
 			break;
 		}
 	}
 }
 
-void EntityList::checkCollisions(EntityList &otherList, std::function<void(Entity *, Entity *)> callback)
+void EntityList::checkCollisions(EntityList &otherList, std::function<void(Entity &, Entity &)> callback)
 {
-	for (int i = entities.size() - 1; i >= 0; i--)
+	std::for_each(entities.rbegin(), entities.rend(), [callback, otherList](std::shared_ptr<Entity> leftEntity)
 	{
-        if (!(entities.at(i).get()->shape() == Shape::NONE || entities.at(i)->position() == Position::NONE))
+		if (leftEntity->shape() != Shape::NONE && leftEntity->position() != Position::NONE)
 		{
-			for (int j = otherList.size() - 1; j >= 0; j--)
+			std::for_each(otherList.entities.rbegin(), otherList.entities.rend(), [callback, leftEntity](std::shared_ptr<Entity> rightEntity)
 			{
-                if (colliding(entities.at(i).get(), otherList.at(j)))
+				if (leftEntity->shape() != Shape::NONE && leftEntity->position() != Position::NONE)
 				{
-                    callback(entities.at(i).get(), otherList.at(j));
-					break;
+					if (colliding(*leftEntity, *rightEntity))
+					{
+						callback(*leftEntity, *rightEntity);
+					}
 				}
-			}
+			});
 		}
-	}
+	});
 }
 
 void EntityList::clear()
 {
-	for (int i = entities.size() - 1; i >= 0; i--)
-	{
-        entities.erase(entities.begin() + i);
-	}
+	entities.clear();
 }
 
 void EntityList::renderAll(Gfx &gfx)
 {
-	for (size_t i = 0; i < entities.size(); i++)
-	{
-		entities.at(i)->render(gfx);
-	}
+	std::for_each(entities.begin(), entities.end(), [&gfx](std::shared_ptr<Entity> entity) { entity->render(gfx); });
 }
 
-void EntityList::removeEntity(Entity *entity)
+void EntityList::removeEntity(std::shared_ptr<Entity> entity)
 {
-    for (int i = entities.size() - 1; i >= 0; i--)
-    {
-        if (entities.at(i).get() == entity)
-        {
-            entities.erase(entities.begin() + i);
-            return;
-        }
-    }
+	std::remove_if(entities.begin(), entities.end(), [entity](std::shared_ptr<Entity> currentEntity) { return entity == currentEntity; });
 }
 
-Entity *EntityList::at(int i)
+std::shared_ptr<Entity> EntityList::at(unsigned long i)
 {
-    return entities.at(i).get();
+    return entities.at(i);
 }
 
-int EntityList::size()
+unsigned long EntityList::size()
 {
     return entities.size();
 }
+

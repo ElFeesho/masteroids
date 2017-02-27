@@ -27,31 +27,31 @@ public:
 
     void shown();
 
-	bool update();
+	bool update() override;
 
-    void render(Gfx &gfx);
+    void render(Gfx &gfx) override;
 
-	Position &position()
+	Position &position() override
 	{
 		return Position::NONE;
 	}
 
-	Shape &shape()
+	Shape &shape() override
 	{
 		return Shape::NONE;
 	}
 
-	Direction &direction()
+	Direction &direction() override
 	{
 		return Direction::NONE;
 	}
 
-	AliveMonitor &aliveMonitor()
+	const AliveMonitor &aliveMonitor() override
 	{
         return alwaysAliveMonitor;
 	}
 
-	Renderer &renderer()
+	const Renderer &renderer() override
 	{
 		return pauseDialogRenderer;
 	}
@@ -92,9 +92,9 @@ private:
 				{
 					listener->ingameQuitSelected();
 				}
-                gamepad.left().removeDownHandler(&leftHandler);
-                gamepad.right().removeDownHandler(&rightHandler);
-                gamepad.fire().removeUpHandler(&fireHandler);
+				gamepad.left().removeDownHandler();
+				gamepad.right().removeDownHandler();
+				gamepad.fire().removeUpHandler();
 			}
 	};
 };

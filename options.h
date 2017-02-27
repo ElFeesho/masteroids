@@ -30,34 +30,34 @@ public:
 
 	~Options();
 
-	bool update();
+	bool update() override;
 
-    void render(Gfx &gfx);
+    void render(Gfx &gfx) override;
 
     void menuScreenPresented() override;
     void menuScreenHidden() override;
 
-	Position &position()
+	Position &position() override
 	{
 		return Position::NONE;
 	}
 
-	Shape &shape()
+	Shape &shape() override
 	{
 		return Shape::NONE;
 	}
 
-	Direction &direction()
+	Direction &direction() override
 	{
 		return Direction::NONE;
 	}
 
-	AliveMonitor &aliveMonitor()
+	const AliveMonitor &aliveMonitor() override
 	{
         return alwaysAliveMonitor;
 	}
 
-	Renderer &renderer()
+	const Renderer &renderer() override
 	{
 		return optionsRenderer;
 	}

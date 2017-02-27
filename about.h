@@ -7,54 +7,33 @@
 #include "input/gamepad.h"
 #include "menuscreenitem.h"
 
-class AboutListener
-{
+class AboutListener {
 public:
-	virtual ~AboutListener()
-	{
-	}
+    virtual ~AboutListener() {
+    }
 
-	virtual void aboutClosed() = 0;
+    virtual void aboutClosed() = 0;
 };
 
-class About : public MenuScreenItem
-{
+class About : public MenuScreenItem {
 public:
-	About(AboutListener *listener);
+    About(AboutListener *listener);
 
-	~About();
+    ~About();
 
-	bool update()
-	{
-		return aliveMonitor().alive();
-	}
+    bool update() override;
 
-    void render(Gfx &gfx);
+    void render(Gfx &gfx) override;
 
-	Position &position()
-	{
-		return Position::NONE;
-	}
+    Position &position() override;
 
-	Shape &shape()
-	{
-		return Shape::NONE;
-	}
+    Shape &shape() override;
 
-	Direction &direction()
-	{
-		return Direction::NONE;
-	}
+    Direction &direction() override;
 
-	AliveMonitor &aliveMonitor()
-	{
-        return alivemonitor;
-	}
+    const AliveMonitor &aliveMonitor() override;
 
-	Renderer &renderer()
-	{
-		return aboutRenderer;
-	}
+    const Renderer &renderer() override;
 
     void menuScreenPresented() override;
 
@@ -62,8 +41,8 @@ public:
 
 private:
     AlwaysAlive alivemonitor;
-	AboutListener *listener;
-	AboutRenderer aboutRenderer;
+    AboutListener *listener;
+    AboutRenderer aboutRenderer;
 };
 
 #endif

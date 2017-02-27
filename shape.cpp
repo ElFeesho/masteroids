@@ -13,5 +13,9 @@ double Shape::Radius() {
 bool Shape::operator==(Shape &rhs) {
 	return radius == rhs.radius;
 }
+bool Shape::operator!=(Shape &rhs)
+{
+	return radius != rhs.radius;
+}
 
 Shape Shape::NONE = Shape(0.0);

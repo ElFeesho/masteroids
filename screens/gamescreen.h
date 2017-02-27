@@ -12,50 +12,42 @@
 #include "renderers/livesrenderer.h"
 #include "renderers/scorerenderer.h"
 #include "asteroidfactory.h"
-#include "bulletfactory.h"
 #include "directioncontroller.h"
 
 #include "shipfactory.h"
-#include "bulletgenerator.h"
-#include "playermanager.h"
 
-class GameScreenListener
-{
+class GameScreenListener {
 public:
-    virtual ~GameScreenListener() {}
+    virtual ~GameScreenListener() { }
 
     virtual void gameScreenShouldShowGameOverScreen() = 0;
+
     virtual void gameScreenShouldShowMenu() = 0;
 };
 
-class GameScreen : public Screen, public PauseDialogListener
-{
+class GameScreen : public Screen, public PauseDialogListener {
 public:
     GameScreen(GameScreenListener &listener);
 
-	~GameScreen();
+    void generateLevel();
 
-	void screenHidden();
-
-	void screenShown();
-
-    void update(Gfx &gfx);
-
-	void ingameContinueSelected();
-
-	void ingameQuitSelected();
-
-	void generateLevel();
+    void screenHidden() override ;
+    void screenShown() override ;
+    void update(Gfx &gfx) override;
+    void ingameContinueSelected() override;
+    void ingameQuitSelected() override;
 
 private:
-	AsteroidFactory asteroidFactory;
+    ShipFactory shipFactory;
+    std::unique_ptr<Actor> ship;
+    AsteroidFactory asteroidFactory;
     GameScreenListener &listener;
-	EntityList asteroids;
+    EntityList asteroids;
     PauseDialog pauseEnt;
 
-	bool isPaused;
-	int level;
+    bool isPaused;
+    int level;
 
-    std::unique_ptr<std::function<void()>> pauseHandler;
+    std::function<void()> pauseHandler;
 };
 

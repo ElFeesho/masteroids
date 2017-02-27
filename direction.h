@@ -7,61 +7,23 @@
 class Direction
 {
 public:
-    Direction(double initialSpeed, double initialAngle, double initialSpin = 0) : speed(initialSpeed), spin(initialSpin), angle(initialAngle)
-	{
-		std::cout << "Direction" << std::endl;
-	}
+	Direction(double initialSpeed, double initialAngle, double initialSpin = 0);
 
-	Direction(const Direction &copy) : speed(copy.speed), angle(copy.angle)
-	{
-		std::cout << "Direction copy" << std::endl;
-	}
+	double Speed();
 
-	~Direction()
-	{
-		std::cout << "~Direction" << std::endl;
-	}
+	double Angle();
 
-	double Speed()
-	{
-		return speed;
-	}
+	double Spin();
 
-	double Angle()
-	{
-		return angle;
-	}
+	void Spin(double nSpin);
 
-	double Spin()
-	{
-		return spin;
-	}
+	void Speed(double nSpeed);
 
-	void Spin(double nSpin)
-	{
-		spin = nSpin;
-	}
+	void Angle(double nAngle);
 
-	void Speed(double nSpeed)
-	{
-		speed = nSpeed;
-	}
+	void rotate(double nAngle);
 
-	void Angle(double nAngle)
-	{
-		angle = nAngle;
-	}
-
-	void rotate(double nAngle)
-	{
-		this->angle += nAngle;
-	}
-
-
-	bool operator==(const Direction &other) const
-	{
-		return (&other == &NONE) || ((other.speed == speed) && (other.angle == angle));
-	}
+	bool operator==(const Direction &other) const;
 
 	static Direction NONE;
 private:

@@ -1,30 +1,24 @@
 #include <iostream>
 #include "gamescreen.h"
-#include "options.h"
 
 using std::stringstream;
 
 GameScreen::GameScreen(GameScreenListener &screenListener) :
+        ship(std::unique_ptr<Actor>(shipFactory.createShip(RGB::PURPLE, Position(400, 200, 10)))),
         listener(screenListener),
         pauseEnt(GamepadInputManager::sharedInstance().inputForPlayer(0), this),
         isPaused(false),
         level(0),
-        pauseHandler(new std::function<void()>([&](){
+        pauseHandler([&](){
             isPaused = true;
             pauseEnt.shown();
-        }))
+        })
 {
-
-}
-
-GameScreen::~GameScreen()
-{
-
 }
 
 void GameScreen::screenHidden()
 {
-    GamepadInputManager::sharedInstance().inputForPlayer(0).pause().removeUpHandler(pauseHandler.get());
+	GamepadInputManager::sharedInstance().inputForPlayer(0).pause().removeUpHandler();
 	asteroids.clear();
 
     isPaused = false;
@@ -33,7 +27,7 @@ void GameScreen::screenHidden()
 
 void GameScreen::screenShown()
 {
-    GamepadInputManager::sharedInstance().inputForPlayer(0).pause().addUpHandler(pauseHandler.get());
+    GamepadInputManager::sharedInstance().inputForPlayer(0).pause().addUpHandler(pauseHandler);
 	generateLevel();
 }
 
@@ -51,10 +45,13 @@ void GameScreen::update(Gfx &gfx)
 	{
 		asteroids.updateAll();
 		asteroids.renderAll(gfx);
+        ship->update();
+        ship->render(gfx);
 	}
 	else
 	{
 		asteroids.renderAll(gfx);
+
         pauseEnt.update();
         pauseEnt.render(gfx);
 	}

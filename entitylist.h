@@ -14,28 +14,26 @@ class EntityList
 public:
 	EntityList() {}
 
-	~EntityList() {}
-
-	void add(Entity *entity);
+	void add(std::shared_ptr<Entity> entity);
 
 	void updateAll();
 
     void renderAll(Gfx &gfx);
 
-    void removeEntity(Entity *entity);
+    void removeEntity(std::shared_ptr<Entity> entity);
 
-    Entity *at(int i);
+    std::shared_ptr<Entity> at(unsigned long i);
 
-    int size();
+    unsigned long size();
 
 	void clear();
 
-    void checkCollisions(Entity &entity, std::function<void(Entity *)> callback);
+    void checkCollisions(Entity &entity, std::function<void(Entity &)> callback);
 
-    void checkCollisions(EntityList &otherList, std::function<void(Entity *, Entity *)> callback);
+    void checkCollisions(EntityList &otherList, std::function<void(Entity &, Entity &)> callback);
 
 private:
-    std::vector<std::unique_ptr<Entity>> entities;
+    std::vector<std::shared_ptr<Entity>> entities;
 };
 
 #endif

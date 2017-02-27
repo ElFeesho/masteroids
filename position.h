@@ -15,6 +15,8 @@ public:
 
 	bool operator==(const Position &other) const;
 
+	bool operator!=(const Position &other) const;
+
 	void set(double x, double y, double rotation);
 
 	double X();

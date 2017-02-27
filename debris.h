@@ -13,20 +13,15 @@ public:
 
 	~Debris();
 
-	Position &position();
+	Position &position() override;
+	Shape &shape() override;
+	Direction &direction() override;
 
-	Shape &shape();
+    void render(Gfx &gfx) override;
+	bool update() override;
 
-	Direction &direction();
-
-	AliveMonitor & aliveMonitor();
-
-    void render(Gfx &gfx);
-
-	bool update();
-
-	Renderer & renderer();
-
+	const AliveMonitor & aliveMonitor() override;
+	const Renderer & renderer() override;
 
 private:
 	Direction travelDirection;

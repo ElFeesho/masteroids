@@ -7,7 +7,6 @@
 #include "options.h"
 #include "about.h"
 #include "entitylist.h"
-#include "controlconf.h"
 #include "asteroidfactory.h"
 #include "menuscreenitem.h"
 
@@ -21,35 +20,29 @@ public:
 };
 
 class MenuScreen
-		: public Screen, public AboutListener, public ControlConfListener, public MenuListener, public OptionsListener
+		: public Screen, public AboutListener, public MenuListener, public OptionsListener
 {
 public:
     MenuScreen(MenuScreenListener &menuScreenListener);
 
-	~MenuScreen();
+    void update(Gfx &gfx) override;
 
-    void update(Gfx &gfx);
+	void aboutClosed() override;
 
-	void setListener(ScreenListener *listener);
+	void menuStartGameSelected() override;
 
-	void aboutClosed();
+	void menuOptionsSelected() override;
 
-	void controlConfClosed();
+	void menuAboutSelected() override;
+    void menuExitSelected() override;
 
-	void menuStartGameSelected();
+	void optionsControllerConfigSelected() override;
 
-	void menuOptionsSelected();
+	void optionsMenuClosed() override;
 
-	void menuAboutSelected();
-    void menuExitSelected();
+	void screenShown() override;
 
-	void optionsControllerConfigSelected();
-
-	void optionsMenuClosed();
-
-	void screenShown();
-
-	void screenHidden();
+	void screenHidden() override;
 
 private:
     AsteroidFactory asteroidFactory;
@@ -61,10 +54,8 @@ private:
 
     EntityList entityList;
 
-	ScreenListener *listener;
     Menu menuScreen;
     Options optionsScreen;
-    ControlConf controllerConfigScreen;
     About aboutScreen;
 
 };

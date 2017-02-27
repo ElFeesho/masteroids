@@ -1,84 +1,56 @@
 #include "menuscreen.h"
 
-MenuScreen::MenuScreen(MenuScreenListener &menuScreenListener) : menuListener(menuScreenListener), menuScreen(this), optionsScreen(this), controllerConfigScreen(this), aboutScreen(this)
-{
-    for (int i = 0; i < 16; i++)
-    {
+MenuScreen::MenuScreen(MenuScreenListener &menuScreenListener) : menuListener(menuScreenListener), menuScreen(this),
+                                                                 optionsScreen(this), aboutScreen(this) {
+    for (int i = 0; i < 16; i++) {
         entityList.add(asteroidFactory.createAsteroid(75.0f));
     }
 }
 
-MenuScreen::~MenuScreen() {
-    entityList.clear();
-}
-
-void MenuScreen::screenShown()
-{
-
+void MenuScreen::screenShown() {
     activeMenu = &menuScreen;
     activeMenu->menuScreenPresented();
 }
 
-void MenuScreen::screenHidden()
-{
+void MenuScreen::screenHidden() {
     activeMenu->menuScreenHidden();
 }
 
-void MenuScreen::aboutClosed()
-{
+void MenuScreen::aboutClosed() {
     activateScreen(&menuScreen);
 }
 
-void MenuScreen::controlConfClosed()
-{
-    activateScreen(&optionsScreen);
-}
-
-void MenuScreen::menuStartGameSelected()
-{
+void MenuScreen::menuStartGameSelected() {
     menuListener.menuScreenShouldShowGameScreen();
 }
 
-void MenuScreen::menuOptionsSelected()
-{
+void MenuScreen::menuOptionsSelected() {
     activateScreen(&optionsScreen);
 }
 
-void MenuScreen::menuAboutSelected()
-{
+void MenuScreen::menuAboutSelected() {
     activateScreen(&aboutScreen);
 }
 
-void MenuScreen::menuExitSelected()
-{
+void MenuScreen::menuExitSelected() {
     menuListener.menuScreenShouldExitGame();
 }
 
-void MenuScreen::optionsControllerConfigSelected()
-{
-    activateScreen(&controllerConfigScreen);
+void MenuScreen::optionsControllerConfigSelected() {
 }
 
-void MenuScreen::optionsMenuClosed()
-{
+void MenuScreen::optionsMenuClosed() {
     activateScreen(&menuScreen);
 }
 
-void MenuScreen::update(Gfx &gfx)
-{
-	entityList.updateAll();
-	activeMenu->update();
-	entityList.renderAll(gfx);
-	activeMenu->render(gfx);
+void MenuScreen::update(Gfx &gfx) {
+    entityList.updateAll();
+    activeMenu->update();
+    entityList.renderAll(gfx);
+    activeMenu->render(gfx);
 }
 
-void MenuScreen::setListener(ScreenListener *nlistener)
-{
-	this->listener = nlistener;
-}
-
-void MenuScreen::activateScreen(MenuScreenItem *screenItem)
-{
+void MenuScreen::activateScreen(MenuScreenItem *screenItem) {
     activeMenu->menuScreenHidden();
     activeMenu = screenItem;
     activeMenu->menuScreenPresented();

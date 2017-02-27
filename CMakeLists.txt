@@ -3,7 +3,7 @@ project(masteroids)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -g -fPIC -Wall -O0 -W -Wshadow -Wunused-variable \
                                                                    -Wunused-parameter -Wunused-function -Wunused -Wno-system-headers \
-                                                                   -Wno-deprecated -Woverloaded-virtual -Wwrite-strings")
+                                                                   -Wno-deprecated -Woverloaded-virtual -Wwrite-strings -Werror")
 #                                                                    -fprofile-arcs -ftest-coverage")
 #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O0 -Wall -W -fprofile-arcs -ftest-coverage")
 
@@ -11,15 +11,12 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -g -fPIC -Wall -O0 -W -Wshado
 
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
-find_package(SFML 2 REQUIRED system window graphics network audio)
+find_package(SFML 2 REQUIRED system window graphics network)
 
 set(SOURCE_FILES
     menuscreenitem.h
     gfx/gfx.h
     images/asteroid_banner.h
-    bulletfactory.h
-    bulletgenerator.cpp
-    bulletgenerator.h
     images/controllers.h
     images/controls_img.h
     images/game_over_img.h
@@ -59,8 +56,6 @@ set(SOURCE_FILES
     renderers/shiprenderer.h
     about.cpp
     about.h
-    playermanager.cpp
-    playermanager.h
     images/about_img.h
     actor.cpp
     actor.h
@@ -68,8 +63,6 @@ set(SOURCE_FILES
     alivemonitor.cpp
     movers/bulletmover.cpp
     alivemonitor.h
-    controlconf.cpp
-    controlconf.h
     debris.cpp
     debris.h
     debrisfountain.cpp
@@ -121,120 +114,7 @@ set(SOURCE_FILES
     asteroidfactory.cpp
     vector.h)
 
-set(TEST_FILES
-    menuscreenitem.h
-    gfx/gfx.h
-    images/asteroid_banner.h
-    bulletfactory.h
-    bulletgenerator.cpp
-    bulletgenerator.h
-    images/controllers.h
-    images/controls_img.h
-    images/game_over_img.h
-    images/options_img.h
-    input/gamepad.h
-    input/gamepad.cpp
-    directioncontroller.h
-    input/gamepadinputmanager.cpp
-    input/gamepadinputmanager.h
-    input/keyboardsource.cpp
-    input/keyboardsource.h
-    libwiiwrap/ogc/lwp_watchdog.cpp
-    libwiiwrap/ogc/lwp_watchdog.h
-    libwiiwrap/wiiuse/wpad.cpp
-    libwiiwrap/wiiuse/wpad.h
-    libwiiwrap/gccore.cpp
-    libwiiwrap/gccore.h
-    libwiiwrap/ogcsys.cpp
-    shipfactory.h
-    directioncontroller.h
-    libwiiwrap/ogcsys.h
-    movers/bulletmover.h
-    movers/fixeddirectionmover.cpp
-    movers/fixeddirectionmover.h
-    movers/shipmover.h
-    movers/shipmover.cpp
-    renderers/aboutrenderer.h
-    renderers/asteroidrenderer.h
-    renderers/asteroidrenderer.cpp
-    renderers/bulletrenderer.h
-    renderers/bulletrenderer.cpp
-    renderers/debrisrender.h
-    renderers/menurenderer.h
-    renderers/optionsrenderer.cpp
-    renderers/optionsrenderer.h
-    renderers/shiprenderer.cpp
-    renderers/shiprenderer.h
-    about.cpp
-    about.h
-    playermanager.cpp
-    playermanager.h
-    images/about_img.h
-    actor.cpp
-    actor.h
-    asteroidfactory.h
-    alivemonitor.cpp
-    alivemonitor.h
-    controlconf.cpp
-    controlconf.h
-    debris.cpp
-    debris.h
-    debrisfountain.cpp
-    debrisfountain.h
-    direction.cpp
-    direction.h
-    elapsedtimetolive.cpp
-    elapsedtimetolive.h
-    entity.h
-    entitylist.cpp
-    entitylist.h
-    font5.h
-    gameover.cpp
-    gameover.h
-    screens/gamescreen.cpp
-    screens/gamescreen.h
-    screens/gameoverscreen.cpp
-    screens/gameoverscreen.h
-    renderers/gameoverrenderer.cpp
-    renderers/gameoverrenderer.h
-    renderers/pausedialogrenderer.cpp
-    renderers/pausedialogrenderer.h
-    renderers/livesrenderer.cpp
-    renderers/livesrenderer.h
-    renderers/scorerenderer.cpp
-    renderers/scorerenderer.h
-    pausedialog.cpp
-    pausedialog.h
-    testmain.cpp
-    menu.cpp
-    menu.h
-    screens/menuscreen.cpp
-    screens/menuscreen.h
-    movers/mover.h
-    options.cpp
-    options.h
-    position.cpp
-    position.h
-    renderers/renderer.h
-    screens/screen.h
-    screenmanager.cpp
-    screenmanager.h
-    shape.cpp
-    shape.h
-    gametime.cpp
-    gametime.h
-    gfx/sfmlgfx.cpp
-    gfx/sfmlgfx.h
-    movers/bulletmover.cpp
-     asteroidfactory.cpp
-    vector.h)
-
-enable_testing()
-add_test(gamescreenTest masteroids_test COMMAND Coverage)
-
-
 add_executable(masteroids ${SOURCE_FILES})
-add_executable(masteroids_test ${TEST_FILES})
 include_directories("libwiiwrap")
 include_directories(".")
 
@@ -246,4 +126,5 @@ IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
 target_link_libraries(masteroids -lm ${SFML_LIBRARIES})
-target_link_libraries(masteroids_test -lm ${SFML_LIBRARIES})
+
+include_directories(${SFML_INCLUDE_DIR})

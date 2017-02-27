@@ -12,3 +12,4 @@ CMakeFiles
 masteroids
 *.elf
 *.dol
+build/

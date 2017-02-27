@@ -6,7 +6,7 @@
 class SFMLGfx : public Gfx
 {
 public:
-    SFMLGfx(sf::RenderWindow &window);
+    explicit SFMLGfx();
 
     ~SFMLGfx();
 
@@ -25,6 +25,8 @@ public:
     virtual void render();
 
     virtual void waitForVBlank();
+
+    virtual bool checkQuit();
 private:
-    sf::RenderWindow &app;
+    sf::RenderWindow app;
 };

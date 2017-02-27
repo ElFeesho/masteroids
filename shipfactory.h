@@ -18,7 +18,7 @@ public:
 	{
 	}
 
-    Actor* createShip(RGB &colour, Position &spawnLocation)
+    Actor* createShip(RGB &colour, Position spawnLocation)
 	{
         Actor* ship = new Actor(colour, shipMover, shipRenderer, std::unique_ptr<AlwaysAlive>(new AlwaysAlive()));
 		ship->position().X(spawnLocation.X());

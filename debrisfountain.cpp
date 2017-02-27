@@ -7,7 +7,7 @@ void DebrisFountain::projectDebris(EntityList &entityList, Direction direction, 
 	double angleStep = spread / (double) amount;
 	for (int i = 0; i < amount; i++)
 	{
-		entityList.add(new Debris(direction, from, Shape(5.0f), colour));
+		entityList.add(std::make_shared<Debris>(direction, from, Shape(5.0f), colour));
 		direction.rotate(angleStep);
 	}
 }

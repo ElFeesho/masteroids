@@ -1,7 +1,4 @@
 #include "screenmanager.h"
-#include "screens/menuscreen.h"
-#include "screens/gamescreen.h"
-#include "screens/gameoverscreen.h"
 
 ScreenManager::ScreenManager() : menuScreen(*this), gameScreen(*this), gameOverScreen(*this)
 {
