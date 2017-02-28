@@ -18,7 +18,6 @@ public:
 		attachListeners();
 	}
 
-
 	DirectionController(GamepadSource &source, Direction &directon) : gamepadSource(source), directionToControl(directon)
 	{
 		attachListeners();

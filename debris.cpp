@@ -11,11 +11,6 @@ Debris::Debris(Direction ntravelDirection, Position npos, Shape shape, RGB &debr
 {
 }
 
-Debris::~Debris()
-{
-
-}
-
 Position &Debris::position()
 {
 	return pos;

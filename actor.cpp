@@ -14,11 +14,6 @@ Actor::Actor(RGB &colour, Mover &pmover, const Renderer &prenderer, std::unique_
 	std::cout << "Actor" << std::endl;
 }
 
-Actor::~Actor()
-{
-	std::cout << "~Actor" << std::endl;
-}
-
 bool Actor::update()
 {
     mover().move(direction(), position(), shape());

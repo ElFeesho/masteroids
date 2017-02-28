@@ -47,11 +47,6 @@ Menu::Menu(MenuListener *nlistener)
 
 }
 
-Menu::~Menu() {
-    //GamepadInputManager::sharedInstance()->inputForPlayer(0)->removeListener(this);
-    std::cout << "~Menu" << std::endl;
-}
-
 void Menu::menuScreenPresented() {
     GamepadSource &source = GamepadInputManager::sharedInstance().inputForPlayer(0);
     source.fire().addUpHandler(&firePressHandler);

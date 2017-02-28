@@ -18,8 +18,6 @@ class AsteroidFactory
 public:
 	AsteroidFactory();
 
-	~AsteroidFactory();
-
 	Actor * createAsteroid(double radius, Position pos = Position::NONE);
 
 private:

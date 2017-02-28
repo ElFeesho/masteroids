@@ -17,8 +17,6 @@ class AlwaysAlive : public AliveMonitor
 public:
 	AlwaysAlive();
 
-	~AlwaysAlive();
-
 	bool alive() const;
 };
 

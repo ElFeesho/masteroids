@@ -9,17 +9,6 @@ class Direction
 public:
     Direction(double initialSpeed, double initialAngle, double initialSpin = 0) : speed(initialSpeed), spin(initialSpin), angle(initialAngle)
 	{
-		std::cout << "Direction" << std::endl;
-	}
-
-	Direction(const Direction &copy) : speed(copy.speed), angle(copy.angle)
-	{
-		std::cout << "Direction copy" << std::endl;
-	}
-
-	~Direction()
-	{
-		std::cout << "~Direction" << std::endl;
 	}
 
 	double Speed()

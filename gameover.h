@@ -11,11 +11,9 @@ class GameOver : public Entity
 public:
 	GameOver();
 
-	~GameOver();
+	bool update() override;
 
-	bool update();
-
-    void render(Gfx &gfx);
+    void render(Gfx &gfx) override;
 
 	Position &position() override;
 

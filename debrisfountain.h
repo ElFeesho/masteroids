@@ -12,8 +12,6 @@ class DebrisFountain
 public:
 	DebrisFountain() {}
 
-	~DebrisFountain() {}
-
 	void projectDebris(EntityList &entityList, Direction direction, Position from, double spread, int amount, RGB &colour);
 };
 

@@ -21,10 +21,6 @@ public:
 	{
 	}
 
-	~ControlConfRenderer()
-	{
-	}
-
     void render(Gfx &gfx, Position &, Shape &, Direction &, RGB &) const
 	{
         gfx.drawRect(120, 70, 403, 316, RGB::BLUE);
@@ -35,9 +31,7 @@ public:
 class ControlConfListener
 {
 public:
-	virtual ~ControlConfListener()
-	{
-	};
+	virtual ~ControlConfListener() {}
 
 	virtual void controlConfClosed() = 0;
 };
@@ -47,25 +41,23 @@ class ControlConf : public MenuScreenItem
 public:
 	ControlConf(ControlConfListener *listener);
 
-	~ControlConf();
+	bool update() override;
 
-	bool update();
-
-    void render(Gfx &gfx);
+    void render(Gfx &gfx) override;
 
 	bool buttonDown(GamepadButton button);
 
 	bool buttonUp(GamepadButton button);
 
-	Position & position();
+	Position & position() override;
 
-	Shape & shape();
+	Shape & shape() override;
 
-	Direction & direction();
+	Direction & direction() override;
 
-	AliveMonitor &aliveMonitor();
+	AliveMonitor &aliveMonitor() override;
 
-	Renderer & renderer();
+	Renderer & renderer() override;
 
     void menuScreenPresented() override;
     void menuScreenHidden() override;

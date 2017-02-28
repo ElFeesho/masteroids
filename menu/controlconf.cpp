@@ -14,10 +14,6 @@ ControlConf::ControlConf(ControlConfListener *nlistener)
 
 }
 
-ControlConf::~ControlConf()
-{
-}
-
 void ControlConf::render(Gfx &gfx)
 {
 	renderer().render(gfx, position(), shape(), direction());

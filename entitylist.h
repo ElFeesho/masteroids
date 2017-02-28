@@ -14,8 +14,6 @@ class EntityList
 public:
 	EntityList() {}
 
-	~EntityList() {}
-
 	void add(Entity *entity);
 
 	void updateAll();

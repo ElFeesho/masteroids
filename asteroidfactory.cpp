@@ -19,10 +19,6 @@ AsteroidFactory::AsteroidFactory() : renderers{AsteroidRenderer(), AsteroidRende
     std::cout << "AsteroidFactory" << std::endl;
 }
 
-AsteroidFactory::~AsteroidFactory() {
-    std::cout << "~AsteroidFactory" << std::endl;
-}
-
 Actor *AsteroidFactory::createAsteroid(double radius, Position pos) {
     Actor *asteroid = new Actor(RGB::WHITE, mover, renderers[rand() % 5], std::unique_ptr<AlwaysAlive>(new AlwaysAlive()));
     asteroid->shape().Radius(radius);

@@ -11,19 +11,12 @@ About::About(AboutListener *nlistener) : listener(nlistener), aboutRenderer(Abou
     aboutFinishHandler = [this](){
 		this->listener->aboutClosed();
 	};
-
-}
-
-About::~About()
-{
-    std::cout << "~About" << std::endl;
 }
 
 void About::render(Gfx &gfx)
 {
 	renderer().render(gfx, position(), shape(), direction());
 }
-
 
 void About::menuScreenPresented() {
     GamepadInputManager::sharedInstance().inputForPlayer(0).fire().addUpHandler(&aboutFinishHandler);

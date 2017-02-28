@@ -6,10 +6,6 @@ FixedDirectionMover::FixedDirectionMover() {
     std::cout << "FixedDirectionMover" << std::endl;
 }
 
-FixedDirectionMover::~FixedDirectionMover() {
-    std::cout << "~FixedDirectionMover" << std::endl;
-}
-
 void FixedDirectionMover::move(Direction &direction, Position &position, Shape &) {
     position.rotate(GameTime::factorTime(direction.Spin()));
     position.translate(GameTime::factorTime(cos(direction.Angle()) * direction.Speed()),

@@ -3,13 +3,13 @@
 
 #include "entity.h"
 #include "screen.h"
-#include "menu.h"
-#include "options.h"
-#include "about.h"
+#include "menu/menu.h"
+#include "menu/options.h"
+#include "menu/about.h"
+#include "menu/controlconf.h"
+#include "menu/menuscreenitem.h"
 #include "entitylist.h"
-#include "controlconf.h"
 #include "asteroidfactory.h"
-#include "menuscreenitem.h"
 
 class MenuScreenListener
 {

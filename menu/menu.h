@@ -12,9 +12,7 @@
 class MenuListener
 {
 public:
-	virtual ~MenuListener()
-	{
-	};
+	virtual ~MenuListener() {}
 
 	virtual void menuStartGameSelected() = 0;
 
@@ -30,14 +28,12 @@ class Menu : public MenuScreenItem
 public:
 	Menu(MenuListener *listener);
 
-	~Menu();
-
     void menuScreenPresented() override;
     void menuScreenHidden() override;
 
-	bool update();
+	bool update() override;
 
-    void render(Gfx &gfx);
+    void render(Gfx &gfx) override;
 
 	void incrementMenu();
 
@@ -45,27 +41,27 @@ public:
 
 	void handleMenuSelection();
 
-	Position &position()
+	Position &position() override
 	{
 		return Position::NONE;
 	}
 
-	Shape &shape()
+	Shape &shape() override
 	{
 		return Shape::NONE;
 	}
 
-	Direction &direction()
+	Direction &direction() override
 	{
 		return Direction::NONE;
 	}
 
-	AliveMonitor &aliveMonitor()
+	AliveMonitor &aliveMonitor() override
 	{
         return alwaysAliveMonitor;
 	}
 
-	Renderer &renderer()
+	Renderer &renderer() override
 	{
 		return menuRenderer;
 	}

@@ -8,8 +8,6 @@ class ElapsedTimeToLive : public AliveMonitor
 public:
 	ElapsedTimeToLive(unsigned long ttl);
 
-	~ElapsedTimeToLive();
-
     bool alive() const;
 
 private:

@@ -15,10 +15,6 @@ public:
 	{
 	}
 
-	~BulletFactory()
-	{
-	}
-
     Actor *createBullet(RGB &colour, Direction direction, Position position)
     {
         Actor *bullet = new Actor(colour, mover, renderer, std::unique_ptr<ElapsedTimeToLive>(new ElapsedTimeToLive(3000)));

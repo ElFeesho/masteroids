@@ -6,11 +6,6 @@ ElapsedTimeToLive::ElapsedTimeToLive(unsigned long nttl) : ttl(GameTime::getMill
 
 }
 
-ElapsedTimeToLive::~ElapsedTimeToLive()
-{
-
-}
-
 bool ElapsedTimeToLive::alive() const
 {
 	return GameTime::getMillis() < ttl;

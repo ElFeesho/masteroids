@@ -9,8 +9,6 @@ class BulletGenerator
 public:
     BulletGenerator(std::function<void()> fireBullet);
 
-    ~BulletGenerator();
-
     void attachToButton(GamepadButton &button);
 
     void detachFromButton(GamepadButton &button);

@@ -23,8 +23,6 @@ class PauseDialog : public Entity
 public:
 	PauseDialog(GamepadSource &gamepad, PauseDialogListener *listener);
 
-	~PauseDialog();
-
     void shown();
 
 	bool update();

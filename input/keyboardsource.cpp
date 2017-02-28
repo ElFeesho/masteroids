@@ -85,11 +85,6 @@ KeyboardSource::KeyboardSource()
     printf("KeyboardSource\n");
 }
 
-KeyboardSource::~KeyboardSource()
-{
-    printf("~KeyboardSource\n");
-}
-
 void KeyboardSource::poll()
 {
     lastState = keyState;

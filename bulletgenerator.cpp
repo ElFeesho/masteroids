@@ -4,10 +4,6 @@ BulletGenerator::BulletGenerator(std::function<void ()> fireBullet) : onShouldFi
 {
 }
 
-BulletGenerator::~BulletGenerator()
-{
-}
-
 void BulletGenerator::attachToButton(GamepadButton &button)
 {
     button.addDownHandler(&onShouldFireBullet);

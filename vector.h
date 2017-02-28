@@ -8,10 +8,6 @@ public:
 	{
 	}
 
-	~Vector()
-	{
-	}
-
 	double X()
 	{
 		return x;

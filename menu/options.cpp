@@ -16,12 +16,6 @@ Options::Options(OptionsListener *nlistener)
 
 }
 
-Options::~Options()
-{
-
-}
-
-
 void Options::menuScreenPresented() {
     GamepadSource &gamepadSource = GamepadInputManager::sharedInstance().inputForPlayer(0);
     gamepadSource.up().addDownHandler(&upPressedHandler);

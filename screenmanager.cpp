@@ -9,8 +9,6 @@ ScreenManager::ScreenManager() : menuScreen(*this), gameScreen(*this), gameOverS
     activeScreen = &menuScreen;
 }
 
-ScreenManager::~ScreenManager() {}
-
 bool ScreenManager::update(Gfx &gfx)
 {
     activeScreen->update(gfx);

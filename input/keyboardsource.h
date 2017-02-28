@@ -8,13 +8,10 @@ class KeyboardSource : public GamepadSource
 {
 public:
     KeyboardSource();
-    KeyboardSource(KeyboardSource &) = delete;
-    KeyboardSource(KeyboardSource &&) = delete;
-    ~KeyboardSource();
 
-	void poll();
+	void poll() override;
 
-	const std::string name() const
+	const std::string name() const override
 	{
 		return "Keyboard";
 	}

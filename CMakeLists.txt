@@ -4,8 +4,6 @@ project(masteroids)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -g -fPIC -Wall -O0 -W -Wshadow -Wunused-variable \
                                                                    -Wunused-parameter -Wunused-function -Wunused -Wno-system-headers \
                                                                    -Wno-deprecated -Woverloaded-virtual -Wwrite-strings")
-#                                                                    -fprofile-arcs -ftest-coverage")
-#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O0 -Wall -W -fprofile-arcs -ftest-coverage")
 
 #SET(CMAKE_EXE_LINKER_FLAGS="-fprofile-arcs -ftest-coverage")
 
@@ -14,7 +12,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 find_package(SFML 2 REQUIRED system window graphics network audio)
 
 set(SOURCE_FILES
-    menuscreenitem.h
+    menu/menuscreenitem.h
     gfx/gfx.h
     images/asteroid_banner.h
     bulletfactory.h
@@ -57,8 +55,8 @@ set(SOURCE_FILES
     renderers/optionsrenderer.h
     renderers/shiprenderer.cpp
     renderers/shiprenderer.h
-    about.cpp
-    about.h
+    menu/about.cpp
+    menu/about.h
     playermanager.cpp
     playermanager.h
     images/about_img.h
@@ -68,8 +66,8 @@ set(SOURCE_FILES
     alivemonitor.cpp
     movers/bulletmover.cpp
     alivemonitor.h
-    controlconf.cpp
-    controlconf.h
+    menu/controlconf.cpp
+    menu/controlconf.h
     debris.cpp
     debris.h
     debrisfountain.cpp
@@ -99,13 +97,13 @@ set(SOURCE_FILES
     pausedialog.cpp
     pausedialog.h
     main.cpp
-    menu.cpp
-    menu.h
+    menu/menu.cpp
+    menu/menu.h
     screens/menuscreen.cpp
     screens/menuscreen.h
     movers/mover.h
-    options.cpp
-    options.h
+    menu/options.cpp
+    menu/options.h
     position.cpp
     position.h
     renderers/renderer.h

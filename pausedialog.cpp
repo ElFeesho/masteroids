@@ -11,10 +11,6 @@ PauseDialog::PauseDialog(GamepadSource &ngamepad, PauseDialogListener *nlistener
     std::cout << "PauseDialog::CTOR" << std::endl;
 }
 
-PauseDialog::~PauseDialog() {
-    std::cout << "PauseDialog::DTOR" << std::endl;
-}
-
 void PauseDialog::shown()
 {
     gamepad.left().addDownHandler(&leftHandler);

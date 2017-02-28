@@ -1,6 +1,6 @@
 #include <iostream>
 #include "gamescreen.h"
-#include "options.h"
+#include "menu/options.h"
 
 using std::stringstream;
 

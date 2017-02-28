@@ -14,9 +14,7 @@
 class OptionsListener
 {
 public:
-	virtual ~OptionsListener()
-	{
-	};
+	virtual ~OptionsListener() {}
 
 	virtual void optionsControllerConfigSelected() = 0;
 
@@ -28,36 +26,34 @@ class Options : public MenuScreenItem
 public:
 	Options(OptionsListener *listener);
 
-	~Options();
+	bool update() override;
 
-	bool update();
-
-    void render(Gfx &gfx);
+    void render(Gfx &gfx) override;
 
     void menuScreenPresented() override;
     void menuScreenHidden() override;
 
-	Position &position()
+	Position &position() override
 	{
 		return Position::NONE;
 	}
 
-	Shape &shape()
+	Shape &shape() override
 	{
 		return Shape::NONE;
 	}
 
-	Direction &direction()
+	Direction &direction() override
 	{
 		return Direction::NONE;
 	}
 
-	AliveMonitor &aliveMonitor()
+	AliveMonitor &aliveMonitor() override
 	{
         return alwaysAliveMonitor;
 	}
 
-	Renderer &renderer()
+	Renderer &renderer() override
 	{
 		return optionsRenderer;
 	}

@@ -10,9 +10,7 @@
 class AboutListener
 {
 public:
-	virtual ~AboutListener()
-	{
-	}
+	virtual ~AboutListener() {}
 
 	virtual void aboutClosed() = 0;
 };
@@ -22,36 +20,34 @@ class About : public MenuScreenItem
 public:
 	About(AboutListener *listener);
 
-	~About();
-
-	bool update()
+	bool update() override
 	{
 		return aliveMonitor().alive();
 	}
 
-    void render(Gfx &gfx);
+    void render(Gfx &gfx) override;
 
-	Position &position()
+	Position &position() override
 	{
 		return Position::NONE;
 	}
 
-	Shape &shape()
+	Shape &shape() override
 	{
 		return Shape::NONE;
 	}
 
-	Direction &direction()
+	Direction &direction() override
 	{
 		return Direction::NONE;
 	}
 
-	AliveMonitor &aliveMonitor()
+	AliveMonitor &aliveMonitor() override
 	{
         return alivemonitor;
 	}
 
-	Renderer &renderer()
+	Renderer &renderer() override
 	{
 		return aboutRenderer;
 	}

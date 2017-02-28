@@ -1,6 +1,6 @@
 #include "gameoverrenderer.h"
 
-#include "options.h"
+#include "menu/options.h"
 
 #include "images/game_over_img.h"
 

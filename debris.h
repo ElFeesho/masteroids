@@ -11,8 +11,6 @@ class Debris : public Entity
 public:
 	Debris(Direction travelDirection, Position pos, Shape shape, RGB &debrisColour);
 
-	~Debris();
-
 	Position &position();
 
 	Shape &shape();
@@ -26,7 +24,6 @@ public:
 	bool update();
 
 	Renderer & renderer();
-
 
 private:
 	Direction travelDirection;

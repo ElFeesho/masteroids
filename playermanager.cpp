@@ -1,7 +1,7 @@
 #include <math.h>
 #include "playermanager.h"
 #include "input/gamepadinputmanager.h"
-#include "options.h"
+#include "menu/options.h"
 
 #ifdef __WII__
 #define M_PI        3.14159265358979323846264338327950288   /* pi             */
@@ -83,14 +83,6 @@ PlayerManager::PlayerManager(int nplayerNumber, int lives, std::function<void()>
     });
 
     GamepadInputManager::sharedInstance().inputForPlayer(0).fire().addDownHandler(fireHandler);
-}
-
-PlayerManager::~PlayerManager()
-{
-    shutdown();
-    delete fireHandler;
-    delete player;
-    delete directionController;
 }
 
 void PlayerManager::checkPlayerBulletCollisions(PlayerManager &playerManager)

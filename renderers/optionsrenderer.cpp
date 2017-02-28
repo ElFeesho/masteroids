@@ -1,5 +1,5 @@
 #include "optionsrenderer.h"
-#include "../options.h"
+#include "../menu/options.h"
 #include "../images/options_img.h"
 
 #include <sstream>

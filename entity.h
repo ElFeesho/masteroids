@@ -12,9 +12,7 @@ class Gfx;
 class Entity
 {
 public:
-	virtual ~Entity()
-	{
-	}
+	virtual ~Entity() {}
 
 	virtual bool update() = 0;
 

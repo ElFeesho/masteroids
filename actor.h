@@ -10,13 +10,11 @@ class Actor : public Entity
 public:
     Actor(RGB &colour, Mover &mover, const Renderer &prenderer, std::unique_ptr<AliveMonitor> aliveMonitor);
 
-	~Actor();
+	Position &position() override;
 
-	Position &position();
+	Direction &direction() override;
 
-	Direction &direction();
-
-	Shape &shape();
+	Shape &shape() override;
 
     RGB &colour();
 

@@ -6,11 +6,6 @@ GameOver::GameOver() : gameOverRenderer(GameOverRenderer())
 
 }
 
-GameOver::~GameOver()
-{
-
-}
-
 bool GameOver::update()
 {
 	return aliveMonitor().alive();

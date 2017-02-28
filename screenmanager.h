@@ -15,8 +15,6 @@ class ScreenManager : public MenuScreenListener, public GameScreenListener, publ
 public:
     ScreenManager();
 
-	~ScreenManager();
-
     void menuScreenShouldExitGame() override;
     void menuScreenShouldShowGameScreen() override;
 
