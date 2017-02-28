@@ -14,7 +14,6 @@ MenuScreen::~MenuScreen() {
 
 void MenuScreen::screenShown()
 {
-
     activeMenu = &menuScreen;
     activeMenu->menuScreenPresented();
 }

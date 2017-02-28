@@ -5,6 +5,10 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+#ifdef MACOSX
+#include "resources.h"
+#endif
+
 RGB RGB::WHITE(1.0f, 1.0f, 1.0f);
 RGB RGB::BLUE(0.0f, 0.5f, 1.0f);
 RGB RGB::YELLOW(1.0f, 5.0f, 0.0f);
@@ -28,7 +32,11 @@ Rect SFMLGfx::measureText(const std::string &inputText)
 {
     sf::Text text;
     sf::Font font;
+#ifdef MACOSX
+    font.loadFromFile(Resources::regularFontLocation());
+#else
     font.loadFromFile("regularfont.ttf");
+#endif
     text.setFont(font);
     text.setString(inputText);
     text.setCharacterSize(2*14);
@@ -56,7 +64,11 @@ void SFMLGfx::drawText(bool bold, int x, int y, const std::string &textString, c
 {
     sf::Text text;
     sf::Font font;
+#ifdef MACOSX
+    font.loadFromFile(bold ? Resources::boldFontLocation():Resources::regularFontLocation());
+#else
     font.loadFromFile(bold ? "boldfont.ttf":"regularfont.ttf");
+#endif
     text.setFont(font);
     text.setString(textString);
     text.setCharacterSize(2*14);

@@ -31,7 +31,6 @@ void Options::menuScreenPresented() {
     gamepadSource.fire().addDownHandler(&firePressed);
     gamepadSource.pause().addDownHandler(&pausePressed);
 
-
     gamepadSource.up().addUpHandler(&buttonReleased);
     gamepadSource.left().addUpHandler(&buttonReleased);
     gamepadSource.right().addUpHandler(&buttonReleased);
@@ -46,7 +45,6 @@ void Options::menuScreenHidden() {
     gamepadSource.right().removeDownHandler(&rightPressedHandler);
     gamepadSource.fire().removeDownHandler(&firePressed);
     gamepadSource.pause().removeDownHandler(&pausePressed);
-
 
     gamepadSource.up().removeUpHandler(&buttonReleased);
     gamepadSource.left().removeUpHandler(&buttonReleased);
@@ -73,8 +71,6 @@ void Options::render(Gfx &gfx)
 {
 	renderer().render(gfx, position(), shape(), direction());
 }
-
-
 
 int Options::lives = 3;
 int Options::difficulty = 1;
