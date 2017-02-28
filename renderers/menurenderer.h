@@ -24,8 +24,8 @@ public:
 
     void render(Gfx &gfx, Position &, Shape &, Direction &, RGB &) const override
 	{
-        gfx.drawRect(320 - asteroid_banner_width / 2, 79, asteroid_banner_width + 1, 310, RGB::BLUE);
-        gfx.drawImg(321 - asteroid_banner_width / 2, 80, asteroid_banner_width, asteroid_banner_height, asteroid_banner_data);
+        gfx.drawRect(120, 70, 403, 300, RGB::BLUE);
+        gfx.drawImg((640 - asteroid_banner_width) / 2, 80, asteroid_banner_width, asteroid_banner_height, asteroid_banner_data);
         gfx.drawImg(320, 200, controllers_width, controllers_height, controllers_data);
 
         float textHeight = gfx.measureText("W").h;

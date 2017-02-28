@@ -23,7 +23,6 @@ void ControlConf::render(Gfx &gfx)
 	renderer().render(gfx, position(), shape(), direction());
 }
 
-
 void ControlConf::menuScreenPresented() {
 
 }

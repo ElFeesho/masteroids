@@ -4,6 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <map>
 
 #ifdef MACOSX
 #include "resources.h"
@@ -100,9 +101,40 @@ void SFMLGfx::drawRect(int x, int y, int w, int h, const RGB &colour)
     app.draw(shape);
 }
 
-void SFMLGfx::drawImg(int, int, int, int, const unsigned short *)
+void SFMLGfx::drawImg(int x, int y, int w, int h, const unsigned short *pixels)
 {
+    static std::map<const unsigned short *, sf::Texture> textureLookup;
 
+    if (textureLookup.find(pixels) == textureLookup.end()) {
+        sf::Uint8* pixels_32bit = new sf::Uint8[w * h * 4];
+        for(int i = 0; i < h; i++)
+        {
+            for(int j = 0; j < w; j++)
+            {
+                unsigned short cpixel = pixels[w*i + j];
+                unsigned char red = (cpixel & 0xf800) >> 11;
+                unsigned char green = (cpixel & 0x07e0) >> 5;
+                unsigned char blue = cpixel & 0x001f;
+
+                pixels_32bit[(w*i*4)+j*4 + 0] = (int)((red/31.f)*255.f);
+                pixels_32bit[(w*i*4)+j*4 + 1] = (int)((green/63.f)*255.f);
+                pixels_32bit[(w*i*4)+j*4 + 2] = (int)((blue/31.f)*255.f);
+                pixels_32bit[(w*i*4)+j*4 + 3] = 255;
+            }
+        }
+        sf::Texture texture;
+        texture.create(w, h);
+        texture.update(pixels_32bit);
+        textureLookup[pixels] = texture;
+        texture.setSmooth(true);
+    }
+
+    sf::Sprite sprite;
+    sprite.setTexture(textureLookup[pixels]);
+    sprite.setScale(sf::Vector2f(2.0f, 2.0f));
+    sprite.move(sf::Vector2f(x*2, y*2));
+
+    app.draw(sprite);
 }
 
 void SFMLGfx::render()
