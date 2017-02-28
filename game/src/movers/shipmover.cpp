@@ -1,12 +1,6 @@
 #include "movers/shipmover.h"
 
-ShipMover::ShipMover() : movementVector(0, 0) {
-    std::cout << "ShipMover ctor " << this << std::endl;
-}
-
-ShipMover::~ShipMover() {
-    std::cout << "ShipMover dtor " << this << std::endl;
-}
+#include <cmath>
 
 void ShipMover::move(Direction &direction, Position &position, Shape &) {
     direction.rotate(GameTime::factorTime(direction.Spin()));

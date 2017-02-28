@@ -4,7 +4,7 @@
 #include <gfx/gfx.h>
 #include <position.h>
 #include <shape.h>
-#include "../direction.h"
+#include <direction.h>
 
 class Gfx;
 

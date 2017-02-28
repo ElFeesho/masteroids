@@ -1,9 +1,6 @@
 #ifndef __DIRECTION_H__
 #define __DIRECTION_H__
 
-#include <cmath>
-#include <iostream>
-
 class Direction
 {
 public:

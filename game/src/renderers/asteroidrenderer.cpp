@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include "renderers/asteroidrenderer.h"
 
 AsteroidRenderer::AsteroidRenderer()

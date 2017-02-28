@@ -1,12 +1,11 @@
+#include <cmath>
 #include <iostream>
 #include "bulletmover.h"
 
 BulletMover::BulletMover() {
-    std::cout << "BulletMove" << std::endl;
 }
 
 BulletMover::~BulletMover() {
-    std::cout << "~BulletMover" << std::endl;
 }
 
 void BulletMover::move(Direction &direction, Position &position, Shape &) {

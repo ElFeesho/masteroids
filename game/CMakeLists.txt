@@ -65,8 +65,6 @@ set(SOURCE_FILES
     src/debris.h
     src/debrisfountain.cpp
     src/debrisfountain.h
-    src/direction.cpp
-    src/direction.h
     src/elapsedtimetolive.cpp
     src/elapsedtimetolive.h
     src/entity.h

@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include "entitylist.h"
 
 #include "entity.h"

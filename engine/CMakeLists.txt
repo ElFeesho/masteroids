@@ -2,7 +2,14 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -g -fPIC -Wall -O0 -W -Wshado
                                                                    -Wunused-parameter -Wunused-function -Wunused -Wno-system-headers \
                                                                    -Wno-deprecated -Woverloaded-virtual -Wwrite-strings")
 
-set(SOURCES src/engine.cpp src/position.cpp src/shape.cpp include/position.h include/shape.h)
+set(SOURCES 
+	src/engine.cpp
+	src/position.cpp
+	include/position.h
+	src/shape.cpp
+	include/shape.h
+	src/direction.cpp
+	include/direction.h)
 
 add_library(engine ${SOURCES})
 

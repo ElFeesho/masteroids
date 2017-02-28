@@ -9,15 +9,11 @@
 class ShipMover : public Mover
 {
 public:
-    ShipMover();
-
-    ~ShipMover();
-
     void move(Direction &direction, Position &position, Shape &shape = Shape::NONE);
 
     void reset();
 
 private:
-	Vector movementVector;
+	Vector movementVector{ 0, 0 };
 };
 

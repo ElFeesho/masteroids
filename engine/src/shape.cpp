@@ -3,7 +3,7 @@
 Shape::Shape(double nradius) : radius(nradius) {}
 
 void Shape::Radius(double nradius) {
-	this->radius = nradius;
+	radius = nradius;
 }
 
 double Shape::Radius() {
