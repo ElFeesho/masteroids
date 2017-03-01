@@ -1,4 +1,4 @@
-#include "actor.h"
+#include <actor.h>
 
 Actor::Actor(RGB &colour, Mover &pmover, const Renderer &prenderer, std::unique_ptr<AliveMonitor> pmonitor)
 		: actorColour(colour),

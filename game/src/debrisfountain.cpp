@@ -1,5 +1,5 @@
 #include "debrisfountain.h"
-#include "actor.h"
+#include <actor.h>
 #include <movers/fixeddirectionmover.h>
 #include "renderers/debrisrender.h"
 #include "elapsedtimetolive.h"

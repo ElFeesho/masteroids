@@ -9,8 +9,12 @@ before_install:
   - if [ $TRAVIS_OS_NAME == linux ]; then sudo apt-get update && sudo apt-get install -y cmake libsfml-dev; fi
   - if [ $TRAVIS_OS_NAME == osx ]; then brew update && brew install cmake sfml; fi
 
-script: cmake .; make
-
+script: 
+  - mkdir build
+  - cd build
+  - cmake ..
+  - make
+  
 after_success:
   - echo Success
 

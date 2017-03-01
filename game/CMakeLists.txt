@@ -42,8 +42,6 @@ set(SOURCE_FILES
     src/playermanager.cpp
     src/playermanager.h
     src/images/about_img.h
-    src/actor.cpp
-    src/actor.h
     src/asteroidfactory.h
     src/menu/controlconf.cpp
     src/menu/controlconf.h

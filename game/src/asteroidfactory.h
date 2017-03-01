@@ -2,8 +2,8 @@
 
 #include <memory>
 
-#include "movers/fixeddirectionmover.h"
-#include "actor.h"
+#include <movers/fixeddirectionmover.h>
+#include <actor.h>
 #include "renderers/asteroidrenderer.h"
 
 class AsteroidFactory

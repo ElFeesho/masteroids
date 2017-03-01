@@ -2,8 +2,8 @@
 
 #include <memory>
 
-#include "movers/mover.h"
-#include "entity.h"
+#include <movers/mover.h>
+#include <entity.h>
 
 class Actor : public Entity
 {

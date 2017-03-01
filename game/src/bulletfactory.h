@@ -2,11 +2,11 @@
 
 #include <memory>
 
-#include "movers/fixeddirectionmover.h"
+#include <movers/fixeddirectionmover.h>
 #include "renderers/bulletrenderer.h"
 #include "elapsedtimetolive.h"
 
-#include "actor.h"
+#include <actor.h>
 
 class BulletFactory
 {

@@ -1,19 +1,15 @@
 #pragma once
 
 #include <memory>
+#include <gfx/gfx.h>
+#include <actor.h>
 
 #include "movers/shipmover.h"
 #include "renderers/shiprenderer.h"
-#include "gfx/gfx.h"
-#include "actor.h"
 
 class ShipFactory
 {
 public:
-    ShipFactory() : shipMover(ShipMover()), shipRenderer(ShipRenderer())
-	{
-	}
-
     Actor* createShip(RGB &colour, Position &spawnLocation)
 	{
         Actor* ship = new Actor(colour, shipMover, shipRenderer, std::unique_ptr<AlwaysAlive>(new AlwaysAlive()));
@@ -23,7 +19,6 @@ public:
 		ship->shape().Radius(10);
 		return ship;
 	}
-
 private:
     ShipMover shipMover;
     ShipRenderer shipRenderer;

@@ -9,7 +9,8 @@ set(SOURCES
 	src/direction.cpp
 	src/gametime.cpp
 	src/entitylist.cpp
-	src/fixeddirectionmover.cpp)
+	src/fixeddirectionmover.cpp
+	src/actor.cpp)
 
 set(HEADERS 
 	include/shape.h
@@ -21,7 +22,8 @@ set(HEADERS
 	include/entity.h
 	include/alivemonitor.h
 	include/gametime.h
-	include/entitylist.h)
+	include/entitylist.h
+	include/actor.h)
 
 add_library(engine ${SOURCES} ${HEADERS})
 
