@@ -2,20 +2,13 @@
 #define __MENURENDERER_H__
 
 #include <gfx/gfx.h>
-#include "renderer.h"
+#include <renderer.h>
 #include "../images/asteroid_banner.h"
 #include "../images/controllers.h"
 
 class MenuRenderer : public Renderer
 {
 public:
-	MenuRenderer() : menu_sel(0)
-	{
-	}
-
-	~MenuRenderer()
-	{
-	}
 
 	void setMenuItemSelection(int selection)
 	{
@@ -74,7 +67,7 @@ public:
 	}
 
 private:
-	int menu_sel;
+	int menu_sel { 0 };
 };
 
 #endif
