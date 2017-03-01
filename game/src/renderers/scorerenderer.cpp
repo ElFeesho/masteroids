@@ -10,3 +10,13 @@ void ScoreRenderer::render(Gfx &gfx, Position &position, Shape &, Direction &, R
 	sstream << "SCORE: " << score;
     gfx.drawText(false, position.X(), position.Y(), sstream.str(), colour, alignment);
 }
+
+void ScoreRenderer::setScore(int nscore)
+{
+	this->score = nscore;
+}
+
+void ScoreRenderer::setAlignment(TextAlignment nalignment)
+{
+	this->alignment = nalignment;
+}

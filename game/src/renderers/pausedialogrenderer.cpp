@@ -1,13 +1,5 @@
 #include "pausedialogrenderer.h"
 
-PauseDialogRenderer::PauseDialogRenderer() : menu_sel(0)
-{
-}
-
-PauseDialogRenderer::~PauseDialogRenderer()
-{
-}
-
 void PauseDialogRenderer::setMenuSelection(int menuSelection)
 {
 	menu_sel = menuSelection;
