@@ -22,16 +22,8 @@ set(SOURCE_FILES
     src/input/gamepadinputmanager.h
     src/input/keyboardsource.cpp
     src/input/keyboardsource.h
-    src/libwiiwrap/ogc/lwp_watchdog.cpp
-    src/libwiiwrap/ogc/lwp_watchdog.h
-    src/libwiiwrap/wiiuse/wpad.cpp
-    src/libwiiwrap/wiiuse/wpad.h
-    src/libwiiwrap/gccore.cpp
-    src/libwiiwrap/gccore.h
-    src/libwiiwrap/ogcsys.cpp
     src/shipfactory.h
     src/directioncontroller.h
-    src/libwiiwrap/ogcsys.h
     src/movers/fixeddirectionmover.cpp
     src/movers/fixeddirectionmover.h
     src/movers/shipmover.h
@@ -94,7 +86,6 @@ set(SOURCE_FILES
     src/gfx/sfmlgfx.h
     src/asteroidfactory.cpp)
 
-include_directories("src/libwiiwrap")
 include_directories("src/")
 
 

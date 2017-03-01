@@ -59,7 +59,6 @@ void AsteroidRenderer::render(Gfx &gfx, Position &position, Shape &shape, Direct
         renderAtLocation(gfx, position.X(), position.Y() + 480, position.Rotation(), shape.Radius(), colour);
     }
     
-    
     renderAtLocation(gfx, position.X(), position.Y(), position.Rotation(), shape.Radius(), colour);
 }
 

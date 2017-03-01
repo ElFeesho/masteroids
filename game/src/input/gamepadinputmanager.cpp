@@ -1,9 +1,10 @@
 #ifndef __WII__
 #include <SFML/Main.hpp>
-#endif
+#else
 #include <wiiuse/wpad.h>
 #include <gccore.h>
-#include <iostream>
+#endif
+
 #include "gamepadinputmanager.h"
 
 #include "keyboardsource.h"
@@ -18,18 +19,14 @@ GamepadInputManager::GamepadInputManager()
 		: gamepads{new GamecubePadSource(0), new GamecubePadSource(1), new GamecubePadSource(2), new GamecubePadSource(3)}
 #endif
 {
-	std::cout << "GamepadInputManager" << std::endl;
-}
-
-GamepadInputManager::~GamepadInputManager()
-{
-    std::cout << "~GamepadInputManager" << std::endl;
 }
 
 void GamepadInputManager::poll()
 {
+#ifdef __WII__
 	PAD_ScanPads();
 	WPAD_ScanPads();
+#endif
     gamepad->poll();
 }
 
@@ -57,10 +54,12 @@ bool GamepadInputManager::checkQuit()
 
 void GamepadInputManager::initialise()
 {
+#ifdef __WII__
 	PAD_Init();
 	WPAD_Init();
 	WPAD_Disconnect(WPAD_CHAN_ALL);
 	WPAD_SetIdleTimeout(120);
+#endif
 }
 
 GamepadSource &GamepadInputManager::inputForPlayer(int)

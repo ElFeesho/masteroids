@@ -7,7 +7,6 @@ class GamepadInputManager
 {
 public:
     GamepadInputManager();
-	~GamepadInputManager();
 
     static GamepadInputManager &sharedInstance();
 
