@@ -17,11 +17,6 @@ GameScreen::GameScreen(GameScreenListener &screenListener) :
 
 }
 
-GameScreen::~GameScreen()
-{
-
-}
-
 void GameScreen::screenHidden()
 {
     GamepadInputManager::sharedInstance().inputForPlayer(0).pause().removeUpHandler(pauseHandler.get());

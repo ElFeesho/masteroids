@@ -1,8 +1,10 @@
 #ifndef __DEBRIS_RENDERER_H__
 #define __DEBRIS_RENDERER_H__
 
-#include "renderer.h"
+#include <renderer.h>
 #include <gfx/gfx.h>
+
+#include <cmath>
 
 class DebrisRenderer : public Renderer
 {

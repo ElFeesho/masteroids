@@ -20,8 +20,7 @@ public:
     virtual void menuScreenShouldExitGame() = 0;
 };
 
-class MenuScreen
-		: public Screen, public AboutListener, public ControlConfListener, public MenuListener, public OptionsListener
+class MenuScreen : public Screen, public AboutListener, public ControlConfListener, public MenuListener, public OptionsListener
 {
 public:
     MenuScreen(MenuScreenListener &menuScreenListener);

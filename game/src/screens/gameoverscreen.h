@@ -17,8 +17,6 @@ class GameOverScreen : public Screen
 public:
     GameOverScreen(GameOverScreenListener &listener);
 
-	~GameOverScreen();
-
     void update(Gfx &gfx) override;
 
 	void screenShown() override;

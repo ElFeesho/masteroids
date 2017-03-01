@@ -1,12 +1,6 @@
-#ifndef __SCREEN_H__
-#define __SCREEN_H__
+#pragma once
 
-#include <vector>
-#include "gfx/gfx.h"
-#include "entity.h"
-
-using std::vector;
-
+class Gfx;
 class Screen;
 
 class ScreenListener
@@ -18,9 +12,7 @@ public:
 class Screen
 {
 public:
-	virtual ~Screen()
-	{
-    }
+	virtual ~Screen() {}
 
     virtual void update(Gfx &gfx) = 0;
 
@@ -28,5 +20,3 @@ public:
 
 	virtual void screenHidden() = 0;
 };
-
-#endif

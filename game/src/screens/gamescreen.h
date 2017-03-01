@@ -33,8 +33,6 @@ class GameScreen : public Screen, public PauseDialogListener
 public:
     GameScreen(GameScreenListener &listener);
 
-	~GameScreen();
-
 	void screenHidden();
 
 	void screenShown();

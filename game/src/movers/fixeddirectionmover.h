@@ -1,8 +1,6 @@
-#ifndef FIXEDDIRECTIONMOVER_H
-#define FIXEDDIRECTIONMOVER_H
+#pragma once
 
-#include "mover.h"
-#include <cmath>
+#include <movers/mover.h>
 
 class FixedDirectionMover : public Mover
 {
@@ -11,5 +9,3 @@ public:
 
 	virtual void reset() override;
 };
-
-#endif // FIXEDDIRECTIONMOVER_H

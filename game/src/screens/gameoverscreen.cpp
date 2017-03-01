@@ -8,11 +8,6 @@ GameOverScreen::GameOverScreen(GameOverScreenListener &gameOverScreenListener) :
 
 }
 
-GameOverScreen::~GameOverScreen()
-{
-
-}
-
 void GameOverScreen::update(Gfx &gfx)
 {
 	gameOverEntity.update();

@@ -1,10 +1,10 @@
 #include "fixeddirectionmover.h"
 #include "gametime.h"
+#include <cmath>
 
 void FixedDirectionMover::move(Direction &direction, Position &position, Shape &) {
     position.rotate(GameTime::factorTime(direction.Spin()));
-    position.translate(GameTime::factorTime(cos(direction.Angle()) * direction.Speed()),
-                       GameTime::factorTime(sin(direction.Angle()) * direction.Speed()));
+    position.translate(GameTime::factorTime(cos(direction.Angle()) * direction.Speed()), GameTime::factorTime(sin(direction.Angle()) * direction.Speed()));
 
     if (position.X() > 640.0f) {
         position.X(0.0f);
