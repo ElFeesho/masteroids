@@ -1,5 +1,4 @@
-#ifndef OPTIONSRENDERER_H
-#define OPTIONSRENDERER_H
+#pragma once
 
 #include "renderer.h"
 
@@ -13,5 +12,3 @@ public:
 private:
 	int menu_sel { 0 };
 };
-
-#endif // OPTIONSRENDERER_H
