@@ -1,80 +1,69 @@
 #pragma once
 
-#include "input/gamepad.h"
-#include "direction.h"
+#include <input/gamepad.h>
+#include <direction.h>
 
 class DirectionController
 {
 
 public:
-	DirectionController(GamepadSource &source) : gamepadSource(source), directionToControl(Direction::NONE)
+	void control(GamepadSource &source, Direction &directionToControl)
 	{
-		attachListeners();
+		upPressHandler = {[&]()
+		{
+			directionToControl.Speed(0.1f);
+		}};
+
+		upReleaseHandler = {[&]()
+		{
+			directionToControl.Speed(0.0f);
+		}};
+
+		leftPressHandler = {[&]()
+		{
+			directionToControl.Spin(-0.1f);
+		}};
+
+		leftReleaseHandler = {[&]()
+		{
+			directionToControl.Spin(0.0f);
+		}};
+
+		rightPressHandler = {[&]()
+		{
+			directionToControl.Spin(0.1f);
+		}};
+
+		rightReleaseHandler = {[&]()
+		{
+			directionToControl.Spin(0.0f);
+		}};
+
+		source.up().addDownHandler(&upPressHandler);
+		source.up().addUpHandler(&upReleaseHandler);
+		source.left().addDownHandler(&leftPressHandler);
+		source.left().addUpHandler(&leftReleaseHandler);
+		source.right().addDownHandler(&rightPressHandler);
+		source.right().addUpHandler(&rightReleaseHandler);
 	}
 
-	DirectionController(GamepadSource &source, DirectionController &copy)
-			: gamepadSource(source), directionToControl(copy.directionToControl)
+	void releaseControl(GamepadSource &source)
 	{
-		attachListeners();
+		source.up().removeAllHandlers();
+		source.left().removeAllHandlers();
+		source.right().removeAllHandlers();
 	}
 
-	DirectionController(GamepadSource &source, Direction &directon) : gamepadSource(source), directionToControl(directon)
-	{
-		attachListeners();
-	}
+	std::function<void()> upPressHandler;
 
-	~DirectionController()
-	{
-		gamepadSource.up().removeDownHandler(&upPressHandler);
-		gamepadSource.up().removeUpHandler(&upReleaseHandler);
-		gamepadSource.left().removeDownHandler(&leftPressHandler);
-		gamepadSource.left().removeUpHandler(&leftReleaseHandler);
-		gamepadSource.right().removeDownHandler(&rightPressHandler);
-		gamepadSource.right().removeUpHandler(&rightReleaseHandler);
-	}
+	std::function<void()> upReleaseHandler;
 
-	void attachListeners()
-	{
-		gamepadSource.up().addDownHandler(&upPressHandler);
-		gamepadSource.up().addUpHandler(&upReleaseHandler);
-		gamepadSource.left().addDownHandler(&leftPressHandler);
-		gamepadSource.left().addUpHandler(&leftReleaseHandler);
-		gamepadSource.right().addDownHandler(&rightPressHandler);
-		gamepadSource.right().addUpHandler(&rightReleaseHandler);
-	}
+	std::function<void()> leftPressHandler;
 
-private:
-	GamepadSource &gamepadSource;
-    Direction &directionToControl;
+	std::function<void()> leftReleaseHandler;
 
-	std::function<void()> upPressHandler{[&]()
-	{
-		directionToControl.Speed(0.1f);
-	}};
+	std::function<void()> rightPressHandler;
 
-	std::function<void()> upReleaseHandler{[&]()
-	{
-		directionToControl.Speed(0.0f);
-	}};
+	std::function<void()> rightReleaseHandler;
 
-
-	std::function<void()> leftPressHandler{[&]()
-	{
-		directionToControl.Spin(-0.1f);
-	}};
-
-	std::function<void()> leftReleaseHandler{[&]()
-	{
-		directionToControl.Spin(0.0f);
-	}};
-
-	std::function<void()> rightPressHandler{[&]()
-	{
-		directionToControl.Spin(0.1f);
-	}};
-
-	std::function<void()> rightReleaseHandler{[&]()
-	{
-		directionToControl.Spin(0.0f);
-	}};
 };

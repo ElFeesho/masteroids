@@ -9,8 +9,6 @@ set(SOURCE_FILES
     src/menu/menuscreenitem.h
     src/images/asteroid_banner.h
     src/bulletfactory.h
-    src/bulletgenerator.cpp
-    src/bulletgenerator.h
     src/images/controllers.h
     src/images/controls_img.h
     src/images/game_over_img.h

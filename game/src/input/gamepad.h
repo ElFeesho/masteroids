@@ -10,10 +10,6 @@ using std::vector;
 class GamepadButton
 {
 public:
-    GamepadButton();
-
-    ~GamepadButton();
-
     void addDownHandler(std::function<void()> *handler);
 
     void addUpHandler(std::function<void()> *handler);
@@ -21,6 +17,8 @@ public:
     void removeDownHandler(std::function<void()> *handler);
 
     void removeUpHandler(std::function<void()> *handler);
+
+    void removeAllHandlers();
 
     void notifyDownHandlers();
 

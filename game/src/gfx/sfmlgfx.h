@@ -8,8 +8,6 @@ class SFMLGfx : public Gfx
 public:
     SFMLGfx(sf::RenderWindow &window);
 
-    ~SFMLGfx();
-
     virtual Rect measureText(const std::string &text);
 
     virtual void drawLine(int x, int y, int x2, int y2, const RGB &colour);

@@ -19,15 +19,7 @@ RGB RGB::GREEN(0.0f, 1.0f, 0.0f);
 
 SFMLGfx::SFMLGfx(sf::RenderWindow &window) : app(window)
 {
-    std::cout << "SFMLGfx" << std::endl;
 }
-
-SFMLGfx::~SFMLGfx()
-{
-    app.close();
-    std::cout << "~SFMLGfx" << std::endl;
-}
-
 
 Rect SFMLGfx::measureText(const std::string &inputText)
 {

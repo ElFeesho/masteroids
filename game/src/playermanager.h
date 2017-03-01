@@ -6,7 +6,6 @@
 #include "entity.h"
 #include "shipfactory.h"
 #include "bulletfactory.h"
-#include "bulletgenerator.h"
 #include "entitylist.h"
 #include "renderers/scorerenderer.h"
 #include "renderers/livesrenderer.h"

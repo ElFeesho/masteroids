@@ -72,7 +72,8 @@ PlayerManager::PlayerManager(int nplayerNumber, int lives, std::function<void()>
     playersLives = lives;
 
     player = shipFactory.createShip(playerColours[playerNumber-1], playerSpawnLocation);
-    directionController = new DirectionController(GamepadInputManager::sharedInstance().inputForPlayer(playerNumber-1), player->direction());
+    directionController = new DirectionController();
+    directionController->control(GamepadInputManager::sharedInstance().inputForPlayer(playerNumber-1), player->direction());
 
     fireHandler = new std::function<void()>([&]() {
         if (playerBullets.size() < Options::max_bullets)

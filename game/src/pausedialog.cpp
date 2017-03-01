@@ -25,7 +25,6 @@ void PauseDialog::render(Gfx &gfx)
 	renderer().render(gfx, position(), shape(), direction());
 }
 
-
 Position &PauseDialog::position()
 {
   return Position::NONE;

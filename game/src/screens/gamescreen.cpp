@@ -7,19 +7,17 @@ using std::stringstream;
 GameScreen::GameScreen(GameScreenListener &screenListener) :
         listener(screenListener),
         pauseEnt(GamepadInputManager::sharedInstance().inputForPlayer(0), this),
-        isPaused(false),
-        level(0),
-        pauseHandler(new std::function<void()>([&](){
+        pauseHandler([&](){
             isPaused = true;
             pauseEnt.shown();
-        }))
+        })
 {
 
 }
 
 void GameScreen::screenHidden()
 {
-    GamepadInputManager::sharedInstance().inputForPlayer(0).pause().removeUpHandler(pauseHandler.get());
+    GamepadInputManager::sharedInstance().inputForPlayer(0).pause().removeUpHandler(&pauseHandler);
 	asteroids.clear();
 
     isPaused = false;
@@ -28,7 +26,7 @@ void GameScreen::screenHidden()
 
 void GameScreen::screenShown()
 {
-    GamepadInputManager::sharedInstance().inputForPlayer(0).pause().addUpHandler(pauseHandler.get());
+    GamepadInputManager::sharedInstance().inputForPlayer(0).pause().addUpHandler(&pauseHandler);
 	generateLevel();
 }
 
@@ -46,14 +44,15 @@ void GameScreen::update(Gfx &gfx)
 	{
 		asteroids.updateAll();
 		asteroids.renderAll(gfx);
+        playerManager.updatePlayer(gfx);
 	}
 	else
 	{
 		asteroids.renderAll(gfx);
         pauseEnt.update();
         pauseEnt.render(gfx);
-	}
 
+	}
 }
 
 void GameScreen::ingameContinueSelected()

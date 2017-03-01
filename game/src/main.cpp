@@ -1,16 +1,11 @@
 
-#include "gfx/gfx.h"
-#include "gametime.h"
+#include <gfx/gfx.h>
+#include <gametime.h>
+
+#include "gfx/sfmlgfx.h"
 
 #include "input/gamepadinputmanager.h"
 #include "screenmanager.h"
-
-#ifndef __WII__
-
-#include "gfx/sfmlgfx.h"
-#include <SFML/System.hpp>
-
-#endif
 
 int main(int, char **)
 {
@@ -23,25 +18,23 @@ int main(int, char **)
     });
 
     SFMLGfx gfxWrapper(window);
-    GamepadInputManager::sharedInstance().initialise();
+    
     ScreenManager screenManager;
     bool shouldRun = true;
-	while(shouldRun && window.isOpen())
+	
+    sf::Event event;
+    while(shouldRun && window.isOpen())
 	{
         gfxWrapper.waitForVBlank();
         gfxWrapper.fillScreen(RGB::BLACK);
 
         GamepadInputManager::sharedInstance().poll();
+        
         shouldRun = screenManager.update(gfxWrapper);
         gfxWrapper.render();
+
 		GameTime::tick();
 
-        if (GamepadInputManager::sharedInstance().checkQuit())
-		{
-			break;
-		}
-
-        sf::Event event;
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed) {

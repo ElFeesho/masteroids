@@ -16,7 +16,6 @@
 #include "directioncontroller.h"
 
 #include "shipfactory.h"
-#include "bulletgenerator.h"
 #include "playermanager.h"
 
 class GameScreenListener
@@ -44,16 +43,18 @@ public:
 	void ingameQuitSelected();
 
 	void generateLevel();
-
 private:
+
 	AsteroidFactory asteroidFactory;
     GameScreenListener &listener;
 	EntityList asteroids;
     PauseDialog pauseEnt;
 
-	bool isPaused;
-	int level;
+    PlayerManager playerManager{0, 3, [](){}};
 
-    std::unique_ptr<std::function<void()>> pauseHandler;
+	bool isPaused { false };
+	int level { 0 };
+
+    std::function<void()> pauseHandler;
 };
 

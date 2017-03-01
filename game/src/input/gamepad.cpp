@@ -1,16 +1,6 @@
 #include <iostream>
 #include "gamepad.h"
 
-GamepadButton::GamepadButton()
-{
-    std::cout << "GamepadButton" << std::endl;
-}
-
-GamepadButton::~GamepadButton()
-{
-    std::cout << "~GamepadButton" << std::endl;
-}
-
 void GamepadButton::addDownHandler(std::function<void ()> *handler)
 {
     downHandlers.push_back(handler);
@@ -29,6 +19,11 @@ void GamepadButton::removeDownHandler(std::function<void ()> *handler)
 void GamepadButton::removeUpHandler(std::function<void ()> *handler)
 {
     upHandlers.erase(std::find(upHandlers.begin(), upHandlers.end(), handler));
+}
+
+void GamepadButton::removeAllHandlers() {
+    upHandlers.erase(upHandlers.begin(), upHandlers.end());
+    downHandlers.erase(downHandlers.begin(), downHandlers.end());
 }
 
 void GamepadButton::notifyDownHandlers()
