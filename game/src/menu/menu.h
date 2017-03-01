@@ -35,44 +35,29 @@ public:
 
     void render(Gfx &gfx) override;
 
+	Position &position() override;
+
+	Shape &shape() override;
+
+	Direction &direction() override;
+
+	AliveMonitor &aliveMonitor() override;
+
+	Renderer &renderer() override;
+
 	void incrementMenu();
 
 	void decrementMenu();
 
 	void handleMenuSelection();
 
-	Position &position() override
-	{
-		return Position::NONE;
-	}
-
-	Shape &shape() override
-	{
-		return Shape::NONE;
-	}
-
-	Direction &direction() override
-	{
-		return Direction::NONE;
-	}
-
-	AliveMonitor &aliveMonitor() override
-	{
-        return alwaysAliveMonitor;
-	}
-
-	Renderer &renderer() override
-	{
-		return menuRenderer;
-	}
-
 private:
     AlwaysAlive alwaysAliveMonitor;
 	MenuListener *listener;
 	MenuRenderer menuRenderer;
-	unsigned int menu_sel;
-	unsigned long next_change;
-	char ldir;
+	unsigned int menu_sel { 0 };
+	unsigned long next_change { 0 };
+	char ldir { -1 };
 };
 
 #endif

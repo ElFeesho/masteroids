@@ -20,37 +20,19 @@ class About : public MenuScreenItem
 public:
 	About(AboutListener *listener);
 
-	bool update() override
-	{
-		return aliveMonitor().alive();
-	}
+	bool update() override;
 
     void render(Gfx &gfx) override;
 
-	Position &position() override
-	{
-		return Position::NONE;
-	}
+	Position &position() override;
 
-	Shape &shape() override
-	{
-		return Shape::NONE;
-	}
+	Shape &shape() override;
 
-	Direction &direction() override
-	{
-		return Direction::NONE;
-	}
+	Direction &direction() override;
 
-	AliveMonitor &aliveMonitor() override
-	{
-        return alivemonitor;
-	}
+	AliveMonitor &aliveMonitor() override;
 
-	Renderer &renderer() override
-	{
-		return aboutRenderer;
-	}
+	Renderer &renderer() override;
 
     void menuScreenPresented() override;
 
@@ -58,7 +40,6 @@ public:
 
 private:
     AlwaysAlive alivemonitor;
-	AboutListener *listener;
 	AboutRenderer aboutRenderer;
 };
 

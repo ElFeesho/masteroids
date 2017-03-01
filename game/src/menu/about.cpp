@@ -5,12 +5,41 @@
 
 static std::function<void()> aboutFinishHandler;
 
-About::About(AboutListener *nlistener) : listener(nlistener), aboutRenderer(AboutRenderer())
+About::About(AboutListener *nlistener)
 {
-    std::cout << "About" << std::endl;
-    aboutFinishHandler = [this](){
-		this->listener->aboutClosed();
+    aboutFinishHandler = [nlistener](){
+		nlistener->aboutClosed();
 	};
+}
+
+bool About::update()
+{
+	return aliveMonitor().alive();
+}
+
+Position &About::position()
+{
+	return Position::NONE;
+}
+
+Shape &About::shape()
+{
+	return Shape::NONE;
+}
+
+Direction &About::direction()
+{
+	return Direction::NONE;
+}
+
+AliveMonitor &About::aliveMonitor()
+{
+    return alivemonitor;
+}
+
+Renderer &About::renderer()
+{
+	return aboutRenderer;
 }
 
 void About::render(Gfx &gfx)

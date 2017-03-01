@@ -13,8 +13,7 @@ static std::function<void()> downPressHandler;
 static std::function<void()> upReleaseHandler;
 static std::function<void()> downReleaseHandler;
 
-Menu::Menu(MenuListener *nlistener)
-        : listener(nlistener), menuRenderer(MenuRenderer()), menu_sel(0), next_change(0), ldir(-1) {
+Menu::Menu(MenuListener *nlistener): listener(nlistener) {
     std::cout << "Menu" << std::endl;
     firePressHandler = [&]() {
         next_change = 0;
@@ -31,7 +30,6 @@ Menu::Menu(MenuListener *nlistener)
     downPressHandler = [&]() {
         ldir = 1;
         incrementMenu();
-
         next_change = GameTime::getMillis() + 500;
     };
 
@@ -94,6 +92,31 @@ bool Menu::update() {
 
 void Menu::render(Gfx &gfx) {
     renderer().render(gfx, position(), shape(), direction());
+}
+
+Position &Menu::position()
+{
+    return Position::NONE;
+}
+
+Shape &Menu::shape()
+{
+    return Shape::NONE;
+}
+
+Direction &Menu::direction()
+{
+    return Direction::NONE;
+}
+
+AliveMonitor &Menu::aliveMonitor()
+{
+    return alwaysAliveMonitor;
+}
+
+Renderer &Menu::renderer()
+{
+    return menuRenderer;
 }
 
 void Menu::incrementMenu() {
