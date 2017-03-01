@@ -25,34 +25,19 @@ public:
 
     void shown();
 
-	bool update();
+	bool update() override;
 
-    void render(Gfx &gfx);
+    void render(Gfx &gfx) override;
 
-	Position &position()
-	{
-		return Position::NONE;
-	}
+	Position &position() override;
 
-	Shape &shape()
-	{
-		return Shape::NONE;
-	}
+	Shape &shape() override;
 
-	Direction &direction()
-	{
-		return Direction::NONE;
-	}
+	Direction &direction() override;
 
-	AliveMonitor &aliveMonitor()
-	{
-        return alwaysAliveMonitor;
-	}
+	AliveMonitor &aliveMonitor() override;
 
-	Renderer &renderer()
-	{
-		return pauseDialogRenderer;
-	}
+	Renderer &renderer() override;
 
 	void reset();
 
@@ -61,7 +46,7 @@ private:
 	GamepadSource &gamepad;
 	PauseDialogListener *listener;
 	PauseDialogRenderer pauseDialogRenderer;
-	int menu_sel;
+	int menu_sel { 0 };
 	void highlightMenu(int menuSelection);
 
 	std::function<void()> leftHandler{

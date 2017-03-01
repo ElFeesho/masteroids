@@ -1,6 +1,4 @@
-#ifndef ELAPSEDTIMETOLIVE_H
-#define ELAPSEDTIMETOLIVE_H
-
+#pragma once
 #include "alivemonitor.h"
 
 class ElapsedTimeToLive : public AliveMonitor
@@ -13,5 +11,3 @@ public:
 private:
 	unsigned long ttl;
 };
-
-#endif // ELAPSEDTIMETOLIVE_H

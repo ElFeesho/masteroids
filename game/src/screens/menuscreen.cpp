@@ -1,5 +1,9 @@
 #include "menuscreen.h"
 
+#include <gametime.h>
+
+#include "debrisfountain.h"
+
 MenuScreen::MenuScreen(MenuScreenListener &menuScreenListener) : menuListener(menuScreenListener), menuScreen(this), optionsScreen(this), controllerConfigScreen(this), aboutScreen(this)
 {
     for (int i = 0; i < 16; i++)

@@ -4,11 +4,8 @@
 
 PauseDialog::PauseDialog(GamepadSource &ngamepad, PauseDialogListener *nlistener)
         : gamepad(ngamepad),
-          listener(nlistener),
-          pauseDialogRenderer(),
-          menu_sel(0)
+          listener(nlistener)
 {
-    std::cout << "PauseDialog::CTOR" << std::endl;
 }
 
 void PauseDialog::shown()
@@ -26,6 +23,32 @@ bool PauseDialog::update()
 void PauseDialog::render(Gfx &gfx)
 {
 	renderer().render(gfx, position(), shape(), direction());
+}
+
+
+Position &PauseDialog::position()
+{
+  return Position::NONE;
+}
+
+Shape &PauseDialog::shape()
+{
+  return Shape::NONE;
+}
+
+Direction &PauseDialog::direction()
+{
+  return Direction::NONE;
+}
+
+AliveMonitor &PauseDialog::aliveMonitor()
+{
+      return alwaysAliveMonitor;
+}
+
+Renderer &PauseDialog::renderer()
+{
+  return pauseDialogRenderer;
 }
 
 void PauseDialog::reset() {
