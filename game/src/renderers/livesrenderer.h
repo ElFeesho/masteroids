@@ -11,16 +11,8 @@ class LivesRenderer : public Renderer
 public:
     void render(Gfx &gfx, Position &position, Shape &shape, Direction &direction, RGB &colour = RGB::WHITE) const override;
 
-	void setLives(int nliveCount)
-	{
-		this->liveCount = nliveCount;
-	}
-
-	void setAlignment(TextAlignment nalignment)
-	{
-		this->alignment = nalignment;
-	}
-
+	void setLives(int nliveCount);
+	void setAlignment(TextAlignment nalignment);
 private:
 	int liveCount;
 	TextAlignment alignment;

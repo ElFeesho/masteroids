@@ -9,3 +9,13 @@ void LivesRenderer::render(Gfx &gfx, Position &position, Shape &, Direction &, R
 	sstream << "LIVES: " << liveCount;
     gfx.drawText(false, position.X(), position.Y() + gfx.measureText(sstream.str()).h + 3, sstream.str(), colour, alignment);
 }
+
+void LivesRenderer::setLives(int nliveCount)
+{
+	this->liveCount = nliveCount;
+}
+
+void LivesRenderer::setAlignment(TextAlignment nalignment)
+{
+	this->alignment = nalignment;
+}
