@@ -5,12 +5,23 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -g -fPIC -Wall -O0 -W -Wshado
 set(SOURCES 
 	src/engine.cpp
 	src/position.cpp
-	include/position.h
+	src/alivemonitor.cpp
 	src/shape.cpp
-	include/shape.h
 	src/direction.cpp
-	include/direction.h)
+	src/gametime.cpp
+	src/entitylist.cpp)
 
-add_library(engine ${SOURCES})
+set(HEADERS 
+	include/shape.h
+	include/position.h
+	include/direction.h
+	include/vector.h
+	include/movers/mover.h
+	include/entity.h
+	include/alivemonitor.h
+	include/gametime.h
+	include/entitylist.h)
+
+add_library(engine ${SOURCES} ${HEADERS})
 
 target_include_directories(engine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)

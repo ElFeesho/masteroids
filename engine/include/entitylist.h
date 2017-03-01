@@ -1,5 +1,4 @@
-#ifndef __ENTITYLIST_H__
-#define __ENTITYLIST_H__
+#pragma once
 
 #include <vector>
 #include <functional>
@@ -12,8 +11,6 @@ class Gfx;
 class EntityList
 {
 public:
-	EntityList() {}
-
 	void add(Entity *entity);
 
 	void updateAll();
@@ -35,5 +32,3 @@ public:
 private:
     std::vector<std::unique_ptr<Entity>> entities;
 };
-
-#endif

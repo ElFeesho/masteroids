@@ -8,6 +8,7 @@
 #ifndef __WII__
 
 #include "gfx/sfmlgfx.h"
+#include <SFML/System.hpp>
 
 #endif
 
@@ -15,6 +16,10 @@ int main(int, char **)
 {
     sf::RenderWindow window(sf::VideoMode(1280, 960), "Masteroids", sf::Style::Close);
     window.setVerticalSyncEnabled(true);
+    GameTime::setTimeProvider([](){
+        static sf::Clock clockTime;
+        return clockTime.getElapsedTime().asMilliseconds();
+    });
     SFMLGfx gfxWrapper(window);
     GamepadInputManager::sharedInstance().initialise();
     ScreenManager screenManager;

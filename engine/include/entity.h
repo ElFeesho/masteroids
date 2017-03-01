@@ -1,9 +1,9 @@
 #ifndef __ENTITY_H__
 #define __ENTITY_H__
 
-#include "position.h"
-#include "shape.h"
-#include "direction.h"
+#include <position.h>
+#include <shape.h>
+#include <direction.h>
 #include "alivemonitor.h"
 #include <renderer.h>
 

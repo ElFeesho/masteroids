@@ -1,7 +1,7 @@
 #pragma once
 
-#include "mover.h"
-#include "vector.h"
+#include <movers/mover.h>
+#include <vector.h>
 #include "gametime.h"
 
 #include <iostream>

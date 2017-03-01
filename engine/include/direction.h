@@ -8,6 +8,12 @@ public:
 	{
 	}
 
+	void set(Direction &other) {
+		speed = other.speed;
+		angle = other.angle;
+		spin = other.spin;
+	}
+
 	double Speed()
 	{
 		return speed;

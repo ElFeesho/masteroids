@@ -32,7 +32,6 @@ set(SOURCE_FILES
     src/shipfactory.h
     src/directioncontroller.h
     src/libwiiwrap/ogcsys.h
-    src/movers/bulletmover.h
     src/movers/fixeddirectionmover.cpp
     src/movers/fixeddirectionmover.h
     src/movers/shipmover.h
@@ -56,9 +55,6 @@ set(SOURCE_FILES
     src/actor.cpp
     src/actor.h
     src/asteroidfactory.h
-    src/alivemonitor.cpp
-    src/movers/bulletmover.cpp
-    src/alivemonitor.h
     src/menu/controlconf.cpp
     src/menu/controlconf.h
     src/debris.cpp
@@ -67,9 +63,6 @@ set(SOURCE_FILES
     src/debrisfountain.h
     src/elapsedtimetolive.cpp
     src/elapsedtimetolive.h
-    src/entity.h
-    src/entitylist.cpp
-    src/entitylist.h
     src/font5.h
     src/gameover.cpp
     src/gameover.h
@@ -92,18 +85,14 @@ set(SOURCE_FILES
     src/menu/menu.h
     src/screens/menuscreen.cpp
     src/screens/menuscreen.h
-    src/movers/mover.h
     src/menu/options.cpp
     src/menu/options.h
     src/screens/screen.h
     src/screenmanager.cpp
     src/screenmanager.h
-    src/gametime.cpp
-    src/gametime.h
     src/gfx/sfmlgfx.cpp
     src/gfx/sfmlgfx.h
-    src/asteroidfactory.cpp
-    src/vector.h)
+    src/asteroidfactory.cpp)
 
 include_directories("src/libwiiwrap")
 include_directories("src/")

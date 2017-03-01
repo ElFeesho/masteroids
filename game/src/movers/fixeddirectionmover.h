@@ -7,8 +7,6 @@
 class FixedDirectionMover : public Mover
 {
 public:
-	FixedDirectionMover();
-
 	void move(Direction &direction, Position &position, Shape &shape) override;
 
 	virtual void reset() override;
