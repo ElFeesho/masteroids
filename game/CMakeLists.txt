@@ -24,8 +24,6 @@ set(SOURCE_FILES
     src/input/keyboardsource.h
     src/shipfactory.h
     src/directioncontroller.h
-    src/movers/fixeddirectionmover.cpp
-    src/movers/fixeddirectionmover.h
     src/movers/shipmover.h
     src/movers/shipmover.cpp
     src/renderers/aboutrenderer.h

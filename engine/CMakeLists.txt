@@ -3,13 +3,13 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -g -fPIC -Wall -O0 -W -Wshado
                                                                    -Wno-deprecated -Woverloaded-virtual -Wwrite-strings")
 
 set(SOURCES 
-	src/engine.cpp
 	src/position.cpp
 	src/alivemonitor.cpp
 	src/shape.cpp
 	src/direction.cpp
 	src/gametime.cpp
-	src/entitylist.cpp)
+	src/entitylist.cpp
+	src/fixeddirectionmover.cpp)
 
 set(HEADERS 
 	include/shape.h
@@ -17,6 +17,7 @@ set(HEADERS
 	include/direction.h
 	include/vector.h
 	include/movers/mover.h
+	include/movers/fixeddirectionmover.h
 	include/entity.h
 	include/alivemonitor.h
 	include/gametime.h

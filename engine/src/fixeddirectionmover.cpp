@@ -1,5 +1,5 @@
-#include "fixeddirectionmover.h"
-#include "gametime.h"
+#include <movers/fixeddirectionmover.h>
+#include <gametime.h>
 #include <cmath>
 
 void FixedDirectionMover::move(Direction &direction, Position &position, Shape &) {
