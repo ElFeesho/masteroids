@@ -3,10 +3,8 @@
 #include "entitylist.h"
 #include <movers/fixeddirectionmover.h>
 #include "renderers/debrisrender.h"
-#include "direction.h"
-#include "position.h"
-
-#include "debris.h"
+#include <direction.h>
+#include <position.h>
 
 class DebrisFountain
 {

@@ -47,8 +47,6 @@ set(SOURCE_FILES
     src/asteroidfactory.h
     src/menu/controlconf.cpp
     src/menu/controlconf.h
-    src/debris.cpp
-    src/debris.h
     src/debrisfountain.cpp
     src/debrisfountain.h
     src/elapsedtimetolive.cpp
