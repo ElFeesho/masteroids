@@ -21,13 +21,17 @@ void GameScreen::screenHidden()
 	asteroids.clear();
 
     isPaused = false;
-    level = 1;
+    level = 0;
+
+    playerManager.shutdown();
 }
 
 void GameScreen::screenShown()
 {
     GamepadInputManager::sharedInstance().inputForPlayer(0).pause().addUpHandler(&pauseHandler);
 	generateLevel();
+
+    playerManager.reset();
 }
 
 void GameScreen::generateLevel()
@@ -43,8 +47,43 @@ void GameScreen::update(Gfx &gfx)
 	if (!isPaused)
 	{
 		asteroids.updateAll();
-		asteroids.renderAll(gfx);
+		debris.updateAll();
+        debris.renderAll(gfx);
+        asteroids.renderAll(gfx);
+
         playerManager.updatePlayer(gfx);
+
+        playerManager.bulletsForPlayer().checkCollisions(asteroids, [&](Entity *bullet, Entity *asteroid) {
+
+            if (asteroid->shape().Radius()>10.f) {
+                asteroids.add(asteroidFactory.createAsteroid(asteroid->shape().Radius()-8.f, asteroid->position()));
+                asteroids.add(asteroidFactory.createAsteroid(asteroid->shape().Radius()-8.f, asteroid->position()));
+                asteroids.add(asteroidFactory.createAsteroid(asteroid->shape().Radius()-8.f, asteroid->position()));
+                asteroids.add(asteroidFactory.createAsteroid(asteroid->shape().Radius()-8.f, asteroid->position()));
+            }
+            
+            debrisFountain.projectDebris(debris, asteroid->direction(), asteroid->position(), M_PI_2/2.f, 8, RGB::WHITE, asteroid->shape().Radius()/2.f);
+
+            playerManager.updatePlayerScore(100 - asteroid->shape().Radius());
+
+            asteroids.removeEntity(asteroid);
+
+            playerManager.bulletsForPlayer().removeEntity(bullet);
+        });
+
+        playerManager.checkCollisionsWithPlayers(asteroids, [&](Entity *, Entity *asteroid) {
+            playerManager.killPlayer();
+            if (asteroid->shape().Radius()>10.f) {
+                asteroids.add(asteroidFactory.createAsteroid(asteroid->shape().Radius()-8.f, asteroid->position()));
+                asteroids.add(asteroidFactory.createAsteroid(asteroid->shape().Radius()-8.f, asteroid->position()));
+                asteroids.add(asteroidFactory.createAsteroid(asteroid->shape().Radius()-8.f, asteroid->position()));
+                asteroids.add(asteroidFactory.createAsteroid(asteroid->shape().Radius()-8.f, asteroid->position()));
+            }
+
+            debrisFountain.projectDebris(debris, asteroid->direction(), asteroid->position(), M_PI_2/2.f, 8, RGB::WHITE, asteroid->shape().Radius()/2.f);
+
+            asteroids.removeEntity(asteroid);
+        });
 	}
 	else
 	{

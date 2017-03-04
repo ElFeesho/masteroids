@@ -48,9 +48,15 @@ private:
 	AsteroidFactory asteroidFactory;
     GameScreenListener &listener;
 	EntityList asteroids;
+	EntityList debris;
     PauseDialog pauseEnt;
+    DebrisFountain debrisFountain;
 
-    PlayerManager playerManager{0, 3, [](){}};
+    std::function<void()> gameOverHandler = [&](){
+    	listener.gameScreenShouldShowGameOverScreen();
+    };
+
+    PlayerManager playerManager{0, 3, gameOverHandler};
 
 	bool isPaused { false };
 	int level { 0 };

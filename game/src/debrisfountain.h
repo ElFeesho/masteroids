@@ -9,7 +9,7 @@
 class DebrisFountain
 {
 public:
-	void projectDebris(EntityList &entityList, Direction direction, Position from, double spread, int amount, RGB &colour);
+	void projectDebris(EntityList &entityList, Direction direction, Position from, double spread, int amount, RGB &colour, float size);
 private:
 	FixedDirectionMover mover;
 	DebrisRenderer renderer;

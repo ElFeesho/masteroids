@@ -7,7 +7,7 @@
 #include <cstdlib>
 #include <cmath>
 
-void DebrisFountain::projectDebris(EntityList &entityList, Direction direction, Position from, double spread, int amount, RGB &colour)
+void DebrisFountain::projectDebris(EntityList &entityList, Direction direction, Position from, double spread, int amount, RGB &colour, float size)
 {
 	double startAngle = direction.Angle() - spread / 2.0;
 
@@ -19,7 +19,7 @@ void DebrisFountain::projectDebris(EntityList &entityList, Direction direction, 
 		Actor *actor = new Actor(colour, mover, renderer, std::unique_ptr<ElapsedTimeToLive>(new ElapsedTimeToLive(1000)));
 		actor->position().set(from.X(), from.Y(), from.Rotation());
 		actor->direction().set(debrisDirection);
-		actor->shape().Radius(5);
+		actor->shape().Radius(size);
 
 		entityList.add(actor);
 	}

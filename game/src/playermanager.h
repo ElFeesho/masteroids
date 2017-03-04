@@ -11,6 +11,19 @@
 #include "renderers/livesrenderer.h"
 #include "directioncontroller.h"
 
+#include <iostream>
+class MemWatch {
+public:
+    MemWatch() = default;
+    MemWatch(MemWatch&) = default;
+    MemWatch(MemWatch&&) = default;
+    MemWatch &operator=(MemWatch&) = default;
+    MemWatch &operator=(MemWatch&&) = default;
+    ~MemWatch() {
+        std::cout << "DTORRED" << std::endl;
+    }
+};
+
 class PlayerManager
 {
 public:
@@ -34,12 +47,13 @@ public:
 
 	void shutdown();
 
+    void reset();
+
 private:
     int playerNumber;
 	BulletFactory bulletFactory;
 
     DirectionController *directionController;
-	int playingPlayers;
 
     Actor *player;
 
@@ -56,6 +70,7 @@ private:
 	ScoreRenderer scoreRenderer;
 
 	std::function<void()> gameOverCallback;
+    MemWatch w;
 };
 
 

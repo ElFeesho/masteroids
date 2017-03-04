@@ -76,7 +76,7 @@ PlayerManager::PlayerManager(int nplayerNumber, int lives, std::function<void()>
     directionController->control(GamepadInputManager::sharedInstance().inputForPlayer(playerNumber-1), player->direction());
 
     fireHandler = new std::function<void()>([&]() {
-        if (playerBullets.size() < Options::max_bullets)
+        if (playerBullets.size() < Options::max_bullets && player->isVisible())
         {
             Direction bulletDir(5.0f, player->direction().Angle());
             playerBullets.add(bulletFactory.createBullet(RGB::GREEN, bulletDir, player->position()));
@@ -95,9 +95,28 @@ void PlayerManager::checkPlayerBulletCollisions(PlayerManager &playerManager)
     });
 }
 
+void PlayerManager::reset() {
+    for (int i = 0; i < Options::players; i++)
+    {
+        playersLives = 3;
+        playerBullets.clear();
+        playerScore = 0;
+
+        player->position().X(playerSpawnLocation.X());
+        player->position().Y(playerSpawnLocation.Y());
+        player->position().Rotation(playerSpawnLocation.Rotation());
+        player->direction().Angle(playerSpawnLocation.Rotation());
+        player->direction().Speed(0);
+        player->setVisible(true);
+        player->mover().reset();
+        
+        GamepadInputManager::sharedInstance().inputForPlayer(0).fire().addDownHandler(fireHandler);
+    }
+}
+
 void PlayerManager::shutdown()
 {
-    for (int i = 0; i < playingPlayers; i++)
+    for (int i = 0; i < Options::players; i++)
     {
         playersLives = 0;
         playerBullets.clear();
@@ -123,7 +142,6 @@ void PlayerManager::updatePlayer(Gfx &gfx)
     player->render(gfx);
     playerBullets.updateAll();
     playerBullets.renderAll(gfx);
-
 
     scoreRenderer.setScore(playerScore);
     livesRenderer.setLives(playersLives);
