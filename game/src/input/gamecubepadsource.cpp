@@ -34,8 +34,6 @@ GamepadButton &GamecubePadSource::pause()
 
 void GamecubePadSource::poll()
 {
-
-
 	if (PAD_ButtonsDown(padNumber) & PAD_BUTTON_UP)
 	{
 		upButton.notifyDownHandlers();

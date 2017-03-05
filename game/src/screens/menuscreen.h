@@ -25,8 +25,6 @@ class MenuScreen : public Screen, public AboutListener, public ControlConfListen
 public:
     MenuScreen(MenuScreenListener &menuScreenListener);
 
-	~MenuScreen();
-
     void update(Gfx &gfx);
 
 	void setListener(ScreenListener *listener);
@@ -65,7 +63,6 @@ private:
     Options optionsScreen;
     ControlConf controllerConfigScreen;
     About aboutScreen;
-
 };
 
 #endif

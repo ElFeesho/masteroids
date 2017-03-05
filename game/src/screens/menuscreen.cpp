@@ -12,10 +12,6 @@ MenuScreen::MenuScreen(MenuScreenListener &menuScreenListener) : menuListener(me
     }
 }
 
-MenuScreen::~MenuScreen() {
-    entityList.clear();
-}
-
 void MenuScreen::screenShown()
 {
     activeMenu = &menuScreen;
