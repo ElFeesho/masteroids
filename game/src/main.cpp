@@ -9,18 +9,21 @@
 
 int main(int, char **)
 {
+    sf::RenderWindow window(sf::VideoMode(1280, 960), "Masteroids", sf::Style::Close);
+    window.setVerticalSyncEnabled(true);
     
     GameTime::setTimeProvider([](){
         static sf::Clock clockTime;
         return clockTime.getElapsedTime().asMilliseconds();
     });
 
-    SFMLGfx gfxWrapper;
+    SFMLGfx gfxWrapper(window);
     
     ScreenManager screenManager;
     bool shouldRun = true;
-    
-    while(shouldRun)
+	
+    sf::Event event;
+    while(shouldRun && window.isOpen())
 	{
         gfxWrapper.waitForVBlank();
         gfxWrapper.fillScreen(RGB::BLACK);
@@ -31,6 +34,13 @@ int main(int, char **)
         gfxWrapper.render();
 
 		GameTime::tick();
+
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            }
+        }
 	}
 
 	return 0;

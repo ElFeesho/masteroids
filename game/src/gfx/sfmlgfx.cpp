@@ -8,9 +8,6 @@
 
 #ifdef MACOSX
 #include "resources.h"
-const float scale = 2.0f;
-#else
-static const float scale = 1.0f;
 #endif
 
 RGB RGB::WHITE(1.0f, 1.0f, 1.0f);
@@ -20,9 +17,8 @@ RGB RGB::BLACK(0.0f, 0.0f, 0.0f);
 RGB RGB::PURPLE(1.0f, 0.0f, 1.0f);
 RGB RGB::GREEN(0.0f, 1.0f, 0.0f);
 
-SFMLGfx::SFMLGfx() : app(sf::VideoMode(640*scale, 480*scale), "Masteroids", sf::Style::Close)
+SFMLGfx::SFMLGfx(sf::RenderWindow &window) : app(window)
 {
-    app.setVerticalSyncEnabled(true);
 }
 
 Rect SFMLGfx::measureText(const std::string &inputText)
@@ -32,11 +28,11 @@ Rect SFMLGfx::measureText(const std::string &inputText)
 #ifdef MACOSX
     font.loadFromFile(Resources::regularFontLocation());
 #else
-    font.loadFromFile("../../game/resources/regularfont.ttf");
+    font.loadFromFile("regularfont.ttf");
 #endif
     text.setFont(font);
     text.setString(inputText);
-    text.setCharacterSize(2 * 14);
+    text.setCharacterSize(2*14);
     const sf::FloatRect &rect = text.getLocalBounds();
 
     return Rect(0, 0, rect.width, rect.height);
@@ -46,8 +42,7 @@ void SFMLGfx::drawLine(int x, int y, int x2, int y2, const RGB &colour)
 {
 
     sf::Vertex vertices[] = {
-            sf::Vertex(sf::Vector2f(x*scale, y*scale), sf::Color(colour.getR()*255.0f, colour.getG()*255.0f, colour.getB()*255.0f)), 
-            sf::Vertex(sf::Vector2f(x2*scale, y2*scale),sf::Color(colour.getR()*255.0f, colour.getG()*255.0f, colour.getB()*255.0f))
+            sf::Vertex(sf::Vector2f(x*2, y*2), sf::Color(colour.getR()*255.0f, colour.getG()*255.0f, colour.getB()*255.0f)), sf::Vertex(sf::Vector2f(x2*2, y2*2),sf::Color(colour.getR()*255.0f, colour.getG()*255.0f, colour.getB()*255.0f))
     };
 
     app.draw(vertices, 2, sf::Lines);
@@ -65,7 +60,7 @@ void SFMLGfx::drawText(bool bold, int x, int y, const std::string &textString, c
 #ifdef MACOSX
     font.loadFromFile(bold ? Resources::boldFontLocation():Resources::regularFontLocation());
 #else
-    font.loadFromFile(bold ? "../../game/resources/boldfont.ttf":"../../game/resources/regularfont.ttf");
+    font.loadFromFile(bold ? "boldfont.ttf":"regularfont.ttf");
 #endif
     text.setFont(font);
     text.setString(textString);
@@ -74,15 +69,15 @@ void SFMLGfx::drawText(bool bold, int x, int y, const std::string &textString, c
     float textSize = text.getLocalBounds().width;
     if(align == TextAlignment::CENTRE)
     {
-        text.setPosition(sf::Vector2f((x-textSize/2.0f)*scale, y*scale));
+        text.setPosition(sf::Vector2f((x-textSize/2.0f)*2, y*2));
     }
     else if (align == TextAlignment::RIGHT)
     {
-        text.setPosition(sf::Vector2f((x-textSize)*scale, y*scale));
+        text.setPosition(sf::Vector2f((x-textSize)*2, y*2));
     }
     else
     {
-        text.setPosition(sf::Vector2f(x*scale, y*scale));
+        text.setPosition(sf::Vector2f(x*2, y*2));
     }
 
     app.draw(text);
@@ -90,8 +85,8 @@ void SFMLGfx::drawText(bool bold, int x, int y, const std::string &textString, c
 
 void SFMLGfx::drawRect(int x, int y, int w, int h, const RGB &colour)
 {
-    sf::RectangleShape shape(sf::Vector2f(w*scale, h*scale));
-    shape.setPosition(sf::Vector2f(x*scale, y*scale));
+    sf::RectangleShape shape(sf::Vector2f(w*2, h*2));
+    shape.setPosition(sf::Vector2f(x*2, y*2));
     shape.setFillColor(sf::Color::Transparent);
     shape.setOutlineThickness(5);
     shape.setOutlineColor(sf::Color(colour.getR()*255.0f, colour.getG()*255.0f, colour.getB() *255.0f, 255));
@@ -128,8 +123,8 @@ void SFMLGfx::drawImg(int x, int y, int w, int h, const unsigned short *pixels)
 
     sf::Sprite sprite;
     sprite.setTexture(textureLookup[pixels]);
-    sprite.setScale(sf::Vector2f(scale, scale));
-    sprite.move(sf::Vector2f(x*scale, y*scale));
+    sprite.setScale(sf::Vector2f(2.0f, 2.0f));
+    sprite.move(sf::Vector2f(x*2, y*2));
 
     app.draw(sprite);
 }
@@ -145,3 +140,5 @@ void SFMLGfx::waitForVBlank()
 }
 
 #endif
+
+

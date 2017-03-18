@@ -6,7 +6,7 @@
 class SFMLGfx : public Gfx
 {
 public:
-    SFMLGfx();
+    SFMLGfx(sf::RenderWindow &window);
 
     virtual Rect measureText(const std::string &text);
 
@@ -24,5 +24,5 @@ public:
 
     virtual void waitForVBlank();
 private:
-    sf::RenderWindow app;
+    sf::RenderWindow &app;
 };
