@@ -29,7 +29,7 @@ set(SOURCE_FILES
     src/renderers/asteroidrenderer.cpp
     src/renderers/bulletrenderer.h
     src/renderers/bulletrenderer.cpp
-    src/renderers/debrisrender.h
+        src/renderers/debrisrenderer.h
     src/renderers/menurenderer.h
     src/renderers/optionsrenderer.cpp
     src/renderers/optionsrenderer.h
@@ -76,7 +76,7 @@ set(SOURCE_FILES
     src/screenmanager.h
     src/gfx/sfmlgfx.cpp
     src/gfx/sfmlgfx.h
-    src/asteroidfactory.cpp src/renderers/aboutrenderer.cpp)
+    src/asteroidfactory.cpp src/renderers/aboutrenderer.cpp src/renderers/debrisrenderer.cpp src/renderers/menurenderer.cpp src/bulletfactory.cpp src/directioncontroller.cpp src/shipfactory.cpp)
 
 include_directories("src/")
 

@@ -21,11 +21,11 @@ static void renderAt(Gfx &gfx, double x, double y, double radius, double rotatio
 	double brx = cx + cos(rotation + M_PI * 0.75) * radius;
 	double bry = cy + sin(rotation + M_PI * 0.75) * radius;
 
-    gfx.drawLine(cx, cy, blx, bly, colour);
-    gfx.drawLine(cx, cy, brx, bry, colour);
+    gfx.drawLine((int) cx, (int) cy, (int) blx, (int) bly, colour);
+    gfx.drawLine((int) cx, (int) cy, (int) brx, (int) bry, colour);
 
-    gfx.drawLine(blx, bly, tpx, tpy, colour);
-    gfx.drawLine(brx, bry, tpx, tpy, colour);
+    gfx.drawLine((int)blx, (int)bly, (int)tpx, (int)tpy, colour);
+    gfx.drawLine((int)brx, (int)bry, (int)tpx, (int)tpy, colour);
 }
 
 

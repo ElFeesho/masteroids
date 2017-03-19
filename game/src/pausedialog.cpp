@@ -40,12 +40,12 @@ Direction &PauseDialog::direction()
   return Direction::NONE;
 }
 
-AliveMonitor &PauseDialog::aliveMonitor()
+const AliveMonitor & PauseDialog::aliveMonitor()
 {
       return alwaysAliveMonitor;
 }
 
-Renderer &PauseDialog::renderer()
+const Renderer & PauseDialog::renderer()
 {
   return pauseDialogRenderer;
 }

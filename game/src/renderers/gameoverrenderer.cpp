@@ -29,11 +29,11 @@ void GameOverRenderer::render(Gfx &gfx, Position &, Shape &, Direction &, RGB &)
 			//sprintf(score, "Player %d Score: %d",i+1,Ship::scores[i]);
 			//if(Ship::scores[i]==highest)
 			{
-                gfx.drawText(false, 320, (480 - game_over_height) / 2 + 50 + (textHeight * i + 20), score, RGB::YELLOW, TextAlignment::CENTRE);
+                gfx.drawText(false, 320, (int) ((480 - game_over_height) / 2 + 50 + (textHeight * i + 20)), score, RGB::YELLOW, TextAlignment::CENTRE);
 			}
 			//else
 			{
-                gfx.drawText(false, 320, (480 - game_over_height) / 2 + 50 + (textHeight * i + 10), score, RGB::WHITE, TextAlignment::CENTRE);
+                gfx.drawText(false, 320, (int) ((480 - game_over_height) / 2 + 50 + (textHeight * i + 10)), score, RGB::WHITE, TextAlignment::CENTRE);
 			}
 		}
 	}

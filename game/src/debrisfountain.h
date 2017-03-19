@@ -2,7 +2,7 @@
 
 #include "entitylist.h"
 #include <movers/fixeddirectionmover.h>
-#include "renderers/debrisrender.h"
+#include "renderers/debrisrenderer.h"
 #include <direction.h>
 #include <position.h>
 

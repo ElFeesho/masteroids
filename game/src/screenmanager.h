@@ -1,5 +1,4 @@
-#ifndef __SCREENMANAGER_H__
-#define __SCREENMANAGER_H__
+#pragma once
 
 #include <memory>
 
@@ -36,4 +35,3 @@ private:
     bool shouldRun { true };
 };
 
-#endif

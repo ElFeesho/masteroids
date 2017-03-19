@@ -21,9 +21,9 @@ public:
 
 	Direction &direction() override;
 
-	AliveMonitor &aliveMonitor() override;
+	const AliveMonitor & aliveMonitor() override;
 
-	Renderer &renderer() override;
+	const Renderer & renderer() override;
 
 	GameOverRenderer gameOverRenderer;
 private:

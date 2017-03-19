@@ -1,5 +1,4 @@
-#ifndef __PLAYERMANAGER_H__
-#define __PLAYERMANAGER_H__
+#pragma once
 
 #include <functional>
 #include "gfx/gfx.h"
@@ -31,9 +30,7 @@ public:
 
     void killPlayer();
 
-	void killPlayer(Entity *player);
-
-    void respawnShip();
+	void respawnShip();
 
     void updatePlayer(Gfx &gfx);
 
@@ -72,6 +69,3 @@ private:
 	std::function<void()> gameOverCallback;
     MemWatch w;
 };
-
-
-#endif

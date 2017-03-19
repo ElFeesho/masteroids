@@ -7,7 +7,7 @@ void PauseDialogRenderer::setMenuSelection(int menuSelection)
 
 void PauseDialogRenderer::render(Gfx &gfx, Position &, Shape &, Direction &, RGB &) const
 {
-	static int titleWidth = gfx.measureText("Quit Current Game?").w;
+	static int titleWidth = (int) gfx.measureText("Quit Current Game?").w;
 
 	int dialogWidth = 400;
 	int dialogHeight = 100;

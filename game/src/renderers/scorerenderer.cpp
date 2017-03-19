@@ -8,7 +8,7 @@ void ScoreRenderer::render(Gfx &gfx, Position &position, Shape &, Direction &, R
 {
 	stringstream sstream;
 	sstream << "SCORE: " << score;
-    gfx.drawText(false, position.X(), position.Y(), sstream.str(), colour, alignment);
+    gfx.drawText(false, (int) position.X(), (int) position.Y(), sstream.str(), colour, alignment);
 }
 
 void ScoreRenderer::setScore(int nscore)
