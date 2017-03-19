@@ -76,7 +76,7 @@ set(SOURCE_FILES
     src/screenmanager.h
     src/gfx/sfmlgfx.cpp
     src/gfx/sfmlgfx.h
-    src/asteroidfactory.cpp)
+    src/asteroidfactory.cpp src/renderers/aboutrenderer.cpp)
 
 include_directories("src/")
 
