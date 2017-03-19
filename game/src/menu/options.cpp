@@ -46,6 +46,14 @@ void Options::menuScreenHidden() {
     gamepadSource.down().removeUpHandler(&buttonReleased);
 }
 
+const AliveMonitor &Options::aliveMonitor() {
+    return alwaysAliveMonitor;
+}
+
+const Renderer &Options::renderer() {
+    return optionsRenderer;
+}
+
 bool Options::update()
 {
     if (child != nullptr)
@@ -60,15 +68,29 @@ bool Options::update()
 
 	return alive;
 }
-
 void Options::render(Gfx &gfx)
 {
 	renderer().render(gfx, position(), shape(), direction());
 }
 
+Position &Options::position() {
+    return Position::NONE;
+}
+
+Shape &Options::shape() {
+    return Shape::NONE;
+}
+
+Direction &Options::direction() {
+    return Direction::NONE;
+}
+
 int Options::lives = 3;
 int Options::difficulty = 1;
 bool Options::team_kill = false;
+
 int Options::players = 1;
+
 int Options::max_bullets = 5;
+
 bool Options::music = false;
