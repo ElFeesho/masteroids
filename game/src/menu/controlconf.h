@@ -24,7 +24,7 @@ public:
     void render(Gfx &gfx, Position &, Shape &, Direction &, RGB &) const
 	{
         gfx.drawRect(120, 70, 403, 316, RGB::BLUE);
-        gfx.drawText(false, 135, 80 + gfx.measureText("W").h * 8, "Not implemented", RGB::WHITE);
+        gfx.drawText(false, 135, (int) (80 + gfx.measureText("W").h * 8), "Not implemented", RGB::WHITE);
 	}
 };
 
@@ -45,19 +45,15 @@ public:
 
     void render(Gfx &gfx) override;
 
-	bool buttonDown(GamepadButton button);
-
-	bool buttonUp(GamepadButton button);
-
 	Position & position() override;
 
 	Shape & shape() override;
 
 	Direction & direction() override;
 
-	AliveMonitor &aliveMonitor() override;
+	const AliveMonitor & aliveMonitor() override;
 
-	Renderer & renderer() override;
+	const Renderer & renderer() override;
 
     void menuScreenPresented() override;
     void menuScreenHidden() override;

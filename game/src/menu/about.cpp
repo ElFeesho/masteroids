@@ -32,12 +32,12 @@ Direction &About::direction()
 	return Direction::NONE;
 }
 
-AliveMonitor &About::aliveMonitor()
+const AliveMonitor & About::aliveMonitor()
 {
     return alivemonitor;
 }
 
-Renderer &About::renderer()
+const Renderer & About::renderer()
 {
 	return aboutRenderer;
 }
