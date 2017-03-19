@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
+
 #include <iostream>
 #include "menu.h"
 
@@ -13,31 +12,31 @@ static std::function<void()> downPressHandler;
 static std::function<void()> upReleaseHandler;
 static std::function<void()> downReleaseHandler;
 
-Menu::Menu(MenuListener *nlistener): listener(nlistener) {
-    firePressHandler = [&]() {
+Menu::Menu(MenuListener *nlistener) : listener(nlistener) {
+    firePressHandler = [&] {
         next_change = 0;
         ldir = -1;
         handleMenuSelection();
     };
 
-    upPressHandler = [&]() {
+    upPressHandler = [&] {
         ldir = 0;
         decrementMenu();
         next_change = GameTime::getMillis() + 500;
     };
 
-    downPressHandler = [&]() {
+    downPressHandler = [&] {
         ldir = 1;
         incrementMenu();
         next_change = GameTime::getMillis() + 500;
     };
 
-    upReleaseHandler = [&]() {
+    upReleaseHandler = [&] {
         next_change = 0;
         ldir = -1;
     };
 
-    downReleaseHandler = [&]() {
+    downReleaseHandler = [&] {
         next_change = 0;
         ldir = -1;
     };
@@ -70,16 +69,13 @@ bool Menu::update() {
         if (ldir == 1) {
             if (menu_sel < 3) {
                 menu_sel++;
-            }
-            else {
+            } else {
                 menu_sel = 0;
             }
-        }
-        else if (ldir == 0) {
+        } else if (ldir == 0) {
             if (menu_sel > 0) {
                 menu_sel--;
-            }
-            else {
+            } else {
                 menu_sel = 3;
             }
         }
@@ -93,36 +89,30 @@ void Menu::render(Gfx &gfx) {
     renderer().render(gfx, position(), shape(), direction());
 }
 
-Position &Menu::position()
-{
+Position &Menu::position() {
     return Position::NONE;
 }
 
-Shape &Menu::shape()
-{
+Shape &Menu::shape() {
     return Shape::NONE;
 }
 
-Direction &Menu::direction()
-{
+Direction &Menu::direction() {
     return Direction::NONE;
 }
 
-AliveMonitor &Menu::aliveMonitor()
-{
+const AliveMonitor &Menu::aliveMonitor() {
     return alwaysAliveMonitor;
 }
 
-Renderer &Menu::renderer()
-{
+const Renderer &Menu::renderer() {
     return menuRenderer;
 }
 
 void Menu::incrementMenu() {
     if (menu_sel < 3) {
         menu_sel++;
-    }
-    else {
+    } else {
         menu_sel = 0;
     }
 }
@@ -130,14 +120,14 @@ void Menu::incrementMenu() {
 void Menu::decrementMenu() {
     if (menu_sel > 0) {
         menu_sel--;
-    }
-    else {
+    } else {
         menu_sel = 3;
     }
 }
 
 void Menu::handleMenuSelection() {
     switch (menu_sel) {
+        default:
         case 0:
             listener->menuStartGameSelected();
             break;
