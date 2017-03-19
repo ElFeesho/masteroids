@@ -18,7 +18,7 @@ public:
 
     virtual void drawRect(int x, int y, int w, int h, const RGB &colour);
 
-    virtual void drawImg(int x, int y, int w, int h, const unsigned short *imgData);
+    virtual void drawImg(int x, int y, unsigned int w, unsigned int h, const unsigned short *imgData);
 
     virtual void render();
 
